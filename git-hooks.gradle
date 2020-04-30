@@ -1,0 +1,21 @@
+task copyGitHooks(type: Copy) {
+    description = "Copies the git hooks from scripts/git-hooks to the .git folder."
+    from new File("$rootProject.rootDir/scripts/git-hooks/", 'pre-commit')
+    into("$rootDir/.git/hooks")
+}
+
+task installGitHooks(type: Copy) {
+    description = "Installs the pre-commit git hooks from scripts/git-hooks."
+    from new File("$rootProject.rootDir/scripts/git-hooks/", 'pre-commit')
+    into("$rootDir/.git/hooks")
+}
+
+
+task deleteGitHooks(type: Delete) {
+    description = "Delete the pre-commit git hooks."
+    delete(fileTree(".git/hooks/"))
+}
+
+afterEvaluate {
+    tasks["clean"].dependsOn(tasks.named("installGitHooks"))
+}
