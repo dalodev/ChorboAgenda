@@ -1,2 +1,3 @@
 rootProject.name='ChorboAgenda'
 include ':app'
+include ':core'
