@@ -2,7 +2,10 @@ package es.littledavity.core.di
 
 import android.content.Context
 import dagger.Component
+import es.littledavity.core.database.chorbo.ChorboDao
+import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.di.modules.ContextModule
+import es.littledavity.core.di.modules.DatabaseModule
 import es.littledavity.core.di.modules.UtilsModule
 import es.littledavity.core.utils.ThemeUtils
 import javax.inject.Singleton
@@ -15,10 +18,10 @@ import javax.inject.Singleton
 @Singleton
 @Component(modules = [
     ContextModule::class,
-    UtilsModule::class
+    UtilsModule::class,
+    DatabaseModule::class
 ])
 interface CoreComponent {
-
 
     /**
      * Provide dependency graph Context
@@ -33,4 +36,18 @@ interface CoreComponent {
      * @return ThemeUtils
      */
     fun themeUtils(): ThemeUtils
+
+    /**
+     * Provide dependency graph [ChorboRepository]
+     *
+     * @return ChorboRepository
+     */
+    fun chorboRepository(): ChorboRepository
+
+    /**
+     * Provide dependency graph ChorboDao
+     *
+     * @return ChorboDao
+     */
+    fun chorboDao(): ChorboDao
 }

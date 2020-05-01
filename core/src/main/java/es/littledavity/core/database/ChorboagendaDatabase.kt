@@ -7,14 +7,14 @@ import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboDao
 
 /**
- * Marvel room database storing the different requested information like: chorba, etc...
+ * Marvel room database storing the different requested information like: [Chorbo], etc...
  *
  * @see Database
  */
 @Database(
     entities = [Chorbo::class],
     exportSchema = BuildConfig.CHORBOAGENDA_DATABASE_EXPORT_SCHEMA,
-    version = BuildConfig.MARVEL_DATABASE_VERSION
+    version = BuildConfig.CHORBOAGENDA_DATABASE_VERSION
 )
 abstract class ChorboagendaDatabase : RoomDatabase() {
 
@@ -23,5 +23,5 @@ abstract class ChorboagendaDatabase : RoomDatabase() {
      *
      * @return [Chorbo] favorite dao.
      */
-    abstract fun chorboFavoriteDao(): ChorboDao
+    abstract fun chorboDao(): ChorboDao
 }

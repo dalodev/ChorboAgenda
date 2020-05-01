@@ -1,3 +1,4 @@
 rootProject.name='ChorboAgenda'
 include ':app'
 include ':core'
+include ':libraries:test_utils'
