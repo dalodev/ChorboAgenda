@@ -5,5 +5,6 @@
 
     <!--Dynamic module titles-->
     <string name="feature_home">Home</string>
+    <string name="feature_chorbo_list">Chorbo List</string>
 
 </resources>

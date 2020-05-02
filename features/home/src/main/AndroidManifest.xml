@@ -3,7 +3,7 @@
     package="es.littledavity.dynamicfeatures.home">
 
     <dist:module
-        dist:instant="false"
+        dist:instant="true"
         dist:title="@features/feature_home">
         <dist:delivery>
             <dist:install-time />

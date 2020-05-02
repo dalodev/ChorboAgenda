@@ -1,0 +1,44 @@
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="chorbo"
+            type="es.littledavity.dynamicfeatures.chorbo_list.list.model.ChorboItem" />
+
+        <variable
+            name="viewModel"
+            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewModel" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="@{() -> viewModel.openChorboDetail(chorbo.id)}"
+        app:cardCornerRadius="@dimen/characters_list_item_corner_radius"
+        app:cardElevation="@dimen/characters_list_item_elevation"
+        app:cardBackgroundColor="@android:color/transparent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.SurfaceStyle">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/character_name"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/characters_list_item_text_padding"
+                android:text="@{chorbo.name}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="parent"
+                tools:text="Character name"
+                style="@style/TextAppearance.CardTitle" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>

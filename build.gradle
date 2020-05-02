@@ -12,6 +12,9 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.diffplug.spotless:spotless-plugin-gradle:3.27.0'
         classpath "org.jetbrains.kotlin:kotlin-allopen:$kotlin_version"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:2.3.0-alpha06"
+        classpath "com.vanniktech:gradle-dependency-graph-generator-plugin:0.5.0"
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -27,4 +30,10 @@ allprojects {
         jcenter()
         
     }
+}
+
+task installGitHookssssss(type: Copy) {
+    description = "Installs the pre-commit git hooks from scripts/git-hooks."
+    from new File("$rootProject.rootDir/scripts/git-hooks/", 'pre-commit')
+    into("$rootDir/.git/hooks")
 }

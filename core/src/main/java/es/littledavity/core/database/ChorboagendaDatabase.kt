@@ -7,7 +7,7 @@ import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboDao
 
 /**
- * Marvel room database storing the different requested information like: [Chorbo], etc...
+ * Chorboagenda room database storing the different requested information like: [Chorbo], etc...
  *
  * @see Database
  */

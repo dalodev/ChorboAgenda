@@ -4,6 +4,9 @@ import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.LiveData
 import androidx.paging.DataSource
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 /**
@@ -27,8 +30,8 @@ class ChorboRepository @Inject constructor(
      *
      * @return List with chorbos.
      */
-    suspend fun getAllChorbos(): List<Chorbo> =
-        chorboDao.getAllChorbos()
+    suspend fun getChorbos() =
+        chorboDao.getChorbos()
 
     /**
      * Obtain database Chorbo by identifier.
@@ -48,7 +51,7 @@ class ChorboRepository @Inject constructor(
      * @return List with chorbos.
      */
     suspend fun getChorbos(offset: Int, limit: Int) =
-        chorboDao.getAllChorbos()
+        chorboDao.getChorbos(offset, limit)
 
     /**
      * Delete all database chorbo.
@@ -86,11 +89,10 @@ class ChorboRepository @Inject constructor(
      * @param id Chorbo identifier.
      * @param name Chorbo name.
      */
-    suspend fun insertChorbo(id: Long, name: String, description: String) {
+    suspend fun insertChorbo(id: Long, name: String) {
         val chorboFavorite = Chorbo(
             id = id,
-            name = name,
-            description = description
+            name = name
         )
         chorboDao.insertChorbo(chorboFavorite)
     }

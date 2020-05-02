@@ -23,7 +23,7 @@ class DatabaseModule {
     /**
      * Create a provider method binding for [ChorboagendaDatabase].
      *
-     * @return Instance of marvel database.
+     * @return Instance of chorboagenda database.
      * @see Provides
      */
     @Singleton

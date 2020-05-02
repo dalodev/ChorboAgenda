@@ -3,6 +3,7 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: 'kotlin-allopen'
+apply plugin: 'com.vanniktech.dependency.graph.generator'
 apply from: "$rootDir/ktlint.gradle"
 apply from: "$rootDir/git-hooks.gradle"
 apply from: "$rootDir/spotless.gradle"
@@ -35,6 +36,10 @@ android {
 
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
+    }
+
+    androidExtensions {
+        experimental  = true
     }
 }
 

@@ -65,14 +65,14 @@ class ChorboDaoTest : TestRobolectric() {
 
     @Test
     fun obtainAllCChorbos_WithoutData_ShouldReturnEmpty() = runBlocking {
-        assertTrue(chorboDao.getAllChorbos().isNullOrEmpty())
+        assertTrue(chorboDao.getChorbos().isNullOrEmpty())
     }
 
     @Test
     fun obtainAllChorbos_WithData_ShouldReturnSorted() = runBlocking {
         chorboDao.insertChorbos(fakeChorbos)
 
-        assertEquals(fakeChorbos, chorboDao.getAllChorbos())
+        assertEquals(fakeChorbos, chorboDao.getChorbos())
     }
 
     @Test
@@ -96,7 +96,7 @@ class ChorboDaoTest : TestRobolectric() {
             chorboDao.insertChorbo(it)
         }
 
-        assertEquals(fakeChorbos, chorboDao.getAllChorbos())
+        assertEquals(fakeChorbos, chorboDao.getChorbos())
     }
 
     @Test
@@ -104,7 +104,7 @@ class ChorboDaoTest : TestRobolectric() {
         chorboDao.insertChorbos(fakeChorbos)
         chorboDao.deleteAllChorbos()
 
-        assertTrue(chorboDao.getAllChorbos().isNullOrEmpty())
+        assertTrue(chorboDao.getChorbos().isNullOrEmpty())
     }
 
     @Test
@@ -114,7 +114,7 @@ class ChorboDaoTest : TestRobolectric() {
         val chorboToRemove = fakeChorbos.first()
         chorboDao.deleteChorbo(chorboToRemove)
 
-        assertThat(chorboDao.getAllChorbos(), not(hasItem(chorboToRemove)))
+        assertThat(chorboDao.getChorbos(), not(hasItem(chorboToRemove)))
     }
 
     @Test
@@ -124,7 +124,7 @@ class ChorboDaoTest : TestRobolectric() {
         val chorboToRemove = Chorbo(5, "test")
         chorboDao.deleteChorbo(chorboToRemove)
 
-        assertEquals(fakeChorbos, chorboDao.getAllChorbos())
+        assertEquals(fakeChorbos, chorboDao.getChorbos())
     }
 
     @Test
@@ -134,7 +134,7 @@ class ChorboDaoTest : TestRobolectric() {
         val chorboToRemove = fakeChorbos.first()
         chorboDao.deleteChorboById(chorboToRemove.id)
 
-        assertThat(chorboDao.getAllChorbos(), not(hasItem(chorboToRemove)))
+        assertThat(chorboDao.getChorbos(), not(hasItem(chorboToRemove)))
     }
 
     @Test
@@ -144,6 +144,20 @@ class ChorboDaoTest : TestRobolectric() {
         val chorboNoStoredId = 100L
         chorboDao.deleteChorboById(chorboNoStoredId)
 
-        assertEquals(fakeChorbos, chorboDao.getAllChorbos())
+        assertEquals(fakeChorbos, chorboDao.getChorbos())
+    }
+
+    @Test
+    fun obtainAllChorbosPaging_WithData_ShouldReturnNotEmpty() = runBlocking {
+        chorboDao.insertChorbos(fakeChorbos)
+        val chorbos = chorboDao.getChorbos(0, 10)
+        assertTrue(chorbos.isNotEmpty())
+    }
+
+    @Test
+    fun obtainAllChorbosPaging_WithoutData_ShouldReturnNull() = runBlocking {
+        chorboDao.insertChorbos(fakeChorbos)
+        val chorbos = chorboDao.getChorbos(3, 10)
+        assertTrue(chorbos.isNullOrEmpty())
     }
 }

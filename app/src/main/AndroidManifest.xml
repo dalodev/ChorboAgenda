@@ -9,7 +9,7 @@
     <application
         android:name=".ChorboagendaApp"
         android:fullBackupContent="true"
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:extractNativeLibs="false"
         android:label="@string/app_name"

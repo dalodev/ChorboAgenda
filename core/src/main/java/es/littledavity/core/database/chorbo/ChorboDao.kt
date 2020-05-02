@@ -6,6 +6,7 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 
 /**
  * The data access object for the [Chorbo] class.
@@ -39,7 +40,15 @@ interface ChorboDao {
      * @return List with chorbo.
      */
     @Query("SELECT * FROM chorbo ORDER BY name")
-    suspend fun getAllChorbos(): List<Chorbo>
+    suspend fun getChorbos(): List<Chorbo>
+
+    /**
+     * Obtain all database added chorbos ordering by name field.
+     *
+     * @return List with chorbo.
+     */
+    @Query("SELECT * FROM chorbo ORDER BY name LIMIT :limit OFFSET :offset")
+    suspend fun getChorbos(offset: Int, limit: Int): List<Chorbo>
 
     /**
      * Delete all database chorbo.
