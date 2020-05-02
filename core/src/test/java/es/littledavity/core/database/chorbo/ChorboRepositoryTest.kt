@@ -69,7 +69,8 @@ class ChorboRepositoryTest {
     fun deleteChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
         val chorboToDelete = Chorbo(
             0,
-            "Lorena"
+            "Lorena",
+            "test"
         )
         val chorboCaptor = argumentCaptor<Chorbo>()
         chorboRepository.deleteChorbo(chorboToDelete)
@@ -81,9 +82,9 @@ class ChorboRepositoryTest {
     @Test
     fun insertChorbos_ShouldInvokeCorrectDaoMethod() = runBlocking {
         val chorbosToInsert = listOf(
-            Chorbo(0, "Noemi"),
-            Chorbo(1, "Ximena"),
-            Chorbo(2, "Ángeles")
+            Chorbo(0, "Noemi", "test"),
+            Chorbo(1, "Ximena", "test"),
+            Chorbo(2, "Ángeles", "test")
         )
         val chorbosInsertedCaptor = argumentCaptor<List<Chorbo>>()
         chorboRepository.insertChorbos(chorbosToInsert)
@@ -96,12 +97,14 @@ class ChorboRepositoryTest {
     fun insertChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
         val chorboToInsert = Chorbo(
             0,
-            "Test"
+            "Test",
+            "test"
         )
         val chorboInsertedCaptor = argumentCaptor<Chorbo>()
         chorboRepository.insertChorbo(
             id = chorboToInsert.id,
-            name = chorboToInsert.name
+            name = chorboToInsert.name,
+            description = chorboToInsert.description
         )
 
         verify(chorboDao).insertChorbo(chorboInsertedCaptor.capture())

@@ -11,5 +11,7 @@ import androidx.room.PrimaryKey
 @Entity(tableName = "chorbo")
 data class Chorbo(
     @PrimaryKey val id: Long,
-    @ColumnInfo(name = "name") val name: String
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "description") val description: String
+
 )

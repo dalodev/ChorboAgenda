@@ -1,4 +1,3 @@
-apply plugin: 'kotlin-allopen'
 apply from: "$rootDir/android-library.gradle"
 
 allOpen {
@@ -9,7 +8,7 @@ allOpen {
 android {
     buildTypes.forEach {
         it.buildConfigField("boolean", "CHORBOAGENDA_DATABASE_EXPORT_SCHEMA", "false")
-        it.buildConfigField("String", "CHORBOAGENDA_DATABASE_NAME", '"characters-db"')
+        it.buildConfigField("String", "CHORBOAGENDA_DATABASE_NAME", '"chorboagenda-db"')
         it.buildConfigField("int", "CHORBOAGENDA_DATABASE_VERSION", "1")
     }
 }
@@ -23,6 +22,7 @@ dependencies {
     implementation 'androidx.fragment:fragment-ktx:1.3.0-alpha04'
     implementation 'com.jakewharton.timber:timber:4.7.1'
     implementation 'com.google.dagger:dagger:2.25.3'
+    implementation "androidx.paging:paging-runtime-ktx:2.1.2"
 
     kapt 'androidx.room:room-compiler:2.2.5'
     kapt 'com.android.databinding:compiler:3.1.4'

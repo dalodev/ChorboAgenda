@@ -7,15 +7,15 @@ class ChorboTest {
 
     @Test
     fun createChorbo_ShouldAddCorrectAttributes() {
-        val characterId = 0L
-        val characterName = "David"
+        val chorboId = 0L
+        val chorboName = "David"
 
-        val characterFavorite = Chorbo(
-            id = characterId,
-            name = characterName
+        val chorboFavorite = Chorbo(
+            id = chorboId,
+            name = chorboName
         )
 
-        assertEquals(characterId, characterFavorite.id)
-        assertEquals(characterName, characterFavorite.name)
+        assertEquals(chorboId, chorboFavorite.id)
+        assertEquals(chorboName, chorboFavorite.name)
     }
 }

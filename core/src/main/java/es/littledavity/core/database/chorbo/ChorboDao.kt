@@ -1,6 +1,7 @@
 package es.littledavity.core.database.chorbo
 
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -17,7 +18,7 @@ interface ChorboDao {
     /**
      * Obtain all database added chorbo ordering by name field.
      *
-     * @return [LiveData] List with favorite characters.
+     * @return [LiveData] List with favorite chorbos.
      */
     @Query("SELECT * FROM chorbo ORDER BY name")
     fun getAllChorbosLiveData(): LiveData<List<Chorbo>>

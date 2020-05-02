@@ -3,6 +3,7 @@ package es.littledavity.core.database.chorbo
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.LiveData
+import androidx.paging.DataSource
 import javax.inject.Inject
 
 /**
@@ -40,6 +41,16 @@ class ChorboRepository @Inject constructor(
         chorboDao.getChorbo(chorboId)
 
     /**
+     * Obtain all database added Chorbo ordering by name field.
+     *
+     * @param offset Skip the specified number of resources in the result set.
+     * @param limit Limit the result set to the specified number of resources.
+     * @return List with chorbos.
+     */
+    suspend fun getChorbos(offset: Int, limit: Int) =
+        chorboDao.getAllChorbos()
+
+    /**
      * Delete all database chorbo.
      */
     suspend fun deleteAllChorbos() =
@@ -48,7 +59,7 @@ class ChorboRepository @Inject constructor(
     /**
      * Delete database chorbo by identifier.
      *
-     * @param chorboId Character identifier.
+     * @param chorboId chorbo identifier.
      */
     suspend fun deleteChorboById(chorboId: Long) =
         chorboDao.deleteChorboById(chorboId)
@@ -75,11 +86,12 @@ class ChorboRepository @Inject constructor(
      * @param id Chorbo identifier.
      * @param name Chorbo name.
      */
-    suspend fun insertChorbo(id: Long, name: String) {
-        val characterFavorite = Chorbo(
+    suspend fun insertChorbo(id: Long, name: String, description: String) {
+        val chorboFavorite = Chorbo(
             id = id,
-            name = name
+            name = name,
+            description = description
         )
-        chorboDao.insertChorbo(characterFavorite)
+        chorboDao.insertChorbo(chorboFavorite)
     }
 }
