@@ -1,26 +1,26 @@
-package es.littledavity.dynamicfeatures.home.di
+package es.littledavity.dynamicfeatures.create.di
 
 import dagger.Component
 import es.littledavity.core.di.CoreComponent
 import es.littledavity.core.di.scopes.FeatureScope
-import es.littledavity.dynamicfeatures.home.HomeFragment
+import es.littledavity.dynamicfeatures.create.CreateFragment
 
 /**
  * Class for which a fully-formed, dependency-injected implementation is to
- * be generated from [HomeModule].
+ * be generated from [CreateModule].
  *
  * @see Component
  */
 @FeatureScope
 @Component(
-    modules = [HomeModule::class],
+    modules = [CreateModule::class],
     dependencies = [CoreComponent::class])
-interface HomeComponent {
+interface CreateComponent {
 
     /**
      * Inject dependencies on component.
      *
-     * @param homeFragment Home component.
+     * @param createFragment Chorbo list component.
      */
-    fun inject(homeFragment: HomeFragment)
+    fun inject(createFragment: CreateFragment)
 }

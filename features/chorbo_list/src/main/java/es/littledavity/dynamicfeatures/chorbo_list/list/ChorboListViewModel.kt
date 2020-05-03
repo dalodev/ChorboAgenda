@@ -5,6 +5,7 @@ import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.paging.LivePagedListBuilder
+import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.DatabaseState
 import es.littledavity.dynamicfeatures.chorbo_list.list.paging.ChorboPageDataSourceFactory
@@ -19,7 +20,7 @@ import javax.inject.Inject
 class ChorboListViewModel @Inject constructor(
     @VisibleForTesting(otherwise = PRIVATE)
     val dataSourceFactory: ChorboPageDataSourceFactory
-) : ViewModel() {
+) : BaseViewModel() {
 
     @VisibleForTesting(otherwise = PRIVATE)
     val databaseState = Transformations.switchMap(dataSourceFactory.sourceLiveData) {
@@ -80,11 +81,7 @@ class ChorboListViewModel @Inject constructor(
      * @param chorboId chorbo identifier.
      */
     fun openChorboDetail(chorboId: Long) {
-        event.postValue(
-            ChorboListViewEvent.OpenChorboDetail(
-                chorboId
-            )
-        )
+        navigate(ChorboListFragmentDirections.actionChorboListFragmentToChorboDetailFragment(chorboId))
     }
 
     /**

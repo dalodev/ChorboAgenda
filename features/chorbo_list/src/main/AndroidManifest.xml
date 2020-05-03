@@ -3,12 +3,12 @@
     package="es.littledavity.dynamicfeatures.chorbo_list">
 
     <dist:module
-        dist:instant="true"
+        dist:instant="false"
         dist:title="@features/feature_chorbo_list">
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>
-        <dist:fusing dist:include="false" />
+        <dist:fusing dist:include="true" />
     </dist:module>
 </manifest>
 

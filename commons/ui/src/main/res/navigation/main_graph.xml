@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     app:startDestination="@id/chorbo_list_fragment"
-    android:id="@+id/navigation_app_graph">
+    android:id="@+id/main_graph">
 
     <fragment
         android:id="@+id/chorbo_list_fragment"

@@ -11,9 +11,12 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
+import es.littledavity.commons.ui.extensions.observe
+import es.littledavity.commons.ui.navigation.NavigationCommand
 import javax.inject.Inject
 
-abstract class BaseFragment<B : ViewDataBinding, M : ViewModel>(
+abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     @LayoutRes
     private val layoutId: Int
 ) : Fragment() {
@@ -71,6 +74,8 @@ abstract class BaseFragment<B : ViewDataBinding, M : ViewModel>(
     override fun onAttach(context: Context) {
         super.onAttach(context)
         onInitDependencyInjection()
+        observe(viewModel.navigationCommands, ::onNavigate)
+
     }
 
     /**
@@ -85,6 +90,7 @@ abstract class BaseFragment<B : ViewDataBinding, M : ViewModel>(
         super.onViewCreated(view, savedInstanceState)
         onInitDataBinding()
     }
+
 
     /**
      * Return the [AppCompatActivity] this fragment is currently associated with.
@@ -108,5 +114,12 @@ abstract class BaseFragment<B : ViewDataBinding, M : ViewModel>(
     override fun onDestroy() {
         super.onDestroy()
         onClear()
+    }
+
+    private fun onNavigate(command: NavigationCommand) {
+        when (command) {
+            is NavigationCommand.To ->
+                findNavController().navigate(command.directions)
+        }
     }
 }

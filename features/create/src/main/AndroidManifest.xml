@@ -1,14 +1,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:dist="http://schemas.android.com/apk/distribution"
-    package="es.littledavity.dynamicfeatures.home">
+    package="es.littledavity.dynamicfeatures.create">
 
     <dist:module
-        dist:instant="true"
-        dist:title="@features/feature_home">
+        dist:instant="false"
+        dist:title="@string/feature_create">
         <dist:delivery>
-            <dist:install-time />
+            <dist:on-demand />
         </dist:delivery>
-        <dist:fusing dist:include="true" />
+        <dist:fusing dist:include="false" />
     </dist:module>
 </manifest>
 

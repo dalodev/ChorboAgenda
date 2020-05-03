@@ -2,6 +2,9 @@ package es.littledavity.dynamicfeatures.chorbo_list.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
@@ -111,8 +114,6 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
      */
     private fun onViewEvent(viewEvent: ChorboListViewEvent) {
         when (viewEvent) {
-            is ChorboListViewEvent.OpenChorboDetail ->
-                Unit
             is ChorboListViewEvent.OpenChorboOptions -> playAnimationAndNavigate()
         }
     }
@@ -123,10 +124,12 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
         viewBinding.openOptionsFab.addAnimatorUpdateListener {
             val progress = (it.animatedValue as Float * 100).toInt()
             //navigate
-            if (progress <= 25) {
-                viewBinding.root.showTopSnackbar(R.string.add_options_navigate)
+            if (progress >= 25) {
+                val direction = ChorboListFragmentDirections.actionChorboListFragmentToCreateFragment()
+                viewModel.navigate(direction)
             }
         }
         viewBinding.openOptionsFab.playAnimation()
+
     }
 }

@@ -71,12 +71,13 @@ android {
 //        isWarningsAsErrors = true
     }
 
-    dynamicFeatures = [":features:home",
-                       ":features:chorbo_list"]
+    dynamicFeatures = [":features:chorbo_list", ":features:create"]
 
     androidExtensions {
-        experimental  = true
+        experimental = true
     }
+
+
 }
 
 dependencies {
