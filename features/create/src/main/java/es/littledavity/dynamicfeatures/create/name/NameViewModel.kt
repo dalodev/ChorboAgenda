@@ -1,4 +1,4 @@
-package es.littledavity.dynamicfeatures.create
+package es.littledavity.dynamicfeatures.create.name
 
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
@@ -8,13 +8,10 @@ import es.littledavity.core.database.chorbo.ChorboRepository
 import javax.inject.Inject
 
 /**
- * View model responsible for preparing and managing the data for [CreateFragment].
+ * View model responsible for preparing and managing the data for [NameFragment].
  *
  * @see ViewModel
  */
-class CreateViewModel @Inject constructor(
-    @VisibleForTesting(otherwise = PRIVATE)
-    val chorboRepository: ChorboRepository
-) : BaseViewModel() {
+class NameViewModel @Inject constructor() : BaseViewModel() {
 
 }

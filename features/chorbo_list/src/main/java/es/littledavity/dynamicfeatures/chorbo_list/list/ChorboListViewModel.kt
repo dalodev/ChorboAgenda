@@ -81,7 +81,7 @@ class ChorboListViewModel @Inject constructor(
      * @param chorboId chorbo identifier.
      */
     fun openChorboDetail(chorboId: Long) {
-        navigate(ChorboListFragmentDirections.actionChorboListFragmentToChorboDetailFragment(chorboId))
+        navigate(ChorboListFragmentDirections.toDetail(chorboId))
     }
 
     /**

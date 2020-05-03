@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="name">Chorbo name</string>
+    <string name="birthday">Birthday</string>
+    <string name="name_hint"><![CDATA[Type chorbo name <3]]></string>
+</resources>

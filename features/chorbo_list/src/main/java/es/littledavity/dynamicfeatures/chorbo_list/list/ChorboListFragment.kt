@@ -125,7 +125,7 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
             val progress = (it.animatedValue as Float * 100).toInt()
             //navigate
             if (progress >= 25) {
-                val direction = ChorboListFragmentDirections.actionChorboListFragmentToCreateFragment()
+                val direction = ChorboListFragmentDirections.toName()
                 viewModel.navigate(direction)
             }
         }

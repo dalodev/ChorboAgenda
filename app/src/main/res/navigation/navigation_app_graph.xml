@@ -11,10 +11,10 @@
         app:moduleName="chorbo_list"
         tools:layout="@layout/fragment_chorbo_list">
         <action
-            android:id="@+id/action_chorbo_list_fragment_to_create_fragment"
-            app:destination="@id/create_fragment" />
+            android:id="@+id/to_name"
+            app:destination="@id/name_fragment" />
         <action
-            android:id="@+id/action_chorbo_list_fragment_to_chorbo_detail_fragment"
+            android:id="@+id/to_detail"
             app:destination="@id/chorbo_detail_fragment" />
     </fragment>
 
@@ -28,8 +28,8 @@
             app:argType="long" />
     </fragment>
     <fragment
-        android:id="@+id/create_fragment"
+        android:id="@+id/name_fragment"
         app:moduleName="create"
-        android:name="es.littledavity.dynamicfeatures.create.CreateFragment"
-        tools:layout="@layout/fragment_create" />
+        android:name="es.littledavity.dynamicfeatures.create.name.NameFragment"
+        tools:layout="@layout/fragment_name" />
 </navigation>

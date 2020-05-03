@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+
+        <variable
+            name="viewModel"
+            type="es.littledavity.dynamicfeatures.create.name.NameViewModel" />
+
+    </data>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/nameTitle"
+            style="@style/TextAppearance.AppCompat.Title"
+            android:textStyle="bold"
+            android:textSize="@dimen/name_title_size"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/name"
+            android:layout_marginBottom="@dimen/chorbo_name_padding"
+            android:textAppearance="@style/TextAppearance.Title"
+            app:layout_constraintBottom_toTopOf="@id/name"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_chainStyle="packed" />
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="@style/TextAppearance.Title"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nameTitle"
+            app:layout_constraintVertical_chainStyle="packed"
+            android:padding="@dimen/chorbo_name_padding"
+            android:hint="@string/name_hint"
+            android:gravity="center"
+            android:inputType="textCapWords"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
