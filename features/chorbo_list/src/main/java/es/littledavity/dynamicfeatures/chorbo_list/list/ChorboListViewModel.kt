@@ -27,7 +27,6 @@ class ChorboListViewModel @Inject constructor(
         it.databaseState
     }
 
-
     val event = SingleLiveData<ChorboListViewEvent>()
     val data = LivePagedListBuilder(dataSourceFactory,
         PAGE_MAX_ELEMENTS

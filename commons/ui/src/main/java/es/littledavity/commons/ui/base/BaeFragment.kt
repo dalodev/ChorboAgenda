@@ -12,6 +12,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
+import androidx.transition.TransitionInflater
+import es.littledavity.commons.ui.R
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.commons.ui.navigation.NavigationCommand
 import javax.inject.Inject
@@ -61,6 +63,8 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     ): View? {
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding.lifecycleOwner = viewLifecycleOwner
+        sharedElementEnterTransition = TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
+        sharedElementReturnTransition =  TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
         return viewBinding.root
     }
 
@@ -119,7 +123,8 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     private fun onNavigate(command: NavigationCommand) {
         when (command) {
             is NavigationCommand.To ->
-                findNavController().navigate(command.directions)
+                command.extras?.let { findNavController().navigate(command.directions, it) }
+                    ?: findNavController().navigate(command.directions)
         }
     }
 }

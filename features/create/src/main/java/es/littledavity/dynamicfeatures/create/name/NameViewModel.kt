@@ -1,10 +1,10 @@
 package es.littledavity.dynamicfeatures.create.name
 
-import androidx.annotation.VisibleForTesting
-import androidx.annotation.VisibleForTesting.PRIVATE
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import es.littledavity.commons.ui.base.BaseViewModel
-import es.littledavity.core.database.chorbo.ChorboRepository
+import es.littledavity.commons.ui.livedata.SingleLiveData
 import javax.inject.Inject
 
 /**
@@ -14,4 +14,15 @@ import javax.inject.Inject
  */
 class NameViewModel @Inject constructor() : BaseViewModel() {
 
+    val event = SingleLiveData<NameViewEvent>()
+    private val _state = MutableLiveData<NameViewState>()
+    val state: LiveData<NameViewState>
+        get() = _state
+
+    val onChangeText: (String) -> Unit = {
+        if (it.trim().isNotEmpty()) _state.postValue(NameViewState.Continue)
+        else _state.postValue(NameViewState.EmptyName)
+    }
+
+    fun onContinue() = event.postValue(NameViewEvent.OpenImage)
 }

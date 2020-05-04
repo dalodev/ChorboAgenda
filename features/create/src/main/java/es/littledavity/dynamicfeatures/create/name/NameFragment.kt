@@ -2,8 +2,11 @@ package es.littledavity.dynamicfeatures.create.name
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
+import es.littledavity.commons.ui.extensions.getStringOrEmpty
+import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.create.R
 import es.littledavity.dynamicfeatures.create.databinding.FragmentNameBinding
 import es.littledavity.dynamicfeatures.create.name.di.DaggerNameComponent
@@ -28,7 +31,7 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        observe(viewModel.event, ::onViewEvent)
     }
 
     /**
@@ -51,5 +54,21 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
     }
 
     override fun onClear() {
+    }
+
+    /**
+     * Observer view event change on [NameViewModel].
+     *
+     * @param viewEvent Event on chorbos list.
+     */
+    private fun onViewEvent(viewEvent: NameViewEvent) {
+        when (viewEvent) {
+            is NameViewEvent.OpenImage -> {
+                val extras = FragmentNavigatorExtras(
+                    viewBinding.continueButton to viewBinding.continueButton.transitionName
+                )
+                viewModel.navigate(NameFragmentDirections.toImage(viewBinding.name.toString()), extras)
+            }
+        }
     }
 }

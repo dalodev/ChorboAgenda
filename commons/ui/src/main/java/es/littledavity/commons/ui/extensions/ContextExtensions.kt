@@ -9,7 +9,7 @@ import androidx.annotation.StringRes
  * @param resId Resource string identifier.
  * @return The key value if exist, otherwise empty.
  */
-fun Context.getString(@StringRes resId: Int?) =
+fun Context.getStringOrEmpty(@StringRes resId: Int?) =
     resId?.let {
         getString(it)
     } ?: run {
