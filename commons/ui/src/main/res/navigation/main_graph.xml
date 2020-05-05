@@ -45,9 +45,6 @@
         android:id="@+id/image_fragment"
         app:moduleName="create"
         android:name="es.littledavity.dynamicfeatures.create.image.ImageFragment"
-        tools:layout="@layout/fragment_image" >
-        <argument
-            android:name="name"
-            app:argType="string" />
-    </fragment>
+        tools:layout="@layout/fragment_image" />
+
 </navigation>

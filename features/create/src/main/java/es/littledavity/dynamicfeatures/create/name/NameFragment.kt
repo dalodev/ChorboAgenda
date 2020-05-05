@@ -2,15 +2,18 @@ package es.littledavity.dynamicfeatures.create.name
 
 import android.os.Bundle
 import android.view.View
+import androidx.navigation.NavOptions
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
-import es.littledavity.commons.ui.extensions.getStringOrEmpty
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.create.R
 import es.littledavity.dynamicfeatures.create.databinding.FragmentNameBinding
+import es.littledavity.dynamicfeatures.create.model.CreateItem
 import es.littledavity.dynamicfeatures.create.name.di.DaggerNameComponent
 import es.littledavity.dynamicfeatures.create.name.di.NameModule
+import java.io.Serializable
 
 /**
  * Chorbo name view containing bottom navigation bar with different chorbos tabs.
@@ -53,8 +56,7 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
         viewBinding.viewModel = viewModel
     }
 
-    override fun onClear() {
-    }
+    override fun onClear() {}
 
     /**
      * Observer view event change on [NameViewModel].
@@ -63,11 +65,22 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
      */
     private fun onViewEvent(viewEvent: NameViewEvent) {
         when (viewEvent) {
-            is NameViewEvent.OpenImage -> {
+            is NameViewEvent.Next -> {
                 val extras = FragmentNavigatorExtras(
-                    viewBinding.continueButton to viewBinding.continueButton.transitionName
+                    viewBinding.continueButton to viewBinding.continueButton.transitionName,
+                    viewBinding.name to viewBinding.name.transitionName
                 )
-                viewModel.navigate(NameFragmentDirections.toImage(viewBinding.name.toString()), extras)
+                val bundle = Bundle()
+                bundle.putSerializable(
+                    "createItem", CreateItem(
+                        name = viewBinding.name.text.toString(),
+                        image = ""
+                    )
+                )
+                viewModel.navigate(
+                    NameFragmentDirections.toImage(),
+                    extras
+                )
             }
         }
     }

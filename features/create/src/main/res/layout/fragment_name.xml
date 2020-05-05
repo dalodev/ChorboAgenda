@@ -50,7 +50,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameTitle"
                 app:onTextChange="@{viewModel.onChangeText}"
-                tools:layout_editor_absoluteX="24dp" />
+                tools:layout_editor_absoluteX="24dp"
+                android:transitionName="@string/name"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

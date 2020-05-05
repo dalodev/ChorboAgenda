@@ -20,6 +20,31 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <TextView
+                android:id="@+id/nameTitle"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/chorbo_name_padding"
+                android:gravity="center"
+                android:text="@string/name"
+                android:textAppearance="@style/TextAppearance.Title"
+                android:textSize="@dimen/name_title_size"
+                android:textStyle="bold"
+                android:transitionName="@string/name"
+                app:layout_constraintBottom_toTopOf="@id/addImageButton"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/addImageButton"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_add_photo" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
@@ -29,10 +54,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/name_input_margin"
             android:layout_marginBottom="@dimen/name_input_margin"
+            android:onClick="@{() -> viewModel.onContinue()}"
             android:text="@string/continue_button"
+            android:transitionName="@string/continue_button"
             app:layout_anchor="@id/formContainer"
             app:layout_anchorGravity="bottom"
-            android:transitionName="@string/continue_button"
+            app:visible="@{viewModel.state.continue}"
+
             />
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

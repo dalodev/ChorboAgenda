@@ -24,5 +24,7 @@ class NameViewModel @Inject constructor() : BaseViewModel() {
         else _state.postValue(NameViewState.EmptyName)
     }
 
-    fun onContinue() = event.postValue(NameViewEvent.OpenImage)
+    fun onContinue(){
+        event.postValue(NameViewEvent.Next)
+    }
 }
