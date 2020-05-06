@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
@@ -39,11 +40,37 @@
                 android:id="@+id/addImageButton"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
+                android:onClick="@{() -> viewModel.addImage()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_add_photo" />
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/image_arrow_margin"
+                app:layout_constraintBottom_toTopOf="@id/insertImageText"
+                app:layout_constraintEnd_toEndOf="@+id/insertImageText"
+                app:layout_constraintStart_toStartOf="@id/insertImageText"
+                app:layout_constraintTop_toBottomOf="@id/addImageButton"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/image_arrow"
+                app:lottie_repeatMode="restart"
+                app:visible="@{!viewModel.state.continue}"
+                tools:androdid="pppp" />
+
+            <TextView
+                android:id="@+id/insertImageText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/insert_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/addImageButton" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

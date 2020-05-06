@@ -78,7 +78,7 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
                     )
                 )
                 viewModel.navigate(
-                    NameFragmentDirections.toImage(),
+                    NameFragmentDirections.toImage(viewBinding.name.text.toString()),
                     extras
                 )
             }

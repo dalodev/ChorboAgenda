@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.Provides
 import es.littledavity.commons.ui.extensions.viewModel
 import es.littledavity.core.di.scopes.FeatureScope
+import es.littledavity.core.service.PermissionService
 import es.littledavity.dynamicfeatures.create.image.ImageFragment
 import es.littledavity.dynamicfeatures.create.image.ImageViewModel
 
@@ -28,7 +29,9 @@ class ImageModule(
      */
     @FeatureScope
     @Provides
-    fun providesCreateViewModel() = fragment.viewModel {
-        ImageViewModel()
+    fun providesCreateViewModel(
+        permissionService: PermissionService
+    ) = fragment.viewModel {
+        ImageViewModel(permissionService)
     }
 }

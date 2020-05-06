@@ -4,5 +4,6 @@
     <dimen name="chorbo_name_padding">24dp</dimen>
     <dimen name="name_title_size">32sp</dimen>
     <dimen name="name_input_margin">24dp</dimen>
+    <dimen name="image_arrow_margin">8dp</dimen>
 
 </resources>
