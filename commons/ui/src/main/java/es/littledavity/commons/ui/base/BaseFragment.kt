@@ -10,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import es.littledavity.commons.ui.R
@@ -64,7 +63,7 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding.lifecycleOwner = viewLifecycleOwner
         sharedElementEnterTransition = TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
-        sharedElementReturnTransition =  TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
+        sharedElementReturnTransition = TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
         return viewBinding.root
     }
 
@@ -94,7 +93,6 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
         super.onViewCreated(view, savedInstanceState)
         onInitDataBinding()
     }
-
 
     /**
      * Return the [AppCompatActivity] this fragment is currently associated with.
