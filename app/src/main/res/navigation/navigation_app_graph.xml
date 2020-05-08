@@ -34,11 +34,11 @@
         tools:layout="@layout/fragment_name" >
         <action
             android:id="@+id/toImage"
-            app:destination="@id/image_fragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:destination="@id/image_fragment" />
+        <!--            app:enterAnim="@anim/slide_in_right"-->
+        <!--            app:exitAnim="@anim/slide_out_left"-->
+        <!--            app:popEnterAnim="@android:anim/slide_in_left"-->
+        <!--            app:popExitAnim="@android:anim/slide_out_right" />-->
     </fragment>
 
     <fragment
@@ -46,9 +46,24 @@
         app:moduleName="create"
         android:name="es.littledavity.dynamicfeatures.create.image.ImageFragment"
         tools:layout="@layout/fragment_image" >
-
+        <action
+            android:id="@+id/toLocation"
+            app:destination="@id/location_fragment" />
         <argument
             android:name="name"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/location_fragment"
+        app:moduleName="create"
+        android:name="es.littledavity.dynamicfeatures.create.location.LocationFragment"
+        tools:layout="@layout/fragment_location" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="image"
             app:argType="string" />
     </fragment>
 

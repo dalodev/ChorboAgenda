@@ -46,9 +46,24 @@
         app:moduleName="create"
         android:name="es.littledavity.dynamicfeatures.create.image.ImageFragment"
         tools:layout="@layout/fragment_image" >
-
+        <action
+            android:id="@+id/toLocation"
+            app:destination="@id/location_fragment" />
         <argument
             android:name="name"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/location_fragment"
+        app:moduleName="create"
+        android:name="es.littledavity.dynamicfeatures.create.location.LocationFragment"
+        tools:layout="@layout/fragment_location" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="image"
             app:argType="string" />
     </fragment>
 

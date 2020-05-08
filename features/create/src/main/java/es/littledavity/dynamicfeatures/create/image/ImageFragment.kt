@@ -9,12 +9,10 @@ import androidx.navigation.fragment.navArgs
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.extensions.observe
-import es.littledavity.core.utils.ImageUtils
 import es.littledavity.dynamicfeatures.create.R
 import es.littledavity.dynamicfeatures.create.databinding.FragmentImageBinding
 import es.littledavity.dynamicfeatures.create.image.di.DaggerImageComponent
 import es.littledavity.dynamicfeatures.create.image.di.ImageModule
-
 
 /**
  * Chorbo image view containing bottom navigation bar with different chorbos tabs.
@@ -28,12 +26,8 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
     private val args: ImageFragmentArgs by navArgs()
 
     private val getContent = registerForActivityResult(GetContent()) { uri ->
-            context?.let {
-                val bitmap = ImageUtils.getImageFromResult(it, uri)
-                viewBinding.image.setImageBitmap(bitmap)
-            }
-            viewModel.onViewStateChange(ImageViewState.Continue)
-        }
+        viewModel.loadImage(uri)
+    }
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -91,9 +85,18 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
         when (viewEvent) {
             is ImageViewEvent.Next -> {
                 val extras = FragmentNavigatorExtras(
-                    viewBinding.continueButton to viewBinding.continueButton.transitionName
+                    viewBinding.continueButton to viewBinding.continueButton.transitionName,
+                    viewBinding.nameTitle to viewBinding.nameTitle.transitionName,
+                    viewBinding.image to viewBinding.image.transitionName
                 )
-//                viewModel.navigate(NameFragmentDirections.toImage(viewBinding.name.toString()), extras)
+                viewModel.imageUri?.let {
+                    viewModel.navigate(
+                        ImageFragmentDirections.toLocation(
+                            args.name,
+                            it.toString()
+                        ), null
+                    )
+                }
             }
         }
     }

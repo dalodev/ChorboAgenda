@@ -1,6 +1,7 @@
 package es.littledavity.dynamicfeatures.create.image
 
 import android.Manifest
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.karumi.dexter.PermissionToken
@@ -13,7 +14,6 @@ import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.service.PermissionService
 import javax.inject.Inject
 
-
 /**
  * View model responsible for preparing and managing the data for [ImageFragment].
  *
@@ -22,30 +22,34 @@ import javax.inject.Inject
 class ImageViewModel @Inject constructor(
     private val permissionService: PermissionService
 ) : BaseViewModel() {
+
     val event = SingleLiveData<ImageViewEvent>()
     private val _state = MutableLiveData<ImageViewState>()
     val state: LiveData<ImageViewState>
         get() = _state
 
+    var imageUri = MutableLiveData<Uri>()
+
     fun addImage() {
-        permissionService.requestPermission(Manifest.permission.READ_EXTERNAL_STORAGE, object: PermissionListener{
-            override fun onPermissionGranted(reponse: PermissionGrantedResponse?) {
-                _state.postValue(ImageViewState.OpenGallery)
-            }
+        permissionService.requestPermission(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            object : PermissionListener {
+                override fun onPermissionGranted(reponse: PermissionGrantedResponse?) {
+                    _state.postValue(ImageViewState.OpenGallery)
+                }
 
-            override fun onPermissionRationaleShouldBeShown(
-                request: PermissionRequest?,
-                token: PermissionToken?
-            ) {
-            }
+                override fun onPermissionRationaleShouldBeShown(
+                    request: PermissionRequest?,
+                    token: PermissionToken?
+                ) {}
 
-            override fun onPermissionDenied(response: PermissionDeniedResponse?) {
-            }
-
-        })
+                override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
+            })
     }
-
     fun onContinue() = event.postValue(ImageViewEvent.Next)
 
-    fun onViewStateChange(vieState: ImageViewState) = _state.postValue(vieState)
+    fun loadImage(uri: Uri) {
+        imageUri.postValue(uri)
+        _state.postValue(ImageViewState.Continue())
+    }
 }

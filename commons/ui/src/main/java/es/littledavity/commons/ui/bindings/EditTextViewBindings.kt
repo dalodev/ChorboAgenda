@@ -9,7 +9,7 @@ import androidx.databinding.BindingAdapter
  *
  * @param listener lambda passed to invoke custom event.
  */
-@BindingAdapter("app:onTextChange")
+@BindingAdapter("onTextChange")
 fun EditText.onTextChange(listener: (String) -> Unit) {
     this.addTextChangedListener { text ->
         listener(text.toString())

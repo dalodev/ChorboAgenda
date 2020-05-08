@@ -1,24 +1,28 @@
-package es.littledavity.dynamicfeatures.create.name
+package es.littledavity.dynamicfeatures.create.location
 
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.FragmentNavigatorExtras
+import androidx.navigation.fragment.navArgs
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.create.R
-import es.littledavity.dynamicfeatures.create.databinding.FragmentNameBinding
-import es.littledavity.dynamicfeatures.create.name.di.DaggerNameComponent
-import es.littledavity.dynamicfeatures.create.name.di.NameModule
+import es.littledavity.dynamicfeatures.create.databinding.FragmentLocationBinding
+import es.littledavity.dynamicfeatures.create.location.di.DaggerLocationComponent
+import es.littledavity.dynamicfeatures.create.location.di.LocationModule
+import es.littledavity.dynamicfeatures.create.name.NameViewModel
 
 /**
  * Chorbo name view containing bottom navigation bar with different chorbos tabs.
  *
  * @see BaseFragment
  */
-class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
-    layoutId = R.layout.fragment_name
+class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel>(
+    layoutId = R.layout.fragment_location
 ) {
+
+    private val args: LocationFragmentArgs by navArgs()
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -37,10 +41,10 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
      * Initialize dagger injection dependency graph.
      */
     override fun onInitDependencyInjection() {
-        DaggerNameComponent
+        DaggerLocationComponent
             .builder()
             .coreComponent(ChorboagendaApp.coreComponent(requireContext()))
-            .nameModule(NameModule(this))
+            .locationModule(LocationModule(this))
             .build()
             .inject(this)
     }
@@ -59,16 +63,11 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
      *
      * @param viewEvent Event on chorbos list.
      */
-    private fun onViewEvent(viewEvent: NameViewEvent) {
+    private fun onViewEvent(viewEvent: LocationViewEvent) {
         when (viewEvent) {
-            is NameViewEvent.Next -> {
+            is LocationViewEvent.Next -> {
                 val extras = FragmentNavigatorExtras(
-                    viewBinding.continueButton to viewBinding.continueButton.transitionName,
-                    viewBinding.name to viewBinding.name.transitionName
-                )
-                viewModel.navigate(
-                    NameFragmentDirections.toImage(viewBinding.name.text.toString()),
-                    extras
+
                 )
             }
         }

@@ -2,7 +2,6 @@ package es.littledavity.dynamicfeatures.create.name
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import javax.inject.Inject
@@ -10,7 +9,7 @@ import javax.inject.Inject
 /**
  * View model responsible for preparing and managing the data for [NameFragment].
  *
- * @see ViewModel
+ * @see BaseViewModel
  */
 class NameViewModel @Inject constructor() : BaseViewModel() {
 
@@ -24,7 +23,5 @@ class NameViewModel @Inject constructor() : BaseViewModel() {
         else _state.postValue(NameViewState.EmptyName)
     }
 
-    fun onContinue(){
-        event.postValue(NameViewEvent.Next)
-    }
+    fun onContinue() = event.postValue(NameViewEvent.Next)
 }

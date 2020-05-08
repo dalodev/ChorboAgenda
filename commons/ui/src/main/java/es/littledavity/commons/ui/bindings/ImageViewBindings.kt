@@ -2,11 +2,14 @@ package es.littledavity.commons.ui.bindings
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.api.load
+import coil.decode.DataSource
+import coil.target.Target
 import es.littledavity.commons.ui.R
 import kotlin.random.Random
 
@@ -16,8 +19,15 @@ import kotlin.random.Random
  * @param url Image url to download and set as drawable.
  * @param placeholderId Drawable resource identifier to set while downloading image.
  */
-@BindingAdapter("imageUrl", "imagePlaceholder", requireAll = false)
-fun ImageView.imageUrl(url: String?, @DrawableRes placeholderId: Int?) {
+@BindingAdapter(
+    "imageUrl",
+    "imagePlaceholder",
+    requireAll = false
+)
+fun ImageView.imageUrl(
+    url: String?,
+    @DrawableRes placeholderId: Int?
+) {
     load(url) {
         crossfade(true)
         placeholder(placeholderId?.let {

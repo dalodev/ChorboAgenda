@@ -1,24 +1,18 @@
-package es.littledavity.dynamicfeatures.create.image
+package es.littledavity.dynamicfeatures.create.location
 
-import android.net.Uri
 import es.littledavity.commons.ui.base.BaseViewState
 
 /**
- * Different states for [ImageFragment].
+ * Different states for [LocationFragment].
  *
  * @see BaseViewState
  */
-sealed class ImageViewState : BaseViewState {
+sealed class LocationViewState : BaseViewState {
 
     /**
      * Show continue
      */
-    data class Continue(val uri: Uri? = null) : ImageViewState()
-
-    /**
-     * Open Gallery
-     */
-    object OpenGallery : ImageViewState()
+    object Continue: LocationViewState()
 
     // ============================================================================================
     //  Public helpers methods

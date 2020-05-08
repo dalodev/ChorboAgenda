@@ -51,7 +51,8 @@
                 app:layout_constraintTop_toBottomOf="@id/nameTitle"
                 app:onTextChange="@{viewModel.onChangeText}"
                 tools:layout_editor_absoluteX="24dp"
-                android:transitionName="@string/name"/>
+                android:transitionName="@string/name"
+                android:background="@null"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
