@@ -21,6 +21,53 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/locationAnimation"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toTopOf="@id/location"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/location_simple"
+                app:lottie_repeatMode="restart" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/locationButton"
+                style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/name_input_margin"
+                android:onClick="@{() -> viewModel.onSelectCountry()}"
+                android:text="@string/select_location"
+                app:layout_constraintBottom_toTopOf="@id/bottomGuide"
+                app:visible="@{!viewModel.state.continue}" />
+
+            <TextView
+                android:id="@+id/location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/name_input_margin"
+                android:drawableStart="@{viewModel.countryFlag}"
+                android:gravity="center"
+                android:onClick="@{() -> viewModel.onSelectCountry()}"
+                android:text="@{viewModel.countryName}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textAppearance="@style/TextAppearance.Title"
+                app:layout_constraintBottom_toTopOf="@id/bottomGuide"
+                app:visible="@{viewModel.state.continue}"
+                tools:text="+34 España" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/bottomGuide"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.85" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton

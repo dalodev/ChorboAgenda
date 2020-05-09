@@ -42,4 +42,10 @@
     <style name="TextAppearance.Body" parent="@style/TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/textBody</item>
     </style>
+
+    <!--Button Style-->
+    <style name="Button.Accent" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/textBody</item>
+        <item name="android:background">@color/accent</item>
+    </style>
 </resources>

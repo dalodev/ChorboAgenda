@@ -1,5 +1,6 @@
 package es.littledavity.dynamicfeatures.create.location.di
 
+import android.content.Context
 import androidx.annotation.VisibleForTesting
 import dagger.Module
 import dagger.Provides
@@ -28,7 +29,7 @@ class LocationModule(
      */
     @FeatureScope
     @Provides
-    fun providesLocationViewModel() = fragment.viewModel {
-        LocationViewModel()
+    fun providesLocationViewModel(context: Context) = fragment.viewModel {
+        LocationViewModel(context)
     }
 }

@@ -68,14 +68,8 @@
                     android:layout_gravity="center"
                     android:scaleType="fitXY"
                     app:imageUrl="@{viewModel.imageUri.toString()}"
-
                     tools:srcCompat="@drawable/ic_launcher_background" />
 
-                <ProgressBar
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    app:visible="@{viewModel.state.showLoading}" />
             </com.google.android.material.card.MaterialCardView>
 
 
