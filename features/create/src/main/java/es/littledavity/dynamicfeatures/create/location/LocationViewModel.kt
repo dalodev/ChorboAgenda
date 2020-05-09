@@ -16,7 +16,7 @@ import javax.inject.Inject
  * @see BaseViewModel
  */
 class LocationViewModel @Inject constructor(
-    val context: Context
+    private val context: Context
 ) : BaseViewModel() {
 
     val event = SingleLiveData<LocationViewEvent>()
@@ -33,7 +33,7 @@ class LocationViewModel @Inject constructor(
 
     fun loadCountry(country: Country) {
         _state.postValue(LocationViewState.Continue)
-        countryName.postValue("+ ${country.countryCode} ${country.name}")
+        countryName.postValue("+${country.countryCode}  ${country.name}")
         countryFlag.postValue(BitmapDrawable(context.resources, country.flag))
     }
 }

@@ -43,21 +43,34 @@
                 android:onClick="@{() -> viewModel.onSelectCountry()}"
                 android:text="@string/select_location"
                 app:layout_constraintBottom_toTopOf="@id/bottomGuide"
-                app:visible="@{!viewModel.state.continue}" />
+                app:visible="@{!viewModel.state.continue}"
+                tools:visibility="gone" />
+
+            <ImageView
+                android:id="@+id/flag"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_marginEnd="@dimen/name_input_margin"
+                android:background="@{viewModel.countryFlag}"
+                app:layout_constraintBottom_toBottomOf="@id/location"
+                app:layout_constraintEnd_toStartOf="@id/location"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/location"
+                app:visible="@{viewModel.state.continue}" />
 
             <TextView
                 android:id="@+id/location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/name_input_margin"
-                android:drawableStart="@{viewModel.countryFlag}"
                 android:gravity="center"
                 android:onClick="@{() -> viewModel.onSelectCountry()}"
                 android:text="@{viewModel.countryName}"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
                 android:textAppearance="@style/TextAppearance.Title"
                 app:layout_constraintBottom_toTopOf="@id/bottomGuide"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/flag"
                 app:visible="@{viewModel.state.continue}"
                 tools:text="+34 España" />
 

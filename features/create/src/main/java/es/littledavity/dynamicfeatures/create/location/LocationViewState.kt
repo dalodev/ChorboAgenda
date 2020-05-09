@@ -40,5 +40,5 @@ sealed class LocationViewState : BaseViewState {
      *
      * @return True if is empty state, otherwise false.
      */
-    fun isContinue() = this is Continue
+    fun isContinue() = this is Continue || this is CountryPicker
 }
