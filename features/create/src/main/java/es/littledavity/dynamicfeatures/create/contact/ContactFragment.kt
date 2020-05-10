@@ -56,7 +56,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
         viewBinding.viewModel = viewModel
         val countryCode = "+${args.countryCode}"
         viewBinding.countryCode.text = countryCode
-
+        viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
     }
 
     override fun onClear() {}

@@ -50,6 +50,7 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
      */
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
+        viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
     }
 
     override fun onClear() {}

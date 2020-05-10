@@ -129,7 +129,10 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
                 false
             )
             is NavigationCommand.Back -> findNavController().popBackStack()
-            is NavigationCommand.ToRoot -> findNavController().popBackStack(R.id.chorbo_list_fragment, false)
+            is NavigationCommand.ToRoot -> findNavController().popBackStack(
+                R.id.chorbo_list_fragment,
+                false
+            )
         }
     }
 }

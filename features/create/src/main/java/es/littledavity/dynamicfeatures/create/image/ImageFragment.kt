@@ -61,6 +61,7 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
         viewBinding.nameTitle.text = args.name
+        viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
     }
 
     override fun onClear() {}
