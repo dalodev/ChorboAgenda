@@ -13,4 +13,11 @@ abstract class BaseViewModel : ViewModel() {
     fun navigate(directions: NavDirections, extras: FragmentNavigator.Extras? = null) {
         navigationCommands.postValue(NavigationCommand.To(directions, extras))
     }
+
+    fun backTo(destinationId: Int) =
+        navigationCommands.postValue(NavigationCommand.BackTo(destinationId))
+
+    fun back() = navigationCommands.postValue(NavigationCommand.Back)
+
+    fun toRoot() = navigationCommands.postValue(NavigationCommand.ToRoot)
 }

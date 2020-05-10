@@ -89,14 +89,12 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
                     viewBinding.nameTitle to viewBinding.nameTitle.transitionName,
                     viewBinding.image to viewBinding.image.transitionName
                 )
-                viewModel.imageUri?.let {
-                    viewModel.navigate(
-                        ImageFragmentDirections.toLocation(
-                            args.name,
-                            it.toString()
-                        ), null
-                    )
-                }
+                viewModel.navigate(
+                    ImageFragmentDirections.toLocation(
+                        args.name,
+                        viewModel.imageUri.value.toString()
+                    ), null
+                )
             }
         }
     }

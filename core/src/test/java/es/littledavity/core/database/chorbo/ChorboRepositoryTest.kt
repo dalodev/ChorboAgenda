@@ -18,6 +18,8 @@ class ChorboRepositoryTest {
     @InjectMocks
     lateinit var chorboRepository: ChorboRepository
 
+    private val chorbo = Chorbo(2, "Ángeles", "test", "+34", "España", "test", "test", "test")
+
     @Before
     fun setUp() {
         MockitoAnnotations.initMocks(this)
@@ -77,10 +79,7 @@ class ChorboRepositoryTest {
 
     @Test
     fun deleteChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
-        val chorboToDelete = Chorbo(
-            0,
-            "Lorena"
-        )
+        val chorboToDelete = chorbo
         val chorboCaptor = argumentCaptor<Chorbo>()
         chorboRepository.deleteChorbo(chorboToDelete)
 
@@ -91,9 +90,9 @@ class ChorboRepositoryTest {
     @Test
     fun insertChorbos_ShouldInvokeCorrectDaoMethod() = runBlocking {
         val chorbosToInsert = listOf(
-            Chorbo(0, "Noemi"),
-            Chorbo(1, "Ximena"),
-            Chorbo(2, "Ángeles")
+            chorbo,
+            chorbo,
+            chorbo
         )
         val chorbosInsertedCaptor = argumentCaptor<List<Chorbo>>()
         chorboRepository.insertChorbos(chorbosToInsert)
@@ -106,12 +105,24 @@ class ChorboRepositoryTest {
     fun insertChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
         val chorboToInsert = Chorbo(
             0,
-            "Test"
+            "Test",
+            "test",
+            "test",
+            "test",
+            "test",
+            "test",
+            "test"
         )
         val chorboInsertedCaptor = argumentCaptor<Chorbo>()
         chorboRepository.insertChorbo(
             id = chorboToInsert.id,
-            name = chorboToInsert.name
+            name = chorboToInsert.name,
+            image = chorboToInsert.image,
+            countryCode = chorboToInsert.countryCode,
+            countryName = chorboToInsert.countryName,
+            flag = chorboToInsert.flag,
+            whatsapp = chorboToInsert.whatsapp,
+            instagram = chorboToInsert.instagram
         )
 
         verify(chorboDao).insertChorbo(chorboInsertedCaptor.capture())

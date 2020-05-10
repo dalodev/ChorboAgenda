@@ -59,12 +59,38 @@
         app:moduleName="create"
         android:name="es.littledavity.dynamicfeatures.create.location.LocationFragment"
         tools:layout="@layout/fragment_location" >
+        <action
+            android:id="@+id/toContact"
+            app:destination="@id/contact_fragment" />
         <argument
             android:name="name"
             app:argType="string" />
         <argument
             android:name="image"
             app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/contact_fragment"
+        app:moduleName="create"
+        android:name="es.littledavity.dynamicfeatures.create.contact.ContactFragment"
+        tools:layout="@layout/fragment_contact" >
+        <argument
+            android:name="name"
+            app:argType="string" />
+        <argument
+            android:name="image"
+            app:argType="string" />
+        <argument
+            android:name="countryCode"
+            app:argType="string" />
+        <argument
+            android:name="countryName"
+            app:argType="string" />
+        <argument
+            android:name="flag"
+            app:argType="string" />
+
     </fragment>
 
 </navigation>

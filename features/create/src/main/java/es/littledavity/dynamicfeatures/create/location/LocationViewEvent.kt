@@ -9,4 +9,9 @@ sealed class LocationViewEvent {
      * Next screen event.
      */
     object Next : LocationViewEvent()
+
+    /**
+     * Show country picker
+     */
+    object CountryPicker: LocationViewEvent()
 }

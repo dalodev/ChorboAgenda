@@ -24,9 +24,36 @@ var instantTaskExecutorRule = InstantTaskExecutorRule()
 private lateinit var database: ChorboagendaDatabase
 private lateinit var chorboDao: ChorboDao
 private val fakeChorbos = listOf(
-    Chorbo(0, "Noemi"),
-    Chorbo(1, "Ximena"),
-    Chorbo(2, "Ángeles")
+    Chorbo(
+        id = 1,
+        name = "Noemi",
+        image = "test",
+        countryCode = "+34",
+        countryName = "España",
+        flag = "test",
+        whatsapp = "test",
+        instagram = "test"
+    ),
+    Chorbo(
+        id = 2,
+        name = "Ximena",
+        image = "test",
+        countryCode = "+34",
+        countryName = "España",
+        flag = "test",
+        whatsapp = "test",
+        instagram = "test"
+    ),
+    Chorbo(
+        id = 3,
+        name = "Ángeles",
+        image = "test",
+        countryCode = "+34",
+        countryName = "España",
+        flag = "test",
+        whatsapp = "test",
+        instagram = "test"
+    )
 )
 
 class ChorboDaoTest : TestRobolectric() {
@@ -121,7 +148,7 @@ class ChorboDaoTest : TestRobolectric() {
     fun deleteChorbo_NoStored_ShouldNotRemoveNothing() = runBlocking {
         chorboDao.insertChorbos(fakeChorbos)
 
-        val chorboToRemove = Chorbo(5, "test")
+        val chorboToRemove = Chorbo(5, "test", "test", "+34", "España", "test", "test", "test")
         chorboDao.deleteChorbo(chorboToRemove)
 
         assertEquals(fakeChorbos, chorboDao.getChorbos())

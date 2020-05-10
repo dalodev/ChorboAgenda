@@ -14,7 +14,13 @@ open class ChorboItemMapper : Mapper<List<Chorbo>, List<ChorboItem>> {
         from.map {
             ChorboItem(
                 id = it.id,
-                name = it.name
+                name = it.name,
+                image = it.image,
+                countryCode = it.countryCode,
+                countryName = it.countryName,
+                flag = it.flag,
+                whatsapp = it.whatsapp,
+                instagram = it.whatsapp
             )
         }
 
@@ -22,7 +28,13 @@ open class ChorboItemMapper : Mapper<List<Chorbo>, List<ChorboItem>> {
         from.map {
             Chorbo(
                 id = it.id,
-                name = it.name
+                name = it.name,
+                image = it.image,
+                countryCode = it.countryCode,
+                countryName = it.countryName,
+                flag = it.flag,
+                whatsapp = it.whatsapp,
+                instagram = it.instagram
             )
         }
 }

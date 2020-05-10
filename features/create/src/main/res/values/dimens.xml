@@ -7,5 +7,9 @@
     <dimen name="image_arrow_margin">8dp</dimen>
     <dimen name="image_margin">24dp</dimen>
     <dimen name="image_max_height">300dp</dimen>
+    <dimen name="phone_padding">16dp</dimen>
+    <dimen name="instagram_padding">10dp</dimen>
+    <dimen name="phone_margin">8dp</dimen>
+    <dimen name="contact_container_margin">16dp</dimen>
 
 </resources>

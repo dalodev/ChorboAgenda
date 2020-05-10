@@ -72,7 +72,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/flag"
                 app:visible="@{viewModel.state.continue}"
-                tools:text="+34 España" />
+                tools:text="+34 España"
+                android:transitionName="@string/select_country_code"/>
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/bottomGuide"

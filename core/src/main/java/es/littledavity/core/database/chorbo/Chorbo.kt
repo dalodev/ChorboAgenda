@@ -10,6 +10,13 @@ import androidx.room.PrimaryKey
  */
 @Entity(tableName = "chorbo")
 data class Chorbo(
-    @PrimaryKey val id: Long,
-    @ColumnInfo(name = "name") val name: String
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @ColumnInfo(name = "name") val name: String,
+    @ColumnInfo(name = "image") val image: String,
+    @ColumnInfo(name = "countryCode") val countryCode: String,
+    @ColumnInfo(name = "countryName") val countryName: String,
+    @ColumnInfo(name = "flag") val flag: String,
+    @ColumnInfo(name = "whatsapp") var whatsapp: String,
+    @ColumnInfo(name = "instagram") var instagram: String
+
 )

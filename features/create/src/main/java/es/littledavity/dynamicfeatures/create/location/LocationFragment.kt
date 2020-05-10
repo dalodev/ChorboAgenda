@@ -7,7 +7,6 @@ import androidx.navigation.fragment.navArgs
 import com.debut.countrycodepicker.CountryPicker
 import com.debut.countrycodepicker.data.Country
 import com.debut.countrycodepicker.listeners.CountryCallBack
-import com.google.android.material.snackbar.Snackbar
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.extensions.observe
@@ -18,7 +17,7 @@ import es.littledavity.dynamicfeatures.create.location.di.LocationModule
 import es.littledavity.dynamicfeatures.create.name.NameViewModel
 
 /**
- * Chorbo name view containing bottom navigation bar with different chorbos tabs.
+ * Chorbo Location view containing bottom navigation bar with different chorbos tabs.
  *
  * @see BaseFragment
  */
@@ -39,7 +38,6 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.event, ::onViewEvent)
-        observe(viewModel.state, ::onViewStateChange)
     }
 
     /**
@@ -64,32 +62,33 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
     override fun onClear() {}
 
     /**
-     * Observer view state change on [LocationViewModel].
-     *
-     * @param viewState State of location fragment view.
-     */
-    private fun onViewStateChange(viewState: LocationViewState) {
-        when (viewState) {
-            is LocationViewState.CountryPicker -> {
-                CountryPicker.show(requireCompatActivity().supportFragmentManager, object : CountryCallBack {
-                    override fun onCountrySelected(country: Country) {
-                        viewModel.loadCountry(country)
-                    }
-                })
-            }
-        }
-    }
-
-    /**
      * Observer view event change on [NameViewModel].
      *
      * @param viewEvent Event on chorbos list.
      */
     private fun onViewEvent(viewEvent: LocationViewEvent) {
         when (viewEvent) {
+            is LocationViewEvent.CountryPicker -> {
+                CountryPicker.show(
+                    requireCompatActivity().supportFragmentManager,
+                    object : CountryCallBack {
+                        override fun onCountrySelected(country: Country) {
+                            viewModel.loadCountry(country)
+                        }
+                    })
+            }
             is LocationViewEvent.Next -> {
                 val extras = FragmentNavigatorExtras(
-
+                    viewBinding.location to viewBinding.location.transitionName
+                )
+                viewModel.navigate(
+                    LocationFragmentDirections.toContact(
+                        args.name,
+                        args.image,
+                        viewModel.country.countryCode,
+                        viewModel.country.name,
+                        viewModel.getFlag()
+                    ), extras
                 )
             }
         }

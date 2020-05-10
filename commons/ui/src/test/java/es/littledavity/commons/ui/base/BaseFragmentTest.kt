@@ -75,7 +75,7 @@ class BaseFragmentTest  {
                  baseFragment.requireCompatActivity()
              }
          }*/
-    class TestBaseFragment : BaseFragment<ViewDataBinding, ViewModel>(
+    class TestBaseFragment : BaseFragment<ViewDataBinding, BaseViewModel>(
         layoutId = 0
     ) {
         override fun onCreateView(

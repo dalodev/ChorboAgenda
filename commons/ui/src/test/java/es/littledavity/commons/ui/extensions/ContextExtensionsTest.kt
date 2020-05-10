@@ -25,7 +25,7 @@ class ContextExtensionsTest {
 
         every { context.getString(any()) } returns expectedString
 
-        assertEquals(expectedString, context.getString(resId))
+        assertEquals(expectedString, context.getStringOrEmpty(resId))
     }
 
     @Test
@@ -33,6 +33,6 @@ class ContextExtensionsTest {
         val resId = null
         val expectedString = ""
 
-        assertEquals(expectedString, context.getString(resId))
+        assertEquals(expectedString, context.getStringOrEmpty(resId))
     }
 }

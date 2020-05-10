@@ -9,10 +9,22 @@ class ChorboTest {
     fun createChorbo_ShouldAddCorrectAttributes() {
         val chorboId = 0L
         val chorboName = "David"
+        val image = "test"
+        val code = "test"
+        val countryName = "test"
+        val flag = "test"
+        val whatsapp = "test"
+        val instagram = "test"
 
         val chorboFavorite = Chorbo(
             id = chorboId,
-            name = chorboName
+            name = chorboName,
+            image = image,
+            countryCode = code,
+            countryName = countryName,
+            flag = flag,
+            whatsapp = whatsapp,
+            instagram = instagram
         )
 
         assertEquals(chorboId, chorboFavorite.id)

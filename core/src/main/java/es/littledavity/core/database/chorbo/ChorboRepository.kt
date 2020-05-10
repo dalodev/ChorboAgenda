@@ -89,11 +89,35 @@ class ChorboRepository @Inject constructor(
      * @param id Chorbo identifier.
      * @param name Chorbo name.
      */
-    suspend fun insertChorbo(id: Long, name: String) {
-        val chorboFavorite = Chorbo(
+    suspend fun insertChorbo(
+        id: Long,
+        name: String,
+        image: String,
+        countryCode: String,
+        countryName: String,
+        flag: String,
+        whatsapp: String,
+        instagram: String
+    ) {
+        val chorbo = Chorbo(
             id = id,
-            name = name
+            name = name,
+            image = image,
+            countryCode = countryCode,
+            countryName = countryName,
+            flag = flag,
+            whatsapp = whatsapp,
+            instagram = instagram
         )
-        chorboDao.insertChorbo(chorboFavorite)
+        chorboDao.insertChorbo(chorbo)
+    }
+
+    /**
+     * Add to database a chrobo.
+     *
+     * @param chorbo Chorbo object.
+     */
+    suspend fun insertChorbo(chorbo: Chorbo) {
+        chorboDao.insertChorbo(chorbo)
     }
 }

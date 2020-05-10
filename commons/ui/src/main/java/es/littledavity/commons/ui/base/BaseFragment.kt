@@ -62,8 +62,10 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     ): View? {
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding.lifecycleOwner = viewLifecycleOwner
-        sharedElementEnterTransition = TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
-        sharedElementReturnTransition = TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
+        sharedElementEnterTransition =
+            TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
+        sharedElementReturnTransition =
+            TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
         return viewBinding.root
     }
 
@@ -77,8 +79,6 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     override fun onAttach(context: Context) {
         super.onAttach(context)
         onInitDependencyInjection()
-        observe(viewModel.navigationCommands, ::onNavigate)
-
     }
 
     /**
@@ -92,6 +92,7 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onInitDataBinding()
+        observe(viewModel.navigationCommands, ::onNavigate)
     }
 
     /**
@@ -123,6 +124,12 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
             is NavigationCommand.To ->
                 command.extras?.let { findNavController().navigate(command.directions, it) }
                     ?: findNavController().navigate(command.directions)
+            is NavigationCommand.BackTo -> findNavController().popBackStack(
+                command.destinationId,
+                false
+            )
+            is NavigationCommand.Back -> findNavController().popBackStack()
+            is NavigationCommand.ToRoot -> findNavController().popBackStack(R.id.chorbo_list_fragment, false)
         }
     }
 }
