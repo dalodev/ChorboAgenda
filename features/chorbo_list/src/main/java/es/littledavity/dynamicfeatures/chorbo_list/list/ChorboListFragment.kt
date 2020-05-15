@@ -9,7 +9,6 @@ import androidx.paging.PagedList
 import com.airbnb.lottie.LottieDrawable
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
-import es.littledavity.commons.ui.extensions.linearLayoutManager
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.chorbo_list.R
 import es.littledavity.dynamicfeatures.chorbo_list.databinding.FragmentChorboListBinding
@@ -64,9 +63,8 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
      */
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
-        viewBinding.chorboList.apply {
+        viewBinding.includeList.chorboList.apply {
             adapter = viewAdapter
-            layoutManager = linearLayoutManager
         }
     }
 
@@ -102,7 +100,7 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
             is ChorboListViewState.NoMoreElements ->
                 viewAdapter.submitState(ChorboListAdapterState.NoMore)
             is ChorboListViewState.Empty ->
-                viewBinding.openOptionsFab.repeatCount = LottieDrawable.INFINITE
+                viewBinding.includeListEmpty.openOptionsFab.repeatCount = LottieDrawable.INFINITE
         }
     }
 
@@ -118,9 +116,9 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
     }
 
     private fun playAnimationAndNavigate() {
-        viewBinding.openOptionsFab.cancelAnimation()
-        viewBinding.openOptionsFab.repeatCount = 0
-        viewBinding.openOptionsFab.addAnimatorUpdateListener {
+        viewBinding.includeListEmpty.openOptionsFab.cancelAnimation()
+        viewBinding.includeListEmpty.openOptionsFab.repeatCount = 0
+        viewBinding.includeListEmpty.openOptionsFab.addAnimatorUpdateListener {
             val progress = (it.animatedValue as Float * 100).toInt()
             // navigate
             if (progress >= 25) {
@@ -128,6 +126,6 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
                 viewModel.navigate(direction)
             }
         }
-        viewBinding.openOptionsFab.playAnimation()
+        viewBinding.includeListEmpty.openOptionsFab.playAnimation()
     }
 }

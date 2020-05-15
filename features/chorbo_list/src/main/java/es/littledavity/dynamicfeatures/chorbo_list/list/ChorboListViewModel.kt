@@ -31,9 +31,7 @@ class ChorboListViewModel @Inject constructor(
     }
 
     val event = SingleLiveData<ChorboListViewEvent>()
-    val data = LivePagedListBuilder(dataSourceFactory,
-        PAGE_MAX_ELEMENTS
-    ).build()
+    val data = LivePagedListBuilder(dataSourceFactory, PAGE_MAX_ELEMENTS).build()
     val state = Transformations.map(databaseState) {
         when (it) {
             is DatabaseState.Success ->

@@ -2,17 +2,20 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <data>
+        <variable
+            name="viewState"
+            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewState" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/chorbo_list_item_loading_padding">
+        android:layout_height="match_parent"
+        app:visible="@{viewState.isLoading}">
 
-        <androidx.core.widget.ContentLoadingProgressBar
-            android:id="@+id/progress_bar"
-            style="?android:attr/progressBarStyle"
-            android:layout_width="@dimen/chorbo_list_item_loading_size"
-            android:layout_height="@dimen/chorbo_list_item_loading_size"
-            android:layout_gravity="center"
+        <ProgressBar
+            android:layout_width="@dimen/chorbo_list_loading_size"
+            android:layout_height="@dimen/chorbo_list_loading_size"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

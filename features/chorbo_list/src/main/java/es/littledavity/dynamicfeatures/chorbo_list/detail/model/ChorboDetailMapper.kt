@@ -19,14 +19,5 @@ class ChorboDetailMapper : Mapper<Chorbo, ChorboDetailItem> {
         instagram = from.instagram
     )
 
-    override suspend fun reverseMap(from: ChorboDetailItem) = Chorbo(
-        id = from.id,
-        name = from.name,
-        image = from.image,
-        countryCode = from.countryCode,
-        countryName = from.countryName,
-        flag = from.flag,
-        whatsapp = from.whatsapp,
-        instagram = from.instagram
-    )
+
 }

@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.littledavity.commons.ui.base.BaseListAdapter
 import es.littledavity.commons.ui.base.BasePagedListAdapter
@@ -44,8 +45,7 @@ class ChorbosListAdapter @Inject constructor(
     contentsSame = { old, new -> old == new }
 ) {
 
-    private var state: ChorboListAdapterState =
-        ChorboListAdapterState.Added
+    private var state: ChorboListAdapterState = ChorboListAdapterState.Added
 
     /**
      * Called when RecyclerView needs a new [RecyclerView.ViewHolder] of the given type to
@@ -63,18 +63,10 @@ class ChorbosListAdapter @Inject constructor(
         inflater: LayoutInflater,
         viewType: Int
     ): RecyclerView.ViewHolder =
-        when (ItemView.valueOf(
-            viewType
-        )) {
-            ItemView.CHORBO -> ChorboViewHolder(
-                inflater
-            )
-            ItemView.LOADING -> LoadingViewHolder(
-                inflater
-            )
-            else -> ErrorViewHolder(
-                inflater
-            )
+        when (ItemView.valueOf(viewType)) {
+            ItemView.CHORBO -> ChorboViewHolder(inflater)
+            ItemView.LOADING -> LoadingViewHolder(inflater)
+            else -> ErrorViewHolder(inflater)
         }
 
     /**
@@ -87,18 +79,19 @@ class ChorbosListAdapter @Inject constructor(
      */
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         when (getItemView(position)) {
-            ItemView.CHORBO ->
+            ItemView.CHORBO -> {
                 getItem(position)?.let {
                     if (holder is ChorboViewHolder) {
                         holder.bind(viewModel, it)
                     }
                 }
-            ItemView.ERROR ->
+            }
+            ItemView.ERROR -> {
                 if (holder is ErrorViewHolder) {
                     holder.bind(viewModel)
                 }
-            else -> {
             }
+            else -> { }
         }
     }
 
