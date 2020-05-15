@@ -29,16 +29,16 @@
                 android:id="@+id/character_image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/chorbo_list_item_size"
-                android:scaleType="centerCrop"
                 app:imageUrl="@{chorbo.image}"
-                app:layout_constraintBottom_toTopOf="@+id/character_name"
+                android:scaleType="fitXY"
+                app:layout_constraintBottom_toTopOf="@+id/chorbo_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/character_name"
+                android:id="@+id/chorbo_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/chorbo_list_item_text_padding"

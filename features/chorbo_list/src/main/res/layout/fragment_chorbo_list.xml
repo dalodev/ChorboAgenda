@@ -9,52 +9,60 @@
             type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewModel" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:onRefreshListener="@{() -> viewModel.refreshLoadedChorboList()}"
+        app:refreshing="@{viewModel.state.refreshing}">
 
-        <androidx.coordinatorlayout.widget.CoordinatorLayout
-            android:id="@+id/main_content"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
-            <include
-                android:id="@+id/include_list"
-                layout="@layout/view_chorbo_list"
-                app:viewState="@{viewModel.state}" />
+            <androidx.coordinatorlayout.widget.CoordinatorLayout
+                android:id="@+id/main_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <include
-                android:id="@+id/include_list_error"
-                layout="@layout/view_chorbo_list_error"
-                app:viewState="@{viewModel.state}" />
+                <include
+                    android:id="@+id/include_list"
+                    layout="@layout/view_chorbo_list"
+                    app:viewState="@{viewModel.state}" />
 
-            <include
-                android:id="@+id/include_list_loading"
-                layout="@layout/view_chorbo_list_loading"
-                app:viewState="@{viewModel.state}" />
+                <include
+                    android:id="@+id/include_list_error"
+                    layout="@layout/view_chorbo_list_error"
+                    app:viewState="@{viewModel.state}" />
 
-            <include
-                android:id="@+id/include_list_empty"
-                layout="@layout/view_corbo_list_empty"
+                <include
+                    android:id="@+id/include_list_loading"
+                    layout="@layout/view_chorbo_list_loading"
+                    app:viewState="@{viewModel.state}" />
+
+                <include
+                    android:id="@+id/include_list_empty"
+                    layout="@layout/view_corbo_list_empty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|end"
+                    app:layout_anchorGravity="bottom|right|end"
+                    app:viewModel="@{viewModel}"
+                    app:viewState="@{viewModel.state}" />
+
+            </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+            <TextView
+                android:id="@+id/emptyView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="bottom|end"
-                app:layout_anchorGravity="bottom|right|end"
-                app:viewModel="@{viewModel}"
-                app:viewState="@{viewModel.state}" />
+                android:gravity="center"
+                android:text="@string/chorbos_list_empty_text"
+                app:layout_constraintBottom_toBottomOf="@+id/main_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:visible="@{viewModel.state.empty}" />
 
-        </androidx.coordinatorlayout.widget.CoordinatorLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <TextView
-            android:id="@+id/emptyView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/chorbos_list_empty_text"
-            app:layout_constraintBottom_toBottomOf="@+id/main_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:visible="@{viewModel.state.empty}" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 </layout>

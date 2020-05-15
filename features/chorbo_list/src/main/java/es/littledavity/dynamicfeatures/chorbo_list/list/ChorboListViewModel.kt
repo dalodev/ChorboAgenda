@@ -69,6 +69,13 @@ class ChorboListViewModel @Inject constructor(
     }
 
     /**
+     * Refresh characters fetch them again and update the list.
+     */
+    fun refreshLoadedChorboList() {
+        dataSourceFactory.refresh()
+    }
+
+    /**
      * Retry last fetch operation to add chorbo into list.
      */
     fun retryAddChorbosList() {
@@ -82,13 +89,6 @@ class ChorboListViewModel @Inject constructor(
      */
     fun openChorboDetail(chorboId: Long) {
         navigate(ChorboListFragmentDirections.toDetail(chorboId))
-    }
-
-    /**
-     * Retry last fetch operation to add characters into list.
-     */
-    fun retryAddCharactersList() {
-        dataSourceFactory.retry()
     }
 
     /**

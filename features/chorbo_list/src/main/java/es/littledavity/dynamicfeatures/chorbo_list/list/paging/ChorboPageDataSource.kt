@@ -62,9 +62,7 @@ open class ChorboPageDataSource @Inject constructor(
                 limit = PAGE_MAX_ELEMENTS
             )
             val data = mapper.map(response)
-            callback.onResult(data, null,
-                PAGE_MAX_ELEMENTS
-            )
+            callback.onResult(data, null, PAGE_MAX_ELEMENTS)
             databaseState.postValue(DatabaseState.Success(isEmptyResponse = data.isEmpty()))
         }
     }

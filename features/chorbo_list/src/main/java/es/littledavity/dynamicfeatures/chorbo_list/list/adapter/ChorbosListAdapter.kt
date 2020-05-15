@@ -145,6 +145,18 @@ class ChorbosListAdapter @Inject constructor(
     }
 
     /**
+     * Obtain helper class to provide the number of spans each item occupies.
+     *
+     * @return The helper class.
+     */
+    fun getSpanSizeLookup(): GridLayoutManager.SpanSizeLookup =
+        object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return getItemView(position).span
+            }
+        }
+
+    /**
      * Obtain the type of view by the item position.
      *
      * @param position Current item position.

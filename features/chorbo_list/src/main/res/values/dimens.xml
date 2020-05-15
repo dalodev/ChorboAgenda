@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!--Characters list-->
+    <!--chorbo list-->
     <dimen name="chorbo_list_loading_size">50dp</dimen>
     <dimen name="chorbo_list_item_elevation">5dp</dimen>
     <dimen name="chorbo_list_item_corner_radius">5dp</dimen>
@@ -13,7 +13,7 @@
     <dimen name="chorbo_list_item_error_button_top_margin">5dp</dimen>
     <dimen name="chorbos_list_empty_view_margin">16dp</dimen>
 
-    <!--Character detail-->
+    <!--chorbo detail-->
     <dimen name="chorbo_detail_app_bar_height">300dp</dimen>
     <dimen name="chorbo_detail_floating_button_margin">16dp</dimen>
     <dimen name="chorbo_detail_content_padding_top">30dp</dimen>

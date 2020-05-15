@@ -6,9 +6,11 @@ package es.littledavity.dynamicfeatures.chorbo_list.list
 import android.os.Bundle
 import android.view.View
 import androidx.paging.PagedList
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieDrawable
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
+import es.littledavity.commons.ui.extensions.gridLayoutManager
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.chorbo_list.R
 import es.littledavity.dynamicfeatures.chorbo_list.databinding.FragmentChorboListBinding
@@ -65,6 +67,7 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
         viewBinding.viewModel = viewModel
         viewBinding.includeList.chorboList.apply {
             adapter = viewAdapter
+            gridLayoutManager?.spanSizeLookup = viewAdapter.getSpanSizeLookup()
         }
     }
 
