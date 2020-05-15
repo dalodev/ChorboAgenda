@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.chorbo_list.list.model
 
 import es.littledavity.core.database.chorbo.Chorbo
@@ -15,26 +18,7 @@ open class ChorboItemMapper : Mapper<List<Chorbo>, List<ChorboItem>> {
             ChorboItem(
                 id = it.id,
                 name = it.name,
-                image = it.image,
-                countryCode = it.countryCode,
-                countryName = it.countryName,
-                flag = it.flag,
-                whatsapp = it.whatsapp,
-                instagram = it.whatsapp
-            )
-        }
-
-    override suspend fun reverseMap(from: List<ChorboItem>) =
-        from.map {
-            Chorbo(
-                id = it.id,
-                name = it.name,
-                image = it.image,
-                countryCode = it.countryCode,
-                countryName = it.countryName,
-                flag = it.flag,
-                whatsapp = it.whatsapp,
-                instagram = it.instagram
+                image = it.image
             )
         }
 }

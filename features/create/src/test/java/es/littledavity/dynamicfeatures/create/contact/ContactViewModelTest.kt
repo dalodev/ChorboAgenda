@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.contact
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -45,7 +48,7 @@ class ContactViewModelTest {
     }
 
     @Test
-    fun onContinue_shouldInsertAndNextEvent(){
+    fun onContinue_shouldInsertAndNextEvent() {
         val expectedEvent = ContactViewEvent.Next
 
         viewModel.onContinue()

@@ -1,16 +1,14 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.commons.ui.extensions
-
 
 import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
 import es.littledavity.test_utils.TestFragment
 import es.littledavity.test_utils.roboelectric.TestRobolectric
-import org.hamcrest.Matchers
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertThat
 import org.junit.Test
 
 class FragmentExtensionsTest : TestRobolectric() {

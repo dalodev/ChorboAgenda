@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.image
 
 import android.os.Bundle

@@ -1,24 +1,23 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.chorbo_list.list
 
 import android.os.Bundle
 import android.view.View
-import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.findNavController
 import androidx.paging.PagedList
+import com.airbnb.lottie.LottieDrawable
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
-import es.littledavity.commons.ui.extensions.observe
-import es.littledavity.dynamicfeatures.chorbo_list.list.di.ChorboListModule
-import es.littledavity.dynamicfeatures.chorbo_list.list.model.ChorboItem
-import com.airbnb.lottie.LottieDrawable
 import es.littledavity.commons.ui.extensions.linearLayoutManager
-import es.littledavity.commons.ui.extensions.showTopSnackbar
+import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.chorbo_list.R
 import es.littledavity.dynamicfeatures.chorbo_list.databinding.FragmentChorboListBinding
 import es.littledavity.dynamicfeatures.chorbo_list.list.adapter.ChorboListAdapterState
 import es.littledavity.dynamicfeatures.chorbo_list.list.adapter.ChorbosListAdapter
+import es.littledavity.dynamicfeatures.chorbo_list.list.di.ChorboListModule
 import es.littledavity.dynamicfeatures.chorbo_list.list.di.DaggerChorboListComponent
+import es.littledavity.dynamicfeatures.chorbo_list.list.model.ChorboItem
 import javax.inject.Inject
 
 /**
@@ -123,13 +122,12 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
         viewBinding.openOptionsFab.repeatCount = 0
         viewBinding.openOptionsFab.addAnimatorUpdateListener {
             val progress = (it.animatedValue as Float * 100).toInt()
-            //navigate
+            // navigate
             if (progress >= 25) {
                 val direction = ChorboListFragmentDirections.toName()
                 viewModel.navigate(direction)
             }
         }
         viewBinding.openOptionsFab.playAnimation()
-
     }
 }

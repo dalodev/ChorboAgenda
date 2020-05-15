@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.name
 
 /**
@@ -8,5 +11,5 @@ sealed class NameViewEvent {
     /**
      * Open chorbo image view.
      */
-     object Next : NameViewEvent()
+    object Next : NameViewEvent()
 }

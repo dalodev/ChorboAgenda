@@ -1,8 +1,10 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.commons.ui
 
+import org.junit.Assert.assertEquals
 import org.junit.Test
-
-import org.junit.Assert.*
 
 /**
  * Example local unit test, which will execute on the development machine (host).

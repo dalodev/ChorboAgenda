@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.chorbo_list.list
 
 import androidx.annotation.VisibleForTesting
@@ -97,5 +100,4 @@ class ChorboListViewModel @Inject constructor(
     fun openAddChorboOptions() {
         event.postValue(ChorboListViewEvent.OpenChorboOptions)
     }
-
 }

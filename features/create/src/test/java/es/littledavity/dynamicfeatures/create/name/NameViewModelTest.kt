@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.name
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
@@ -61,7 +64,7 @@ class NameViewModelTest {
     }
 
     @Test
-    fun onContinue_ShouldbeNextEvent(){
+    fun onContinue_ShouldbeNextEvent() {
         val expectedEvent = NameViewEvent.Next
         viewModel.onContinue()
 

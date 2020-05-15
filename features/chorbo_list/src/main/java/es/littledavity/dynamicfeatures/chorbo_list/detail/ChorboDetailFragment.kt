@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.chorbo_list.detail
 
 import es.littledavity.commons.ui.base.BaseFragment
@@ -20,5 +23,4 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
 
     override fun onClear() {
     }
-
 }

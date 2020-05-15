@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.commons.ui.bindings
 
 import android.widget.EditText

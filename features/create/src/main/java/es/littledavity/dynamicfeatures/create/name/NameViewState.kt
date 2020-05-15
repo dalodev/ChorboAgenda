@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.name
 
 import es.littledavity.commons.ui.base.BaseViewState
@@ -12,12 +15,12 @@ sealed class NameViewState : BaseViewState {
     /**
      * Empty name.
      */
-    object EmptyName: NameViewState()
+    object EmptyName : NameViewState()
 
     /**
      * Show continue
      */
-    object Continue: NameViewState()
+    object Continue : NameViewState()
 
     // ============================================================================================
     //  Public helpers methods

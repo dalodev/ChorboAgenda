@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.test_utils.livedata
 
 import androidx.lifecycle.LiveData

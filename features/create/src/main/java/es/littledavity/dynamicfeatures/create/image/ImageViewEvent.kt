@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.image
 
 /**
@@ -8,5 +11,5 @@ sealed class ImageViewEvent {
     /**
      * Open chorbo image view.
      */
-     object Next : ImageViewEvent()
+    object Next : ImageViewEvent()
 }

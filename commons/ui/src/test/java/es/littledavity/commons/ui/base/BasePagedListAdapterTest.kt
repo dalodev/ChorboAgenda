@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.commons.ui.base
 
 import android.view.LayoutInflater
@@ -6,7 +9,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagedList
 import androidx.recyclerview.widget.RecyclerView
 import com.nhaarman.mockitokotlin2.after
-import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.never
@@ -25,7 +27,6 @@ import org.mockito.ArgumentMatchers.anyString
 import org.mockito.Mock
 import org.mockito.Mockito.anyInt
 import org.mockito.MockitoAnnotations
-import org.mockito.Spy
 
 class BasePagedListAdapterTest : TestRobolectric() {
 

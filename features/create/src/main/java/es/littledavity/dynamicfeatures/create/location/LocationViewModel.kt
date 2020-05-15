@@ -1,6 +1,8 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.location
 
-import android.R.attr.bitmap
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
@@ -13,7 +15,6 @@ import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
-
 
 /**
  * View model responsible for preparing and managing the data for [LocationFragment].

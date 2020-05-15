@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.location
 
 import es.littledavity.commons.ui.base.BaseViewState
@@ -12,14 +15,12 @@ sealed class LocationViewState : BaseViewState {
     /**
      * Empty name.
      */
-    object EmptyName: LocationViewState()
+    object EmptyName : LocationViewState()
 
     /**
      * Show continue
      */
-    object Continue: LocationViewState()
-
-
+    object Continue : LocationViewState()
 
     // ============================================================================================
     //  Public helpers methods

@@ -1,22 +1,25 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.core.database.chorbo
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
-import es.littledavity.core.database.ChorboagendaDatabase
-import es.littledavity.test_utils.roboelectric.TestRobolectric
-import org.junit.Rule
 import androidx.test.platform.app.InstrumentationRegistry
+import es.littledavity.core.database.ChorboagendaDatabase
 import es.littledavity.test_utils.livedata.getValue
+import es.littledavity.test_utils.roboelectric.TestRobolectric
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.Matchers.hasItem
+import org.hamcrest.Matchers.not
 import org.junit.After
-import org.junit.Before
-import org.junit.Test
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertThat
 import org.junit.Assert.assertTrue
-import org.hamcrest.Matchers.not
-import org.hamcrest.Matchers.hasItem
+import org.junit.Before
+import org.junit.Rule
+import org.junit.Test
 
 @get:Rule
 var instantTaskExecutorRule = InstantTaskExecutorRule()

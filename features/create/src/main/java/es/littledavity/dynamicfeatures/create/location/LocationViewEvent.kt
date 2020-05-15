@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.location
 
 /**
@@ -13,5 +16,5 @@ sealed class LocationViewEvent {
     /**
      * Show country picker
      */
-    object CountryPicker: LocationViewEvent()
+    object CountryPicker : LocationViewEvent()
 }

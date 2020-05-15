@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.chorbo_list.detail.model
 
 data class ChorboDetailItem(

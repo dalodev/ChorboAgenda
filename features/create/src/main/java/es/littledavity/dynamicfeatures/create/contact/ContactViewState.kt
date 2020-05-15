@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.create.contact
 
 import es.littledavity.commons.ui.base.BaseViewState

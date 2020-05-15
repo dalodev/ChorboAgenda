@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.chorbo_list.list.di
 
 import androidx.annotation.VisibleForTesting
@@ -5,11 +8,11 @@ import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.viewModelScope
 import dagger.Module
 import dagger.Provides
+import es.littledavity.commons.ui.extensions.viewModel
+import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.di.scopes.FeatureScope
 import es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListFragment
 import es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewModel
-import es.littledavity.commons.ui.extensions.viewModel
-import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.dynamicfeatures.chorbo_list.list.adapter.ChorbosListAdapter
 import es.littledavity.dynamicfeatures.chorbo_list.list.model.ChorboItemMapper
 import es.littledavity.dynamicfeatures.chorbo_list.list.paging.ChorboPageDataSource

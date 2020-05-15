@@ -1,15 +1,18 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.core.database.chorbo
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
-import org.junit.Assert.assertEquals
 
 class ChorboRepositoryTest {
     @Mock

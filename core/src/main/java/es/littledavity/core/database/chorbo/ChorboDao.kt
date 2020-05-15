@@ -1,12 +1,13 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.core.database.chorbo
 
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 
 /**
  * The data access object for the [Chorbo] class.

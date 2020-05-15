@@ -1,15 +1,15 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.commons.ui.bindings
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
-import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.api.load
-import coil.decode.DataSource
-import coil.target.Target
 import es.littledavity.commons.ui.R
 import kotlin.random.Random
 

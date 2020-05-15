@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.core.di.modules
 
 import android.content.Context
@@ -35,7 +38,6 @@ class DatabaseModule {
             BuildConfig.CHORBOAGENDA_DATABASE_NAME
         ).addMigrations(MIGRATION_1_2)
             .build()
-
 
     /**
      * Create a provider method binding for [ChorboDao].

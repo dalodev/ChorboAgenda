@@ -1,7 +1,9 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.core.utils
 
 import android.content.Context
-import android.content.Intent
 import android.content.res.AssetFileDescriptor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
@@ -12,9 +14,9 @@ import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
 import androidx.annotation.RequiresApi
-import timber.log.Timber
 import java.io.File
 import java.io.FileNotFoundException
+import timber.log.Timber
 
 object ImageUtils {
     private const val DEFAULT_MIN_WIDTH_QUALITY = 600 // min pixels

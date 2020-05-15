@@ -1,32 +1,16 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.commons.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
-import androidx.lifecycle.ViewModel
-import androidx.test.core.app.ActivityScenario
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import es.littledavity.test_utils.TestCompatActivity
-import es.littledavity.test_utils.TestFragmentActivity
-import es.littledavity.test_utils.roboelectric.TestRobolectric
-import io.mockk.MockKAnnotations
-import io.mockk.impl.annotations.MockK
-import io.mockk.impl.annotations.SpyK
-import org.hamcrest.Matchers.instanceOf
-import org.junit.Assert.assertNotNull
-import org.junit.Assert.assertThat
-import org.junit.Before
-import org.junit.Test
-import org.mockito.Mockito
 import org.mockito.MockitoAnnotations
-import org.mockito.Spy
 
-class BaseFragmentTest  {
-
+class BaseFragmentTest {
 
     lateinit var baseFragment: TestBaseFragment
 
@@ -91,4 +75,3 @@ class BaseFragmentTest  {
         override fun onClear() {}
     }
 }
-

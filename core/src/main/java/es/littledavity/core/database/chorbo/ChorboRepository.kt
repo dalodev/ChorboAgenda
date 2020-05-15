@@ -1,12 +1,11 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.core.database.chorbo
 
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.LiveData
-import androidx.paging.DataSource
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.distinctUntilChanged
-import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 
 /**

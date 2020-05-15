@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.dynamicfeatures.chorbo_list.detail
 
 import androidx.annotation.VisibleForTesting
@@ -18,6 +21,4 @@ class ChorboDetailViewModel @Inject constructor(
     val chorboRepository: ChorboRepository,
     @VisibleForTesting(otherwise = PRIVATE)
     val chorboDetailMapper: ChorboDetailMapper
-) : BaseViewModel() {
-
-}
+) : BaseViewModel()

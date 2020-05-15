@@ -1,3 +1,6 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.chorboagenda
 
 import android.content.Context
@@ -7,8 +10,8 @@ import es.littledavity.core.di.CoreComponent
 import es.littledavity.core.di.DaggerCoreComponent
 import es.littledavity.core.di.modules.ContextModule
 import es.littledavity.core.utils.ThemeUtils
-import timber.log.Timber
 import javax.inject.Inject
+import timber.log.Timber
 
 class ChorboagendaApp : SplitCompatApplication() {
 

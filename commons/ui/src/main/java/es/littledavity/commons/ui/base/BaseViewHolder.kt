@@ -1,5 +1,7 @@
+/*
+ * Copyright 2020 littledavity
+ */
 package es.littledavity.commons.ui.base
-
 
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
