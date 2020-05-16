@@ -10,6 +10,7 @@ import dagger.Provides
 import es.littledavity.commons.ui.extensions.viewModel
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.di.scopes.FeatureScope
+import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.dynamicfeatures.create.contact.ContactFragment
 import es.littledavity.dynamicfeatures.create.contact.ContactViewModel
 
@@ -33,8 +34,9 @@ class ContactModule(
     @FeatureScope
     @Provides
     fun providesCreateViewModel(
-        chorboRepository: ChorboRepository
+        chorboRepository: ChorboRepository,
+        imageGalleryService: ImageGalleryService
     ) = fragment.viewModel {
-        ContactViewModel(chorboRepository)
+        ContactViewModel(chorboRepository, imageGalleryService)
     }
 }

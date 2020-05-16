@@ -3,9 +3,13 @@
  */
 package es.littledavity.commons.ui.extensions
 
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import es.littledavity.test_utils.roboelectric.TestRobolectric
+import org.hamcrest.Matchers.instanceOf
+import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
+import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -21,7 +25,7 @@ class RecyclerViewExtensionsTest : TestRobolectric() {
         MockitoAnnotations.initMocks(this)
     }
 
-    /* @Test
+     /*@Test
      fun obtainRecyclerLayoutManagerAsGridType() {
          recyclerView.layoutManager = GridLayoutManager(context, 2)
 

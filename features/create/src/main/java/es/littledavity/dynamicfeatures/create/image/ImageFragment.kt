@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.activity.invoke
 import androidx.activity.result.contract.ActivityResultContracts.GetContent
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.navigation.fragment.navArgs
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
@@ -88,11 +87,6 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
     private fun onViewEvent(viewEvent: ImageViewEvent) {
         when (viewEvent) {
             is ImageViewEvent.Next -> {
-                val extras = FragmentNavigatorExtras(
-                    viewBinding.continueButton to viewBinding.continueButton.transitionName,
-                    viewBinding.nameTitle to viewBinding.nameTitle.transitionName,
-                    viewBinding.image to viewBinding.image.transitionName
-                )
                 viewModel.navigate(
                     ImageFragmentDirections.toLocation(
                         args.name,

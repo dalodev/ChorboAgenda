@@ -12,7 +12,7 @@ import com.karumi.dexter.listener.single.PermissionListener
 import javax.inject.Inject
 
 class PermissionService @Inject constructor(
-    private val context: Context
+    internal val context: Context
 ) {
     fun requestPermissions(
         permissions: List<String>,

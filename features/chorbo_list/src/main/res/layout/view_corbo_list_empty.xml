@@ -41,6 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"
+            app:lottie_repeatCount="0"
             app:lottie_rawRes="@raw/open_chorbo_options"
             app:lottie_repeatMode="restart"
             app:lottie_scale="0.27"

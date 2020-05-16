@@ -9,6 +9,7 @@ import es.littledavity.core.database.chorbo.ChorboDao
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.di.modules.ContextModule
 import es.littledavity.core.di.modules.DatabaseModule
+import es.littledavity.core.di.modules.ServiceModule
 import es.littledavity.core.di.modules.UtilsModule
 import es.littledavity.core.utils.ThemeUtils
 import javax.inject.Singleton
@@ -22,7 +23,8 @@ import javax.inject.Singleton
 @Component(modules = [
     ContextModule::class,
     UtilsModule::class,
-    DatabaseModule::class
+    DatabaseModule::class,
+    ServiceModule::class
 ])
 interface CoreComponent {
 

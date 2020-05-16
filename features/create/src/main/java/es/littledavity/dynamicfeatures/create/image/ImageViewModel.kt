@@ -4,7 +4,10 @@
 package es.littledavity.dynamicfeatures.create.image
 
 import android.Manifest
+import android.content.Context
+import android.graphics.Bitmap
 import android.net.Uri
+import android.util.Base64
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.karumi.dexter.PermissionToken
@@ -15,6 +18,9 @@ import com.karumi.dexter.listener.single.PermissionListener
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.service.PermissionService
+import es.littledavity.core.utils.ImageUtils
+import java.io.ByteArrayOutputStream
+import java.io.InputStream
 import javax.inject.Inject
 
 /**
@@ -44,11 +50,13 @@ class ImageViewModel @Inject constructor(
                 override fun onPermissionRationaleShouldBeShown(
                     request: PermissionRequest?,
                     token: PermissionToken?
-                ) {}
+                ) {
+                }
 
                 override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
             })
     }
+
     fun onContinue() = event.postValue(ImageViewEvent.Next)
 
     fun loadImage(uri: Uri) {

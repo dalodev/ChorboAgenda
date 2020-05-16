@@ -3,6 +3,9 @@
  */
 package es.littledavity.dynamicfeatures.chorbo_list.list
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.util.Base64
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.Transformations
@@ -11,8 +14,10 @@ import androidx.paging.LivePagedListBuilder
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.DatabaseState
+import es.littledavity.core.utils.ImageUtils
 import es.littledavity.dynamicfeatures.chorbo_list.list.paging.ChorboPageDataSourceFactory
 import es.littledavity.dynamicfeatures.chorbo_list.list.paging.PAGE_MAX_ELEMENTS
+import java.io.File
 import javax.inject.Inject
 
 /**
@@ -98,4 +103,6 @@ class ChorboListViewModel @Inject constructor(
     fun openAddChorboOptions() {
         event.postValue(ChorboListViewEvent.OpenChorboOptions)
     }
+
+    fun getImageFile(imagePath: String) = File(imagePath)
 }

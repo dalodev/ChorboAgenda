@@ -1,0 +1,62 @@
+package es.littledavity.core.service
+
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
+import android.net.Uri
+import android.os.Environment
+import android.util.Base64
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileOutputStream
+import java.util.*
+import javax.inject.Inject
+
+class ImageGalleryService @Inject constructor(
+    internal val context: Context
+) {
+
+    fun getBitmap(uri: Uri): Bitmap {
+        val imageStream = context.contentResolver?.openInputStream(uri)
+        val bitmap = BitmapFactory.decodeStream(imageStream)
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val bytes = baos.toByteArray()
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+    }
+
+    fun getBitmap(imageBase64: String): Bitmap {
+        val decodedBytes = Base64.decode(imageBase64, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+    }
+
+    suspend fun createDirectoryAndSaveFile(
+        imageToSave: Bitmap,
+        fileName: String
+    ): String {
+        val dirName =
+            context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/chorboagenda"
+        val direct = File(
+            dirName
+        )
+
+        if (!direct.exists()) {
+            val wallpaperDirectory = File(dirName)
+            wallpaperDirectory.mkdirs()
+        }
+        val uuid = UUID.randomUUID().toString()
+        val file = File(dirName, fileName+uuid)
+        if (file.exists()) {
+            file.delete()
+        }
+        try {
+            val out = FileOutputStream(file)
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out)
+            out.flush()
+            out.close()
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return file.path
+    }
+}

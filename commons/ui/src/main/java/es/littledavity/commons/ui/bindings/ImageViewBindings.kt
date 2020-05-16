@@ -11,6 +11,7 @@ import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import coil.api.load
 import es.littledavity.commons.ui.R
+import java.io.File
 import kotlin.random.Random
 
 /**
@@ -29,6 +30,33 @@ fun ImageView.imageUrl(
     @DrawableRes placeholderId: Int?
 ) {
     load(url) {
+        crossfade(true)
+        placeholder(placeholderId?.let {
+            ContextCompat.getDrawable(context, it)
+        } ?: run {
+            val placeholdersColors = resources.getStringArray(R.array.placeholders)
+            val placeholderColor = placeholdersColors[Random.nextInt(placeholdersColors.size)]
+            ColorDrawable(Color.parseColor(placeholderColor))
+        })
+    }
+}
+
+/**
+ * Set image loaded from url.
+ *
+ * @param url Image url to download and set as drawable.
+ * @param placeholderId Drawable resource identifier to set while downloading image.
+ */
+@BindingAdapter(
+    "imageFile",
+    "imagePlaceholder",
+    requireAll = false
+)
+fun ImageView.imageFile(
+    file: File?,
+    @DrawableRes placeholderId: Int?
+) {
+    load(file) {
         crossfade(true)
         placeholder(placeholderId?.let {
             ContextCompat.getDrawable(context, it)

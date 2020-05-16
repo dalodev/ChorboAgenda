@@ -3,6 +3,7 @@
  */
 package es.littledavity.dynamicfeatures.create.contact
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -10,6 +11,8 @@ import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboRepository
+import es.littledavity.core.service.ImageGalleryService
+import es.littledavity.core.utils.ImageUtils
 import javax.inject.Inject
 import kotlinx.coroutines.launch
 
@@ -19,7 +22,8 @@ import kotlinx.coroutines.launch
  * @see BaseViewModel
  */
 class ContactViewModel @Inject constructor(
-    private val chorboRepository: ChorboRepository
+    private val chorboRepository: ChorboRepository,
+    private val imageGalleryService: ImageGalleryService
 ) : BaseViewModel() {
 
     val event = SingleLiveData<ContactViewEvent>()
@@ -35,12 +39,17 @@ class ContactViewModel @Inject constructor(
 
     fun onContinue() {
         viewModelScope.launch {
+            val imageBitmap = imageGalleryService.getBitmap(Uri.parse(chorbo.image))
+            chorbo.image = imageGalleryService.createDirectoryAndSaveFile(imageBitmap, chorbo.name)
+            val flagBitmap = imageGalleryService.getBitmap(chorbo.flag)
+            chorbo.flag = imageGalleryService.createDirectoryAndSaveFile(flagBitmap, chorbo.name)
             chorboRepository.insertChorbo(chorbo)
             event.postValue(ContactViewEvent.Next)
         }
     }
 
     fun setData(args: ContactFragmentArgs) {
+
         chorbo = Chorbo(
             name = args.name,
             image = args.image,

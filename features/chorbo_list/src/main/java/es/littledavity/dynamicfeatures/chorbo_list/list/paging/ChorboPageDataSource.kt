@@ -17,7 +17,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 const val PAGE_INIT_ELEMENTS = 0
-const val PAGE_MAX_ELEMENTS = 50
+const val PAGE_MAX_ELEMENTS = 20
 
 /**
  * Incremental data loader for page-keyed content, where requests return keys for next/previous

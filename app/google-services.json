@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "300526789088",
+    "firebase_url": "https://chorboagenda-5c19c.firebaseio.com",
+    "project_id": "chorboagenda-5c19c",
+    "storage_bucket": "chorboagenda-5c19c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:300526789088:android:6724aaaa7fce58fd624b85",
+        "android_client_info": {
+          "package_name": "es.littledavity.chorboagenda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300526789088-et3ti9qiafdmrretko34ik5k8f115ef0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2lOVk4qY_jQu9iDiTKFLFXjLM86veqc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300526789088-et3ti9qiafdmrretko34ik5k8f115ef0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

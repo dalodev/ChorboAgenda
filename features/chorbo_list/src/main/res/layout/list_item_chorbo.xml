@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="chorbo"
             type="es.littledavity.dynamicfeatures.chorbo_list.list.model.ChorboItem" />
@@ -16,21 +17,21 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:onClick="@{() -> viewModel.openChorboDetail(chorbo.id)}"
+        app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="@dimen/chorbo_list_item_corner_radius"
-        app:cardElevation="@dimen/chorbo_list_item_elevation"
-        app:cardBackgroundColor="@android:color/transparent">
+        app:cardElevation="@dimen/chorbo_list_item_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            style="@style/AppTheme.SurfaceStyle"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            style="@style/AppTheme.SurfaceStyle">
+            android:layout_height="wrap_content">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/character_image"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/chorbo_list_item_size"
-                app:imageUrl="@{chorbo.image}"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
+                app:imageFile="@{viewModel.getImageFile(chorbo.image)}"
                 app:layout_constraintBottom_toTopOf="@+id/chorbo_name"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,6 +40,7 @@
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/chorbo_name"
+                style="@style/TextAppearance.CardTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/chorbo_list_item_text_padding"
@@ -47,8 +49,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="parent"
-                tools:text="Chorbo name"
-                style="@style/TextAppearance.CardTitle" />
+                tools:text="Chorbo name" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

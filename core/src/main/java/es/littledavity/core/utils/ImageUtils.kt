@@ -7,21 +7,59 @@ import android.content.Context
 import android.content.res.AssetFileDescriptor
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.ImageDecoder.decodeBitmap
 import android.graphics.Matrix
 import android.media.ExifInterface
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
+import android.util.Base64
 import androidx.annotation.RequiresApi
 import java.io.File
 import java.io.FileNotFoundException
 import timber.log.Timber
+import java.io.ByteArrayOutputStream
 
 object ImageUtils {
     private const val DEFAULT_MIN_WIDTH_QUALITY = 600 // min pixels
     private const val TEMP_IMAGE_NAME = "tempImage"
     private var minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY
+
+
+
+    fun getImageBytes(imageBase64: String): ByteArray = Base64.decode(imageBase64, Base64.DEFAULT)
+
+    fun getDecodedBitmap(imageBase64: String): Bitmap {
+        val decodedBytes = Base64.decode(imageBase64, Base64.DEFAULT)
+        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+    }
+
+    fun getDecodedBitmap(imageByteArray: ByteArray): Bitmap {
+        return BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.size)
+    }
+
+    fun encodeImage(context: Context?, imageUri: Uri): String {
+        val imageStream = context?.contentResolver?.openInputStream(imageUri)
+        val bitmap = BitmapFactory.decodeStream(imageStream)
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        val b = baos.toByteArray()
+        return Base64.encodeToString(b, Base64.DEFAULT)
+    }
+
+    fun encodeImage(imageBitmap: Bitmap): String {
+        val baos = ByteArrayOutputStream()
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        val b: ByteArray = baos.toByteArray()
+        return Base64.encodeToString(b, Base64.DEFAULT)
+    }
+
+    fun getImageBytes(context: Context?, imageUri: Uri): ByteArray {
+        val imageStream = context?.contentResolver?.openInputStream(imageUri)
+        val bitmap = BitmapFactory.decodeStream(imageStream)
+        val baos = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        return baos.toByteArray()
+    }
 
     fun getImageFromResult(context: Context, imageReturnedIntent: Uri?): Bitmap? {
         var bm: Bitmap?

@@ -13,6 +13,7 @@ import androidx.lifecycle.MutableLiveData
 import com.debut.countrycodepicker.data.Country
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
+import es.littledavity.core.utils.ImageUtils
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -46,10 +47,5 @@ class LocationViewModel @Inject constructor(
         countryFlag.postValue(BitmapDrawable(context.resources, country.flag))
     }
 
-    fun getFlag(): String {
-        val baos = ByteArrayOutputStream()
-        country.flag.compress(Bitmap.CompressFormat.PNG, 100, baos)
-        val b: ByteArray = baos.toByteArray()
-        return Base64.encodeToString(b, Base64.DEFAULT)
-    }
+    fun getFlag(): String = ImageUtils.encodeImage(country.flag)
 }

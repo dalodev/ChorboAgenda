@@ -27,16 +27,4 @@ class ContextModule(private val application: Application) {
     @Singleton
     @Provides
     fun provideContext(): Context = application
-
-    /**
-     * Create a provider method binding for [PermissionService].
-     *
-     * @return Instance of permission service.
-     * @see Provides
-     */
-    @Singleton
-    @Provides
-    fun providePermissionService(
-        context: Context
-    ) = PermissionService(context)
 }
