@@ -39,9 +39,10 @@ class ChorboListModule(
     @FeatureScope
     @Provides
     fun providesChorboListViewModel(
-        dataFactory: ChorboPageDataSourceFactory
+        dataFactory: ChorboPageDataSourceFactory,
+        chorboRepository: ChorboRepository
     ) = fragment.viewModel {
-        ChorboListViewModel(dataFactory)
+        ChorboListViewModel(dataFactory, chorboRepository)
     }
 
     /**

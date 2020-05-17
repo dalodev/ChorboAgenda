@@ -6,7 +6,6 @@ package es.littledavity.dynamicfeatures.chorbo_list.list
 import android.os.Bundle
 import android.view.View
 import androidx.paging.PagedList
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.airbnb.lottie.LottieDrawable
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
@@ -44,6 +43,7 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.state, ::onViewStateChange)
+        observe(viewModel.viewState, ::onViewStateChange)
         observe(viewModel.data, ::onViewDataChange)
         observe(viewModel.event, ::onViewEvent)
     }
@@ -104,6 +104,7 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
                 viewAdapter.submitState(ChorboListAdapterState.NoMore)
             is ChorboListViewState.Empty ->
                 viewBinding.includeListEmpty.openOptionsFab.repeatCount = LottieDrawable.INFINITE
+            is ChorboListViewState.SelectElement -> viewAdapter.selectItem(viewState.position)
         }
     }
 

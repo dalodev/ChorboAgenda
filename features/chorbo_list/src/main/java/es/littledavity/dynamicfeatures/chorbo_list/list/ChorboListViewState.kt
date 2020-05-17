@@ -52,6 +52,12 @@ sealed class ChorboListViewState : BaseViewState {
      */
     object NoMoreElements : ChorboListViewState()
 
+    /**
+     * Delete elements view state
+     */
+    data class SelectElement(val position: Int) : ChorboListViewState()
+
+
     // ============================================================================================
     //  Public helpers methods
     // ============================================================================================
@@ -111,4 +117,11 @@ sealed class ChorboListViewState : BaseViewState {
      * @return True if is no more elements state, otherwise false.
      */
     fun isNoMoreElements() = this is NoMoreElements
+
+    /**
+     * Check if current view state is [SelectElement].
+     *
+     * @return True if is no more elements state, otherwise false.
+     */
+    fun isSelectElements() = this is SelectElement
 }

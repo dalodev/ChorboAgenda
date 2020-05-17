@@ -11,6 +11,10 @@
         <variable
             name="viewState"
             type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewState" />
+
+        <variable
+            name="viewStateObserver"
+            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -20,16 +24,6 @@
         app:layout_anchor="@id/include_list"
         app:layout_anchorGravity="bottom|right|end"
         >
-
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/createChorboFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/chorbos_list_empty_view_margin"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@mipmap/ic_launcher" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/openOptionsFab"
@@ -45,7 +39,25 @@
             app:lottie_rawRes="@raw/open_chorbo_options"
             app:lottie_repeatMode="restart"
             app:lottie_scale="0.27"
-            app:lottie_speed="1" />
+            app:lottie_speed="1"
+            app:visible="@{!viewStateObserver.selectElements}"/>
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/deleteFab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{() -> viewModel.deleteChorboItemsSelected()}"
+            app:elevation="6dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:lottie_autoPlay="true"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/delete"
+            app:lottie_repeatMode="restart"
+            app:lottie_speed="1"
+            app:lottie_scale="0.45"
+            android:layout_margin="@dimen/chorbo_list_item_padding"
+            app:visible="@{viewStateObserver.selectElements}"/>
 
         <TextView
             android:id="@+id/tutorialText"

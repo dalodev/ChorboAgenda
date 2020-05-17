@@ -6,6 +6,8 @@ package es.littledavity.core.database.chorbo
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.LiveData
+import androidx.room.Query
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**
@@ -65,6 +67,14 @@ class ChorboRepository @Inject constructor(
      */
     suspend fun deleteChorboById(chorboId: Long) =
         chorboDao.deleteChorboById(chorboId)
+
+    /**
+     * Delete database chorbos by identifier.
+     *
+     * @param idList chorbos identifier.
+     */
+    suspend fun deleteChorbosById(idList: List<Long>) =
+        chorboDao.deleteChorbosById(idList)
 
     /**
      * Delete database chorbo.

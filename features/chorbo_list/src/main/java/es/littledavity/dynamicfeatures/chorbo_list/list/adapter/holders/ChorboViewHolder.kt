@@ -30,6 +30,7 @@ class ChorboViewHolder(
     fun bind(viewModel: ChorboListViewModel, item: ChorboItem) {
         binding.viewModel = viewModel
         binding.chorbo = item
+        binding.position = adapterPosition
         binding.executePendingBindings()
     }
 }

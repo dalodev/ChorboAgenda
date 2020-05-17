@@ -18,7 +18,8 @@ open class ChorboItemMapper : Mapper<List<Chorbo>, List<ChorboItem>> {
             ChorboItem(
                 id = it.id,
                 name = it.name,
-                image = it.image
+                image = it.image,
+                isSelected = false
             )
         }
 }

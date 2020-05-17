@@ -81,6 +81,16 @@ class ChorboRepositoryTest {
     }
 
     @Test
+    fun deleteChorbosById_ShouldInvokeCorrectDaoMethod() = runBlocking {
+        val chorboIdToDelete = listOf(1L, 2L)
+        val chorboIdCaptor = argumentCaptor<List<Long>>()
+        chorboRepository.deleteChorbosById(chorboIdToDelete)
+
+        verify(chorboDao).deleteChorbosById(chorboIdCaptor.capture())
+        assertEquals(chorboIdToDelete, chorboIdCaptor.lastValue)
+    }
+
+    @Test
     fun deleteChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
         val chorboToDelete = chorbo
         val chorboCaptor = argumentCaptor<Chorbo>()

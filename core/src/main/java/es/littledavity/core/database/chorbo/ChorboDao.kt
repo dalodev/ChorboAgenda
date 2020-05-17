@@ -8,6 +8,8 @@ import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
+import androidx.room.Update
+import kotlinx.coroutines.flow.Flow
 
 /**
  * The data access object for the [Chorbo] class.
@@ -66,6 +68,14 @@ interface ChorboDao {
     suspend fun deleteChorboById(chorboId: Long)
 
     /**
+     * Delete database chorbos by identifier.
+     *
+     * @param idList Chorbos identifier.
+     */
+    @Query("DELETE FROM chorbo where id in (:idList)")
+    suspend fun deleteChorbosById(idList: List<Long>)
+
+    /**
      * Delete database Chorbo.
      *
      * @param chorbo Chorbo.
@@ -88,4 +98,20 @@ interface ChorboDao {
      */
     @Insert
     suspend fun insertChorbo(chorbo: Chorbo)
+
+    /**
+     * Update a chorbo list.
+     *
+     * @param chorbos Chorbo list.
+     */
+    @Update
+    fun updateChorbos(vararg chorbos: Chorbo)
+
+    /**
+     * Update a single chorbo.
+     *
+     * @param chorbo Chorbo.
+     */
+    @Update
+    fun updateChorbo(chorbo: Chorbo)
 }

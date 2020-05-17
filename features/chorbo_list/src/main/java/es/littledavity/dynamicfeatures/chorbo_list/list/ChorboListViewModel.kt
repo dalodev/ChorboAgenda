@@ -3,20 +3,22 @@
  */
 package es.littledavity.dynamicfeatures.chorbo_list.list
 
-import android.graphics.Bitmap
-import android.graphics.BitmapFactory
-import android.util.Base64
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.DatabaseState
-import es.littledavity.core.utils.ImageUtils
+import es.littledavity.core.database.chorbo.ChorboRepository
+import es.littledavity.dynamicfeatures.chorbo_list.list.model.ChorboItemMapper
 import es.littledavity.dynamicfeatures.chorbo_list.list.paging.ChorboPageDataSourceFactory
 import es.littledavity.dynamicfeatures.chorbo_list.list.paging.PAGE_MAX_ELEMENTS
+import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 
@@ -27,7 +29,8 @@ import javax.inject.Inject
  */
 class ChorboListViewModel @Inject constructor(
     @VisibleForTesting(otherwise = PRIVATE)
-    val dataSourceFactory: ChorboPageDataSourceFactory
+    val dataSourceFactory: ChorboPageDataSourceFactory,
+    private val chorboRepository: ChorboRepository
 ) : BaseViewModel() {
 
     @VisibleForTesting(otherwise = PRIVATE)
@@ -37,6 +40,9 @@ class ChorboListViewModel @Inject constructor(
 
     val event = SingleLiveData<ChorboListViewEvent>()
     val data = LivePagedListBuilder(dataSourceFactory, PAGE_MAX_ELEMENTS).build()
+    private val _viewState = MutableLiveData<ChorboListViewState>()
+    val viewState: LiveData<ChorboListViewState>
+        get() = _viewState
     val state = Transformations.map(databaseState) {
         when (it) {
             is DatabaseState.Success ->
@@ -69,13 +75,6 @@ class ChorboListViewModel @Inject constructor(
     /**
      * Refresh chorbo fetch them again and update the list.
      */
-    fun refreshLoadedChorbosList() {
-        dataSourceFactory.refresh()
-    }
-
-    /**
-     * Refresh characters fetch them again and update the list.
-     */
     fun refreshLoadedChorboList() {
         dataSourceFactory.refresh()
     }
@@ -104,5 +103,44 @@ class ChorboListViewModel @Inject constructor(
         event.postValue(ChorboListViewEvent.OpenChorboOptions)
     }
 
+    /**
+     * Send interaction event for delete chorbo items selected.
+     *
+     */
+    fun deleteChorboItemsSelected() {
+        viewModelScope.launch {
+            val chorbosToDelete = data.value?.filter {
+                it.isSelected
+            }?.map { it.id }
+            chorbosToDelete?.let {
+                chorboRepository.deleteChorbosById(chorbosToDelete)
+            }
+            dataSourceFactory.refresh()
+            _viewState.postValue(ChorboListViewState.Loaded)
+        }
+    }
+
+    /**
+     * Get file from path
+     *
+     * @param imagePath path of image
+     */
     fun getImageFile(imagePath: String) = File(imagePath)
+
+    /**
+     * Send interaction event for delete chorbo from selected chorbo.
+     *
+     * @param position chorbo position from adapter.
+     */
+    fun onAddChorboItemToDelete(position: Int, choboId: Long) {
+        val anySelected = data.value?.filter { it.isSelected }
+        val isItemSelected = data.value?.get(position)?.isSelected ?: false
+
+        anySelected?.let {
+            if (it.size == 1 && isItemSelected) {
+                _viewState.postValue(ChorboListViewState.SelectElement(position))
+                _viewState.postValue(ChorboListViewState.Loaded)
+            } else _viewState.postValue(ChorboListViewState.SelectElement(position))
+        } ?: _viewState.postValue(ChorboListViewState.SelectElement(position))
+    }
 }

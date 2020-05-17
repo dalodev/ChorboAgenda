@@ -91,7 +91,8 @@ class ChorbosListAdapter @Inject constructor(
                     holder.bind(viewModel)
                 }
             }
-            else -> { }
+            else -> {
+            }
         }
     }
 
@@ -172,4 +173,17 @@ class ChorbosListAdapter @Inject constructor(
         } else {
             ItemView.CHORBO
         }
+
+    /**
+     * Update current adapter item, applying visual changes.
+     *
+     * @param position id of item to select.
+     */
+    fun selectItem(position: Int) {
+        val item = getItem(position)
+        item?.let {
+            getItem(position)?.isSelected = !it.isSelected
+        }
+        notifyItemChanged(position)
+    }
 }

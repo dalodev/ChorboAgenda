@@ -42,13 +42,14 @@
 
                 <include
                     android:id="@+id/include_list_empty"
-                    layout="@layout/view_corbo_list_empty"
+                    layout="@layout/view_corbo_list_options"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|end"
                     app:layout_anchorGravity="bottom|right|end"
                     app:viewModel="@{viewModel}"
-                    app:viewState="@{viewModel.state}" />
+                    app:viewState="@{viewModel.state}"
+                    app:viewStateObserver="@{viewModel.viewState}" />
 
             </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
