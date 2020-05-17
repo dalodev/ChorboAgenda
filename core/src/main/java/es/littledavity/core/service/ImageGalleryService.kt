@@ -6,6 +6,8 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
 import android.util.Base64
+import es.littledavity.core.database.chorbo.ChorboRepository
+import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -13,7 +15,8 @@ import java.util.*
 import javax.inject.Inject
 
 class ImageGalleryService @Inject constructor(
-    internal val context: Context
+    internal val context: Context,
+    internal val chorboRepository: ChorboRepository
 ) {
 
     fun getBitmap(uri: Uri): Bitmap {
@@ -30,7 +33,26 @@ class ImageGalleryService @Inject constructor(
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
     }
 
-    suspend fun createDirectoryAndSaveFile(
+    suspend fun deleteChorboDirectory(idList: List<Long>) {
+        idList.forEach {
+            val chorbo = chorboRepository.getChorbo(it)
+            chorbo?.let { chorbo ->
+                val file = File(chorbo.image)
+                val flagFile = File(chorbo.flag)
+                if (file.exists()) {
+                    file.delete()
+                    Timber.i("image File deleted ${file.path}")
+                }
+                if (flagFile.exists()) {
+                    flagFile.delete()
+                    Timber.i("flag file deleted ${flagFile.path}")
+                }
+            }
+        }
+
+    }
+
+    fun createDirectoryAndSaveFile(
         imageToSave: Bitmap,
         fileName: String
     ): String {
@@ -45,7 +67,7 @@ class ImageGalleryService @Inject constructor(
             wallpaperDirectory.mkdirs()
         }
         val uuid = UUID.randomUUID().toString()
-        val file = File(dirName, fileName+uuid)
+        val file = File(dirName, fileName + uuid)
         if (file.exists()) {
             file.delete()
         }

@@ -15,7 +15,7 @@ import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.DatabaseState
 import es.littledavity.core.database.chorbo.ChorboRepository
-import es.littledavity.dynamicfeatures.chorbo_list.list.model.ChorboItemMapper
+import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.dynamicfeatures.chorbo_list.list.paging.ChorboPageDataSourceFactory
 import es.littledavity.dynamicfeatures.chorbo_list.list.paging.PAGE_MAX_ELEMENTS
 import kotlinx.coroutines.launch
@@ -30,7 +30,8 @@ import javax.inject.Inject
 class ChorboListViewModel @Inject constructor(
     @VisibleForTesting(otherwise = PRIVATE)
     val dataSourceFactory: ChorboPageDataSourceFactory,
-    private val chorboRepository: ChorboRepository
+    private val chorboRepository: ChorboRepository,
+    private val imageGalleryService: ImageGalleryService
 ) : BaseViewModel() {
 
     @VisibleForTesting(otherwise = PRIVATE)
@@ -113,6 +114,7 @@ class ChorboListViewModel @Inject constructor(
                 it.isSelected
             }?.map { it.id }
             chorbosToDelete?.let {
+                imageGalleryService.deleteChorboDirectory(it)
                 chorboRepository.deleteChorbosById(chorbosToDelete)
             }
             dataSourceFactory.refresh()
@@ -135,12 +137,15 @@ class ChorboListViewModel @Inject constructor(
     fun onAddChorboItemToDelete(position: Int, choboId: Long) {
         val anySelected = data.value?.filter { it.isSelected }
         val isItemSelected = data.value?.get(position)?.isSelected ?: false
+        when {
+            anySelected?.size == 1 && isItemSelected -> _viewState.postValue(
+                ChorboListViewState.SelectElement(position, true)
+            )
+            else -> _viewState.postValue(ChorboListViewState.SelectElement(position))
+        }
+    }
 
-        anySelected?.let {
-            if (it.size == 1 && isItemSelected) {
-                _viewState.postValue(ChorboListViewState.SelectElement(position))
-                _viewState.postValue(ChorboListViewState.Loaded)
-            } else _viewState.postValue(ChorboListViewState.SelectElement(position))
-        } ?: _viewState.postValue(ChorboListViewState.SelectElement(position))
+    fun changeViewState(viewState: ChorboListViewState) {
+        _viewState.postValue(viewState)
     }
 }

@@ -180,10 +180,10 @@ class ChorbosListAdapter @Inject constructor(
      * @param position id of item to select.
      */
     fun selectItem(position: Int) {
-        val item = getItem(position)
+        val item = currentList?.get(position)
         item?.let {
-            getItem(position)?.isSelected = !it.isSelected
+            currentList?.get(position)?.isSelected = !item.isSelected
+            notifyDataSetChanged()
         }
-        notifyItemChanged(position)
     }
 }

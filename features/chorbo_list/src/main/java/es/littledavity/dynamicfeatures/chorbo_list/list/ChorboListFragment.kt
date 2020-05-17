@@ -9,6 +9,7 @@ import androidx.paging.PagedList
 import com.airbnb.lottie.LottieDrawable
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
+import es.littledavity.commons.ui.bindings.visible
 import es.littledavity.commons.ui.extensions.gridLayoutManager
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.chorbo_list.R
@@ -104,7 +105,12 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
                 viewAdapter.submitState(ChorboListAdapterState.NoMore)
             is ChorboListViewState.Empty ->
                 viewBinding.includeListEmpty.openOptionsFab.repeatCount = LottieDrawable.INFINITE
-            is ChorboListViewState.SelectElement -> viewAdapter.selectItem(viewState.position)
+            is ChorboListViewState.SelectElement -> {
+                viewAdapter.selectItem(viewState.position)
+                if (viewState.last) {
+                    viewModel.changeViewState(ChorboListViewState.Loaded)
+                }
+            }
         }
     }
 

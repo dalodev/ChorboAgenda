@@ -4,23 +4,16 @@
 package es.littledavity.dynamicfeatures.create.image
 
 import android.Manifest
-import android.content.Context
-import android.graphics.Bitmap
 import android.net.Uri
-import android.util.Base64
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.karumi.dexter.MultiplePermissionsReport
 import com.karumi.dexter.PermissionToken
-import com.karumi.dexter.listener.PermissionDeniedResponse
-import com.karumi.dexter.listener.PermissionGrantedResponse
 import com.karumi.dexter.listener.PermissionRequest
-import com.karumi.dexter.listener.single.PermissionListener
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.service.PermissionService
-import es.littledavity.core.utils.ImageUtils
-import java.io.ByteArrayOutputStream
-import java.io.InputStream
 import javax.inject.Inject
 
 /**
@@ -40,20 +33,29 @@ class ImageViewModel @Inject constructor(
     var imageUri = MutableLiveData<Uri>()
 
     fun addImage() {
-        permissionService.requestPermission(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            object : PermissionListener {
-                override fun onPermissionGranted(reponse: PermissionGrantedResponse?) {
-                    _state.postValue(ImageViewState.OpenGallery)
+        permissionService.requestPermissions(
+            listOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE
+            ),
+            object : MultiplePermissionsListener {
+                override fun onPermissionsChecked(report: MultiplePermissionsReport) {
+                    // check if all permissions are granted
+                    if (report.areAllPermissionsGranted()) {
+                        _state.postValue(ImageViewState.OpenGallery)
+                    }
+                    // check for permanent denial of any permission
+                    if (report.isAnyPermissionPermanentlyDenied) {
+                        // permission is denied permenantly, navigate user to app settings
+                    }
                 }
 
                 override fun onPermissionRationaleShouldBeShown(
-                    request: PermissionRequest?,
-                    token: PermissionToken?
+                    permissions: MutableList<PermissionRequest>,
+                    token: PermissionToken
                 ) {
+                    token.continuePermissionRequest()
                 }
-
-                override fun onPermissionDenied(response: PermissionDeniedResponse?) {}
             })
     }
 

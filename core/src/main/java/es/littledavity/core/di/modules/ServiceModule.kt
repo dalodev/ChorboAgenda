@@ -3,6 +3,7 @@ package es.littledavity.core.di.modules
 import android.content.Context
 import dagger.Module
 import dagger.Provides
+import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.core.service.PermissionService
 import javax.inject.Singleton
@@ -30,7 +31,8 @@ class ServiceModule {
     @Singleton
     @Provides
     fun provideImageGalleryService(
-        context: Context
-    ) = ImageGalleryService(context)
+        context: Context,
+        chorboRepository: ChorboRepository
+    ) = ImageGalleryService(context, chorboRepository)
 
 }
