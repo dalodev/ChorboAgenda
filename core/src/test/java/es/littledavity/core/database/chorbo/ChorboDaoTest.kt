@@ -168,11 +168,31 @@ class ChorboDaoTest : TestRobolectric() {
     }
 
     @Test
+    fun deleteChorbosById_Stored_ShouldRemoveIt() = runBlocking {
+        chorboDao.insertChorbos(fakeChorbos)
+
+        val chorboToRemove = listOf(fakeChorbos.first().id, fakeChorbos[2].id)
+        chorboDao.deleteChorbosById(chorboToRemove)
+
+        assertThat(chorboDao.getChorbos(), not(hasItem(chorboToRemove)))
+    }
+
+    @Test
     fun deleteChorboById_NoStored_ShouldNotRemoveNothing() = runBlocking {
         chorboDao.insertChorbos(fakeChorbos)
 
         val chorboNoStoredId = 100L
         chorboDao.deleteChorboById(chorboNoStoredId)
+
+        assertEquals(fakeChorbos, chorboDao.getChorbos())
+    }
+
+    @Test
+    fun deleteChorbosById_NoStored_ShouldNotRemoveNothing() = runBlocking {
+        chorboDao.insertChorbos(fakeChorbos)
+
+        val chorboNoStoredId = listOf(100L, 200L)
+        chorboDao.deleteChorbosById(chorboNoStoredId)
 
         assertEquals(fakeChorbos, chorboDao.getChorbos())
     }
