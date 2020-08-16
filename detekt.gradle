@@ -1,9 +1,20 @@
-apply plugin: 'io.gitlab.arturbosch.detekt'
+apply plugin: "io.gitlab.arturbosch.detekt"
 
 detekt {
-    config = files("$rootDir/.detekt/config.yml")
-    filters = ".*build.*,.*/resources/.*,.*/tmp/.*"
-    input = project.files("src/main/kotlin")
-    //Optional baseline, uncomment & run gradle command detektBaseline to exclude existing issues
-    //baseline = file("detekt-baseline.xml")
+    config = files("${project.projectDir}")
+    config = files("${project.rootDir}/config/detekt/detekt-ruleset.yml")
+    parallel = true
+    debug = true
+    reports {
+        xml {
+            enabled = true
+            destination = file("build/reports/detekt.xml")
+        }
+        html {
+            enabled = true
+            destination = file("build/reports/detekt.html")
+        }
+    }
 }
+
+tasks.detekt.jvmTarget = "1.8"

@@ -5,7 +5,6 @@ package es.littledavity.dynamicfeatures.create.image
 
 import android.os.Bundle
 import android.view.View
-import androidx.activity.invoke
 import androidx.activity.result.contract.ActivityResultContracts.GetContent
 import androidx.navigation.fragment.navArgs
 import es.littledavity.chorboagenda.ChorboagendaApp
@@ -28,7 +27,7 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
     private val args: ImageFragmentArgs by navArgs()
 
     private val getContent = registerForActivityResult(GetContent()) { uri ->
-        viewModel.loadImage(uri)
+        uri?.let(viewModel::loadImage)
     }
 
     /**
@@ -75,7 +74,7 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
      */
     private fun onViewStateChange(viewState: ImageViewState) {
         when (viewState) {
-            is ImageViewState.OpenGallery -> getContent("image/*")
+            is ImageViewState.OpenGallery -> getContent.launch("image/*")
         }
     }
 

@@ -21,6 +21,7 @@
             <option value="$PROJECT_DIR$/libraries/test_utils" />
           </set>
         </option>
+        <option name="resolveExternalAnnotations" value="false" />
         <option name="resolveModulePerSourceSet" value="false" />
       </GradleProjectSettings>
     </option>
