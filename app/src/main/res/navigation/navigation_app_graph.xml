@@ -90,6 +90,11 @@
         <argument
             android:name="flag"
             app:argType="string" />
+        <action
+            android:id="@+id/toList"
+            app:destination="@id/chorbo_list_fragment"
+            app:popUpTo="@id/chorbo_list_fragment"
+            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

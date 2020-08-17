@@ -53,7 +53,7 @@ sealed class ChorboListViewState : BaseViewState {
     object NoMoreElements : ChorboListViewState()
 
     /**
-     * Delete elements view state
+     * Select elements view state
      */
     data class SelectElement(val position: Int, val last: Boolean = false) : ChorboListViewState()
 

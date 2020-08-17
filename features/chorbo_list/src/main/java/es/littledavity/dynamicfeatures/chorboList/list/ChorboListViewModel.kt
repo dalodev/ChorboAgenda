@@ -110,7 +110,6 @@ class ChorboListViewModel @Inject constructor(
                 imageGalleryService.deleteChorboDirectory(it)
                 chorboRepository.deleteChorbosById(it)
                 refreshLoadedChorboList()
-                _viewState.postValue(ChorboListViewState.Loaded)
             }
         }
     }

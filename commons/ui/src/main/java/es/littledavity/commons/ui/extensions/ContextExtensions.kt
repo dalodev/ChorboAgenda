@@ -20,3 +20,5 @@ fun Context.getStringOrEmpty(@StringRes resId: Int?) =
     }
 
 fun Boolean?.orFalse() = this ?: false
+
+fun Int?.orZero() = this ?: 0

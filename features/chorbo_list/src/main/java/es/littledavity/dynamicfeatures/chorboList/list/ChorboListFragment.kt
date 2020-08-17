@@ -52,6 +52,7 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
         observe(viewModel.event, ::onViewEvent)
     }
 
+
     /**
      * Initialize dagger injection dependency graph.
      */
@@ -138,10 +139,5 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
             }
         }
         viewBinding.includeListEmpty.openOptionsFab.playAnimation()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.refreshLoadedChorboList()
     }
 }

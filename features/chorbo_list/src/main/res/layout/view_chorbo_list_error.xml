@@ -5,6 +5,10 @@
     <data>
 
         <variable
+            name="viewModel"
+            type="es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewModel" />
+
+        <variable
             name="viewState"
             type="es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewState" />
     </data>
@@ -20,10 +24,24 @@
             android:layout_height="wrap_content"
             android:text="@string/chorbo_list_error_text"
             android:textAlignment="center"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/retryButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/retryButton"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/chorbos_list_empty_view_margin"
+            android:gravity="center"
+            android:onClick="@{() -> viewModel.refreshLoadedChorboList()}"
+            android:text="@string/retry"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -70,7 +70,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
      */
     private fun onViewEvent(viewEvent: ContactViewEvent) {
         when (viewEvent) {
-            is ContactViewEvent.Next -> viewModel.toRoot()
+            is ContactViewEvent.Next -> viewModel.navigate(ContactFragmentDirections.toList())
         }
     }
 }
