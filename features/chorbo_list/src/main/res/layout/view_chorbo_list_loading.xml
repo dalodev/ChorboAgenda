@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewState"
-            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewState" />
+            type="es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

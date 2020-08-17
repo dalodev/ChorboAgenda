@@ -6,7 +6,7 @@ package es.littledavity.dynamicfeatures.create.contact
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import es.littledavity.core.database.chorbo.ChorboRepository
-import es.littledavity.test_utils.rules.CoroutineRule
+import es.littledavity.testUtils.rules.CoroutineRule
 import io.mockk.MockKAnnotations
 import io.mockk.coVerify
 import io.mockk.impl.annotations.InjectMockKs

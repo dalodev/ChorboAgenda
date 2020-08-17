@@ -7,7 +7,6 @@ import android.app.Application
 import android.content.Context
 import dagger.Module
 import dagger.Provides
-import es.littledavity.core.service.PermissionService
 import javax.inject.Singleton
 
 /**

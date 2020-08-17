@@ -14,17 +14,24 @@ import android.os.Build
 import android.provider.MediaStore
 import android.util.Base64
 import androidx.annotation.RequiresApi
-import java.io.File
-import java.io.FileNotFoundException
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileNotFoundException
 
 object ImageUtils {
+
+    private const val QUALITY = 100
+    private const val ROTATE_270 = 270
+    private const val ROTATE_180 = 180
+    private const val ROTATE_90 = 90
+    private const val SAMPLE_5 = 5
+    private const val SAMPLE_3 = 3
+    private const val SAMPLE_2 = 2
+    private const val SAMPLE_1 = 1
     private const val DEFAULT_MIN_WIDTH_QUALITY = 600 // min pixels
     private const val TEMP_IMAGE_NAME = "tempImage"
     private var minWidthQuality = DEFAULT_MIN_WIDTH_QUALITY
-
-
 
     fun getImageBytes(imageBase64: String): ByteArray = Base64.decode(imageBase64, Base64.DEFAULT)
 
@@ -41,14 +48,14 @@ object ImageUtils {
         val imageStream = context?.contentResolver?.openInputStream(imageUri)
         val bitmap = BitmapFactory.decodeStream(imageStream)
         val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY, baos)
         val b = baos.toByteArray()
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
 
     fun encodeImage(imageBitmap: Bitmap): String {
         val baos = ByteArrayOutputStream()
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, baos)
+        imageBitmap.compress(Bitmap.CompressFormat.PNG, QUALITY, baos)
         val b: ByteArray = baos.toByteArray()
         return Base64.encodeToString(b, Base64.DEFAULT)
     }
@@ -57,15 +64,14 @@ object ImageUtils {
         val imageStream = context?.contentResolver?.openInputStream(imageUri)
         val bitmap = BitmapFactory.decodeStream(imageStream)
         val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY, baos)
         return baos.toByteArray()
     }
 
     fun getImageFromResult(context: Context, imageReturnedIntent: Uri?): Bitmap? {
         var bm: Bitmap?
         val imageFile = getTempFile(context)
-        val isCamera = imageReturnedIntent == null ||
-                imageReturnedIntent == Uri.fromFile(imageFile)
+        val isCamera = imageReturnedIntent == null || imageReturnedIntent == Uri.fromFile(imageFile)
         val selectedImage = if (isCamera) {
             /** CAMERA  */
             Uri.fromFile(imageFile)
@@ -91,7 +97,7 @@ object ImageUtils {
      */
     private fun getImageResized(context: Context, selectedImage: Uri): Bitmap? {
         var bm: Bitmap
-        val sampleSizes = intArrayOf(5, 3, 2, 1)
+        val sampleSizes = intArrayOf(SAMPLE_5, SAMPLE_3, SAMPLE_2, SAMPLE_1)
         var i = 0
         do {
             bm = decodeBitmap(context, selectedImage, sampleSizes[i])
@@ -140,9 +146,9 @@ object ImageUtils {
                 )
 
                 when (orientation) {
-                    ExifInterface.ORIENTATION_ROTATE_270 -> rotate = 270
-                    ExifInterface.ORIENTATION_ROTATE_180 -> rotate = 180
-                    ExifInterface.ORIENTATION_ROTATE_90 -> rotate = 90
+                    ExifInterface.ORIENTATION_ROTATE_270 -> rotate = ROTATE_270
+                    ExifInterface.ORIENTATION_ROTATE_180 -> rotate = ROTATE_180
+                    ExifInterface.ORIENTATION_ROTATE_90 -> rotate = ROTATE_90
                 }
             }
         } catch (e: Exception) {

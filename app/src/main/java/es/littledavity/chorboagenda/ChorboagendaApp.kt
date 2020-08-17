@@ -10,8 +10,8 @@ import es.littledavity.core.di.CoreComponent
 import es.littledavity.core.di.DaggerCoreComponent
 import es.littledavity.core.di.modules.ContextModule
 import es.littledavity.core.utils.ThemeUtils
-import javax.inject.Inject
 import timber.log.Timber
+import javax.inject.Inject
 
 class ChorboagendaApp : SplitCompatApplication() {
 

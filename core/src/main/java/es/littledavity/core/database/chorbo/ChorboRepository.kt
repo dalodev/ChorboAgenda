@@ -6,8 +6,6 @@ package es.littledavity.core.database.chorbo
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.LiveData
-import androidx.room.Query
-import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
 /**

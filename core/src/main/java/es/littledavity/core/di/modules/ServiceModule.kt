@@ -34,5 +34,4 @@ class ServiceModule {
         context: Context,
         chorboRepository: ChorboRepository
     ) = ImageGalleryService(context, chorboRepository)
-
 }

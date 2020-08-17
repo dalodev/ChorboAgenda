@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewState"
-            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewState" />
+            type="es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:visible="@{viewState.isLoaded || viewState.addLoading || viewState.addError || viewState.NoMoreElements}">
+        app:visible="@{viewState.isLoaded || viewState.addLoading || viewState.addError || viewState.NoMoreElements || viewState.selectElements}">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/chorboList"

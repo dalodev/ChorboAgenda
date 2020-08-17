@@ -4,7 +4,7 @@
 package es.littledavity.commons.ui.bindings
 
 import android.view.View
-import es.littledavity.test_utils.roboelectric.TestRobolectric
+import es.littledavity.testUtils.roboelectric.TestRobolectric
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before

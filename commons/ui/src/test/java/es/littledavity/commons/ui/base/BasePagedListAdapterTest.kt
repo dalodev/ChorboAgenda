@@ -15,8 +15,8 @@ import com.nhaarman.mockitokotlin2.never
 import com.nhaarman.mockitokotlin2.same
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import es.littledavity.test_utils.pagelist.pagedListOf
-import es.littledavity.test_utils.roboelectric.TestRobolectric
+import es.littledavity.testUtils.pagelist.pagedListOf
+import es.littledavity.testUtils.roboelectric.TestRobolectric
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue

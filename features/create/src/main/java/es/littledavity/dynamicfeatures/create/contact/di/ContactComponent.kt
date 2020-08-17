@@ -17,7 +17,8 @@ import es.littledavity.dynamicfeatures.create.contact.ContactFragment
 @FeatureScope
 @Component(
     modules = [ContactModule::class],
-    dependencies = [CoreComponent::class])
+    dependencies = [CoreComponent::class]
+)
 interface ContactComponent {
 
     /**

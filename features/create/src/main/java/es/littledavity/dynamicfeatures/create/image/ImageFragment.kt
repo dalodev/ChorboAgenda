@@ -65,7 +65,7 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
         viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
     }
 
-    override fun onClear() {}
+    override fun onClear() = Unit
 
     /**
      * Observer view state change on [ImageViewModel].
@@ -90,7 +90,8 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
                     ImageFragmentDirections.toLocation(
                         args.name,
                         viewModel.imageUri.value.toString()
-                    ), null
+                    ),
+                    null
                 )
             }
         }

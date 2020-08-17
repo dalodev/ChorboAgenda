@@ -63,7 +63,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
         viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
     }
 
-    override fun onClear() {}
+    override fun onClear() = Unit
 
     /**
      * Observer view event change on [NameViewModel].
@@ -79,7 +79,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         override fun onCountrySelected(country: Country) {
                             viewModel.loadCountry(country)
                         }
-                    })
+                    }
+                )
             }
             is LocationViewEvent.Next -> {
                 val extras = FragmentNavigatorExtras(
@@ -92,7 +93,8 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                         viewModel.country.countryCode,
                         viewModel.country.name,
                         viewModel.getFlag()
-                    ), extras
+                    ),
+                    extras
                 )
             }
         }

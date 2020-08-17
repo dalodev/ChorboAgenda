@@ -9,7 +9,7 @@ import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import es.littledavity.commons.ui.extensions.observe
-import es.littledavity.test_utils.lifecycle.TestLifecycleOwner
+import es.littledavity.testUtils.lifecycle.TestLifecycleOwner
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule

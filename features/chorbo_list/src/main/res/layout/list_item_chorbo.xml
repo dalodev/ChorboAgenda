@@ -10,11 +10,11 @@
 
         <variable
             name="chorbo"
-            type="es.littledavity.dynamicfeatures.chorbo_list.list.model.ChorboItem" />
+            type="es.littledavity.dynamicfeatures.chorboList.list.model.ChorboItem" />
 
         <variable
             name="viewModel"
-            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewModel" />
+            type="es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewModel" />
     </data>
 
     <com.google.android.material.card.MaterialCardView
@@ -24,7 +24,7 @@
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="@dimen/chorbo_list_item_corner_radius"
         app:cardElevation="@dimen/chorbo_list_item_elevation"
-        app:onLongClick="@{() -> viewModel.onAddChorboItemToDelete(position, chorbo.id)}">
+        app:onLongClick="@{() -> viewModel.onAddChorboItemToDelete(position)}">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/AppTheme.SurfaceStyle"

@@ -17,7 +17,8 @@ import es.littledavity.dynamicfeatures.create.image.ImageFragment
 @FeatureScope
 @Component(
     modules = [ImageModule::class],
-    dependencies = [CoreComponent::class])
+    dependencies = [CoreComponent::class]
+)
 interface ImageComponent {
 
     /**

@@ -7,8 +7,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import es.littledavity.core.database.ChorboagendaDatabase
-import es.littledavity.test_utils.livedata.getValue
-import es.littledavity.test_utils.roboelectric.TestRobolectric
+import es.littledavity.testUtils.livedata.getValue
+import es.littledavity.testUtils.roboelectric.TestRobolectric
 import kotlinx.coroutines.runBlocking
 import org.hamcrest.Matchers.hasItem
 import org.hamcrest.Matchers.not

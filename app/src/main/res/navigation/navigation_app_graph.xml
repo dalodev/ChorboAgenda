@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/chorbo_list_fragment"
-        android:name="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListFragment"
+        android:name="es.littledavity.dynamicfeatures.chorboList.list.ChorboListFragment"
         app:moduleName="chorbo_list"
         tools:layout="@layout/fragment_chorbo_list">
         <action
@@ -21,7 +21,7 @@
 
     <fragment
         android:id="@+id/chorbo_detail_fragment"
-        android:name="es.littledavity.dynamicfeatures.chorbo_list.detail.ChorboDetailFragment"
+        android:name="es.littledavity.dynamicfeatures.chorboList.detail.ChorboDetailFragment"
         tools:layout="@layout/fragment_chorbo_detail">
         <argument
             android:name="chorbo_id"
@@ -90,11 +90,6 @@
         <argument
             android:name="flag"
             app:argType="string" />
-        <action
-            android:id="@+id/toList"
-            app:destination="@id/chorbo_list_fragment"
-            app:popUpTo="@id/chorbo_list_fragment"
-            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

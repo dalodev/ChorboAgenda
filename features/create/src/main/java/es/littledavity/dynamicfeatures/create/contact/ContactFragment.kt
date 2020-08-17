@@ -61,7 +61,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
         viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
     }
 
-    override fun onClear() {}
+    override fun onClear() = Unit
 
     /**
      * Observer view event change on [ContactViewModel].
@@ -70,7 +70,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
      */
     private fun onViewEvent(viewEvent: ContactViewEvent) {
         when (viewEvent) {
-            is ContactViewEvent.Next -> viewModel.navigate(ContactFragmentDirections.toList())
+            is ContactViewEvent.Next -> viewModel.toRoot()
         }
     }
 }

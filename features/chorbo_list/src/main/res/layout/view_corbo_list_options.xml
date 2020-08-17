@@ -6,15 +6,15 @@
 
         <variable
             name="viewModel"
-            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewModel" />
+            type="es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewModel" />
 
         <variable
             name="viewState"
-            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewState" />
+            type="es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewState" />
 
         <variable
             name="viewStateObserver"
-            type="es.littledavity.dynamicfeatures.chorbo_list.list.ChorboListViewState" />
+            type="es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewState" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

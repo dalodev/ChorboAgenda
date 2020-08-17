@@ -18,9 +18,12 @@ import androidx.lifecycle.Observer
  * @see LiveData.observe
  */
 fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
-    liveData.observe(this, Observer {
-        it?.let { t -> observer(t) }
-    })
+    liveData.observe(
+        this,
+        Observer {
+            it?.let { t -> observer(t) }
+        }
+    )
 }
 
 /**
@@ -32,8 +35,14 @@ fun <T> LifecycleOwner.observe(liveData: LiveData<T>, observer: (T) -> Unit) {
  * @param observer The observer that will receive the events.
  * @see MutableLiveData.observe
  */
-fun <T> LifecycleOwner.observe(liveData: MutableLiveData<T>, observer: (T) -> Unit) {
-    liveData.observe(this, Observer {
-        it?.let { t -> observer(t) }
-    })
+fun <T> LifecycleOwner.observe(
+    liveData: MutableLiveData<T>,
+    observer: (T) -> Unit
+) {
+    liveData.observe(
+        this,
+        Observer {
+            it?.let { t -> observer(t) }
+        }
+    )
 }

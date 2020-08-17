@@ -12,9 +12,8 @@ import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.service.ImageGalleryService
-import es.littledavity.core.utils.ImageUtils
-import javax.inject.Inject
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 /**
  * View model responsible for preparing and managing the data for [ContactFragment].

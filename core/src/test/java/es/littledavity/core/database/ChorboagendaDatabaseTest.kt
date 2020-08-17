@@ -6,7 +6,7 @@ package es.littledavity.core.database
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import es.littledavity.core.database.chorbo.ChorboDao
-import es.littledavity.test_utils.roboelectric.TestRobolectric
+import es.littledavity.testUtils.roboelectric.TestRobolectric
 import org.hamcrest.Matchers.instanceOf
 import org.junit.Assert.assertThat
 import org.junit.Before

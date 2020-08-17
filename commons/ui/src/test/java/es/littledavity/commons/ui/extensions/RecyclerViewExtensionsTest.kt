@@ -3,13 +3,9 @@
  */
 package es.littledavity.commons.ui.extensions
 
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import es.littledavity.test_utils.roboelectric.TestRobolectric
-import org.hamcrest.Matchers.instanceOf
-import org.junit.Assert.assertNotNull
+import es.littledavity.testUtils.roboelectric.TestRobolectric
 import org.junit.Assert.assertNull
-import org.junit.Assert.assertThat
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mock
@@ -25,14 +21,14 @@ class RecyclerViewExtensionsTest : TestRobolectric() {
         MockitoAnnotations.initMocks(this)
     }
 
-     /*@Test
-     fun obtainRecyclerLayoutManagerAsGridType() {
-         recyclerView.layoutManager = GridLayoutManager(context, 2)
+    /*@Test
+    fun obtainRecyclerLayoutManagerAsGridType() {
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
 
-         val gridLayoutManager = recyclerView.gridLayoutManager
-         assertNotNull(gridLayoutManager)
-         assertThat(gridLayoutManager, instanceOf(GridLayoutManager::class.java))
-     }*/
+        val gridLayoutManager = recyclerView.gridLayoutManager
+        assertNotNull(gridLayoutManager)
+        assertThat(gridLayoutManager, instanceOf(GridLayoutManager::class.java))
+    }*/
 
     @Test
     fun obtainNullRecyclerGridLayoutManagerWithoutConfigured() {

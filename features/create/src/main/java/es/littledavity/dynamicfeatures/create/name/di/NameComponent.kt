@@ -17,7 +17,8 @@ import es.littledavity.dynamicfeatures.create.name.NameFragment
 @FeatureScope
 @Component(
     modules = [NameModule::class],
-    dependencies = [CoreComponent::class])
+    dependencies = [CoreComponent::class]
+)
 interface NameComponent {
 
     /**

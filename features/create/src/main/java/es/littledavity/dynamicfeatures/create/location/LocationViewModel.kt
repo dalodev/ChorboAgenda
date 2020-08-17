@@ -4,17 +4,14 @@
 package es.littledavity.dynamicfeatures.create.location
 
 import android.content.Context
-import android.graphics.Bitmap
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
-import android.util.Base64
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.debut.countrycodepicker.data.Country
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.utils.ImageUtils
-import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
 /**

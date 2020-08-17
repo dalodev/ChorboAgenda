@@ -11,7 +11,7 @@ import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.util.*
+import java.util.UUID
 import javax.inject.Inject
 
 class ImageGalleryService @Inject constructor(
@@ -19,11 +19,15 @@ class ImageGalleryService @Inject constructor(
     internal val chorboRepository: ChorboRepository
 ) {
 
+    companion object {
+        private const val QUALITY = 100
+    }
+
     fun getBitmap(uri: Uri): Bitmap {
         val imageStream = context.contentResolver?.openInputStream(uri)
         val bitmap = BitmapFactory.decodeStream(imageStream)
         val baos = ByteArrayOutputStream()
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos)
+        bitmap.compress(Bitmap.CompressFormat.JPEG, QUALITY, baos)
         val bytes = baos.toByteArray()
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
@@ -36,9 +40,9 @@ class ImageGalleryService @Inject constructor(
     suspend fun deleteChorboDirectory(idList: List<Long>) {
         idList.forEach {
             val chorbo = chorboRepository.getChorbo(it)
-            chorbo?.let { chorbo ->
-                val file = File(chorbo.image)
-                val flagFile = File(chorbo.flag)
+            chorbo?.let { item ->
+                val file = File(item.image)
+                val flagFile = File(item.flag)
                 if (file.exists()) {
                     file.delete()
                     Timber.i("image File deleted ${file.path}")
@@ -49,7 +53,6 @@ class ImageGalleryService @Inject constructor(
                 }
             }
         }
-
     }
 
     fun createDirectoryAndSaveFile(
@@ -73,7 +76,7 @@ class ImageGalleryService @Inject constructor(
         }
         try {
             val out = FileOutputStream(file)
-            imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, out)
+            imageToSave.compress(Bitmap.CompressFormat.JPEG, QUALITY, out)
             out.flush()
             out.close()
         } catch (e: Exception) {

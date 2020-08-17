@@ -56,7 +56,8 @@ class ImageViewModel @Inject constructor(
                 ) {
                     token.continuePermissionRequest()
                 }
-            })
+            }
+        )
     }
 
     fun onContinue() = event.postValue(ImageViewEvent.Next)

@@ -83,8 +83,8 @@ complexity:
     threshold: 60
   LongParameterList:
     active: true
-    functionThreshold: 6
-    constructorThreshold: 7
+    functionThreshold: 10
+    constructorThreshold: 8
     ignoreDefaultParameters: false
     ignoreDataClasses: true
   MethodOverloading:
@@ -103,11 +103,11 @@ complexity:
   TooManyFunctions:
     active: true
     excludes: '**/test/**,**/androidTest/**,**/*.Test.kt,**/*.Spec.kt,**/*.Spek.kt,**/*Extensions.kt'
-    thresholdInFiles: 11
-    thresholdInClasses: 11
-    thresholdInInterfaces: 11
-    thresholdInObjects: 11
-    thresholdInEnums: 11
+    thresholdInFiles: 15
+    thresholdInClasses: 15
+    thresholdInInterfaces: 15
+    thresholdInObjects: 15
+    thresholdInEnums: 15
     ignoreDeprecated: false
     ignorePrivate: true
     ignoreOverridden: true
@@ -190,7 +190,7 @@ exceptions:
     exceptionNames:
      - ArrayIndexOutOfBoundsException
      - Error
-     - Exception
+#     - Exception
      - IllegalMonitorStateException
      - NullPointerException
      - IndexOutOfBoundsException

@@ -9,7 +9,6 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.Query
 import androidx.room.Update
-import kotlinx.coroutines.flow.Flow
 
 /**
  * The data access object for the [Chorbo] class.

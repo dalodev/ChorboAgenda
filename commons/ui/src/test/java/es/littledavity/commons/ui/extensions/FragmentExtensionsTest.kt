@@ -7,8 +7,8 @@ import androidx.fragment.app.testing.launchFragmentInContainer
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import es.littledavity.test_utils.TestFragment
-import es.littledavity.test_utils.roboelectric.TestRobolectric
+import es.littledavity.testUtils.TestFragment
+import es.littledavity.testUtils.roboelectric.TestRobolectric
 import org.junit.Test
 
 class FragmentExtensionsTest : TestRobolectric() {

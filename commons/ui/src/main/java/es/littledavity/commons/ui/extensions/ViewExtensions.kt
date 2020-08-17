@@ -7,7 +7,6 @@ import android.view.Gravity
 import android.view.View
 import android.widget.FrameLayout
 import androidx.annotation.StringRes
-import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 
 /**
@@ -18,7 +17,7 @@ import com.google.android.material.snackbar.Snackbar
  */
 fun View.showTopSnackbar(@StringRes resId: Int?): Snackbar? =
     resId?.let {
-        val snack = Snackbar.make(this, this.context.getString(resId), BaseTransientBottomBar.LENGTH_SHORT)
+        val snack = Snackbar.make(this, this.context.getString(resId), Snackbar.LENGTH_SHORT)
         val view = snack.view
         val params = view.layoutParams as FrameLayout.LayoutParams
         params.gravity = Gravity.TOP

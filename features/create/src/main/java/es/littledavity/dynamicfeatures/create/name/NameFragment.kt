@@ -56,7 +56,7 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
         viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
     }
 
-    override fun onClear() {}
+    override fun onClear() = Unit
 
     /**
      * Observer view event change on [NameViewModel].

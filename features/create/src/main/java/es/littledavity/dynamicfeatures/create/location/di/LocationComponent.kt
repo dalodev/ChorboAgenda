@@ -18,7 +18,8 @@ import es.littledavity.dynamicfeatures.create.name.di.NameModule
 @FeatureScope
 @Component(
     modules = [LocationModule::class],
-    dependencies = [CoreComponent::class])
+    dependencies = [CoreComponent::class]
+)
 interface LocationComponent {
 
     /**
