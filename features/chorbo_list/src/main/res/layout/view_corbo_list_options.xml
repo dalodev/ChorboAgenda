@@ -22,8 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         app:layout_anchor="@id/include_list"
-        app:layout_anchorGravity="bottom|right|end"
-        >
+        app:layout_anchorGravity="bottom|right|end">
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/openOptionsFab"
@@ -35,29 +34,11 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:lottie_autoPlay="true"
             app:lottie_loop="false"
-            app:lottie_repeatCount="0"
             app:lottie_rawRes="@raw/open_chorbo_options"
+            app:lottie_repeatCount="0"
             app:lottie_repeatMode="restart"
             app:lottie_scale="0.27"
-            app:lottie_speed="1"
-            app:visible="@{!viewStateObserver.selectElements}"/>
-
-        <com.airbnb.lottie.LottieAnimationView
-            android:id="@+id/deleteFab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="@{() -> viewModel.deleteChorboItemsSelected()}"
-            app:elevation="6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:lottie_autoPlay="true"
-            app:lottie_loop="true"
-            app:lottie_rawRes="@raw/delete"
-            app:lottie_repeatMode="restart"
-            app:lottie_speed="1"
-            app:lottie_scale="0.45"
-            android:layout_margin="@dimen/chorbo_list_item_padding"
-            app:visible="@{viewStateObserver.selectElements}"/>
+            app:lottie_speed="1" />
 
         <TextView
             android:id="@+id/tutorialText"

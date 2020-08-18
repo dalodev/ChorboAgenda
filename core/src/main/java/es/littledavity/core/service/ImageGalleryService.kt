@@ -6,11 +6,13 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
 import android.util.Base64
+import androidx.core.content.ContextCompat
 import es.littledavity.core.database.chorbo.ChorboRepository
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.lang.IllegalStateException
 import java.util.UUID
 import javax.inject.Inject
 
@@ -59,8 +61,13 @@ class ImageGalleryService @Inject constructor(
         imageToSave: Bitmap,
         fileName: String
     ): String {
-        val dirName =
-            context.getExternalFilesDir(Environment.DIRECTORY_PICTURES).toString() + "/chorboagenda"
+        val externalStorageVolumes = ContextCompat.getExternalFilesDirs(context, null)
+        val primaryExternalStorage =
+            externalStorageVolumes[0]?.path ?: externalStorageVolumes[1].path
+            ?: throw IllegalStateException()
+
+        val dirName = "$primaryExternalStorage/chorboagenda"
+
         val direct = File(
             dirName
         )
@@ -83,5 +90,17 @@ class ImageGalleryService @Inject constructor(
             e.printStackTrace()
         }
         return file.path
+    }
+
+    // Checks if a volume containing external storage is available
+// for read and write.
+    fun isExternalStorageWritable(): Boolean {
+        return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
+    }
+
+    // Checks if a volume containing external storage is available to at least read.
+    fun isExternalStorageReadable(): Boolean {
+        return Environment.getExternalStorageState() in
+                setOf(Environment.MEDIA_MOUNTED, Environment.MEDIA_MOUNTED_READ_ONLY)
     }
 }

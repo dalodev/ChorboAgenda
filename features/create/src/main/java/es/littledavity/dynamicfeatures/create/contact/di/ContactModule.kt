@@ -33,7 +33,7 @@ class ContactModule(
      */
     @FeatureScope
     @Provides
-    fun providesCreateViewModel(
+    fun providesContactViewModel(
         chorboRepository: ChorboRepository,
         imageGalleryService: ImageGalleryService
     ) = fragment.viewModel {

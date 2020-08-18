@@ -108,12 +108,6 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
                 viewAdapter.submitState(ChorboListAdapterState.NoMore)
             is ChorboListViewState.Empty ->
                 viewBinding.includeListEmpty.openOptionsFab.repeatCount = LottieDrawable.INFINITE
-            is ChorboListViewState.SelectElement -> {
-                viewAdapter.selectItem(viewState.position)
-                if (viewState.last) {
-                    viewModel.changeViewState(ChorboListViewState.NoMoreElements)
-                }
-            }
         }
     }
 

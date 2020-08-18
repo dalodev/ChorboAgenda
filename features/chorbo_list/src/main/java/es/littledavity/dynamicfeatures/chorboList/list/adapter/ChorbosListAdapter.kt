@@ -172,16 +172,4 @@ class ChorbosListAdapter @Inject constructor(
         } else {
             ItemView.CHORBO
         }
-
-    /**
-     * Update current adapter item, applying visual changes.
-     *
-     * @param position id of item to select.
-     */
-    fun selectItem(position: Int) {
-        getItem(position)?.let {
-            it.isSelected = !it.isSelected
-        }
-        notifyDataSetChanged()
-    }
 }

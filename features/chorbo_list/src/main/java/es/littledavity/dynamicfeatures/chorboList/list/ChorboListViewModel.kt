@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.LivePagedListBuilder
 import es.littledavity.commons.ui.base.BaseViewModel
-import es.littledavity.commons.ui.extensions.orFalse
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.DatabaseState
 import es.littledavity.core.database.chorbo.ChorboRepository
@@ -98,44 +97,9 @@ class ChorboListViewModel @Inject constructor(
     fun openAddChorboOptions() = event.postValue(ChorboListViewEvent.OpenChorboOptions)
 
     /**
-     * Send interaction event for delete chorbo items selected.
-     *
-     */
-    fun deleteChorboItemsSelected() {
-        viewModelScope.launch {
-            val chorbosToDelete = data.value?.filter {
-                it.isSelected
-            }?.map { it.id }
-            chorbosToDelete?.let {
-                imageGalleryService.deleteChorboDirectory(it)
-                chorboRepository.deleteChorbosById(it)
-                refreshLoadedChorboList()
-            }
-        }
-    }
-
-    /**
      * Get file from path
      *
      * @param imagePath path of image
      */
     fun getImageFile(imagePath: String) = File(imagePath)
-
-    /**
-     * Send interaction event for delete chorbo from selected chorbo.
-     *
-     * @param position chorbo position from adapter.
-     */
-    fun onAddChorboItemToDelete(position: Int) {
-        val anySelected = data.value?.filter { it.isSelected }
-        val isItemSelected = data.value?.get(position)?.isSelected.orFalse()
-        when {
-            anySelected?.size == 1 && isItemSelected -> _viewState.postValue(
-                ChorboListViewState.SelectElement(position, true)
-            )
-            else -> _viewState.postValue(ChorboListViewState.SelectElement(position))
-        }
-    }
-
-    fun changeViewState(viewState: ChorboListViewState) = _viewState.postValue(viewState)
 }

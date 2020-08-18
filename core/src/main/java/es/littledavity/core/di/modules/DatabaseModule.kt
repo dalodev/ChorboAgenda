@@ -13,6 +13,7 @@ import es.littledavity.core.database.chorbo.ChorboDao
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.database.migrations.MIGRATION_1_2
 import es.littledavity.core.di.CoreComponent
+import es.littledavity.core.service.ImageGalleryService
 import javax.inject.Singleton
 
 /**

@@ -23,8 +23,7 @@
         android:onClick="@{() -> viewModel.openChorboDetail(chorbo.id)}"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="@dimen/chorbo_list_item_corner_radius"
-        app:cardElevation="@dimen/chorbo_list_item_elevation"
-        app:onLongClick="@{() -> viewModel.onAddChorboItemToDelete(position)}">
+        app:cardElevation="@dimen/chorbo_list_item_elevation">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/AppTheme.SurfaceStyle"
@@ -56,14 +55,6 @@
                 app:layout_constraintTop_toBottomOf="parent"
                 tools:text="Chorbo name" />
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/chorbo_list_item_padding"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_selected"
-                app:visible="@{chorbo.isSelected}" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>

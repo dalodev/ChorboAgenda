@@ -5,7 +5,9 @@ package es.littledavity.dynamicfeatures.create.contact
 
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.extensions.observe
@@ -36,6 +38,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.event, ::onViewEvent)
+        observe(viewModel.state, ::onViewState)
         viewModel.setData(args)
     }
 
@@ -62,6 +65,22 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
     }
 
     override fun onClear() = Unit
+
+    /**
+     * Observer view state change on [ContactViewModel].
+     *
+     * @param viewState Stte on chorbos list.
+     */
+    private fun onViewState(viewState: ContactViewState) {
+        when (viewState) {
+            is ContactViewState.Error ->
+                Snackbar.make(
+                    viewBinding.root,
+                    viewState.message.orEmpty(),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+        }
+    }
 
     /**
      * Observer view event change on [ContactViewModel].

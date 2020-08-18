@@ -25,7 +25,7 @@ class ServiceModule {
     /**
      * Create a provider method binding for [ImageGalleryService].
      *
-     * @return Instance of image gallry service.
+     * @return Instance of image gallery service.
      * @see Provides
      */
     @Singleton

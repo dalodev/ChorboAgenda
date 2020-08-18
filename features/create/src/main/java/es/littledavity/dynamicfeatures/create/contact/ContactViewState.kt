@@ -13,18 +13,18 @@ import es.littledavity.commons.ui.base.BaseViewState
 sealed class ContactViewState : BaseViewState {
 
     /**
-     * Show continue
+     * Show Error
      */
-    object Continue : ContactViewState()
+    data class Error(val message: String?): ContactViewState()
 
     // ============================================================================================
     //  Public helpers methods
     // ============================================================================================
 
     /**
-     * Check if current view state is [Continue].
+     * Check if current view state is [Error].
      *
      * @return True if is empty state, otherwise false.
      */
-    fun isContinue() = this is Continue
+    fun isError() = this is Error
 }

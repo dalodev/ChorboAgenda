@@ -11,6 +11,5 @@ import es.littledavity.dynamicfeatures.chorboList.list.ChorboListFragment
 data class ChorboItem(
     val id: Long,
     val name: String,
-    val image: String,
-    var isSelected: Boolean
+    val image: String
 )

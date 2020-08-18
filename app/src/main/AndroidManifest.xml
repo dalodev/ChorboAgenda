@@ -4,23 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="es.littledavity.chorboagenda">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <dist:module dist:instant="true" />
 
     <application
         android:name=".ChorboagendaApp"
-        android:fullBackupContent="true"
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
         android:extractNativeLibs="false"
+        android:fullBackupContent="true"
+        android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:targetApi="m">
-        <activity android:name=".MainActivity"
-            android:windowSoftInputMode="adjustResize"
-            android:screenOrientation="portrait"
+        <activity
+            android:name=".MainActivity"
             android:configChanges="orientation"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="adjustResize"
             tools:ignore="LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

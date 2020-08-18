@@ -32,7 +32,7 @@ class ImageModule(
      */
     @FeatureScope
     @Provides
-    fun providesCreateViewModel(
+    fun providesImageViewModel(
         permissionService: PermissionService
     ) = fragment.viewModel {
         ImageViewModel(permissionService)
