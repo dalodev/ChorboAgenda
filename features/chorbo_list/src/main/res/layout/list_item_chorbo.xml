@@ -20,7 +20,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:onClick="@{() -> viewModel.openChorboDetail(chorbo.id)}"
+        android:onClick="@{() -> viewModel.openChorboDetail(chorbo.name, chorbo.id, characterImage, chorboNameView)}"
         app:cardBackgroundColor="@android:color/transparent"
         app:cardCornerRadius="@dimen/chorbo_list_item_corner_radius"
         app:cardElevation="@dimen/chorbo_list_item_elevation">
@@ -35,20 +35,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/chorbo_list_item_size"
                 android:scaleType="centerCrop"
+                android:transitionName="@{String.valueOf(chorbo.id)}"
                 app:imageFile="@{viewModel.getImageFile(chorbo.image)}"
-                app:layout_constraintBottom_toTopOf="@+id/chorbo_name"
+                app:layout_constraintBottom_toTopOf="@+id/chorbo_name_view"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/chorbo_name"
+                android:id="@+id/chorbo_name_view"
                 style="@style/TextAppearance.CardTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/chorbo_list_item_text_padding"
                 android:text="@{chorbo.name}"
+                android:transitionName="@{chorbo.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

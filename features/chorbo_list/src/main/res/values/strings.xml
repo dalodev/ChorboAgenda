@@ -14,4 +14,5 @@
     <string name="chorbo_detail_added_to_favorite_message">Added to your favorite list</string>
     <string name="chorbo_detail_image_content_description">Image of the selected chorbo</string>
     <string name="add_options_navigate">Navigate to add options</string>
+    <string name="chorboImage">chorbo_image</string>
 </resources>

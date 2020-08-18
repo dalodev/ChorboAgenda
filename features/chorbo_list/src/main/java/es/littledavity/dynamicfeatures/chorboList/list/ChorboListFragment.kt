@@ -5,6 +5,8 @@ package es.littledavity.dynamicfeatures.chorboList.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.doOnPreDraw
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.PagedList
 import com.airbnb.lottie.LottieDrawable
 import es.littledavity.chorboagenda.ChorboagendaApp
@@ -50,6 +52,8 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
         observe(viewModel.viewState, ::onViewStateChange)
         observe(viewModel.data, ::onViewDataChange)
         observe(viewModel.event, ::onViewEvent)
+        postponeEnterTransition()
+        view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
 

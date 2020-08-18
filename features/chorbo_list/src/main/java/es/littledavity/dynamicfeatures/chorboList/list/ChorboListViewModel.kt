@@ -3,19 +3,24 @@
  */
 package es.littledavity.dynamicfeatures.chorboList.list
 
+import android.view.View
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.LivePagedListBuilder
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.DatabaseState
+import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.service.ImageGalleryService
+import es.littledavity.dynamicfeatures.chorboList.list.model.ChorboItem
 import es.littledavity.dynamicfeatures.chorboList.list.paging.ChorboPageDataSourceFactory
 import es.littledavity.dynamicfeatures.chorboList.list.paging.PAGE_MAX_ELEMENTS
 import kotlinx.coroutines.launch
@@ -86,9 +91,18 @@ class ChorboListViewModel @Inject constructor(
     /**
      * Send interaction event for open chorbo detail view from selected chorbo.
      *
+     * @param name name of chorbo.
      * @param chorboId chorbo identifier.
+     * @param imageView image view reference.
+     * @param nameView name view reference.
      */
-    fun openChorboDetail(chorboId: Long) = navigate(ChorboListFragmentDirections.toDetail(chorboId))
+    fun openChorboDetail(name: String, chorboId: Long, imageView: View, nameView: View) {
+        val extras = FragmentNavigatorExtras(
+            imageView to chorboId.toString(),
+            nameView to name
+        )
+        navigate(ChorboListFragmentDirections.toDetail(chorboId), extras)
+    }
 
     /**
      * Send interaction event for open chorbo options.

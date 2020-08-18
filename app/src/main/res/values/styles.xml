@@ -10,6 +10,10 @@
         <item name="android:windowActivityTransitions">true</item>
         <item name="android:windowSharedElementEnterTransition">@transition/shared_transition</item>
         <item name="android:windowSharedElementExitTransition">@transition/shared_transition</item>
+        <!-- specify enter and exit transitions -->
+        <!-- options are: explode, slide, fade -->
+        <item name="android:windowEnterTransition">@transition/change_image_transform</item>
+        <item name="android:windowExitTransition">@transition/change_image_transform</item>
     </style>
 
     <style name="AppTheme.BackgroundStyle">

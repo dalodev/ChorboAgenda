@@ -9,13 +9,6 @@ package es.littledavity.dynamicfeatures.chorboList.list
 sealed class ChorboListViewEvent {
 
     /**
-     * Open chorbo detail view.
-     *
-     * @param id chorbo identifier
-     */
-    data class OpenChorboDetail(val id: Long) : ChorboListViewEvent()
-
-    /**
      * Open add chorbo options view.
      */
     object OpenChorboOptions : ChorboListViewEvent()
