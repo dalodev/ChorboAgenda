@@ -43,9 +43,10 @@
 
             <TextView
                 android:id="@+id/name"
-                style="@style/TextAppearance.Title"
+                style="@style/TextAppearance.AppCompat.Title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textSize="@dimen/name_title_size"
                 app:layout_constraintBottom_toTopOf="@id/whatsAppContainer"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
