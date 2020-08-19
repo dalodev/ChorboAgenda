@@ -27,7 +27,7 @@
                 app:contentScrim="?attr/colorPrimary"
                 app:expandedTitleMarginEnd="64dp"
                 app:expandedTitleMarginStart="48dp"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/chorboImage"
@@ -53,9 +53,27 @@
             android:id="@+id/chorboDetailList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/chorbo_detail_list_margin"
+            android:background="@drawable/detail_list_background"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/list_item_chorbo" />
+
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/name"
+            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/chorbos_list_empty_view_margin"
+            android:backgroundTint="@android:color/white"
+            android:gravity="center"
+            android:lines="1"
+            android:text="@string/chorbo_name_sample"
+            android:textAllCaps="false"
+            app:layout_anchor="@id/appBar"
+            app:layout_anchorGravity="bottom|center" />
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

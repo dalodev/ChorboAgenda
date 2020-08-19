@@ -15,4 +15,5 @@
     <string name="chorbo_detail_image_content_description">Image of the selected chorbo</string>
     <string name="add_options_navigate">Navigate to add options</string>
     <string name="chorboImage">chorbo_image</string>
+    <string name="chorbo_name_sample">Almudena</string>
 </resources>

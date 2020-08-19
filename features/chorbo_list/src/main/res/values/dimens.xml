@@ -19,4 +19,5 @@
     <dimen name="chorbo_detail_content_padding_top">30dp</dimen>
     <dimen name="chorbo_detail_content_padding_horizontal">15dp</dimen>
     <dimen name="chorbo_detail_content_description_margin_top">10dp</dimen>
+    <dimen name="chorbo_detail_list_margin">24dp</dimen>
 </resources>

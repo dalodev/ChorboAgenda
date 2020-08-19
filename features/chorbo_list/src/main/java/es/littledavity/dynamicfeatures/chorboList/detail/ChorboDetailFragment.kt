@@ -3,20 +3,20 @@
  */
 package es.littledavity.dynamicfeatures.chorboList.detail
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.doOnPreDraw
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.appbar.AppBarLayout
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
+import es.littledavity.commons.ui.bindings.visible
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.chorboList.detail.di.ChorboDetailModule
 import es.littledavity.dynamicfeatures.chorboList.detail.di.DaggerChorboDetailComponent
-import es.littledavity.dynamicfeatures.chorboList.list.di.ChorboListModule
-import es.littledavity.dynamicfeatures.chorboList.list.di.DaggerChorboListComponent
 import es.littledavity.dynamicfeatures.chorbo_list.R
 import es.littledavity.dynamicfeatures.chorbo_list.databinding.FragmentChorboDetailBinding
-import es.littledavity.dynamicfeatures.create.image.ImageFragmentArgs
+import kotlin.math.abs
 
 /**
  * View detail for selected chorbo, displaying extra info.
@@ -50,18 +50,31 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
         viewBinding.viewModel = viewModel
         viewBinding.chorboImage.transitionName = args.chorboId.toString()
         viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
+        viewBinding.appBar.addOnOffsetChangedListener(
+            AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                val expanded = abs(verticalOffset) < appBarLayout.totalScrollRange
+                viewBinding.name.visible = abs(verticalOffset) < appBarLayout.totalScrollRange / 2
+                if (expanded) {
+                    viewBinding.toolbar.navigationIcon?.setTint(Color.WHITE)
+                    viewBinding.collapsingToolbar.title = " "
+                } else {
+                    viewBinding.collapsingToolbar.title = viewModel.chorboDetail.value?.name
+                    viewBinding.toolbar.navigationIcon?.setTint(Color.BLACK)
+                }
+            }
+        )
     }
 
     /**
      * Observer view state change on [ChorboDetailFragment].
      *
-     * @param viewState State of chorbo detaul fragment view.
+     * @param viewState State of chorbo detail fragment view.
      */
     private fun onViewStateChange(viewState: ChorboDetailViewState) {
         when (viewState) {
             is ChorboDetailViewState.Loaded -> {
-                viewBinding.toolbar.transitionName = viewState.chorbo.name
-                viewBinding.toolbar.title = viewState.chorbo.name
+                viewBinding.name.transitionName = viewState.chorbo.name
+                viewBinding.name.text = viewState.chorbo.name
             }
         }
     }
