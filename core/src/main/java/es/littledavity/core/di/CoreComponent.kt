@@ -11,7 +11,6 @@ import es.littledavity.core.di.modules.ContextModule
 import es.littledavity.core.di.modules.DatabaseModule
 import es.littledavity.core.di.modules.ServiceModule
 import es.littledavity.core.di.modules.UtilsModule
-import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.core.utils.ThemeUtils
 import javax.inject.Singleton
 

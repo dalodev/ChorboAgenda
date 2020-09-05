@@ -19,33 +19,17 @@ import es.littledavity.dynamicfeatures.create.location.di.DaggerLocationComponen
 import es.littledavity.dynamicfeatures.create.location.di.LocationModule
 import es.littledavity.dynamicfeatures.create.name.NameViewModel
 
-/**
- * Chorbo Location view containing bottom navigation bar with different chorbos tabs.
- *
- * @see BaseFragment
- */
 class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel>(
     layoutId = R.layout.fragment_location
 ) {
 
     private val args: LocationFragmentArgs by navArgs()
 
-    /**
-     * Called to have the fragment instantiate its user interface view.
-     *
-     * @param view The view returned by onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     * @see BaseFragment.onViewCreated
-     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.event, ::onViewEvent)
     }
 
-    /**
-     * Initialize dagger injection dependency graph.
-     */
     override fun onInitDependencyInjection() {
         DaggerLocationComponent
             .builder()
@@ -55,9 +39,6 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
             .inject(this)
     }
 
-    /**
-     * Initialize view data binding variables.
-     */
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
         viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }

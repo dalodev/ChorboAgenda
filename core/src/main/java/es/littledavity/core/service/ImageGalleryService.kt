@@ -63,8 +63,9 @@ class ImageGalleryService @Inject constructor(
     ): String {
         val externalStorageVolumes = ContextCompat.getExternalFilesDirs(context, null)
         val primaryExternalStorage =
-            externalStorageVolumes[0]?.path ?: externalStorageVolumes[1].path
-            ?: throw IllegalStateException()
+            externalStorageVolumes[0]?.path
+                ?: externalStorageVolumes[1].path
+                ?: throw IllegalStateException()
 
         val dirName = "$primaryExternalStorage/chorboagenda"
 
@@ -100,7 +101,9 @@ class ImageGalleryService @Inject constructor(
 
     // Checks if a volume containing external storage is available to at least read.
     fun isExternalStorageReadable(): Boolean {
-        return Environment.getExternalStorageState() in
-                setOf(Environment.MEDIA_MOUNTED, Environment.MEDIA_MOUNTED_READ_ONLY)
+        return Environment.getExternalStorageState() in setOf(
+            Environment.MEDIA_MOUNTED,
+            Environment.MEDIA_MOUNTED_READ_ONLY
+        )
     }
 }

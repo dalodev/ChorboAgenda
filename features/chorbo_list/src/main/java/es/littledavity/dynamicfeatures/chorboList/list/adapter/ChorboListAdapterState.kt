@@ -3,6 +3,8 @@
  */
 package es.littledavity.dynamicfeatures.chorboList.list.adapter
 
+import es.littledavity.commons.ui.base.BaseViewState
+
 /**
  * Different states for [ChorbosListAdapter].
  *
@@ -10,7 +12,7 @@ package es.littledavity.dynamicfeatures.chorboList.list.adapter
  */
 sealed class ChorboListAdapterState(
     val hasExtraRow: Boolean
-) {
+) : BaseViewState {
 
     /**
      * Listed the added chorbos into list.

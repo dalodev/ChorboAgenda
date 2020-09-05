@@ -6,24 +6,19 @@ package es.littledavity.dynamicfeatures.chorboList.list
 import android.view.View
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
-import androidx.appcompat.widget.AppCompatImageView
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.LivePagedListBuilder
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.DatabaseState
-import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.service.ImageGalleryService
-import es.littledavity.dynamicfeatures.chorboList.list.model.ChorboItem
 import es.littledavity.dynamicfeatures.chorboList.list.paging.ChorboPageDataSourceFactory
 import es.littledavity.dynamicfeatures.chorboList.list.paging.PAGE_MAX_ELEMENTS
-import kotlinx.coroutines.launch
 import java.io.File
 import javax.inject.Inject
 

@@ -15,7 +15,7 @@ sealed class ContactViewState : BaseViewState {
     /**
      * Show Error
      */
-    data class Error(val message: String?): ContactViewState()
+    data class Error(val message: String?) : ContactViewState()
 
     // ============================================================================================
     //  Public helpers methods

@@ -7,7 +7,7 @@ import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.mapper.Mapper
 
 /**
- * Helper class to transforms network response to visual model, catching the necessary data.
+ * Helper class to transforms repository response to visual model, catching the necessary data.
  *
  * @see Mapper
  */

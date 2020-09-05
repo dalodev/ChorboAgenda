@@ -14,31 +14,15 @@ import es.littledavity.dynamicfeatures.create.databinding.FragmentNameBinding
 import es.littledavity.dynamicfeatures.create.name.di.DaggerNameComponent
 import es.littledavity.dynamicfeatures.create.name.di.NameModule
 
-/**
- * Chorbo name view containing bottom navigation bar with different chorbos tabs.
- *
- * @see BaseFragment
- */
 class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
     layoutId = R.layout.fragment_name
 ) {
 
-    /**
-     * Called to have the fragment instantiate its user interface view.
-     *
-     * @param view The view returned by onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     * @see BaseFragment.onViewCreated
-     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.event, ::onViewEvent)
     }
 
-    /**
-     * Initialize dagger injection dependency graph.
-     */
     override fun onInitDependencyInjection() {
         DaggerNameComponent
             .builder()
@@ -48,9 +32,6 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
             .inject(this)
     }
 
-    /**
-     * Initialize view data binding variables.
-     */
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
         viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }

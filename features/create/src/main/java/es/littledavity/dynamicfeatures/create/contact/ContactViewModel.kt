@@ -4,13 +4,11 @@
 package es.littledavity.dynamicfeatures.create.contact
 
 import android.net.Uri
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
-import es.littledavity.core.database.DatabaseState
 import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.service.ImageGalleryService

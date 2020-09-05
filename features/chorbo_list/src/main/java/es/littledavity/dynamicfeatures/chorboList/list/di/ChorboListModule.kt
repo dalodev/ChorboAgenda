@@ -72,8 +72,7 @@ class ChorboListModule(
      */
     @FeatureScope
     @Provides
-    fun providesChorboItemMapper() =
-        ChorboItemMapper()
+    fun providesChorboItemMapper() = ChorboItemMapper()
 
     /**
      * Create a provider method binding for [ChorbosListAdapter].

@@ -6,7 +6,6 @@ package es.littledavity.dynamicfeatures.chorboList.list
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.doOnPreDraw
-import androidx.navigation.fragment.FragmentNavigatorExtras
 import androidx.paging.PagedList
 import com.airbnb.lottie.LottieDrawable
 import es.littledavity.chorboagenda.ChorboagendaApp
@@ -22,11 +21,6 @@ import es.littledavity.dynamicfeatures.chorbo_list.R
 import es.littledavity.dynamicfeatures.chorbo_list.databinding.FragmentChorboListBinding
 import javax.inject.Inject
 
-/**
- * Chorbo list principal view containing bottom navigation bar with different chorbos tabs.
- *
- * @see BaseFragment
- */
 class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListViewModel>(
     layoutId = R.layout.fragment_chorbo_list
 ) {
@@ -38,14 +32,6 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
     @Inject
     lateinit var viewAdapter: ChorbosListAdapter
 
-    /**
-     * Called to have the fragment instantiate its user interface view.
-     *
-     * @param view The view returned by onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     * @see BaseFragment.onViewCreated
-     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.state, ::onViewStateChange)
@@ -56,10 +42,6 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
         view.doOnPreDraw { startPostponedEnterTransition() }
     }
 
-
-    /**
-     * Initialize dagger injection dependency graph.
-     */
     override fun onInitDependencyInjection() {
         DaggerChorboListComponent
             .builder()
@@ -69,9 +51,6 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
             .inject(this)
     }
 
-    /**
-     * Initialize view data binding variables.
-     */
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
         viewBinding.includeList.chorboList.apply {

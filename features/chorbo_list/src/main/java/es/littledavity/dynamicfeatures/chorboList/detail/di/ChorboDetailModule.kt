@@ -26,7 +26,8 @@ class ChorboDetailModule(
     /**
      * Create a provider method binding for [ChorboDetailViewModel].
      *
-     * @param dataFactory Data source factory for chorbos.
+     * @param chorboRepository
+     * @param chorboDetailMapper mapper for chorbo detail item
      * @return Instance of view model.
      * @see Provides
      */
@@ -47,7 +48,5 @@ class ChorboDetailModule(
      */
     @FeatureScope
     @Provides
-    fun providesChorboDetailMapper() =
-        ChorboDetailMapper()
-
+    fun providesChorboDetailMapper() = ChorboDetailMapper()
 }

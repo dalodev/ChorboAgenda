@@ -3,7 +3,6 @@ package es.littledavity.core.di
 import android.content.Context
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
-import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.di.modules.ServiceModule
 import es.littledavity.testUtils.rules.CoroutineRule
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -11,8 +10,6 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.mockito.InjectMocks
-import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class ServiceModuleTest {

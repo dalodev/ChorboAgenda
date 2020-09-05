@@ -15,11 +15,6 @@ import es.littledavity.dynamicfeatures.create.databinding.FragmentImageBinding
 import es.littledavity.dynamicfeatures.create.image.di.DaggerImageComponent
 import es.littledavity.dynamicfeatures.create.image.di.ImageModule
 
-/**
- * Chorbo image view containing bottom navigation bar with different chorbos tabs.
- *
- * @see BaseFragment
- */
 class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
     layoutId = R.layout.fragment_image
 ) {
@@ -30,23 +25,12 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
         uri?.let(viewModel::loadImage)
     }
 
-    /**
-     * Called to have the fragment instantiate its user interface view.
-     *
-     * @param view The view returned by onCreateView(LayoutInflater, ViewGroup, Bundle)}.
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     * @see BaseFragment.onViewCreated
-     */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observe(viewModel.event, ::onViewEvent)
         observe(viewModel.state, ::onViewStateChange)
     }
 
-    /**
-     * Initialize dagger injection dependency graph.
-     */
     override fun onInitDependencyInjection() {
         DaggerImageComponent
             .builder()
@@ -56,9 +40,6 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
             .inject(this)
     }
 
-    /**
-     * Initialize view data binding variables.
-     */
     override fun onInitDataBinding() {
         viewBinding.viewModel = viewModel
         viewBinding.nameTitle.text = args.name
