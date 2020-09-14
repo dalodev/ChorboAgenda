@@ -25,25 +25,43 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 app:contentScrim="?attr/colorPrimary"
-                app:expandedTitleMarginEnd="64dp"
-                app:expandedTitleMarginStart="48dp"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:id="@+id/chorboImage"
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:scaleType="centerCrop"
-                    app:imageFile="@{viewModel.getImageFile(viewModel.chorboDetail.image)}"
-                    app:layout_collapseMode="parallax"
-                    tools:srcCompat="@tools:sample/avatars" />
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/chorboImage"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:scaleType="centerCrop"
+                        app:imageFile="@{viewModel.getImageFile(viewModel.chorboDetail.image)}"
+                        app:layout_collapseMode="parallax"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:srcCompat="@tools:sample/avatars" />
+
+                    <TextView
+                        android:id="@+id/nameToolbar"
+                        style="@style/TextAppearance.CardTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/chorbo_detail_name_background"
+                        android:gravity="center"
+                        android:padding="16dp"
+                        app:layout_collapseMode="parallax"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:layout_collapseMode="pin"
-                    app:navigationIcon="@drawable/ic_back" />
+                    app:navigationIcon="@drawable/ic_back"
+                    app:menu="@menu/detail_menu"/>
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -58,22 +76,6 @@
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
             tools:listitem="@layout/list_item_chorbo" />
-
-
-        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-            android:id="@+id/name"
-            style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/chorbos_list_empty_view_margin"
-            android:backgroundTint="@android:color/white"
-            android:gravity="center"
-            android:lines="1"
-            android:text="@string/chorbo_name_sample"
-            android:textAllCaps="false"
-            app:layout_anchor="@id/appBar"
-            app:layout_anchorGravity="bottom|center" />
-
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

@@ -13,11 +13,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
 import androidx.transition.TransitionInflater
 import es.littledavity.commons.ui.R
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.commons.ui.navigation.NavigationCommand
+import kotlinx.coroutines.cancel
 import javax.inject.Inject
 
 abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
@@ -119,6 +121,8 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
 
     override fun onDestroy() {
         super.onDestroy()
+        viewBinding.lifecycleOwner = null
+        viewModel.viewModelScope.cancel()
         onClear()
     }
 

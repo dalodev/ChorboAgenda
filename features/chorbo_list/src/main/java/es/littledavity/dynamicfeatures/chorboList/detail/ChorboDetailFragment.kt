@@ -5,6 +5,8 @@ package es.littledavity.dynamicfeatures.chorboList.detail
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.appbar.AppBarLayout
@@ -37,13 +39,16 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
         viewBinding.appBar.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 val expanded = abs(verticalOffset) < appBarLayout.totalScrollRange
-                viewBinding.name.visible = abs(verticalOffset) < appBarLayout.totalScrollRange / 2
+                viewBinding.nameToolbar.visible =
+                    abs(verticalOffset) < appBarLayout.totalScrollRange
                 if (expanded) {
                     viewBinding.toolbar.navigationIcon?.setTint(Color.WHITE)
                     viewBinding.collapsingToolbar.title = " "
+                    viewBinding.toolbar.menu.findItem(R.id.delete).setIcon(R.drawable.ic_delete_white)
                 } else {
                     viewBinding.collapsingToolbar.title = viewModel.chorboDetail.value?.name
                     viewBinding.toolbar.navigationIcon?.setTint(Color.BLACK)
+                    viewBinding.toolbar.menu.findItem(R.id.delete).setIcon(R.drawable.ic_delete)
                 }
             }
         )
@@ -57,8 +62,8 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
     private fun onViewStateChange(viewState: ChorboDetailViewState) {
         when (viewState) {
             is ChorboDetailViewState.Loaded -> {
-                viewBinding.name.transitionName = viewState.chorbo.name
-                viewBinding.name.text = viewState.chorbo.name
+                viewBinding.nameToolbar.transitionName = viewState.chorbo.name
+                viewBinding.nameToolbar.text = viewState.chorbo.name
             }
         }
     }

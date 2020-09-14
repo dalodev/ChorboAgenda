@@ -16,4 +16,5 @@
     <string name="add_options_navigate">Navigate to add options</string>
     <string name="chorboImage">chorbo_image</string>
     <string name="chorbo_name_sample">Almudena</string>
+    <string name="delete">Delete</string>
 </resources>
