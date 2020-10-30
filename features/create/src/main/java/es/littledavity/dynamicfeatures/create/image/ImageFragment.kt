@@ -41,12 +41,12 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
     }
 
     override fun onInitDataBinding() {
-        viewBinding.viewModel = viewModel
-        viewBinding.nameTitle.text = args.name
-        viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
+        viewBinding?.viewModel = viewModel
+        viewBinding?.nameTitle?.text = args.name
+        viewBinding?.toolbar?.setNavigationOnClickListener { viewModel.back() }
     }
 
-    override fun onClear() = Unit
+    override fun onClearView() = Unit
 
     /**
      * Observer view state change on [ImageViewModel].

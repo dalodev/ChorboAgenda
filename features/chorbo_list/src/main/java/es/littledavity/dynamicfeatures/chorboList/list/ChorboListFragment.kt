@@ -52,14 +52,16 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
     }
 
     override fun onInitDataBinding() {
-        viewBinding.viewModel = viewModel
-        viewBinding.includeList.chorboList.apply {
+        viewBinding?.viewModel = viewModel
+        viewBinding?.includeList?.chorboList?.apply {
             adapter = viewAdapter
             gridLayoutManager?.spanSizeLookup = viewAdapter.getSpanSizeLookup()
         }
     }
 
-    override fun onClear() = Unit
+    override fun onClearView() {
+        viewBinding?.includeList?.chorboList?.adapter = null
+    }
 
     // ============================================================================================
     //  Private observers methods
@@ -90,7 +92,8 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
             is ChorboListViewState.NoMoreElements ->
                 viewAdapter.submitState(ChorboListAdapterState.NoMore)
             is ChorboListViewState.Empty ->
-                viewBinding.includeListEmpty.openOptionsFab.repeatCount = LottieDrawable.INFINITE
+                viewBinding?.includeListEmpty?.openOptionsFab?.repeatCount = LottieDrawable.INFINITE
+            else -> Unit
         }
     }
 
@@ -106,15 +109,15 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
     }
 
     private fun playAnimationAndNavigate() {
-        viewBinding.includeListEmpty.openOptionsFab.cancelAnimation()
-        viewBinding.includeListEmpty.openOptionsFab.repeatCount = 0
-        viewBinding.includeListEmpty.openOptionsFab.addAnimatorUpdateListener {
+        viewBinding?.includeListEmpty?.openOptionsFab?.cancelAnimation()
+        viewBinding?.includeListEmpty?.openOptionsFab?.repeatCount = 0
+        viewBinding?.includeListEmpty?.openOptionsFab?.addAnimatorUpdateListener {
             val progress = (it.animatedValue as Float * PERCENT_100).toInt()
             if (progress >= PERCENT_ANIM) {
                 val direction = ChorboListFragmentDirections.toName()
                 viewModel.navigate(direction)
             }
         }
-        viewBinding.includeListEmpty.openOptionsFab.playAnimation()
+        viewBinding?.includeListEmpty?.openOptionsFab?.playAnimation()
     }
 }

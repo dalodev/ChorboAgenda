@@ -5,9 +5,11 @@ package es.littledavity.dynamicfeatures.create.name
 
 import android.os.Bundle
 import android.view.View
+import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
+import es.littledavity.commons.ui.bindings.onTextChange
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.create.R
 import es.littledavity.dynamicfeatures.create.databinding.FragmentNameBinding
@@ -33,11 +35,11 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
     }
 
     override fun onInitDataBinding() {
-        viewBinding.viewModel = viewModel
-        viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
+        viewBinding?.viewModel = viewModel
+        viewBinding?.toolbar?.setNavigationOnClickListener { viewModel.back() }
     }
 
-    override fun onClear() = Unit
+    override fun onClearView() = Unit
 
     /**
      * Observer view event change on [NameViewModel].
@@ -48,11 +50,11 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
         when (viewEvent) {
             is NameViewEvent.Next -> {
                 val extras = FragmentNavigatorExtras(
-                    viewBinding.continueButton to viewBinding.continueButton.transitionName,
-                    viewBinding.name to viewBinding.name.transitionName
+                    viewBinding!!.continueButton to viewBinding!!.continueButton.transitionName,
+                    viewBinding!!.name to viewBinding!!.name.transitionName
                 )
                 viewModel.navigate(
-                    NameFragmentDirections.toImage(viewBinding.name.text.toString()),
+                    NameFragmentDirections.toImage(viewBinding?.name?.text.toString()),
                     extras
                 )
             }

@@ -38,14 +38,14 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
     }
 
     override fun onInitDataBinding() {
-        viewBinding.viewModel = viewModel
+        viewBinding?.viewModel = viewModel
         val countryCode = "+${args.countryCode}"
-        viewBinding.countryCode.text = countryCode
-        viewBinding.name.text = args.name
-        viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
+        viewBinding?.countryCode?.text = countryCode
+        viewBinding?.name?.text = args.name
+        viewBinding?.toolbar?.setNavigationOnClickListener { viewModel.back() }
     }
 
-    override fun onClear() = Unit
+    override fun onClearView() = Unit
 
     /**
      * Observer view state change on [ContactViewModel].
@@ -56,7 +56,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
         when (viewState) {
             is ContactViewState.Error ->
                 Snackbar.make(
-                    viewBinding.root,
+                    viewBinding!!.root,
                     viewState.message.orEmpty(),
                     Snackbar.LENGTH_SHORT
                 ).show()

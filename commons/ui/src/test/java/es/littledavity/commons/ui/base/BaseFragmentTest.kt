@@ -72,6 +72,6 @@ class BaseFragmentTest {
 
         override fun onInitDataBinding() {}
 
-        override fun onClear() {}
+        override fun onClearView() {}
     }
 }

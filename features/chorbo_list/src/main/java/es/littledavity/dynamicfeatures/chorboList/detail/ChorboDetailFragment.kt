@@ -31,22 +31,22 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
     }
 
     override fun onInitDataBinding() {
-        viewBinding.viewModel = viewModel
-        viewBinding.chorboImage.transitionName = args.chorboId.toString()
-        viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
-        viewBinding.appBar.addOnOffsetChangedListener(
+        viewBinding?.viewModel = viewModel
+        viewBinding?.chorboImage?.transitionName = args.chorboId.toString()
+        viewBinding?.toolbar?.setNavigationOnClickListener { viewModel.back() }
+        viewBinding?.appBar?.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 val expanded = abs(verticalOffset) < appBarLayout.totalScrollRange
-                viewBinding.nameToolbar.visible =
+                viewBinding?.nameToolbar?.visible =
                     abs(verticalOffset) < appBarLayout.totalScrollRange
                 if (expanded) {
-                    viewBinding.toolbar.navigationIcon?.setTint(Color.WHITE)
-                    viewBinding.collapsingToolbar.title = " "
-                    viewBinding.toolbar.menu.findItem(R.id.delete).setIcon(R.drawable.ic_delete_white)
+                    viewBinding?.toolbar?.navigationIcon?.setTint(Color.WHITE)
+                    viewBinding?.collapsingToolbar?.title = " "
+                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.setIcon(R.drawable.ic_delete_white)
                 } else {
-                    viewBinding.collapsingToolbar.title = viewModel.chorboDetail.value?.name
-                    viewBinding.toolbar.navigationIcon?.setTint(Color.BLACK)
-                    viewBinding.toolbar.menu.findItem(R.id.delete).setIcon(R.drawable.ic_delete)
+                    viewBinding?.collapsingToolbar?.title = viewModel.chorboDetail.value?.name
+                    viewBinding?.toolbar?.navigationIcon?.setTint(Color.BLACK)
+                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.setIcon(R.drawable.ic_delete)
                 }
             }
         )
@@ -60,13 +60,13 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
     private fun onViewStateChange(viewState: ChorboDetailViewState) {
         when (viewState) {
             is ChorboDetailViewState.Loaded -> {
-                viewBinding.nameToolbar.transitionName = viewState.chorbo.name
-                viewBinding.nameToolbar.text = viewState.chorbo.name
+                viewBinding?.nameToolbar?.transitionName = viewState.chorbo.name
+                viewBinding?.nameToolbar?.text = viewState.chorbo.name
             }
         }
     }
 
-    override fun onClear() = Unit
+    override fun onClearView() = Unit
 
     override fun onInitDependencyInjection() {
         DaggerChorboDetailComponent

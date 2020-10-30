@@ -40,11 +40,11 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
     }
 
     override fun onInitDataBinding() {
-        viewBinding.viewModel = viewModel
-        viewBinding.toolbar.setNavigationOnClickListener { viewModel.back() }
+        viewBinding?.viewModel = viewModel
+        viewBinding?.toolbar?.setNavigationOnClickListener { viewModel.back() }
     }
 
-    override fun onClear() = Unit
+    override fun onClearView() = Unit
 
     /**
      * Observer view event change on [NameViewModel].
@@ -65,7 +65,7 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
             }
             is LocationViewEvent.Next -> {
                 val extras = FragmentNavigatorExtras(
-                    viewBinding.location to viewBinding.location.transitionName
+                    viewBinding!!.location to viewBinding!!.location.transitionName
                 )
                 viewModel.navigate(
                     LocationFragmentDirections.toContact(

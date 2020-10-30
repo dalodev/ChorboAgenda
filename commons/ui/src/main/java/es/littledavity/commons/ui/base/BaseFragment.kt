@@ -29,7 +29,10 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
 
     @Inject
     lateinit var viewModel: M
-    lateinit var viewBinding: B
+    var viewBinding: B? = null
+    private val binding
+        get() = viewBinding!!
+
 
     /**
      * Called to initialize dagger injection dependency graph when fragment is attached.
@@ -44,7 +47,7 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     /**
      * Called when destroy view to clear observers and listeners.
      */
-    abstract fun onClear()
+    abstract fun onClearView()
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -66,12 +69,12 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
         savedInstanceState: Bundle?
     ): View? {
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        viewBinding.lifecycleOwner = viewLifecycleOwner
+        viewBinding?.lifecycleOwner = viewLifecycleOwner
         sharedElementEnterTransition =
             TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
         sharedElementReturnTransition =
             TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
-        return viewBinding.root
+        return binding.root
     }
 
     /**
@@ -121,9 +124,14 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
 
     override fun onDestroy() {
         super.onDestroy()
-        viewBinding.lifecycleOwner = null
+        viewBinding = null
         viewModel.viewModelScope.cancel()
-        onClear()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        onClearView()
+        viewBinding = null
     }
 
     private fun onNavigate(command: NavigationCommand) {
