@@ -5,8 +5,6 @@ package es.littledavity.dynamicfeatures.chorboList.detail
 
 import android.graphics.Color
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuInflater
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.appbar.AppBarLayout
