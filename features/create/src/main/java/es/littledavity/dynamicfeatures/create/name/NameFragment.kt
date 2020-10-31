@@ -34,10 +34,11 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
 
     override fun onInitDataBinding() {
         viewBinding?.viewModel = viewModel
-        viewBinding?.toolbar?.setNavigationOnClickListener { viewModel.back() }
     }
 
     override fun onClearView() = Unit
+
+    override fun toolbar() = viewBinding?.toolbar?.toolbar
 
     /**
      * Observer view event change on [NameViewModel].

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="viewModel"
             type="es.littledavity.dynamicfeatures.create.name.NameViewModel" />
@@ -15,26 +16,9 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/app_bar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:layout_constraintBottom_toTopOf="@+id/formContainer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:elevation="0dp"
-            >
-
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/toolbar"
-                app:navigationIcon="@drawable/ic_back"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                app:elevation="0dp"
-                app:title="@null"/>
-
-        </com.google.android.material.appbar.AppBarLayout>
+        <include
+            android:id="@+id/toolbar"
+            layout="@layout/fragment_toolbar" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/formContainer"
@@ -62,17 +46,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/name_input_margin"
+                android:background="@null"
                 android:gravity="center"
                 android:hint="@string/name_hint"
                 android:inputType="textCapWords"
                 android:padding="@dimen/chorbo_name_padding"
                 android:textAppearance="@style/TextAppearance.Title"
+                android:transitionName="@string/name"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/nameTitle"
                 app:onTextChange="@{viewModel.onChangeText}"
-                tools:layout_editor_absoluteX="24dp"
-                android:transitionName="@string/name"
-                android:background="@null"/>
+                tools:layout_editor_absoluteX="24dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -85,15 +69,14 @@
             android:layout_marginBottom="@dimen/name_input_margin"
             android:onClick="@{() -> viewModel.onContinue()}"
             android:text="@string/continue_button"
+            android:transitionName="@string/continue_button"
             app:layout_anchor="@id/formContainer"
             app:layout_anchorGravity="bottom"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/name"
-            app:visible="@{viewModel.state.continue}"
-            android:transitionName="@string/continue_button"
-            />
+            app:visible="@{viewModel.state.continue}" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

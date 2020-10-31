@@ -4,12 +4,14 @@
 package es.littledavity.commons.ui.base
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
@@ -33,6 +35,7 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     private val binding
         get() = viewBinding!!
 
+    protected var enableBack = true
 
     /**
      * Called to initialize dagger injection dependency graph when fragment is attached.
@@ -48,6 +51,11 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
      * Called when destroy view to clear observers and listeners.
      */
     abstract fun onClearView()
+
+    /**
+     * @return toolbar from fragment
+     */
+    abstract fun toolbar(): Toolbar?
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -100,6 +108,7 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onInitDataBinding()
+        setupToolbar()
         observe(viewModel.navigationCommands, ::onNavigate)
     }
 
@@ -132,6 +141,17 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
         super.onDestroyView()
         onClearView()
         viewBinding = null
+    }
+
+    private fun setupToolbar() {
+        (activity as? AppCompatActivity)?.apply {
+            setSupportActionBar(toolbar())
+            supportActionBar?.setDisplayShowTitleEnabled(false)
+            supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
+            supportActionBar?.setDisplayShowHomeEnabled(false)
+            toolbar()?.navigationIcon?.setTint(Color.BLACK)
+            toolbar()?.setNavigationOnClickListener { viewModel.back() }
+        }
     }
 
     private fun onNavigate(command: NavigationCommand) {

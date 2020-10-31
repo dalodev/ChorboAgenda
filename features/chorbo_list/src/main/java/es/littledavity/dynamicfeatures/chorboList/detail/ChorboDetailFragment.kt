@@ -5,6 +5,9 @@ package es.littledavity.dynamicfeatures.chorboList.detail
 
 import android.graphics.Color
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.appbar.AppBarLayout
@@ -17,6 +20,7 @@ import es.littledavity.dynamicfeatures.chorboList.detail.di.DaggerChorboDetailCo
 import es.littledavity.dynamicfeatures.chorbo_list.R
 import es.littledavity.dynamicfeatures.chorbo_list.databinding.FragmentChorboDetailBinding
 import kotlin.math.abs
+
 
 class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDetailViewModel>(
     layoutId = R.layout.fragment_chorbo_detail
@@ -31,9 +35,9 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
     }
 
     override fun onInitDataBinding() {
+        setHasOptionsMenu(true)
         viewBinding?.viewModel = viewModel
         viewBinding?.chorboImage?.transitionName = args.chorboId.toString()
-        viewBinding?.toolbar?.setNavigationOnClickListener { viewModel.back() }
         viewBinding?.appBar?.addOnOffsetChangedListener(
             AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
                 val expanded = abs(verticalOffset) < appBarLayout.totalScrollRange
@@ -42,14 +46,28 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
                 if (expanded) {
                     viewBinding?.toolbar?.navigationIcon?.setTint(Color.WHITE)
                     viewBinding?.collapsingToolbar?.title = " "
-                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.setIcon(R.drawable.ic_delete_white)
+                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.WHITE)
                 } else {
                     viewBinding?.collapsingToolbar?.title = viewModel.chorboDetail.value?.name
                     viewBinding?.toolbar?.navigationIcon?.setTint(Color.BLACK)
-                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.setIcon(R.drawable.ic_delete)
+                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.BLACK)
                 }
             }
         )
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.detail_menu, menu)
+        return super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.delete -> {
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     /**
@@ -67,6 +85,7 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
     }
 
     override fun onClearView() = Unit
+    override fun toolbar() = viewBinding?.toolbar
 
     override fun onInitDependencyInjection() {
         DaggerChorboDetailComponent

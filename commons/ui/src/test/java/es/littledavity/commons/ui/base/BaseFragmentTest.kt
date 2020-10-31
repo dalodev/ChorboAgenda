@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.Toolbar
 import androidx.databinding.ViewDataBinding
 import org.mockito.MockitoAnnotations
 
@@ -73,5 +74,6 @@ class BaseFragmentTest {
         override fun onInitDataBinding() {}
 
         override fun onClearView() {}
+        override fun toolbar(): Toolbar? = null
     }
 }

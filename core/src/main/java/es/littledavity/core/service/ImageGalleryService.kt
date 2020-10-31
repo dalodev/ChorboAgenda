@@ -94,7 +94,7 @@ class ImageGalleryService @Inject constructor(
     }
 
     // Checks if a volume containing external storage is available
-// for read and write.
+    // for read and write.
     fun isExternalStorageWritable(): Boolean {
         return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
     }

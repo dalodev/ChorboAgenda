@@ -43,10 +43,10 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
     override fun onInitDataBinding() {
         viewBinding?.viewModel = viewModel
         viewBinding?.nameTitle?.text = args.name
-        viewBinding?.toolbar?.setNavigationOnClickListener { viewModel.back() }
     }
 
     override fun onClearView() = Unit
+    override fun toolbar() = viewBinding?.toolbar?.toolbar
 
     /**
      * Observer view state change on [ImageViewModel].
@@ -56,6 +56,7 @@ class ImageFragment : BaseFragment<FragmentImageBinding, ImageViewModel>(
     private fun onViewStateChange(viewState: ImageViewState) {
         when (viewState) {
             is ImageViewState.OpenGallery -> getContent.launch("image/*")
+            else -> Unit
         }
     }
 

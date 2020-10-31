@@ -3,6 +3,7 @@
  */
 package es.littledavity.dynamicfeatures.create.contact
 
+import android.net.Uri
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import es.littledavity.core.database.chorbo.ChorboRepository
@@ -10,10 +11,12 @@ import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.testUtils.rules.CoroutineRule
 import io.mockk.MockKAnnotations
 import io.mockk.coVerify
+import io.mockk.every
 import io.mockk.impl.annotations.InjectMockKs
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
@@ -48,20 +51,22 @@ class ContactViewModelTest {
         MockKAnnotations.init(this)
         viewModel.state.observeForever(stateObserver)
         viewModel.event.observeForever(eventObserver)
-        viewModel.chorbo = mockk()
+        viewModel.chorbo = mockk(relaxed = true)
     }
 
     @Test
-    fun onContinue_shouldInsertAndNextEvent() {
-        val expectedEvent = ContactViewEvent.Next
+    fun onContinue_whenException_shouldShowError() = runBlocking {
+        val ex = Exception("Uri.parse(chorbo.image) must not be null")
+        val expectedState = ContactViewState.Error(ex.message)
+
+        every { imageGalleryService.getBitmap(any<Uri>()) } throws Exception("Uri.parse(chorbo.image) must not be null")
 
         viewModel.onContinue()
 
-        assertEquals(expectedEvent, viewModel.event.value)
+        assertEquals(expectedState, viewModel.state.value)
 
         coVerify {
-            eventObserver.onChanged(expectedEvent)
-            repository.insertChorbo(viewModel.chorbo)
+            stateObserver.onChanged(expectedState)
         }
     }
 }

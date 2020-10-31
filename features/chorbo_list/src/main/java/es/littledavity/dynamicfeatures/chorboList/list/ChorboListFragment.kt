@@ -5,6 +5,7 @@ package es.littledavity.dynamicfeatures.chorboList.list
 
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.widget.Toolbar
 import androidx.core.view.doOnPreDraw
 import androidx.paging.PagedList
 import com.airbnb.lottie.LottieDrawable
@@ -62,6 +63,8 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
     override fun onClearView() {
         viewBinding?.includeList?.chorboList?.adapter = null
     }
+
+    override fun toolbar(): Toolbar? = null
 
     // ============================================================================================
     //  Private observers methods

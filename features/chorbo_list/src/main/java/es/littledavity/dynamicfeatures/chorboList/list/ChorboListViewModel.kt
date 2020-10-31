@@ -15,8 +15,6 @@ import androidx.paging.LivePagedListBuilder
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.livedata.SingleLiveData
 import es.littledavity.core.database.DatabaseState
-import es.littledavity.core.database.chorbo.ChorboRepository
-import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.dynamicfeatures.chorboList.list.paging.ChorboPageDataSourceFactory
 import es.littledavity.dynamicfeatures.chorboList.list.paging.PAGE_MAX_ELEMENTS
 import java.io.File
