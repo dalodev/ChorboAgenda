@@ -17,4 +17,6 @@
     <string name="chorboImage">chorbo_image</string>
     <string name="chorbo_name_sample">Almudena</string>
     <string name="delete">Delete</string>
+    <string name="info_section">Información</string>
+    <string name="social_section">Redes sociales</string>
 </resources>

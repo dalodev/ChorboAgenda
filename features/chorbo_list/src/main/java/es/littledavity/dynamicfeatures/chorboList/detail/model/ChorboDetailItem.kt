@@ -7,9 +7,34 @@ data class ChorboDetailItem(
     val id: Long,
     val name: String,
     val image: String,
-    val countryCode: String,
-    val countryName: String,
-    val flag: String,
-    val whatsapp: String,
-    val instagram: String
+    val content: List<ChorboDetailContent>
 )
+
+sealed class ChorboDetailContent(
+    val section: ContentType? = null,
+    val content: String? = null
+) {
+    data class Content(
+        val category: ContentType?,
+        val data: String,
+        val sectionContent: SectionContent
+    ) : ChorboDetailContent(category, data)
+
+    data class Section(
+        val category: ContentType?
+    ) : ChorboDetailContent(category)
+
+    enum class ContentType {
+        INFO,
+        SOCIAL
+    }
+
+    enum class SectionContent {
+        WHATSAPP,
+        INSTAGRAM,
+        LOCATION
+    }
+}
+
+
+

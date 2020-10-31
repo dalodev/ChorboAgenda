@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="iconItem"
+            type="Integer" />
+
+        <variable
+            name="content"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/detail_item_margin"
+        visible="@{!content.isEmpty()}">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/itemContainer"
+            android:layout_width="@dimen/detail_item_card_size"
+            android:layout_height="@dimen/detail_item_card_size"
+            app:cardBackgroundColor="@color/accent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="14dp"
+            android:elevation="8dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:scaleType="fitXY"
+                app:srcVector="@{iconItem}"
+                tools:srcCompat="@drawable/ic_location" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/text"
+            style="@style/TextAppearance.CardTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_item_margin"
+            android:gravity="center_vertical"
+            android:maxLines="1"
+            android:text="@{content}"
+            app:layout_constraintBottom_toBottomOf="@id/itemContainer"
+            app:layout_constraintStart_toEndOf="@id/itemContainer"
+            app:layout_constraintTop_toTopOf="@id/itemContainer"
+            tools:text="España" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

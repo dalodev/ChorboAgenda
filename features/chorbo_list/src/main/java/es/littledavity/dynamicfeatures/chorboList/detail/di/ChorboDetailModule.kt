@@ -1,5 +1,6 @@
 package es.littledavity.dynamicfeatures.chorboList.detail.di
 
+import android.content.Context
 import androidx.annotation.VisibleForTesting
 import dagger.Module
 import dagger.Provides
@@ -48,5 +49,5 @@ class ChorboDetailModule(
      */
     @FeatureScope
     @Provides
-    fun providesChorboDetailMapper() = ChorboDetailMapper()
+    fun providesChorboDetailMapper(context: Context) = ChorboDetailMapper(context)
 }

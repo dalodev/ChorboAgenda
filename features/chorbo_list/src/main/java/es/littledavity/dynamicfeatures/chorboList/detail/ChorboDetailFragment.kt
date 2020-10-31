@@ -15,6 +15,8 @@ import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.bindings.visible
 import es.littledavity.commons.ui.extensions.observe
+import es.littledavity.dynamicfeatures.chorboList.detail.adapter.DetailChorboAdapter
+import es.littledavity.dynamicfeatures.chorboList.detail.adapter.PreviewImagesAdapter
 import es.littledavity.dynamicfeatures.chorboList.detail.di.ChorboDetailModule
 import es.littledavity.dynamicfeatures.chorboList.detail.di.DaggerChorboDetailComponent
 import es.littledavity.dynamicfeatures.chorbo_list.R
@@ -28,6 +30,8 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
 
     private val args: ChorboDetailFragmentArgs by navArgs()
 
+    private val adapter: DetailChorboAdapter by lazy { DetailChorboAdapter(viewModel) }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.loadData(args.chorboId)
@@ -38,22 +42,7 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
         setHasOptionsMenu(true)
         viewBinding?.viewModel = viewModel
         viewBinding?.chorboImage?.transitionName = args.chorboId.toString()
-        viewBinding?.appBar?.addOnOffsetChangedListener(
-            AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
-                val expanded = abs(verticalOffset) < appBarLayout.totalScrollRange
-                viewBinding?.nameToolbar?.visible =
-                    abs(verticalOffset) < appBarLayout.totalScrollRange
-                if (expanded) {
-                    viewBinding?.toolbar?.navigationIcon?.setTint(Color.WHITE)
-                    viewBinding?.collapsingToolbar?.title = " "
-                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.WHITE)
-                } else {
-                    viewBinding?.collapsingToolbar?.title = viewModel.chorboDetail.value?.name
-                    viewBinding?.toolbar?.navigationIcon?.setTint(Color.BLACK)
-                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.BLACK)
-                }
-            }
-        )
+        setupToolbar()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -80,8 +69,28 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
             is ChorboDetailViewState.Loaded -> {
                 viewBinding?.nameToolbar?.transitionName = viewState.chorbo.name
                 viewBinding?.nameToolbar?.text = viewState.chorbo.name
+                viewBinding?.detailList?.adapter = adapter
             }
         }
+    }
+
+    private fun setupToolbar() {
+        viewBinding?.appBar?.addOnOffsetChangedListener(
+            AppBarLayout.OnOffsetChangedListener { appBarLayout, verticalOffset ->
+                val expanded = abs(verticalOffset) < appBarLayout.totalScrollRange
+                viewBinding?.nameToolbar?.visible =
+                    abs(verticalOffset) < appBarLayout.totalScrollRange
+                if (expanded) {
+                    viewBinding?.toolbar?.navigationIcon?.setTint(Color.WHITE)
+                    viewBinding?.collapsingToolbar?.title = " "
+                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.WHITE)
+                } else {
+                    viewBinding?.collapsingToolbar?.title = viewModel.chorboDetail.value?.name
+                    viewBinding?.toolbar?.navigationIcon?.setTint(Color.BLACK)
+                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.BLACK)
+                }
+            }
+        )
     }
 
     override fun onClearView() = Unit
