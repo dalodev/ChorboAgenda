@@ -29,9 +29,7 @@ import javax.inject.Inject
  */
 class ChorboListViewModel @Inject constructor(
     @VisibleForTesting(otherwise = PRIVATE)
-    val dataSourceFactory: ChorboPageDataSourceFactory,
-    private val chorboRepository: ChorboRepository,
-    private val imageGalleryService: ImageGalleryService
+    val dataSourceFactory: ChorboPageDataSourceFactory
 ) : BaseViewModel() {
 
     @VisibleForTesting(otherwise = PRIVATE)

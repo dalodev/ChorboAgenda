@@ -104,20 +104,8 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
      */
     private fun onViewEvent(viewEvent: ChorboListViewEvent) {
         when (viewEvent) {
-            is ChorboListViewEvent.OpenChorboOptions -> playAnimationAndNavigate()
+            is ChorboListViewEvent.OpenChorboOptions ->
+                viewModel.navigate(ChorboListFragmentDirections.toName())
         }
-    }
-
-    private fun playAnimationAndNavigate() {
-        viewBinding?.includeListEmpty?.openOptionsFab?.cancelAnimation()
-        viewBinding?.includeListEmpty?.openOptionsFab?.repeatCount = 0
-        viewBinding?.includeListEmpty?.openOptionsFab?.addAnimatorUpdateListener {
-            val progress = (it.animatedValue as Float * PERCENT_100).toInt()
-            if (progress >= PERCENT_ANIM) {
-                val direction = ChorboListFragmentDirections.toName()
-                viewModel.navigate(direction)
-            }
-        }
-        viewBinding?.includeListEmpty?.openOptionsFab?.playAnimation()
     }
 }

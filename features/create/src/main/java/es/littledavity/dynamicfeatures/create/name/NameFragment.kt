@@ -5,11 +5,9 @@ package es.littledavity.dynamicfeatures.create.name
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.widget.addTextChangedListener
 import androidx.navigation.fragment.FragmentNavigatorExtras
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
-import es.littledavity.commons.ui.bindings.onTextChange
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.create.R
 import es.littledavity.dynamicfeatures.create.databinding.FragmentNameBinding

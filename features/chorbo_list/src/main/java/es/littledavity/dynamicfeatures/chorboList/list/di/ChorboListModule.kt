@@ -11,7 +11,6 @@ import dagger.Provides
 import es.littledavity.commons.ui.extensions.viewModel
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.di.scopes.FeatureScope
-import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.dynamicfeatures.chorboList.list.ChorboListFragment
 import es.littledavity.dynamicfeatures.chorboList.list.ChorboListViewModel
 import es.littledavity.dynamicfeatures.chorboList.list.adapter.ChorbosListAdapter
@@ -40,11 +39,9 @@ class ChorboListModule(
     @FeatureScope
     @Provides
     fun providesChorboListViewModel(
-        dataFactory: ChorboPageDataSourceFactory,
-        chorboRepository: ChorboRepository,
-        imageGalleryService: ImageGalleryService
+        dataFactory: ChorboPageDataSourceFactory
     ) = fragment.viewModel {
-        ChorboListViewModel(dataFactory, chorboRepository, imageGalleryService)
+        ChorboListViewModel(dataFactory)
     }
 
     /**
