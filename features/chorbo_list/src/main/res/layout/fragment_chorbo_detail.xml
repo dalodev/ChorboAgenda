@@ -68,26 +68,17 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/detailList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/detailList"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="@dimen/chorbo_detail_list_margin"
-                android:background="@drawable/detail_list_background"
-                android:orientation="vertical"
-                app:itemDecorationSpacing="@{@dimen/chorbo_list_item_padding}"
-                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:listitem="@tools:sample/avatars" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:layout_marginTop="@dimen/chorbo_detail_list_margin"
+            android:background="@drawable/detail_list_background"
+            android:orientation="vertical"
+            app:itemDecorationSpacing="@{@dimen/chorbo_list_item_padding}"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            tools:listitem="@tools:sample/avatars" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 

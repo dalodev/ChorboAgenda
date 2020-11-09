@@ -8,24 +8,19 @@ import es.littledavity.dynamicfeatures.chorboList.list.adapter.ChorbosListAdapte
  *
  * @see BaseViewState
  */
-sealed class DetailChorboAdapterState(
+sealed class ChorboDetailAdapterState(
     val hasExtraRow: Boolean
 ) : BaseViewState {
 
     /**
      * Listed the added chorbos into list.
      */
-    object Added : DetailChorboAdapterState(hasExtraRow = false)
-
-    /**
-     * Loading for new chorbos to add into list.
-     */
-    object AddLoading : DetailChorboAdapterState(hasExtraRow = false)
+    object Added : ChorboDetailAdapterState(hasExtraRow = false)
 
     /**
      * Error on add new chorbos into list.
      */
-    object AddError : DetailChorboAdapterState(hasExtraRow = true)
+    object AddError : ChorboDetailAdapterState(hasExtraRow = true)
 
     // ============================================================================================
     //  Public helpers methods
@@ -37,13 +32,6 @@ sealed class DetailChorboAdapterState(
      * @return True if is added state, otherwise false.
      */
     fun isAdded() = this is Added
-
-    /**
-     * Check if current view state is [AddLoading].
-     *
-     * @return True if is add loading state, otherwise false.
-     */
-    fun isAddLoading() = this is AddLoading
 
     /**
      * Check if current view state is [AddError].

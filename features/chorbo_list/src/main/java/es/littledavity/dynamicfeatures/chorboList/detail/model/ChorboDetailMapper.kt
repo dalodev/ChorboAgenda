@@ -4,6 +4,7 @@
 package es.littledavity.dynamicfeatures.chorboList.detail.model
 
 import android.content.Context
+import android.telephony.PhoneNumberUtils
 import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.mapper.Mapper
 
@@ -13,22 +14,13 @@ class ChorboDetailMapper(private val context: Context) : Mapper<Chorbo, ChorboDe
         id = from.id,
         name = from.name,
         image = from.image,
-        content = listOf(
-            ChorboDetailContent.Content(
-                ChorboDetailContent.ContentType.INFO,
-                from.countryName,
-                ChorboDetailContent.SectionContent.LOCATION
+        info = listOf(
+            Info(Section.INFO, from.countryName),
+            Info(
+                Section.SOCIAL,
+                PhoneNumberUtils.formatNumber(from.whatsapp, "ES")
             ),
-            ChorboDetailContent.Content(
-                ChorboDetailContent.ContentType.SOCIAL,
-                "+${from.countryCode} ${from.whatsapp}",
-                ChorboDetailContent.SectionContent.WHATSAPP
-            ),
-            ChorboDetailContent.Content(
-                ChorboDetailContent.ContentType.SOCIAL,
-                from.instagram,
-                ChorboDetailContent.SectionContent.INSTAGRAM
-            )
-        )
+            Info(Section.SOCIAL, from.instagram)
+        ),
     )
 }

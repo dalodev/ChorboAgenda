@@ -10,7 +10,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.core.database.chorbo.ChorboRepository
-import es.littledavity.dynamicfeatures.chorboList.detail.model.ChorboDetailContent
 import es.littledavity.dynamicfeatures.chorboList.detail.model.ChorboDetailItem
 import es.littledavity.dynamicfeatures.chorboList.detail.model.ChorboDetailMapper
 import kotlinx.coroutines.launch
@@ -46,25 +45,4 @@ class ChorboDetailViewModel @Inject constructor(
     }
 
     fun getImageFile(imagePath: String?) = imagePath?.let(::File)
-
-    fun createListWithHeader(): List<ChorboDetailContent> {
-        val groupedList = chorboDetail.value?.content?.groupBy { it.section }
-        val myList = ArrayList<ChorboDetailContent>()
-        groupedList?.let {
-            for (i in groupedList.keys) {
-                myList.add(ChorboDetailContent.Section(i))
-                for (v in groupedList.getValue(i)) {
-                    val content = v as ChorboDetailContent.Content
-                    myList.add(
-                        ChorboDetailContent.Content(
-                            content.section,
-                            content.content.orEmpty(),
-                            content.sectionContent
-                        )
-                    )
-                }
-            }
-        }
-        return myList
-    }
 }

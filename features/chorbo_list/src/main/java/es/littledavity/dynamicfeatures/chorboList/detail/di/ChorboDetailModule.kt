@@ -9,6 +9,7 @@ import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.di.scopes.FeatureScope
 import es.littledavity.dynamicfeatures.chorboList.detail.ChorboDetailFragment
 import es.littledavity.dynamicfeatures.chorboList.detail.ChorboDetailViewModel
+import es.littledavity.dynamicfeatures.chorboList.detail.adapter.ChorboDetailAdapter
 import es.littledavity.dynamicfeatures.chorboList.detail.model.ChorboDetailMapper
 import es.littledavity.dynamicfeatures.chorboList.list.di.ChorboListComponent
 import es.littledavity.dynamicfeatures.chorboList.list.model.ChorboItemMapper
@@ -50,4 +51,19 @@ class ChorboDetailModule(
     @FeatureScope
     @Provides
     fun providesChorboDetailMapper(context: Context) = ChorboDetailMapper(context)
+
+
+    /**
+     * Create a provider method binding for [ChorboDetailAdapter].
+     *
+     * @return Instance of adapter.
+     * @see Provides
+     */
+    @FeatureScope
+    @Provides
+    fun providesChorboDetailAdapter(
+        viewModel: ChorboDetailViewModel
+    ) = ChorboDetailAdapter(
+        viewModel
+    )
 }

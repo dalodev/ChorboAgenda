@@ -58,7 +58,7 @@ class FragmentExtensionsTest : TestRobolectric() {
         }
     }*/
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = NoSuchMethodError::class)
     fun providedViewModelWithWrongIdentifier_ShouldNotObtain() {
         val fragmentScenario = launchFragmentInContainer<TestFragment>()
         val identifierViewModel = "TestViewModel"
@@ -69,7 +69,7 @@ class FragmentExtensionsTest : TestRobolectric() {
         }
     }
 
-    @Test(expected = RuntimeException::class)
+    @Test(expected = NoSuchMethodError::class)
     fun notProvidedViewModel_ShouldNotObtain() {
         val fragmentScenario = launchFragmentInContainer<TestFragment>()
 

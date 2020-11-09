@@ -64,8 +64,8 @@ class BaseListAdapterTest : TestRobolectric() {
 
     @Test
     fun listedRecycleView_ShouldInvokeItemsComparator() {
-        adapter.submitList(listOf("item1", "item2"))
-        adapter.submitList(listOf("item3", "item4"))
+        adapter.submitList(mutableListOf("item1", "item2"))
+        adapter.submitList(mutableListOf("item3", "item4"))
 
         verify(itemsSame, after(100).atLeastOnce()).invoke(anyString(), anyString())
     }
@@ -74,8 +74,8 @@ class BaseListAdapterTest : TestRobolectric() {
     fun listedRecycleView_ShouldInvokeContentComparator() {
         doReturn(true).whenever(itemsSame).invoke(anyString(), anyString())
 
-        adapter.submitList(listOf("item1", "item2"))
-        adapter.submitList(listOf("item6", "item4", "item2"))
+        adapter.submitList(mutableListOf("item1", "item2"))
+        adapter.submitList(mutableListOf("item6", "item4", "item2"))
 
         verify(contentsSame, after(100).atLeastOnce()).invoke(anyString(), anyString())
     }

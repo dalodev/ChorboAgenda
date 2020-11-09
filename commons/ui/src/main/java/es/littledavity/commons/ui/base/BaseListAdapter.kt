@@ -5,6 +5,7 @@ package es.littledavity.commons.ui.base
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -23,6 +24,14 @@ abstract class BaseListAdapter<T>(
     override fun areItemsTheSame(old: T, new: T): Boolean = itemsSame(old, new)
     override fun areContentsTheSame(old: T, new: T): Boolean = contentsSame(old, new)
 }) {
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    internal var recyclerView: RecyclerView? = null
+
+    init {
+        // Avoid That RecyclerView’s Views are Blinking when notifyDataSetChanged.
+        super.setHasStableIds(true)
+    }
 
     /**
      * Called when RecyclerView needs a new [RecyclerView.ViewHolder] of the given type to
@@ -57,4 +66,40 @@ abstract class BaseListAdapter<T>(
             inflater = LayoutInflater.from(parent.context),
             viewType = viewType
         )
+
+    /**
+     * Called by RecyclerView when it starts observing this Adapter.
+     *
+     * @param recyclerView The RecyclerView instance which started observing this adapter.
+     * @see BaseListAdapter.onAttachedToRecyclerView
+     */
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        this.recyclerView = recyclerView
+        super.onAttachedToRecyclerView(recyclerView)
+    }
+
+    /**
+     * Called by RecyclerView when it stops observing this Adapter.
+     *
+     * @param recyclerView The RecyclerView instance which stopped observing this adapter.
+     * @see BaseListAdapter.onDetachedFromRecyclerView
+     */
+    override fun onDetachedFromRecyclerView(recyclerView: RecyclerView) {
+        this.recyclerView = null
+        super.onDetachedFromRecyclerView(recyclerView)
+    }
+
+    /**
+     * Set the new list to be displayed.
+     *
+     * @param list The new list to be displayed.
+     * @see BaseListAdapter.submitList
+     */
+    override fun submitList(list: MutableList<T>?) {
+        super.submitList(list)
+        if (list.isNullOrEmpty()) {
+            // Fix recycle view not scrolling to the top after refresh the data source.
+            recyclerView?.scrollToPosition(0)
+        }
+    }
 }

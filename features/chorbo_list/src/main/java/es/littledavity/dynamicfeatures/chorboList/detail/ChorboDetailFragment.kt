@@ -15,14 +15,13 @@ import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.bindings.visible
 import es.littledavity.commons.ui.extensions.observe
-import es.littledavity.dynamicfeatures.chorboList.detail.adapter.DetailChorboAdapter
-import es.littledavity.dynamicfeatures.chorboList.detail.adapter.PreviewImagesAdapter
+import es.littledavity.dynamicfeatures.chorboList.detail.adapter.ChorboDetailAdapter
 import es.littledavity.dynamicfeatures.chorboList.detail.di.ChorboDetailModule
 import es.littledavity.dynamicfeatures.chorboList.detail.di.DaggerChorboDetailComponent
 import es.littledavity.dynamicfeatures.chorbo_list.R
 import es.littledavity.dynamicfeatures.chorbo_list.databinding.FragmentChorboDetailBinding
+import javax.inject.Inject
 import kotlin.math.abs
-
 
 class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDetailViewModel>(
     layoutId = R.layout.fragment_chorbo_detail
@@ -30,7 +29,8 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
 
     private val args: ChorboDetailFragmentArgs by navArgs()
 
-    private val adapter: DetailChorboAdapter by lazy { DetailChorboAdapter(viewModel) }
+    @Inject
+    lateinit var adapter: ChorboDetailAdapter
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,6 +40,7 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
 
     override fun onInitDataBinding() {
         setHasOptionsMenu(true)
+        viewBinding?.detailList?.adapter = adapter
         viewBinding?.viewModel = viewModel
         viewBinding?.chorboImage?.transitionName = args.chorboId.toString()
         setupToolbar()
@@ -69,7 +70,7 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
             is ChorboDetailViewState.Loaded -> {
                 viewBinding?.nameToolbar?.transitionName = viewState.chorbo.name
                 viewBinding?.nameToolbar?.text = viewState.chorbo.name
-                viewBinding?.detailList?.adapter = adapter
+                adapter.submitSectionedList(viewState.chorbo.info)
             }
         }
     }

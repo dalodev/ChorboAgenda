@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
@@ -6,54 +7,53 @@
     <data>
 
         <variable
-            name="iconItem"
-            type="Integer" />
+            name="info"
+            type="es.littledavity.dynamicfeatures.chorboList.detail.model.InfoItem.Item" />
 
         <variable
-            name="content"
-            type="String" />
+            name="viewModel"
+            type="es.littledavity.dynamicfeatures.chorboList.detail.ChorboDetailViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/detail_item_margin"
-        visible="@{!content.isEmpty()}">
+        android:layout_margin="@dimen/detail_item_margin">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/itemContainer"
             android:layout_width="@dimen/detail_item_card_size"
             android:layout_height="@dimen/detail_item_card_size"
+            android:elevation="8dp"
             app:cardBackgroundColor="@color/accent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
             app:cardCornerRadius="14dp"
-            android:elevation="8dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon"
+                tools:srcCompat="@drawable/ic_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:scaleType="fitXY"
-                app:srcVector="@{iconItem}"
-                tools:srcCompat="@drawable/ic_location" />
+                android:scaleType="fitXY" />
 
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/text"
             style="@style/TextAppearance.CardTitle"
+            tools:text="España"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_item_margin"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="@{content}"
+            android:text="@{info.info.value}"
             app:layout_constraintBottom_toBottomOf="@id/itemContainer"
             app:layout_constraintStart_toEndOf="@id/itemContainer"
-            app:layout_constraintTop_toTopOf="@id/itemContainer"
-            tools:text="España" />
+            app:layout_constraintTop_toTopOf="@id/itemContainer" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
