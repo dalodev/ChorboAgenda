@@ -5,6 +5,7 @@ package es.littledavity.commons.ui.bindings
 
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
+import android.net.Uri
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
@@ -75,4 +76,34 @@ fun ImageView.imageFile(
 @BindingAdapter("app:srcVector")
 fun setSrcVector(view: ImageView, @DrawableRes drawable: Int) {
     view.setImageResource(drawable)
+}
+
+
+/**
+ * Set image loaded from url.
+ *
+ * @param url Image url to download and set as drawable.
+ * @param placeholderId Drawable resource identifier to set while downloading image.
+ */
+@BindingAdapter(
+    "imageUri",
+    "imagePlaceholder",
+    requireAll = false
+)
+fun ImageView.imageUri(
+    uri: Uri?,
+    @DrawableRes placeholderId: Int?
+) {
+    load(uri) {
+        crossfade(true)
+        placeholder(
+            placeholderId?.let {
+                ContextCompat.getDrawable(context, it)
+            } ?: run {
+                val placeholdersColors = resources.getStringArray(R.array.placeholders)
+                val placeholderColor = placeholdersColors[Random.nextInt(placeholdersColors.size)]
+                ColorDrawable(Color.parseColor(placeholderColor))
+            }
+        )
+    }
 }

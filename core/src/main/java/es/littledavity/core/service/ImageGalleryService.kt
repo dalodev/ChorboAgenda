@@ -1,18 +1,22 @@
 package es.littledavity.core.service
 
+import android.R.attr.mimeType
+import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Environment
+import android.provider.MediaStore
 import android.util.Base64
 import androidx.core.content.ContextCompat
+import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboRepository
 import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
-import java.lang.IllegalStateException
+import java.io.IOException
 import java.util.UUID
 import javax.inject.Inject
 
@@ -91,6 +95,52 @@ class ImageGalleryService @Inject constructor(
             e.printStackTrace()
         }
         return file.path
+    }
+
+    fun saveMediaImage(imageToSave: Bitmap, chorbo: Chorbo): String {
+        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${chorbo.name}"
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, chorbo.id)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, relativeLocation)
+        }
+        val resolver = context.contentResolver
+
+        val contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val uri = resolver.insert(contentUri, contentValues)
+            ?: throw IOException("Failed to create new MediaStore record.")
+
+        val stream = resolver.openOutputStream(uri)
+            ?: throw IOException("Failed to get output stream.")
+
+        if (!imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, stream)) {
+            throw IOException("Failed to save bitmap")
+        }
+        stream.close()
+        return uri.toString()
+    }
+
+    fun saveMediaImage(imageToSave: Bitmap, chorbo: Chorbo, fileName: String): String {
+        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${chorbo.name}"
+        val contentValues = ContentValues().apply {
+            put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
+            put(MediaStore.MediaColumns.RELATIVE_PATH, relativeLocation)
+        }
+        val resolver = context.contentResolver
+
+        val contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val uri = resolver.insert(contentUri, contentValues)
+            ?: throw IOException("Failed to create new MediaStore record.")
+
+        val stream = resolver.openOutputStream(uri)
+            ?: throw IOException("Failed to get output stream.")
+
+        if (!imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, stream)) {
+            throw IOException("Failed to save bitmap")
+        }
+        stream.close()
+        return uri.path.orEmpty()
     }
 
     // Checks if a volume containing external storage is available

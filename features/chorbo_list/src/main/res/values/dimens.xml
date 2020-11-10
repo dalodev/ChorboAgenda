@@ -20,7 +20,11 @@
     <dimen name="chorbo_detail_content_padding_horizontal">15dp</dimen>
     <dimen name="chorbo_detail_content_description_margin_top">10dp</dimen>
     <dimen name="chorbo_detail_list_margin">24dp</dimen>
-    <dimen name="detail_item_margin">24dp</dimen>
+    <dimen name="detail_item_margin">20dp</dimen>
     <dimen name="section_margin">24dp</dimen>
     <dimen name="detail_item_card_size">48dp</dimen>
+    <dimen name="preview_image_margin">16dp</dimen>
+    <dimen name="preview_image_width">198dp</dimen>
+    <dimen name="preview_list_item_padding">12dp</dimen>
+    <dimen name="preview_item_padding">6dp</dimen>
 </resources>

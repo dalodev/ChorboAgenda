@@ -44,9 +44,9 @@ class ContactViewModel @Inject constructor(
             }
         ) {
             val imageBitmap = imageGalleryService.getBitmap(Uri.parse(chorbo.image))
-            chorbo.image = imageGalleryService.createDirectoryAndSaveFile(imageBitmap, chorbo.name)
+            chorbo.image = imageGalleryService.saveMediaImage(imageBitmap, chorbo)
             val flagBitmap = imageGalleryService.getBitmap(chorbo.flag)
-            chorbo.flag = imageGalleryService.createDirectoryAndSaveFile(flagBitmap, chorbo.name)
+            chorbo.flag = imageGalleryService.saveMediaImage(flagBitmap, chorbo, chorbo.countryName)
             chorboRepository.insertChorbo(chorbo)
             event.postValue(ContactViewEvent.Next)
         }

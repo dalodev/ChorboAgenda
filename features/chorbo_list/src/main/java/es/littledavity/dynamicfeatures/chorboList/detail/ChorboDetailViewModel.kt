@@ -3,6 +3,7 @@
  */
 package es.littledavity.dynamicfeatures.chorboList.detail
 
+import android.net.Uri
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
 import androidx.lifecycle.LiveData
@@ -13,7 +14,6 @@ import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.dynamicfeatures.chorboList.detail.model.ChorboDetailItem
 import es.littledavity.dynamicfeatures.chorboList.detail.model.ChorboDetailMapper
 import kotlinx.coroutines.launch
-import java.io.File
 import javax.inject.Inject
 
 /**
@@ -44,5 +44,5 @@ class ChorboDetailViewModel @Inject constructor(
         }
     }
 
-    fun getImageFile(imagePath: String?) = imagePath?.let(::File)
+    fun getImageUri(): Uri = Uri.parse(chorboDetail.value?.image)
 }

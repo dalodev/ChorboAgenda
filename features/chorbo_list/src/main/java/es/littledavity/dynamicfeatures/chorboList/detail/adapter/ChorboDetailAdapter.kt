@@ -8,7 +8,9 @@ import es.littledavity.commons.ui.base.BaseListAdapter
 import es.littledavity.dynamicfeatures.chorboList.detail.ChorboDetailViewModel
 import es.littledavity.dynamicfeatures.chorboList.detail.adapter.holders.HeaderViewHolder
 import es.littledavity.dynamicfeatures.chorboList.detail.adapter.holders.InfoViewHolder
+import es.littledavity.dynamicfeatures.chorboList.detail.adapter.holders.PreviewViewHolder
 import es.littledavity.dynamicfeatures.chorboList.detail.model.Info
+import es.littledavity.dynamicfeatures.chorboList.detail.model.InfoData
 import es.littledavity.dynamicfeatures.chorboList.detail.model.InfoItem
 import es.littledavity.dynamicfeatures.chorboList.list.adapter.holders.ErrorViewHolder
 import es.littledavity.dynamicfeatures.chorboList.list.adapter.holders.LoadingViewHolder
@@ -17,8 +19,9 @@ import javax.inject.Inject
 internal enum class ItemView(val type: Int) {
     HEADER(type = 0),
     INFO(type = 1),
-    LOADING(type = 2),
-    ERROR(type = 3);
+    PREVIEW(type = 2),
+    LOADING(type = 3),
+    ERROR(type = 4);
 
     companion object {
         fun valueOf(type: Int): ItemView? = values().first { it.type == type }
@@ -29,7 +32,7 @@ class ChorboDetailAdapter @Inject constructor(
     @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
     val viewModel: ChorboDetailViewModel
 ) : BaseListAdapter<InfoItem>(
-    itemsSame = { old, new -> old.id == new.id },
+    itemsSame = { old, new -> old == new },
     contentsSame = { old, new -> old == new }
 ) {
 
@@ -45,6 +48,7 @@ class ChorboDetailAdapter @Inject constructor(
         when (ItemView.valueOf(viewType)) {
             ItemView.HEADER -> HeaderViewHolder(inflater)
             ItemView.INFO -> InfoViewHolder(inflater)
+            ItemView.PREVIEW -> PreviewViewHolder(inflater)
             ItemView.LOADING -> LoadingViewHolder(inflater)
             else -> ErrorViewHolder(inflater)
         }
@@ -54,6 +58,7 @@ class ChorboDetailAdapter @Inject constructor(
         when (getItemView(position)) {
             ItemView.HEADER -> (holder as? HeaderViewHolder)?.bind(viewModel, item)
             ItemView.INFO -> (holder as? InfoViewHolder)?.bind(viewModel, item)
+            ItemView.PREVIEW -> (holder as? PreviewViewHolder)?.bind(viewModel, item)
             else -> Unit
         }
     }
@@ -66,9 +71,12 @@ class ChorboDetailAdapter @Inject constructor(
                 ItemView.LOADING
             }
         } else {
-            when (getItem(position)) {
+            when (val info = getItem(position)) {
                 is InfoItem.Header -> ItemView.HEADER
-                is InfoItem.Item -> ItemView.INFO
+                is InfoItem.Item -> when (info.info.value) {
+                    is InfoData.Simple -> ItemView.INFO
+                    is InfoData.Preview -> ItemView.PREVIEW
+                }
             }
         }
 

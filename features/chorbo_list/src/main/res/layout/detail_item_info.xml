@@ -7,8 +7,16 @@
     <data>
 
         <variable
+            name="view"
+            type="android.view.View" />
+
+        <variable
             name="info"
             type="es.littledavity.dynamicfeatures.chorboList.detail.model.InfoItem.Item" />
+
+        <variable
+            name="value"
+            type="es.littledavity.dynamicfeatures.chorboList.detail.model.InfoData.Simple" />
 
         <variable
             name="viewModel"
@@ -29,31 +37,33 @@
             app:cardBackgroundColor="@color/accent"
             app:cardCornerRadius="14dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            app:visible="@{info.info.icon != view.NO_ID}">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/icon"
-                tools:srcCompat="@drawable/ic_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:scaleType="fitXY" />
+                android:scaleType="fitXY"
+                app:srcVector="@{info.info.icon}"
+                tools:srcCompat="@drawable/ic_location" />
 
         </com.google.android.material.card.MaterialCardView>
 
         <TextView
             android:id="@+id/text"
             style="@style/TextAppearance.CardTitle"
-            tools:text="España"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/detail_item_margin"
             android:gravity="center_vertical"
             android:maxLines="1"
-            android:text="@{info.info.value}"
-            app:layout_constraintBottom_toBottomOf="@id/itemContainer"
+            android:text="@{value.value}"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/itemContainer"
-            app:layout_constraintTop_toTopOf="@id/itemContainer" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="España" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -4,7 +4,9 @@
 package es.littledavity.dynamicfeatures.create.image
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.net.Uri
+import android.os.Build
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.karumi.dexter.MultiplePermissionsReport
@@ -32,9 +34,14 @@ class ImageViewModel @Inject constructor(
 
     var imageUri = MutableLiveData<Uri>()
 
+    @SuppressLint("InlinedApi")
     fun addImage() {
         permissionService.requestPermissions(
             listOf(
+                Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                Manifest.permission.READ_EXTERNAL_STORAGE,
+                Manifest.permission.ACCESS_MEDIA_LOCATION
+            ).takeIf { Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q } ?: listOf(
                 Manifest.permission.WRITE_EXTERNAL_STORAGE,
                 Manifest.permission.READ_EXTERNAL_STORAGE
             ),
@@ -60,6 +67,7 @@ class ImageViewModel @Inject constructor(
         )
     }
 
+
     fun onContinue() = event.postValue(ImageViewEvent.Next)
 
     fun loadImage(uri: Uri) {
@@ -67,3 +75,4 @@ class ImageViewModel @Inject constructor(
         _state.postValue(ImageViewState.Continue())
     }
 }
+

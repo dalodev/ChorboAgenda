@@ -1,20 +1,28 @@
 package es.littledavity.dynamicfeatures.chorboList.detail.model
 
-data class Info(val section: Section, val value: String)
+import android.net.Uri
+import androidx.annotation.DrawableRes
+
+data class Info(
+    val section: Section,
+    val value: InfoData,
+    @DrawableRes val icon: Int
+)
 
 sealed class InfoItem {
-    data class Header(val category: Section) : InfoItem() {
-        override val id = category.title
-    }
+    data class Header(val category: Section) : InfoItem()
 
-    data class Item(val info: Info) : InfoItem() {
-        override val id = info.value
-    }
+    data class Item(val info: Info) : InfoItem()
+}
 
-    abstract val id: String
+sealed class InfoData {
+    data class Simple(val value: String) : InfoData()
+
+    data class Preview(val list: List<Uri>) : InfoData()
 }
 
 enum class Section(val title: String) {
     INFO("Información"),
-    SOCIAL("Redes sociales")
+    SOCIAL("Redes sociales"),
+    PREVIEW("Galería")
 }

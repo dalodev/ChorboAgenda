@@ -3,6 +3,7 @@
  */
 package es.littledavity.dynamicfeatures.chorboList.list
 
+import android.net.Uri
 import android.view.View
 import androidx.annotation.VisibleForTesting
 import androidx.annotation.VisibleForTesting.PRIVATE
@@ -102,9 +103,9 @@ class ChorboListViewModel @Inject constructor(
     fun openAddChorboOptions() = event.postValue(ChorboListViewEvent.OpenChorboOptions)
 
     /**
-     * Get file from path
+     * Get uri from path
      *
      * @param imagePath path of image
      */
-    fun getImageFile(imagePath: String) = File(imagePath)
+    fun getImageUri(imagePath: String): Uri = Uri.parse(imagePath)
 }
