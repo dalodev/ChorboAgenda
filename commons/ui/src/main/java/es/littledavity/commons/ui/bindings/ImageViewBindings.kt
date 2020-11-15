@@ -74,8 +74,8 @@ fun ImageView.imageFile(
 }
 
 @BindingAdapter("app:srcVector")
-fun setSrcVector(view: ImageView, @DrawableRes drawable: Int) {
-    view.setImageResource(drawable)
+fun ImageView.setSrcVector(@DrawableRes drawable: Int) {
+    this.setImageResource(drawable)
 }
 
 

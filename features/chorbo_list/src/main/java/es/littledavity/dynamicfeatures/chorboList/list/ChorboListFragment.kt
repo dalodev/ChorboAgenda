@@ -53,6 +53,7 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
     }
 
     override fun onInitDataBinding() {
+        enableBack = false
         viewBinding?.viewModel = viewModel
         viewBinding?.includeList?.chorboList?.apply {
             adapter = viewAdapter
@@ -60,11 +61,15 @@ class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListVie
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshLoadedChorboList()
+    }
+
     override fun onClearView() {
         viewBinding?.includeList?.chorboList?.adapter = null
     }
 
-    override fun toolbar(): Toolbar? = null
 
     // ============================================================================================
     //  Private observers methods

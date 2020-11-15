@@ -19,11 +19,14 @@
         app:visible="@{viewState.error}">
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/error_message"
             style="@style/TextAppearance.Body"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="@dimen/chorbo_detail_floating_button_margin"
             android:text="@string/chorbo_list_error_text"
             android:textAlignment="center"
+            app:layout_constraintVertical_chainStyle="packed"
             app:layout_constraintBottom_toTopOf="@id/retryButton"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +43,8 @@
             android:text="@string/retry"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/error_message" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
 data class Chorbo(
     @PrimaryKey(autoGenerate = true) val id: Long = 0,
     @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "image") var image: String,
+    @ColumnInfo(name = "image") val image: String = "",
     @ColumnInfo(name = "countryCode") val countryCode: String,
     @ColumnInfo(name = "countryName") val countryName: String,
     @ColumnInfo(name = "flag") var flag: String,

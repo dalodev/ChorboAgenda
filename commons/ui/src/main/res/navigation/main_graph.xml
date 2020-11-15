@@ -33,21 +33,8 @@
         app:moduleName="create"
         tools:layout="@layout/fragment_name">
         <action
-            android:id="@+id/toImage"
-            app:destination="@id/image_fragment" />
-    </fragment>
-
-    <fragment
-        android:id="@+id/image_fragment"
-        android:name="es.littledavity.dynamicfeatures.create.image.ImageFragment"
-        app:moduleName="create"
-        tools:layout="@layout/fragment_image">
-        <action
             android:id="@+id/toLocation"
             app:destination="@id/location_fragment" />
-        <argument
-            android:name="name"
-            app:argType="string" />
     </fragment>
 
     <fragment
@@ -61,9 +48,6 @@
         <argument
             android:name="name"
             app:argType="string" />
-        <argument
-            android:name="image"
-            app:argType="string" />
     </fragment>
 
     <fragment
@@ -75,9 +59,6 @@
             android:name="name"
             app:argType="string" />
         <argument
-            android:name="image"
-            app:argType="string" />
-        <argument
             android:name="countryCode"
             app:argType="string" />
         <argument
@@ -86,11 +67,6 @@
         <argument
             android:name="flag"
             app:argType="string" />
-        <action
-            android:id="@+id/toList"
-            app:destination="@id/chorbo_list_fragment"
-            app:popUpTo="@id/chorbo_list_fragment"
-            app:popUpToInclusive="true" />
     </fragment>
 
 </navigation>

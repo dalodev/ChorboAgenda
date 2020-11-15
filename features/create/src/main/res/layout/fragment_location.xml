@@ -16,10 +16,6 @@
         android:layout_height="match_parent"
         android:animateLayoutChanges="true">
 
-        <include
-            android:id="@+id/toolbar"
-            layout="@layout/fragment_toolbar" />
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/formContainer"
             android:layout_width="match_parent"
@@ -77,7 +73,7 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.button.MaterialButton
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
             android:id="@+id/locationButton"
             style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton"
             visible="gone"
@@ -87,7 +83,6 @@
             android:layout_marginBottom="@dimen/name_input_margin"
             android:onClick="@{() -> viewModel.onSelectCountry()}"
             android:text="@string/select_location"
-            android:transitionName="@string/continue_button"
             app:layout_anchor="@id/formContainer"
             app:layout_anchorGravity="bottom"
             app:visible="@{!viewModel.state.continue}" />
@@ -101,7 +96,6 @@
             android:layout_marginBottom="@dimen/name_input_margin"
             android:onClick="@{() -> viewModel.onContinue()}"
             android:text="@string/continue_button"
-            android:transitionName="@string/continue_button"
             app:layout_anchor="@id/formContainer"
             app:layout_anchorGravity="bottom"
             app:visible="@{viewModel.state.continue}" />

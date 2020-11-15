@@ -5,8 +5,12 @@ package es.littledavity.chorboagenda
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
 import androidx.navigation.findNavController
+import androidx.navigation.ui.NavigationUI
+import androidx.navigation.ui.setupWithNavController
+import es.littledavity.chorboagenda.databinding.ActivityMainBinding
 import es.littledavity.commons.ui.navigation.NavigationResult
 import kotlin.properties.Delegates
 
@@ -28,11 +32,16 @@ class MainActivity : AppCompatActivity() {
      */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        val binding: ActivityMainBinding =
+            DataBindingUtil.setContentView(this, R.layout.activity_main)
+        setSupportActionBar(binding.toolbar)
     }
 
+    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+
     fun navigateBackWithResult(result: Bundle) {
-        val childFragmentManager = supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager
+        val childFragmentManager =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment)?.childFragmentManager
         var backStackListener: FragmentManager.OnBackStackChangedListener by Delegates.notNull()
         backStackListener = FragmentManager.OnBackStackChangedListener {
             (childFragmentManager?.fragments?.get(0) as NavigationResult).onNavigationResult(result)

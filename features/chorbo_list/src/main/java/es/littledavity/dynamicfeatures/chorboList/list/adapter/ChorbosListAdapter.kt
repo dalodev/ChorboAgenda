@@ -141,6 +141,8 @@ class ChorbosListAdapter @Inject constructor(
         state = newState
         if (newState.hasExtraRow && oldState != newState) {
             notifyItemChanged(itemCount - 1)
+        } else {
+            notifyItemChanged(itemCount)
         }
     }
 

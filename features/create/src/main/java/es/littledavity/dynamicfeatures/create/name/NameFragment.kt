@@ -33,12 +33,11 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
     }
 
     override fun onInitDataBinding() {
+        enableBack = true
         viewBinding?.viewModel = viewModel
     }
 
     override fun onClearView() = Unit
-
-    override fun toolbar() = viewBinding?.toolbar?.toolbar
 
     /**
      * Observer view event change on [NameViewModel].
@@ -47,16 +46,9 @@ class NameFragment : BaseFragment<FragmentNameBinding, NameViewModel>(
      */
     private fun onViewEvent(viewEvent: NameViewEvent) {
         when (viewEvent) {
-            is NameViewEvent.Next -> {
-                val extras = FragmentNavigatorExtras(
-                    viewBinding!!.continueButton to viewBinding!!.continueButton.transitionName,
-                    viewBinding!!.name to viewBinding!!.name.transitionName
-                )
-                viewModel.navigate(
-                    NameFragmentDirections.toImage(viewBinding?.name?.text.toString()),
-                    extras
-                )
-            }
+            is NameViewEvent.Next -> viewModel.navigate(
+                NameFragmentDirections.toLocation(viewBinding?.name?.text.toString())
+            )
         }
     }
 }

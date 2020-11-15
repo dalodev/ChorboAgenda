@@ -1,6 +1,5 @@
 package es.littledavity.core.service
 
-import android.R.attr.mimeType
 import android.content.ContentValues
 import android.content.Context
 import android.graphics.Bitmap
@@ -12,7 +11,6 @@ import android.util.Base64
 import androidx.core.content.ContextCompat
 import es.littledavity.core.database.chorbo.Chorbo
 import es.littledavity.core.database.chorbo.ChorboRepository
-import timber.log.Timber
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -43,25 +41,7 @@ class ImageGalleryService @Inject constructor(
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
     }
 
-    suspend fun deleteChorboDirectory(idList: List<Long>) {
-        idList.forEach {
-            val chorbo = chorboRepository.getChorbo(it)
-            chorbo?.let { item ->
-                val file = File(item.image)
-                val flagFile = File(item.flag)
-                if (file.exists()) {
-                    file.delete()
-                    Timber.i("image File deleted ${file.path}")
-                }
-                if (flagFile.exists()) {
-                    flagFile.delete()
-                    Timber.i("flag file deleted ${flagFile.path}")
-                }
-            }
-        }
-    }
-
-    fun createDirectoryAndSaveFile(
+    fun saveMediaFileLegacy(
         imageToSave: Bitmap,
         fileName: String
     ): String {
@@ -141,19 +121,5 @@ class ImageGalleryService @Inject constructor(
         }
         stream.close()
         return uri.path.orEmpty()
-    }
-
-    // Checks if a volume containing external storage is available
-    // for read and write.
-    fun isExternalStorageWritable(): Boolean {
-        return Environment.getExternalStorageState() == Environment.MEDIA_MOUNTED
-    }
-
-    // Checks if a volume containing external storage is available to at least read.
-    fun isExternalStorageReadable(): Boolean {
-        return Environment.getExternalStorageState() in setOf(
-            Environment.MEDIA_MOUNTED,
-            Environment.MEDIA_MOUNTED_READ_ONLY
-        )
     }
 }

@@ -6,6 +6,7 @@ package es.littledavity.commons.ui.bindings
 import android.widget.EditText
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.BindingAdapter
+import es.littledavity.commons.ui.extensions.orZero
 
 /**
  * Set edit text change listener.
@@ -16,5 +17,6 @@ import androidx.databinding.BindingAdapter
 fun EditText.onTextChange(listener: (String) -> Unit) {
     this.addTextChangedListener { text ->
         listener(text.toString())
+        this.setSelection(text?.length.orZero())
     }
 }

@@ -12,6 +12,7 @@ import com.debut.countrycodepicker.data.Country
 import com.debut.countrycodepicker.listeners.CountryCallBack
 import es.littledavity.chorboagenda.ChorboagendaApp
 import es.littledavity.commons.ui.base.BaseFragment
+import es.littledavity.commons.ui.databinding.FragmentToolbarBinding
 import es.littledavity.commons.ui.extensions.observe
 import es.littledavity.dynamicfeatures.create.R
 import es.littledavity.dynamicfeatures.create.databinding.FragmentLocationBinding
@@ -40,11 +41,11 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
     }
 
     override fun onInitDataBinding() {
+        enableBack = true
         viewBinding?.viewModel = viewModel
     }
 
     override fun onClearView() = Unit
-    override fun toolbar() = viewBinding?.toolbar?.toolbar
 
     /**
      * Observer view event change on [NameViewModel].
@@ -63,21 +64,14 @@ class LocationFragment : BaseFragment<FragmentLocationBinding, LocationViewModel
                     }
                 )
             }
-            is LocationViewEvent.Next -> {
-                val extras = FragmentNavigatorExtras(
-                    viewBinding!!.location to viewBinding!!.location.transitionName
+            is LocationViewEvent.Next -> viewModel.navigate(
+                LocationFragmentDirections.toContact(
+                    args.name,
+                    viewModel.country.countryCode,
+                    viewModel.country.name,
+                    viewModel.getFlag()
                 )
-                viewModel.navigate(
-                    LocationFragmentDirections.toContact(
-                        args.name,
-                        args.image,
-                        viewModel.country.countryCode,
-                        viewModel.country.name,
-                        viewModel.getFlag()
-                    ),
-                    extras
-                )
-            }
+            )
         }
     }
 }

@@ -107,5 +107,5 @@ class ChorboListViewModel @Inject constructor(
      *
      * @param imagePath path of image
      */
-    fun getImageUri(imagePath: String): Uri = Uri.parse(imagePath)
+    fun getImageUri(imagePath: String?): Uri? = imagePath?.let { Uri.parse(it) }
 }

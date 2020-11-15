@@ -52,11 +52,11 @@ open class ChorboPageDataSource @Inject constructor(
     ) {
         databaseState.postValue(DatabaseState.Loading())
         scope.launch(
-            CoroutineExceptionHandler { _, _ ->
+            CoroutineExceptionHandler { _, ex ->
                 retry = {
                     loadInitial(params, callback)
                 }
-                databaseState.postValue(DatabaseState.Error())
+                databaseState.postValue(DatabaseState.Error(message = ex.message))
             }
         ) {
             val response = repository.getChorbos(
@@ -83,11 +83,11 @@ open class ChorboPageDataSource @Inject constructor(
     ) {
         databaseState.postValue(DatabaseState.Loading(true))
         scope.launch(
-            CoroutineExceptionHandler { _, _ ->
+            CoroutineExceptionHandler { _, ex ->
                 retry = {
                     loadAfter(params, callback)
                 }
-                databaseState.postValue(DatabaseState.Error(true))
+                databaseState.postValue(DatabaseState.Error(true, ex.message))
             }
         ) {
             val response = repository.getChorbos(

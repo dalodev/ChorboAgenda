@@ -4,8 +4,6 @@
     <string name="birthday">Birthday</string>
     <string name="name_hint"><![CDATA[Type a name <3]]></string>
     <string name="continue_button">Continue</string>
-    <string name="insert_image">Tap icon to add Image</string>
-    <string name="image">Image</string>
     <string name="select_location">Select his country</string>
     <string name="location">Location</string>
     <string name="phone_hint">Phone number</string>

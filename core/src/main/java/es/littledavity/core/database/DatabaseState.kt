@@ -34,7 +34,8 @@ sealed class DatabaseState {
      * @param isAdditional Is additional request.
      */
     data class Error(
-        val isAdditional: Boolean = false
+        val isAdditional: Boolean = false,
+        val message: String? = null
     ) : DatabaseState()
 
     // ============================================================================================

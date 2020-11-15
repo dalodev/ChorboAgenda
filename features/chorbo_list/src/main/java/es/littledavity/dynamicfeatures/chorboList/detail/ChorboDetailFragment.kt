@@ -39,6 +39,7 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
     }
 
     override fun onInitDataBinding() {
+        enableBack = true
         setHasOptionsMenu(true)
         viewBinding?.detailList?.adapter = adapter
         viewBinding?.viewModel = viewModel

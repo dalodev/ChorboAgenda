@@ -38,14 +38,12 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
     }
 
     override fun onInitDataBinding() {
+        enableBack = true
         viewBinding?.viewModel = viewModel
-        val countryCode = "+${args.countryCode}"
-        viewBinding?.countryCode?.text = countryCode
         viewBinding?.name?.text = args.name
     }
 
     override fun onClearView() = Unit
-    override fun toolbar() = viewBinding?.toolbar?.toolbar
 
     /**
      * Observer view state change on [ContactViewModel].
@@ -70,7 +68,7 @@ class ContactFragment : BaseFragment<FragmentContactBinding, ContactViewModel>(
      */
     private fun onViewEvent(viewEvent: ContactViewEvent) {
         when (viewEvent) {
-            is ContactViewEvent.Next -> viewModel.navigate(ContactFragmentDirections.toList())
+            is ContactViewEvent.Next -> viewModel.toRoot()
         }
     }
 }

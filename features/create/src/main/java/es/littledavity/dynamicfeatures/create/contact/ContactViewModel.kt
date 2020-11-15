@@ -3,7 +3,7 @@
  */
 package es.littledavity.dynamicfeatures.create.contact
 
-import android.net.Uri
+import android.telephony.PhoneNumberUtils
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
@@ -14,6 +14,7 @@ import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.service.ImageGalleryService
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 /**
@@ -30,12 +31,23 @@ class ContactViewModel @Inject constructor(
     private val _state = MutableLiveData<ContactViewState>()
     val state: LiveData<ContactViewState>
         get() = _state
+    val phone = MutableLiveData<String>()
+    val instagram = MutableLiveData<String>()
 
     lateinit var chorbo: Chorbo
 
-    val onInstagramTextChange: (String) -> Unit = { chorbo.instagram = it }
+    val onInstagramTextChange: (String) -> Unit = { newText ->
+        chorbo.instagram = newText
+        instagram.postValue(
+            "@".plus(newText).takeIf {
+                !newText.contains("@")
+            } ?: newText)
+    }
 
-    val onWhatsappTextChange: (String) -> Unit = { chorbo.whatsapp = it }
+    val onPhoneTextChange: (String) -> Unit = {
+        chorbo.whatsapp = it
+        phone.postValue(PhoneNumberUtils.formatNumber(it, getCountryCode(chorbo.countryName)) ?: it)
+    }
 
     fun onContinue() {
         viewModelScope.launch(
@@ -43,8 +55,6 @@ class ContactViewModel @Inject constructor(
                 _state.postValue(ContactViewState.Error(message = exception.message))
             }
         ) {
-            val imageBitmap = imageGalleryService.getBitmap(Uri.parse(chorbo.image))
-            chorbo.image = imageGalleryService.saveMediaImage(imageBitmap, chorbo)
             val flagBitmap = imageGalleryService.getBitmap(chorbo.flag)
             chorbo.flag = imageGalleryService.saveMediaImage(flagBitmap, chorbo, chorbo.countryName)
             chorboRepository.insertChorbo(chorbo)
@@ -56,7 +66,6 @@ class ContactViewModel @Inject constructor(
 
         chorbo = Chorbo(
             name = args.name,
-            image = args.image,
             countryCode = args.countryCode,
             countryName = args.countryName,
             flag = args.flag,
@@ -64,4 +73,7 @@ class ContactViewModel @Inject constructor(
             instagram = ""
         )
     }
+
+    private fun getCountryCode(countryName: String) =
+        Locale.getISOCountries().find { Locale("", it).displayCountry == countryName }
 }

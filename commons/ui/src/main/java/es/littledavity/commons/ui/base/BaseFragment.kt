@@ -17,6 +17,7 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.setupWithNavController
 import androidx.transition.TransitionInflater
 import es.littledavity.commons.ui.R
 import es.littledavity.commons.ui.extensions.observe
@@ -55,7 +56,7 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     /**
      * @return toolbar from fragment
      */
-    abstract fun toolbar(): Toolbar?
+    open fun toolbar(): Toolbar? = null
 
     /**
      * Called to have the fragment instantiate its user interface view.
@@ -145,12 +146,15 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
 
     private fun setupToolbar() {
         (activity as? AppCompatActivity)?.apply {
-            setSupportActionBar(toolbar())
+            toolbar()?.let {
+                it.setupWithNavController(findNavController())
+                setSupportActionBar(it)
+                it.navigationIcon?.setTint(Color.BLACK)
+                it.setNavigationOnClickListener { viewModel.back() }
+            }
             supportActionBar?.setDisplayShowTitleEnabled(false)
             supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
             supportActionBar?.setDisplayShowHomeEnabled(false)
-            toolbar()?.navigationIcon?.setTint(Color.BLACK)
-            toolbar()?.setNavigationOnClickListener { viewModel.back() }
         }
     }
 
