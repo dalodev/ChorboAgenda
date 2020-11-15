@@ -4,7 +4,6 @@
 package es.littledavity.commons.ui.base
 
 import android.content.Context
-import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +20,7 @@ import androidx.navigation.ui.setupWithNavController
 import androidx.transition.TransitionInflater
 import es.littledavity.commons.ui.R
 import es.littledavity.commons.ui.extensions.observe
+import es.littledavity.commons.ui.extensions.orFalse
 import es.littledavity.commons.ui.navigation.NavigationCommand
 import kotlinx.coroutines.cancel
 import javax.inject.Inject
@@ -80,9 +80,9 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
         viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
         viewBinding?.lifecycleOwner = viewLifecycleOwner
         sharedElementEnterTransition =
-            TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
+            TransitionInflater.from(context).inflateTransition(R.transition.shared_transition)
         sharedElementReturnTransition =
-            TransitionInflater.from(this.context).inflateTransition(R.transition.shared_transition)
+            TransitionInflater.from(context).inflateTransition(R.transition.shared_transition)
         return binding.root
     }
 
@@ -145,12 +145,15 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
     }
 
     private fun setupToolbar() {
-        (activity as? AppCompatActivity)?.apply {
+        (activity as? BaseActivity<*>)?.apply {
             toolbar()?.let {
-                it.setupWithNavController(findNavController())
+                supportActionBar?.hide()
                 setSupportActionBar(it)
-                it.navigationIcon?.setTint(Color.BLACK)
-                it.setNavigationOnClickListener { viewModel.back() }
+                it.setupWithNavController(findNavController())
+            } ?: run {
+                setSupportActionBar(activityToolbar)
+                supportActionBar?.show()
+                activityToolbar?.setupWithNavController(findNavController())
             }
             supportActionBar?.setDisplayShowTitleEnabled(false)
             supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)

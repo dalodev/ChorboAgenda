@@ -5,12 +5,13 @@ package es.littledavity.chorboagenda
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.FragmentManager
+import androidx.navigation.ActivityNavigator
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
-import androidx.navigation.ui.setupWithNavController
+import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import es.littledavity.chorboagenda.databinding.ActivityMainBinding
+import es.littledavity.commons.ui.base.BaseActivity
 import es.littledavity.commons.ui.navigation.NavigationResult
 import kotlin.properties.Delegates
 
@@ -19,25 +20,16 @@ import kotlin.properties.Delegates
  *
  * @see AppCompatActivity
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
-    /**
-     * Called when the activity is starting. This is where most initialization should go: calling
-     * [AppCompatActivity.setContentView] to inflate the activity's UI, using
-     * [AppCompatActivity.findViewById] to programmatically interact with widgets in the UI.
-     *
-     * @param savedInstanceState If non-null, this fragment is being re-constructed
-     * from a previous saved state as given here.
-     * @see AppCompatActivity.onCreate
-     */
+    private val navController by lazy { findNavController(R.id.nav_host_fragment) }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
-        setSupportActionBar(binding.toolbar)
+        setupToolbar(viewBinding?.activityToolbar)
     }
 
-    override fun onSupportNavigateUp() = findNavController(R.id.nav_host_fragment).navigateUp()
+    override fun onSupportNavigateUp() = navController.navigateUp()
 
     fun navigateBackWithResult(result: Bundle) {
         val childFragmentManager =

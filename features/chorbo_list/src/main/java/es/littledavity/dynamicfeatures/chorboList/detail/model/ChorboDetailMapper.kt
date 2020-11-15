@@ -18,12 +18,12 @@ class ChorboDetailMapper(private val context: Context) : Mapper<Chorbo, ChorboDe
     override suspend fun map(from: Chorbo) = ChorboDetailItem(
         id = from.id,
         name = from.name,
-        image = from.image,
+        image = Uri.parse(from.image),
         info = listOf(
             Info(Section.INFO, InfoData.Simple(from.countryName), R.drawable.ic_location),
             Info(
                 Section.SOCIAL,
-                InfoData.Simple(PhoneNumberUtils.formatNumber(from.whatsapp, "ES")),
+                InfoData.Simple(PhoneNumberUtils.formatNumber(from.whatsapp, "ES").orEmpty()),
                 R.drawable.ic_whatsapp
             ),
             Info(
@@ -42,7 +42,7 @@ class ChorboDetailMapper(private val context: Context) : Mapper<Chorbo, ChorboDe
     private fun createList(chorbo: Chorbo): List<Uri> {
         val list = arrayListOf<Uri>()
         repeat(6) {
-            list.add( Uri.parse(chorbo.image))
+            list.add(Uri.parse(chorbo.image))
         }
         return list
     }

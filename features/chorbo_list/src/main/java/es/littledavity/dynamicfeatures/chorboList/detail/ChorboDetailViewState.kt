@@ -16,6 +16,11 @@ sealed class ChorboDetailViewState : BaseViewState {
     data class Loaded(val chorbo: ChorboDetailItem) : ChorboDetailViewState()
 
     /**
+     * Open Gallery
+     */
+    object OpenGallery : ChorboDetailViewState()
+
+    /**
      * Check if current view state is [Loaded].
      *
      * @return True if is loaded state, otherwise false.

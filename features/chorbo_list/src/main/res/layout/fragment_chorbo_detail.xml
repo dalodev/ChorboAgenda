@@ -38,11 +38,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="400dp"
                         android:scaleType="centerCrop"
-                        app:imageUri="@{viewModel.getImageUri()}"
+                        app:imageUri="@{viewModel.chorboDetail.image}"
                         app:layout_collapseMode="parallax"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
+                        app:visible='@{!String.valueOf(viewModel.chorboDetail.image).equals("")}'
                         tools:srcCompat="@tools:sample/avatars" />
+
+                    <TextView
+                        style="@style/TextAppearance.CardTitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="400dp"
+                        android:background="#eeeeee"
+                        android:text="@{viewModel.chorboDetail.name.substring(0, 2)}"
+                        android:textAllCaps="true"
+                        android:transitionName="@{viewModel.chorboDetail.name.substring(0, 2)}"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:onClick="@{() -> viewModel.addImage()}"
+                        app:visible='@{String.valueOf(viewModel.chorboDetail.image).equals("")}'
+                        tools:text="DA" />
 
                     <TextView
                         android:id="@+id/nameToolbar"

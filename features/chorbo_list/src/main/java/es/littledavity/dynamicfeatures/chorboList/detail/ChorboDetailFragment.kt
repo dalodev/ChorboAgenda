@@ -22,6 +22,8 @@ import es.littledavity.dynamicfeatures.chorbo_list.R
 import es.littledavity.dynamicfeatures.chorbo_list.databinding.FragmentChorboDetailBinding
 import javax.inject.Inject
 import kotlin.math.abs
+import androidx.activity.result.contract.ActivityResultContracts.GetContent
+import es.littledavity.commons.ui.extensions.orFalse
 
 class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDetailViewModel>(
     layoutId = R.layout.fragment_chorbo_detail
@@ -31,6 +33,10 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
 
     @Inject
     lateinit var adapter: ChorboDetailAdapter
+
+    private val getContent = registerForActivityResult(GetContent()) { uri ->
+        uri?.let(viewModel::loadImage)
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -73,6 +79,7 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
                 viewBinding?.nameToolbar?.text = viewState.chorbo.name
                 adapter.submitSectionedList(viewState.chorbo.info)
             }
+            is ChorboDetailViewState.OpenGallery -> getContent.launch("image/*")
         }
     }
 
@@ -83,9 +90,14 @@ class ChorboDetailFragment : BaseFragment<FragmentChorboDetailBinding, ChorboDet
                 viewBinding?.nameToolbar?.visible =
                     abs(verticalOffset) < appBarLayout.totalScrollRange
                 if (expanded) {
-                    viewBinding?.toolbar?.navigationIcon?.setTint(Color.WHITE)
+                    if (viewModel.chorboDetail.value?.image.toString().isNotBlank()) {
+                        viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.WHITE)
+                        viewBinding?.toolbar?.navigationIcon?.setTint(Color.WHITE)
+                    } else {
+                        viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.BLACK)
+                        viewBinding?.toolbar?.navigationIcon?.setTint(Color.BLACK)
+                    }
                     viewBinding?.collapsingToolbar?.title = " "
-                    viewBinding?.toolbar?.menu?.findItem(R.id.delete)?.icon?.setTint(Color.WHITE)
                 } else {
                     viewBinding?.collapsingToolbar?.title = viewModel.chorboDetail.value?.name
                     viewBinding?.toolbar?.navigationIcon?.setTint(Color.BLACK)

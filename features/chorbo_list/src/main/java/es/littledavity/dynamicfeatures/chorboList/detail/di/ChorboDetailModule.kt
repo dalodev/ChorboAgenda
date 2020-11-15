@@ -7,6 +7,7 @@ import dagger.Provides
 import es.littledavity.commons.ui.extensions.viewModel
 import es.littledavity.core.database.chorbo.ChorboRepository
 import es.littledavity.core.di.scopes.FeatureScope
+import es.littledavity.core.service.PermissionService
 import es.littledavity.dynamicfeatures.chorboList.detail.ChorboDetailFragment
 import es.littledavity.dynamicfeatures.chorboList.detail.ChorboDetailViewModel
 import es.littledavity.dynamicfeatures.chorboList.detail.adapter.ChorboDetailAdapter
@@ -37,9 +38,10 @@ class ChorboDetailModule(
     @Provides
     fun providesChorboDetailViewModel(
         chorboRepository: ChorboRepository,
-        chorboDetailMapper: ChorboDetailMapper
+        chorboDetailMapper: ChorboDetailMapper,
+        permissionService: PermissionService
     ) = fragment.viewModel {
-        ChorboDetailViewModel(chorboRepository, chorboDetailMapper)
+        ChorboDetailViewModel(chorboRepository, chorboDetailMapper, permissionService)
     }
 
     /**

@@ -25,10 +25,6 @@ import javax.inject.Inject
 class ChorboListFragment : BaseFragment<FragmentChorboListBinding, ChorboListViewModel>(
     layoutId = R.layout.fragment_chorbo_list
 ) {
-    companion object {
-        private const val PERCENT_100 = 100
-        private const val PERCENT_ANIM = 25
-    }
 
     @Inject
     lateinit var viewAdapter: ChorbosListAdapter
