@@ -1,5 +1,5 @@
 /*
- * Copyright 2020 littledavity
+ * Copyright 2021 dev.id
  */
 package es.littledavity.database.chorbo.tables
 
@@ -24,8 +24,8 @@ internal interface ChorboDao {
     @Query(
         """
         SELECT * FROM chorbo
-        WHERE LOWER(name) LIKE (:searchQuery || '%') 
-        ORDER BY id ASC 
+        WHERE LOWER(name) LIKE (:searchQuery || '%')
+        ORDER BY id ASC
         LIMIT :offset, :limit
         """
     )
@@ -34,7 +34,7 @@ internal interface ChorboDao {
     @Query(
         """
         SELECT * FROM chorbo
-        ORDER BY id ASC 
+        ORDER BY id ASC
         LIMIT :offset, :limit
         """
     )

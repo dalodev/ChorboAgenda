@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.domain.commons
 
 import com.github.michaelbull.result.Result

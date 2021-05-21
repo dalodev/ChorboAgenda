@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 import com.google.protobuf.gradle.*
 
 plugins {

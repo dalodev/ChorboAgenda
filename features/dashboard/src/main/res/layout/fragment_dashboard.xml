@@ -40,4 +40,3 @@
         app:menu="@menu/dashboard_bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

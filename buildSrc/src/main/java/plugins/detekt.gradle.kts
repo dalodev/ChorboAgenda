@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package plugins
 
 import io.gitlab.arturbosch.detekt.DetektPlugin

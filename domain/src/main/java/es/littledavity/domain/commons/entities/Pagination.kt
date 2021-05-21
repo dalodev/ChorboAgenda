@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.domain.commons.entities
 
 private const val DEFAULT_PAGE_SIZE = 20

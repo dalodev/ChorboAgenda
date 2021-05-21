@@ -1,7 +1,6 @@
 /*
- * Copyright 2020 littledavity
+ * Copyright 2021 dev.id
  */
-
 plugins {
     androidApplication()
     chorboagendaAndroid()

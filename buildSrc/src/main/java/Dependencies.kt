@@ -24,7 +24,7 @@ object Versions {
     const val daggerHilt = "2.34-beta"
     const val coroutines = "1.4.3"
     const val room = "2.3.0-rc01"
-    const val spotless = "3.27.0"
+    const val spotless = "4.0.0"
     const val detekt = "1.16.0"
     const val ktlint = "0.41.0"
 

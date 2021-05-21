@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.splash
 
 import androidx.lifecycle.viewModelScope

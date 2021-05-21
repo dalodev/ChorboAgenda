@@ -1,6 +1,9 @@
-// Top-level build file where you can add configuration options common to all sub-projects/modules.
+/*
+ * Copyright 2021 dev.id
+ */
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import es.littledavity.chorboagenda.BuildPlugins
 
 plugins {
     gradleVersions()
@@ -33,6 +36,7 @@ allprojects {
         google()
         maven { setUrl("https://jitpack.io") }
     }
+    plugins.apply(BuildPlugins.SPOTLESS)
 
     // Without the below block, a build failure was happening when
     // running ./gradlew connectedAndroidTest.

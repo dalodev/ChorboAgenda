@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package plugins
 
 val ktlint by configurations.creating

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.domain
 
 import es.littledavity.domain.commons.usecases.ObservableUseCase

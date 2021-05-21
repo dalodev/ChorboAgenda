@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package plugins
 
 import es.littledavity.chorboagenda.utils.isLinuxOrMacOs

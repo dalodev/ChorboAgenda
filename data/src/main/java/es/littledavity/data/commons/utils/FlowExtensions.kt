@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.data.commons.utils
 
 import es.littledavity.core.utils.onFailure

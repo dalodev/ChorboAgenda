@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package plugins
 import com.diffplug.gradle.spotless.SpotlessExtension
 import com.diffplug.gradle.spotless.SpotlessPlugin

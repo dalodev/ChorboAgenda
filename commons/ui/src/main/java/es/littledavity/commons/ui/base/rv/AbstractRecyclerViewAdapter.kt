@@ -1,5 +1,6 @@
-@file:Suppress("EXPERIMENTAL_FEATURE_WARNING")
-
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.commons.ui.base.rv
 
 import android.content.Context

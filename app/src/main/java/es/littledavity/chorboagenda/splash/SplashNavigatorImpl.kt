@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.chorboagenda.splash
 
 import android.app.Activity

@@ -1,5 +1,6 @@
-rootProject.name = "ChorboAgenda"
-
+/*
+ * Copyright 2021 dev.id
+ */
 include(":app")
 include(":core")
 include(":libraries:test_utils")

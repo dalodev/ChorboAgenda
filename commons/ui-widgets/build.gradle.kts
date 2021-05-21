@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 plugins {
     androidLibrary()
     chorboagendaAndroid()
@@ -37,7 +40,7 @@ dependencies {
     implementation(Deps.Commons.recyclerView)
     implementation(Deps.Commons.material)
     implementation(Deps.Commons.deviceInfo)
-    
+
     implementation(Deps.Misc.expandableTextView)
 
     implementation(Deps.Google.daggerHilt)

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.commons.ui.bindings
 
 import android.view.LayoutInflater

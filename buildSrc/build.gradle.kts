@@ -1,11 +1,15 @@
+/*
+ * Copyright 2021 dev.id
+ */
 plugins {
     `kotlin-dsl`
+    `kotlin-dsl-precompiled-script-plugins`
 }
 
 repositories {
     mavenCentral()
-    jcenter()
     google()
+    maven("https://plugins.gradle.org/m2/")
 }
 
 kotlinDslPluginOptions {
@@ -15,7 +19,7 @@ kotlinDslPluginOptions {
 object PluginsVersions {
     const val GRADLE_VERSIONS = "4.2.0"
     const val KOTLIN = "1.4.32"
-    const val SPOTLESS = "3.24.1"
+    const val SPOTLESS = "4.0.0"
     const val DETEKT = "1.0.1"
     const val KTLINT = "0.41.0"
 }

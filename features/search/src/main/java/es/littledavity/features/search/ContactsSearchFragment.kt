@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.search
 
 import android.text.InputType
@@ -82,4 +85,3 @@ internal class ContactsSearchFragment : BaseFragment<
         }
     }
 }
-
