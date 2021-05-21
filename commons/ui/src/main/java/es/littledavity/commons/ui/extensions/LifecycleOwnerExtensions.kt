@@ -3,10 +3,16 @@
  */
 package es.littledavity.commons.ui.extensions
 
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
+import androidx.lifecycle.coroutineScope
+import androidx.lifecycle.flowWithLifecycle
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.launchIn
 
 /**
  * Adds the given observer to the observers list within the lifespan of the given
@@ -45,4 +51,14 @@ fun <T> LifecycleOwner.observe(
             it?.let { t -> observer(t) }
         }
     )
+}
+
+fun <T> Flow<T>.observeIn(lifecycleOwner: LifecycleOwner): Job {
+    return flowWithLifecycle(lifecycleOwner.lifecycle)
+        .launchIn(lifecycleOwner.lifecycle.coroutineScope)
+}
+
+
+fun <T> Flow<T>.observeIn(fragment: Fragment): Job {
+    return observeIn(fragment.viewLifecycleOwner)
 }

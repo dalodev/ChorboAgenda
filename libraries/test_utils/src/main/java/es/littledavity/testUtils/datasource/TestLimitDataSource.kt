@@ -16,7 +16,7 @@ class TestLimitDataSource<T>(
     private val itemList: List<T>
 ) : LimitOffsetDataSource<T>(db, query, false, null) {
 
-    override fun convertRows(cursor: Cursor?): MutableList<T> = itemList.toMutableList()
+    override fun convertRows(cursor: Cursor): MutableList<T> = itemList.toMutableList()
     override fun countItems(): Int = itemList.count()
     override fun isInvalid(): Boolean = false
     override fun loadRange(params: LoadRangeParams, callback: LoadRangeCallback<T>) {

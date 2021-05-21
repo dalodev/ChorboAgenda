@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Chorboagenda.Contact"/>
+
+    <style name="Chorboagenda.Contact.Details">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/contact_details_margin_start</item>
+        <item name="android:textColor">@color/contact_details_text_color</item>
+        <item name="android:textSize">@dimen/contact_details_text_size</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+        <item name="layout_constraintStart_toEndOf">@id/image</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
+</resources>

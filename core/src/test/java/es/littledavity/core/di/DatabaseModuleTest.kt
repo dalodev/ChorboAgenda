@@ -8,8 +8,8 @@ import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import es.littledavity.core.database.ChorboagendaDatabase
-import es.littledavity.core.database.chorbo.ChorboDao
+import es.littledavity.database.ChorboagendaDatabase
+import es.littledavity.database.chorbo.ChorboDao
 import es.littledavity.core.di.modules.DatabaseModule
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotNull
@@ -35,8 +35,8 @@ class DatabaseModuleTest {
 
     @Test
     fun verifyProvidedChorboDao() {
-        val chorboagendaDatabase: ChorboagendaDatabase = mock()
-        val chorboDao: ChorboDao = mock()
+        val chorboagendaDatabase: es.littledavity.database.ChorboagendaDatabase = mock()
+        val chorboDao: es.littledavity.database.chorbo.ChorboDao = mock()
 
         doReturn(chorboDao).whenever(chorboagendaDatabase).chorboDao()
 
@@ -49,7 +49,7 @@ class DatabaseModuleTest {
 
     @Test
     fun verifyProvidedChorboRepository() {
-        val chorboDao: ChorboDao = mock()
+        val chorboDao: es.littledavity.database.chorbo.ChorboDao = mock()
         val repository = databaseModule.provideChorboRepository(chorboDao)
 
         assertEquals(chorboDao, repository.chorboDao)

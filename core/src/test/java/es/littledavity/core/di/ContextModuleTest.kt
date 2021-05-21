@@ -4,7 +4,6 @@
 package es.littledavity.core.di
 
 import android.app.Application
-import es.littledavity.core.di.modules.ContextModule
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
@@ -19,7 +18,7 @@ class ContextModuleTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         contextModule = ContextModule(application)
     }
 

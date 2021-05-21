@@ -5,9 +5,13 @@ package es.littledavity.commons.ui.extensions
 
 import android.view.Gravity
 import android.view.View
+import android.view.animation.DecelerateInterpolator
 import android.widget.FrameLayout
 import androidx.annotation.StringRes
 import com.google.android.material.snackbar.Snackbar
+
+private const val DATA_SET_ANIMATION_DURATION = 500L
+private val DATA_SET_ANIMATION_INTERPOLATOR = DecelerateInterpolator(1.5F)
 
 /**
  * Get resource string from optional id
@@ -27,3 +31,25 @@ fun View.showTopSnackbar(@StringRes resId: Int?): Snackbar? =
     } ?: run {
         null
     }
+
+fun View.fadeIn() {
+    animate()
+        .alpha(1f)
+        .setDuration(DATA_SET_ANIMATION_DURATION)
+        .setInterpolator(DATA_SET_ANIMATION_INTERPOLATOR)
+        .start()
+}
+
+fun View.resetAnimation() {
+    cancelActiveAnimations()
+    alpha = 0f
+}
+
+fun View.cancelActiveAnimations() {
+    clearAnimation()
+    animate().cancel()
+}
+
+fun String?.orEmpty(): String {
+    return this ?: ""
+}

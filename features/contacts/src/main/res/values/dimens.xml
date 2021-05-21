@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- GamingNewsItemImageView -->
+    <dimen name="contacts_item_image_card_elevation">2dp</dimen>
+    <dimen name="contacts_item_image_card_radius">4dp</dimen>
+    <!-- ContactsItemView -->
+    <dimen name="contacts_item_card_elevation">2dp</dimen>
+    <dimen name="contacts_item_padding">15dp</dimen>
+    <dimen name="contacts_item_image_height">168dp</dimen>
+    <dimen name="contacts_item_image_margin_bottom">15dp</dimen>
+    <dimen name="contacts_item_title_text_size">16sp</dimen>
+    <dimen name="contacts_item_lede_margin_top">5dp</dimen>
+    <dimen name="contacts_item_lede_text_size">14sp</dimen>
+    <dimen name="contacts_item_publication_date_margin_top">10dp</dimen>
+    <dimen name="contacts_item_publication_date_text_size">14sp</dimen>
+    <dimen name="contacts_item_publication_date_icon_padding">5dp</dimen>
+
+    <!-- ContactsView -->
+    <dimen name="contacts_decorator_spacing">15dp</dimen>
+    <dimen name="contacts_info_view_horizontal_margin">30dp</dimen>
+    <dimen name="contacts_info_view_title_text_size">17sp</dimen>
+</resources>

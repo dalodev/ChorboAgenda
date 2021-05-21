@@ -9,18 +9,18 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
 import androidx.core.content.ContextCompat
-import es.littledavity.core.database.chorbo.Chorbo
-import es.littledavity.core.database.chorbo.ChorboRepository
+import com.paulrybitskyi.hiltbinder.BindType
+import es.littledavity.domain.contacts.Contact
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.UUID
 import javax.inject.Inject
+import javax.inject.Singleton
 
-class ImageGalleryService @Inject constructor(
-    internal val context: Context,
-    internal val chorboRepository: ChorboRepository
+class ImageGalleryService constructor(
+    internal val context: Context
 ) {
 
     companion object {
@@ -77,7 +77,7 @@ class ImageGalleryService @Inject constructor(
         return file.path
     }
 
-    fun saveMediaImage(imageToSave: Bitmap, chorbo: Chorbo): String {
+    fun saveMediaImage(imageToSave: Bitmap, chorbo: Contact): String {
         val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${chorbo.name}"
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, chorbo.id)
@@ -100,7 +100,7 @@ class ImageGalleryService @Inject constructor(
         return uri.toString()
     }
 
-    fun saveMediaImage(imageToSave: Bitmap, chorbo: Chorbo, fileName: String): String {
+    fun saveMediaImage(imageToSave: Bitmap, chorbo: Contact, fileName: String): String {
         val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${chorbo.name}"
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)

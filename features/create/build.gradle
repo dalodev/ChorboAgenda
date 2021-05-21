@@ -1,5 +1,0 @@
-apply from: "$rootDir/android-dynamic-feature.gradle"
-
-dependencies {
-    implementation "com.github.debutdeveloper:countrypickerandroid:dcbbda7fda"
-}

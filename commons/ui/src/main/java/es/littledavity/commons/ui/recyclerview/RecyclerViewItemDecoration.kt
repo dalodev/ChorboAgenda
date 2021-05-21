@@ -39,13 +39,13 @@ class RecyclerViewItemDecoration(
             is GridLayoutManager -> configSpacingForGridLayoutManager(
                 outRect = outRect,
                 layoutManager = layoutManager,
-                position = parent.getChildViewHolder(view).adapterPosition,
+                position = parent.getChildViewHolder(view).absoluteAdapterPosition,
                 itemCount = state.itemCount
             )
             is LinearLayoutManager -> configSpacingForLinearLayoutManager(
                 outRect = outRect,
                 layoutManager = layoutManager,
-                position = parent.getChildViewHolder(view).adapterPosition,
+                position = parent.getChildViewHolder(view).absoluteAdapterPosition,
                 itemCount = state.itemCount
             )
         }

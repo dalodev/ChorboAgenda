@@ -25,7 +25,7 @@ class ServiceModuleTest {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         module = ServiceModule()
     }
 

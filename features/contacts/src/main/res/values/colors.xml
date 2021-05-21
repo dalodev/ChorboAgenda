@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- GamingNewsItemImageView -->
+    <color name="contacts_item_image_card_background_color">@android:color/transparent</color>
+
+    <!-- ContactsItemView -->
+    <color name="contacts_item_card_background_color">@color/colorPrimaryDark</color>
+    <color name="contacts_item_title_text_color">@color/colorPrimaryText</color>
+    <color name="contacts_item_lede_text_color">@color/colorSecondaryText</color>
+    <color name="contacts_item_publication_date_text_color">@color/colorSecondaryText</color>
+    <!-- GamingNewsView -->
+    <color name="contacts_swipe_refresh_color">@color/colorAccent</color>
+</resources>

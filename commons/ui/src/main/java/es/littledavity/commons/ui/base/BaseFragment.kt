@@ -3,55 +3,46 @@
  */
 package es.littledavity.commons.ui.base
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
-import androidx.transition.TransitionInflater
-import es.littledavity.commons.ui.R
-import es.littledavity.commons.ui.extensions.observe
-import es.littledavity.commons.ui.extensions.orFalse
-import es.littledavity.commons.ui.navigation.NavigationCommand
+import androidx.viewbinding.ViewBinding
+import com.paulrybitskyi.commons.ktx.showLongToast
+import com.paulrybitskyi.commons.ktx.showShortToast
+import es.littledavity.commons.ui.base.events.Command
+import es.littledavity.commons.ui.base.events.GeneralCommand
+import es.littledavity.commons.ui.base.navigation.Navigator
+import es.littledavity.commons.ui.base.events.Route
+import es.littledavity.commons.ui.extensions.observeIn
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
-abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
-    @LayoutRes
-    private val layoutId: Int
-) : Fragment() {
+abstract class BaseFragment<
+        VB : ViewBinding,
+        VM : BaseViewModel,
+        NA : Navigator
+        >(
+    @LayoutRes private val layoutId: Int
+) : Fragment(layoutId) {
+
+    private var isViewCreated = false
+
+    protected abstract val viewBinding: VB
+    protected abstract val viewModel: VM
 
     @Inject
-    lateinit var viewModel: M
-    var viewBinding: B? = null
-    private val binding
-        get() = viewBinding!!
+    lateinit var navigator: NA
 
     protected var enableBack = true
-
-    /**
-     * Called to initialize dagger injection dependency graph when fragment is attached.
-     */
-    abstract fun onInitDependencyInjection()
-
-    /**
-     * Called to Initialize view data binding variables when fragment view is created.
-     */
-    abstract fun onInitDataBinding()
-
-    /**
-     * Called when destroy view to clear observers and listeners.
-     */
-    abstract fun onClearView()
 
     /**
      * @return toolbar from fragment
@@ -77,25 +68,14 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
-        viewBinding?.lifecycleOwner = viewLifecycleOwner
-        sharedElementEnterTransition =
-            TransitionInflater.from(context).inflateTransition(R.transition.shared_transition)
-        sharedElementReturnTransition =
-            TransitionInflater.from(context).inflateTransition(R.transition.shared_transition)
-        return binding.root
-    }
+        return if (isViewCreated) {
+//            viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
+//            viewBinding.lifecycleOwner = viewLifecycleOwner
+            viewBinding.root
+        } else {
+            super.onCreateView(inflater, container, savedInstanceState)
+        }
 
-    /**
-     * Called when a fragment is first attached to its context.
-     *
-     * @param context The application context.
-     *
-     * @see Fragment.onAttach
-     */
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        onInitDependencyInjection()
     }
 
     /**
@@ -108,73 +88,87 @@ abstract class BaseFragment<B : ViewDataBinding, M : BaseViewModel>(
      */
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onInitDataBinding()
-        setupToolbar()
-        observe(viewModel.navigationCommands, ::onNavigate)
-    }
 
-    /**
-     * Return the [AppCompatActivity] this fragment is currently associated with.
-     *
-     * @throws IllegalStateException if not currently associated with an activity or if associated
-     * only with a context.
-     * @throws TypeCastException if the currently associated activity don't extend [AppCompatActivity].
-     *
-     * @see requireActivity
-     */
-    fun requireCompatActivity(): AppCompatActivity {
-        requireActivity()
-        val activity = requireActivity()
-        if (activity is AppCompatActivity) {
-            return activity
-        } else {
-            throw TypeCastException("Main activity should extend from 'AppCompatActivity'")
+        val wasViewCreated = isViewCreated
+        isViewCreated = true
+
+        if (!wasViewCreated) {
+            onPreInit()
+            onInit()
+            onPostInit()
+        }
+
+        onBindViewModel()
+
+        if (!wasViewCreated) {
+            savedInstanceState?.let(::onRestoreState)
         }
     }
+
+    @CallSuper
+    protected open fun onPreInit() = Unit // Stub
+
+
+    @CallSuper
+    protected open fun onInit() = Unit // Stub
+
+    @CallSuper
+    protected open fun onPostInit() {
+        loadData()
+    }
+
+    private fun loadData() {
+        lifecycleScope.launchWhenResumed {
+            onLoadData()
+        }
+    }
+
+    protected open fun onLoadData() = Unit // Stub
+
+    @CallSuper
+    protected open fun onBindViewModel() {
+        bindViewModelCommands()
+        bindViewModelRoutes()
+    }
+
+    private fun bindViewModelCommands() {
+        viewModel.commandFlow
+            .onEach(::onHandleCommand)
+            .observeIn(this)
+    }
+
+
+    private fun bindViewModelRoutes() {
+        viewModel.routeFlow
+            .onEach(::onRoute)
+            .observeIn(this)
+    }
+
+    @CallSuper
+    protected open fun onHandleCommand(command: Command) {
+        when (command) {
+            is GeneralCommand.ShowShortToast -> showShortToast(command.message)
+            is GeneralCommand.ShowLongToast -> showLongToast(command.message)
+        }
+    }
+
+    @CallSuper
+    protected open fun onRoute(route: Route) = Unit // Stub
+
+    @CallSuper
+    protected open fun onRestoreState(state: Bundle) = Unit // Stub
+
+    final override fun onSaveInstanceState(state: Bundle) {
+        onSaveState(state)
+        super.onSaveInstanceState(state)
+    }
+
+    @CallSuper
+    protected open fun onSaveState(state: Bundle) = Unit // Stub
 
     override fun onDestroy() {
         super.onDestroy()
-        viewBinding = null
+        isViewCreated = false
         viewModel.viewModelScope.cancel()
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        onClearView()
-        viewBinding = null
-    }
-
-    private fun setupToolbar() {
-        (activity as? BaseActivity<*>)?.apply {
-            toolbar()?.let {
-                supportActionBar?.hide()
-                setSupportActionBar(it)
-                it.setupWithNavController(findNavController())
-            } ?: run {
-                setSupportActionBar(activityToolbar)
-                supportActionBar?.show()
-                activityToolbar?.setupWithNavController(findNavController())
-            }
-            supportActionBar?.setDisplayShowTitleEnabled(false)
-            supportActionBar?.setDisplayHomeAsUpEnabled(enableBack)
-            supportActionBar?.setDisplayShowHomeEnabled(false)
-        }
-    }
-
-    private fun onNavigate(command: NavigationCommand) {
-        when (command) {
-            is NavigationCommand.To ->
-                command.extras?.let { findNavController().navigate(command.directions, it) }
-                    ?: findNavController().navigate(command.directions)
-            is NavigationCommand.BackTo -> findNavController().popBackStack(
-                command.destinationId,
-                false
-            )
-            is NavigationCommand.Back -> findNavController().popBackStack()
-            is NavigationCommand.ToRoot -> findNavController().popBackStack(
-                R.id.chorbo_list_fragment,
-                false
-            )
-        }
     }
 }

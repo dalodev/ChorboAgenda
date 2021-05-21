@@ -1,0 +1,80 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <!-- Base application theme. -->
+    <style name="ChorboagendaTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorPrimary</item>
+        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:navigationBarColor">@color/colorNavigationBar</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/shared_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/shared_transition</item>
+        <!-- specify enter and exit transitions -->
+        <!-- options are: explode, slide, fade -->
+        <item name="android:windowEnterTransition">@transition/change_image_transform</item>
+        <item name="android:windowExitTransition">@transition/change_image_transform</item>
+    </style>
+
+    <style name="Chorboagenda"/>
+
+    <style name="ChorboagendaTheme.BackgroundStyle">
+        <item name="android:background">@color/colorPrimaryLight</item>
+    </style>
+
+    <style name="ChorboagendaTheme.SurfaceStyle">
+        <item name="android:foreground">?android:attr/selectableItemBackground</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="ChorboagendaTheme.FloatingActionButton" parent="@style/Widget.MaterialComponents.FloatingActionButton">
+        <item name="tint">@color/colorPrimary</item>
+        <item name="backgroundTint">@color/colorAccent</item>
+    </style>
+
+    <!--Text appearances-->
+    <style name="TextAppearance.Title" parent="@style/TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/textHeadline</item>
+    </style>
+
+    <style name="TextAppearance.CardTitle" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/textBody</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="TextAppearance.Body" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/textBody</item>
+    </style>
+
+    <!--Button Style-->
+    <style name="Button.Accent" parent="@style/TextAppearance.MaterialComponents.Body1">
+        <item name="android:textColor">@color/textBody</item>
+        <item name="android:background">@color/colorAccent</item>
+    </style>
+
+    <style name="ChorboagendaTheme.Toolbar">
+        <item name="android:background">@color/toolbar_background_color</item>
+        <item name="toolbar_titleTextColor">@color/toolbar_title_text_color</item>
+        <item name="toolbar_buttonIconColor">@color/toolbar_button_icon_color</item>
+        <item name="toolbar_titleTextSize">@dimen/toolbar_title_text_size</item>
+        <item name="toolbar_titleTextGravity">left</item>
+    </style>
+
+    <style name="ChorboagendaTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
+        <item name="labelVisibilityMode">labeled</item>
+        <item name="itemTextAppearanceInactive">@style/ChorboagendaTheme.BottomNavigationView.TextAppearance</item>
+        <item name="itemTextAppearanceActive">@style/ChorboagendaTheme.BottomNavigationView.TextAppearance</item>
+    </style>
+
+    <style name="ChorboagendaTheme.BottomNavigationView.TextAppearance" parent="@style/TextAppearance.AppCompat.Caption">
+        <item name="android:textSize">@dimen/bottom_navigation_item_text_size</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+</resources>

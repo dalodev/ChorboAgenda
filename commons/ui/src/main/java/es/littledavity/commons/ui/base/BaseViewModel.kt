@@ -4,23 +4,28 @@
 package es.littledavity.commons.ui.base
 
 import androidx.lifecycle.ViewModel
-import androidx.navigation.NavDirections
-import androidx.navigation.fragment.FragmentNavigator
-import es.littledavity.commons.ui.livedata.SingleLiveData
-import es.littledavity.commons.ui.navigation.NavigationCommand
+import es.littledavity.commons.ui.base.events.Command
+import es.littledavity.commons.ui.base.events.Route
+import es.littledavity.core.markers.Loggable
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.receiveAsFlow
 
-abstract class BaseViewModel : ViewModel() {
+abstract class BaseViewModel : ViewModel(), Loggable {
 
-    val navigationCommands = SingleLiveData<NavigationCommand>()
+    override val logTag: String = javaClass.simpleName
 
-    fun navigate(directions: NavDirections, extras: FragmentNavigator.Extras? = null) {
-        navigationCommands.postValue(NavigationCommand.To(directions, extras))
+    private val _commandChannel = Channel<Command>(Channel.BUFFERED)
+    private val _routeChannel = Channel<Route>(Channel.BUFFERED)
+
+    val commandFlow: Flow<Command> =_commandChannel.receiveAsFlow()
+    val routeFlow: Flow<Route> = _routeChannel.receiveAsFlow()
+
+    protected fun dispatchCommand(command: Command) {
+        _commandChannel.offer(command)
     }
 
-    fun backTo(destinationId: Int) =
-        navigationCommands.postValue(NavigationCommand.BackTo(destinationId))
-
-    fun back() = navigationCommands.postValue(NavigationCommand.Back)
-
-    fun toRoot() = navigationCommands.postValue(NavigationCommand.ToRoot)
+    protected fun route(route: Route) {
+        _routeChannel.offer(route)
+    }
 }

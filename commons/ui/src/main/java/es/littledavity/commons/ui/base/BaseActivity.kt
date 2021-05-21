@@ -1,20 +1,31 @@
 package es.littledavity.commons.ui.base
 
 import android.os.Bundle
-import androidx.annotation.LayoutRes
+import androidx.annotation.CallSuper
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
-import androidx.databinding.DataBindingUtil
-import androidx.databinding.ViewDataBinding
+import androidx.lifecycle.lifecycleScope
+import androidx.viewbinding.ViewBinding
+import com.paulrybitskyi.commons.ktx.showLongToast
+import com.paulrybitskyi.commons.ktx.showShortToast
+import es.littledavity.commons.ui.base.events.Command
+import es.littledavity.commons.ui.base.events.GeneralCommand
+import es.littledavity.commons.ui.base.navigation.Navigator
+import es.littledavity.commons.ui.base.events.Route
+import es.littledavity.commons.ui.extensions.observeIn
+import kotlinx.coroutines.flow.onEach
+import javax.inject.Inject
 
-abstract class BaseActivity<B : ViewDataBinding>(
-    @LayoutRes
-    private val layoutId: Int
-) : AppCompatActivity() {
+abstract class BaseActivity<
+        VB : ViewBinding,
+        VM : BaseViewModel,
+        NA : Navigator
+        > : AppCompatActivity() {
 
-    var viewBinding: B? = null
-    private val binding
-        get() = viewBinding!!
+    protected abstract val viewBinding: VB
+    protected abstract val viewModel: VM
+
+    @Inject lateinit var navigator: NA
 
     var activityToolbar: Toolbar? = null
 
@@ -28,18 +39,77 @@ abstract class BaseActivity<B : ViewDataBinding>(
      * @see AppCompatActivity.onCreate
      */
     override fun onCreate(savedInstanceState: Bundle?) {
+        onPreInit()
         super.onCreate(savedInstanceState)
-        viewBinding = DataBindingUtil.setContentView(this, layoutId)
+        setContentView(viewBinding.root)
+        onInit()
+        onPostInit()
     }
 
-    protected fun setupToolbar(toolbar: Toolbar?) {
-        activityToolbar = toolbar
-        setSupportActionBar(activityToolbar)
+    @CallSuper
+    protected open fun onPreInit() = Unit // Stub
+
+    @CallSuper
+    protected open fun onInit() {
+        onBindViewModel()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        viewBinding = null
+    @CallSuper
+    protected open fun onBindViewModel() {
+        bindViewModelCommands()
+        bindViewModelRoutes()
     }
 
+    private fun bindViewModelCommands() {
+        viewModel.commandFlow
+            .onEach(::onHandleCommand)
+            .observeIn(this)
+    }
+
+    private fun bindViewModelRoutes() {
+        viewModel.routeFlow
+            .onEach(::onRoute)
+            .observeIn(this)
+    }
+
+    @CallSuper
+    protected open fun onPostInit() {
+        loadData()
+    }
+
+    private fun loadData() {
+        lifecycleScope.launchWhenResumed {
+            onLoadData()
+        }
+    }
+
+    protected open fun onLoadData() = Unit // Stub
+
+    @CallSuper
+    protected open fun onHandleCommand(command: Command) {
+        when (command) {
+            is GeneralCommand.ShowShortToast -> showShortToast(command.message)
+            is GeneralCommand.ShowLongToast -> showLongToast(command.message)
+        }
+    }
+
+    @CallSuper
+    protected open fun onRoute(route: Route) = Unit // Stub
+
+    final override fun onRestoreInstanceState(state: Bundle) {
+        super.onRestoreInstanceState(state)
+
+        onRestoreState(state)
+    }
+
+    @CallSuper
+    protected open fun onRestoreState(state: Bundle) = Unit // Stub
+
+    final override fun onSaveInstanceState(state: Bundle) {
+        onSaveState(state)
+        super.onSaveInstanceState(state)
+    }
+
+    @CallSuper
+    protected open fun onSaveState(state: Bundle) = Unit // Stub
 }

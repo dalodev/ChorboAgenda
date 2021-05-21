@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="dashboard_toolbar_title">Dashboard</string>
+    <string name="dashboard_bottom_navigation_item_contacts">Contacts</string>
+
+</resources>

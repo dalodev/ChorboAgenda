@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- SearchToolbar -->
+    <dimen name="search_toolbar_query_input_horizontal_margin">16dp</dimen>
+    <dimen name="search_toolbar_query_input_text_size">20sp</dimen>
+
+    <!-- ContactImageView -->
+    <dimen name="contact_image_card_elevation">2dp</dimen>
+    <dimen name="contact_image_card_corner_radius">4dp</dimen>
+    <dimen name="contact_image_title_horizontal_padding">16dp</dimen>
+    <dimen name="contact_image_title_text_size">14sp</dimen>
+
+    <!-- ContactView -->
+    <dimen name="contact_card_elevation">2dp</dimen>
+    <dimen name="contact_padding">15dp</dimen>
+    <dimen name="contact_cover_width">81dp</dimen>
+    <dimen name="contact_cover_height">110dp</dimen>
+    <dimen name="contact_name_margin_left">12dp</dimen>
+    <dimen name="contact_name_text_size">16sp</dimen>
+    <dimen name="contact_details_margin_top">10dp</dimen>
+    <dimen name="contact_details_margin_start">12dp</dimen>
+    <dimen name="contact_details_text_size">14sp</dimen>
+
+    <!-- ContactsView -->
+    <dimen name="contacts_decorator_spacing">15dp</dimen>
+    <dimen name="contacts_info_view_horizontal_margin">30dp</dimen>
+    <dimen name="contacts_info_view_title_text_size">17sp</dimen>
+
+
+</resources>

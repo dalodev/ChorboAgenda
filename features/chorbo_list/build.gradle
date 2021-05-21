@@ -1,5 +1,0 @@
-apply from: "$rootDir/android-dynamic-feature.gradle"
-
-dependencies {
-    implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
-}
