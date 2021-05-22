@@ -37,6 +37,8 @@ allprojects {
         maven { setUrl("https://jitpack.io") }
     }
     plugins.apply(BuildPlugins.SPOTLESS)
+    plugins.apply(BuildPlugins.DETEKT)
+    plugins.apply(BuildPlugins.KTLINT)
 
     // Without the below block, a build failure was happening when
     // running ./gradlew connectedAndroidTest.

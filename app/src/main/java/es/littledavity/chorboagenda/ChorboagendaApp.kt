@@ -21,10 +21,6 @@ internal class ChorboagendaApp : Application() {
         initTimber()
     }
 
-    // ============================================================================================
-    //  Private init methods
-    // ============================================================================================
-
     /**
      * Initialize log library Timber only on debug build.
      */

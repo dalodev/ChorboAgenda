@@ -18,11 +18,8 @@ internal class StringProviderImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : StringProvider {
 
-    override fun getString(id: Int, vararg args: Any): String {
-        return context.getString(id, *args)
-    }
+    override fun getString(id: Int, vararg args: Any) = context.getString(id, *args)
 
-    override fun getQuantityString(id: Int, quantity: Int, vararg formatArgs: Any): String {
-        return context.resources.getQuantityString(id, quantity, *formatArgs)
-    }
+    override fun getQuantityString(id: Int, quantity: Int, vararg formatArgs: Any) =
+        context.resources.getQuantityString(id, quantity, *formatArgs)
 }

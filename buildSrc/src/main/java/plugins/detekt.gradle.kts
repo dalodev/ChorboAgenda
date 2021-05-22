@@ -9,9 +9,10 @@ import io.gitlab.arturbosch.detekt.extensions.DetektExtension
 apply<DetektPlugin>()
 
 configure<DetektExtension> {
+    toolVersion = "1.17.1"
     input = project.files("src/main/kotlin")
     config = files("$rootDir/.detekt/config.yml")
-    filters = ".*build.*,.*/resources/.*,.*/tmp/.*"
+    buildUponDefaultConfig = true
     reports {
         xml {
             enabled = true

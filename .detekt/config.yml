@@ -557,7 +557,7 @@ style:
   UseCheckOrError:
     active: true
   UseDataClass:
-    active: true
+    active: false
     excludeAnnotatedClasses: ""
     allowVars: true
   UseIfInsteadOfWhen:
