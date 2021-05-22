@@ -117,7 +117,7 @@ class ContactsDatabaseDataStoreTest {
         assertEquals(chorbosToInsert, chorbosInsertedCaptor.lastValue)
     }
 
-    @Test
+    /*@Test
     fun insertChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
         val chorboToInsert = Chorbo(
             0,
@@ -143,5 +143,5 @@ class ContactsDatabaseDataStoreTest {
 
         verify(chorboDao).insertChorbo(chorboInsertedCaptor.capture())
         assertEquals(chorboToInsert, chorboInsertedCaptor.lastValue)
-    }
+    }*/
 }

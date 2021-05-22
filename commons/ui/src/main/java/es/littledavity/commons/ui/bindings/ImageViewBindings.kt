@@ -73,10 +73,10 @@ fun ImageView.imageFile(
     }
 }
 
-@BindingAdapter("app:srcVector")
+/*@BindingAdapter("app:srcVector")
 fun ImageView.setSrcVector(@DrawableRes drawable: Int) {
     this.setImageResource(drawable)
-}
+}*/
 
 
 /**

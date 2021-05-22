@@ -50,6 +50,4 @@ fun View.cancelActiveAnimations() {
     animate().cancel()
 }
 
-fun String?.orEmpty(): String {
-    return this ?: ""
-}
+fun String?.orEmpty() = this ?: ""

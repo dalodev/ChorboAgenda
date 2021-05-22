@@ -23,15 +23,10 @@ internal object DatabaseModule {
     @Singleton
     fun provideChorboagendaDatabase(
         @ApplicationContext context: Context
-    ): ChorboagendaDatabase {
-        return Room.databaseBuilder(
-            context,
-            ChorboagendaDatabase::class.java,
-            Constants.DATABASE_NAME
-        )
-            .addMigrations(*MIGRATIONS)
-            .build()
-    }
-
+    ) = Room.databaseBuilder(
+        context,
+        ChorboagendaDatabase::class.java,
+        Constants.DATABASE_NAME
+    ).addMigrations(*MIGRATIONS).build()
 
 }

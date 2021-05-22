@@ -4,8 +4,6 @@
 package es.littledavity.data.commons.di
 
 import android.content.Context
-import androidx.datastore.core.DataStore
-import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.preferencesDataStore
 import dagger.Module
 import dagger.Provides
@@ -21,7 +19,5 @@ private val Context.contactsPreferences by preferencesDataStore(Constants.CONTAC
 internal object CoreModule {
 
     @Provides
-    fun provideContactsPreferences(@ApplicationContext context: Context): DataStore<Preferences> {
-        return context.contactsPreferences
-    }
+    fun provideContactsPreferences(@ApplicationContext context: Context) = context.contactsPreferences
 }

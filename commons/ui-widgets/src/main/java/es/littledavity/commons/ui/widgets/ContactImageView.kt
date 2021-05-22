@@ -38,11 +38,13 @@ class ContactImageView @JvmOverloads constructor(
         }
 
     var title: CharSequence
-        set(value) { titleTv.text = value }
+        set(value) {
+            titleTv.text = value
+        }
         get() = titleTv.text
 
     var imageUrl by observeChanges<String?>(null) { oldValue, newValue ->
-        if((coverIv.drawable == null) || (oldValue != newValue)) loadImage(newValue)
+        if (coverIv.drawable == null || oldValue != newValue) loadImage(newValue)
     }
 
     private var defaultDrawable = checkNotNull(getDrawable(android.R.drawable.screen_background_dark))
@@ -91,7 +93,7 @@ class ContactImageView @JvmOverloads constructor(
     }
 
     private fun loadImage(url: String?) {
-        if(url == null) {
+        if (url == null) {
             showDefaultImage()
             return
         }
@@ -130,13 +132,13 @@ class ContactImageView @JvmOverloads constructor(
     }
 
     private fun showTitle() {
-        if(!isTitleVisible) return
+        if (!isTitleVisible) return
 
         titleTv.isVisible = true
     }
 
     private fun hideTitle() {
-        if(!isTitleVisible) return
+        if (!isTitleVisible) return
 
         titleTv.isVisible = false
     }

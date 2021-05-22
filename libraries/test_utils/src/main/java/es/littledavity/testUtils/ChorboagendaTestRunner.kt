@@ -3,6 +3,7 @@
  */
 package es.littledavity.testUtils
 
+import android.app.Application
 import android.content.Context
 import androidx.test.runner.AndroidJUnitRunner
 import dagger.hilt.android.testing.HiltTestApplication
@@ -13,7 +14,7 @@ class ChorboagendaTestRunner : AndroidJUnitRunner() {
         classLoader: ClassLoader,
         className: String,
         context: Context
-    ) = super.newApplication(
+    ): Application = super.newApplication(
         classLoader,
         HiltTestApplication::class.java.name,
         context

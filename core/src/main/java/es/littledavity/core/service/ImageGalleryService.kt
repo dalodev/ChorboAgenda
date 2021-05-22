@@ -8,19 +8,17 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
 import androidx.core.content.ContextCompat
-import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.domain.contacts.Contact
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.UUID
-import javax.inject.Inject
-import javax.inject.Singleton
 
 class ImageGalleryService constructor(
     internal val context: Context
@@ -52,7 +50,7 @@ class ImageGalleryService constructor(
         val primaryExternalStorage =
             externalStorageVolumes[0]?.path
                 ?: externalStorageVolumes[1].path
-                ?: throw IllegalStateException()
+                ?: error("Storage volumes not found ")
 
         val dirName = "$primaryExternalStorage/chorboagenda"
 
@@ -85,7 +83,9 @@ class ImageGalleryService constructor(
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, chorbo.id)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            put(MediaStore.MediaColumns.RELATIVE_PATH, relativeLocation)
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                put(MediaStore.MediaColumns.RELATIVE_PATH, relativeLocation)
+            }
         }
         val resolver = context.contentResolver
 

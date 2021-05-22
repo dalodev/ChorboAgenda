@@ -23,9 +23,7 @@ internal class ContactItem(model: ContactModel) : AbstractItem<
         inflater: LayoutInflater,
         parent: ViewGroup,
         dependencies: NoDependencies
-    ): ViewHolder {
-        return ViewHolder(ContactView(parent.context))
-    }
+    ) = ViewHolder(ContactView(parent.context))
 
     override fun performBinding(viewHolder: ViewHolder, dependencies: NoDependencies) {
         viewHolder.bind(model)

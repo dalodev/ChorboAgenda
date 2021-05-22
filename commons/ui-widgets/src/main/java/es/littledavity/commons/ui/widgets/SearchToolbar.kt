@@ -36,21 +36,29 @@ class SearchToolbar @JvmOverloads constructor(
     private lateinit var clearBtnValueAnimator: ValueAnimator
 
     private var isClearButtonVisible: Boolean
-        set(value) { binding.clearBtnContainer.isVisible = value }
+        set(value) {
+            binding.clearBtnContainer.isVisible = value
+        }
         get() = binding.clearBtnContainer.isVisible
 
     private var isSearchQueryEmpty = true
 
     var inputType: Int
-        set(value) { binding.queryInputEt.inputType = value }
+        set(value) {
+            binding.queryInputEt.inputType = value
+        }
         get() = binding.queryInputEt.inputType
 
     var hintText: CharSequence
-        set(value) { binding.queryInputEt.hint = value }
+        set(value) {
+            binding.queryInputEt.hint = value
+        }
         get() = binding.queryInputEt.hint
 
     var searchQuery: CharSequence
-        set(value) { binding.queryInputEt.setText(value) }
+        set(value) {
+            binding.queryInputEt.setText(value)
+        }
         get() = binding.queryInputEt.text
 
     var onQueryChanged: ((String) -> Unit)? = null
@@ -71,7 +79,7 @@ class SearchToolbar @JvmOverloads constructor(
     }
 
     private fun initQueryInput() {
-        if(isSearchQueryEmpty) {
+        if (isSearchQueryEmpty) {
             hideClearButton(false)
         } else {
             showClearButton(false)
@@ -85,7 +93,7 @@ class SearchToolbar @JvmOverloads constructor(
     private fun initQueryInputMargins() = with(binding.queryInputEt) {
         val buttonContainerSize = getDimensionPixelSize(R.dimen.toolbar_button_container_size)
         val horizontalMargin = getDimensionPixelSize(R.dimen.search_toolbar_query_input_horizontal_margin)
-        val totalHorizontalMargin = (buttonContainerSize + horizontalMargin)
+        val totalHorizontalMargin = buttonContainerSize + horizontalMargin
 
         startMargin = totalHorizontalMargin
         endMargin = totalHorizontalMargin
@@ -93,13 +101,13 @@ class SearchToolbar @JvmOverloads constructor(
 
     private fun initQueryInputTextWatcher() = with(binding) {
         queryInputEt.onTextChanged { query ->
-            if(query.isNotEmpty()) {
-                if(isSearchQueryEmpty) {
+            if (query.isNotEmpty()) {
+                if (isSearchQueryEmpty) {
                     isSearchQueryEmpty = false
                     showClearButton(true)
                 }
             } else {
-                if(!isSearchQueryEmpty) {
+                if (!isSearchQueryEmpty) {
                     isSearchQueryEmpty = true
                     hideClearButton(true)
                 }
@@ -111,11 +119,10 @@ class SearchToolbar @JvmOverloads constructor(
 
     private fun initQueryInputActionListener() {
         binding.queryInputEt.setOnEditorActionListener { _, actionId, _ ->
-            if((actionId == EditorInfo.IME_ACTION_SEARCH) && searchQuery.isNotBlank()) {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH && searchQuery.isNotBlank()) {
                 hideKeyboard()
                 onSearchActionRequested?.invoke(searchQuery.toString())
             }
-
             true
         }
     }
@@ -130,15 +137,12 @@ class SearchToolbar @JvmOverloads constructor(
         clearBtnValueAnimator = initClearButtonValueAnimator()
     }
 
-    private fun initClearButtonValueAnimator(): ValueAnimator {
-        return ValueAnimator.ofFloat().apply {
-            addUpdateListener {
-                binding.clearBtnContainer.setScale(it.animatedValue as Float)
-            }
-
-            interpolator = LinearInterpolator()
-            duration = 100L
+    private fun initClearButtonValueAnimator() = ValueAnimator.ofFloat().apply {
+        addUpdateListener {
+            binding.clearBtnContainer.setScale(it.animatedValue as Float)
         }
+        interpolator = LinearInterpolator()
+        duration = 100L
     }
 
     private fun initDefaults() {
@@ -151,7 +155,7 @@ class SearchToolbar @JvmOverloads constructor(
     }
 
     private fun showClearButton(animate: Boolean) {
-        if(animate) {
+        if (animate) {
             clearBtnValueAnimator.cancel()
             clearBtnValueAnimator.removeAllListeners()
 
@@ -165,7 +169,7 @@ class SearchToolbar @JvmOverloads constructor(
     }
 
     private fun hideClearButton(animate: Boolean) {
-        if(animate) {
+        if (animate) {
             clearBtnValueAnimator.cancel()
             clearBtnValueAnimator.removeAllListeners()
             clearBtnValueAnimator.doOnEnd { isClearButtonVisible = false }

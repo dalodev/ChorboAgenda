@@ -8,7 +8,6 @@ import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.core.providers.DispatcherProvider
 import es.littledavity.data.commons.Pagination
 import es.littledavity.data.contacts.datastores.ContactsLocalDataStore
-import es.littledavity.data.contacts.entities.Contact
 import es.littledavity.database.chorbo.DatabaseChorbo
 import es.littledavity.database.chorbo.entities.Chorbo
 import es.littledavity.database.chorbo.tables.ChorboDao
@@ -31,30 +30,24 @@ internal class ContactsDatabaseDataStore @Inject constructor(
     override suspend fun searchGames(
         searchQuery: String,
         pagination: Pagination
-    ): List<Contact> {
-        return chorboDao.searchContacts(
-            searchQuery = searchQuery,
-            offset = pagination.offset,
-            limit = pagination.limit
-        ).let { contacts ->
-            withContext(dispatcherProvider.computation) {
-                chorboMapper.mapToDataContact(contacts)
-            }
+    ) = chorboDao.searchContacts(
+        searchQuery = searchQuery,
+        offset = pagination.offset,
+        limit = pagination.limit
+    ).let { contacts ->
+        withContext(dispatcherProvider.computation) {
+            chorboMapper.mapToDataContact(contacts)
         }
     }
 
-    override suspend fun observeContacts(pagination: Pagination): Flow<List<Contact>> {
-        return chorboDao.observeLikedGames(
-            offset = pagination.offset,
-            limit = pagination.limit
-        ).toDataGamesFlow()
-    }
+    override suspend fun observeContacts(pagination: Pagination) = chorboDao.observeLikedGames(
+        offset = pagination.offset,
+        limit = pagination.limit
+    ).toDataGamesFlow()
 
-    private fun Flow<List<DatabaseChorbo>>.toDataGamesFlow(): Flow<List<Contact>> {
-        return distinctUntilChanged()
-            .map(chorboMapper::mapToDataContact)
-            .flowOn(dispatcherProvider.computation)
-    }
+    private fun Flow<List<DatabaseChorbo>>.toDataGamesFlow() = distinctUntilChanged()
+        .map(chorboMapper::mapToDataContact)
+        .flowOn(dispatcherProvider.computation)
 
     /**
      * Obtain all database added chorbo ordering by name field.
@@ -136,7 +129,7 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      * @param id Chorbo identifier.
      * @param name Chorbo name.
      */
-    suspend fun insertChorbo(
+    /*suspend fun insertChorbo(
         id: Int,
         name: String,
         image: String,
@@ -157,7 +150,7 @@ internal class ContactsDatabaseDataStore @Inject constructor(
             instagram = instagram
         )
         chorboDao.insertChorbo(chorbo)
-    }
+    }*/
 
     /**
      * Add to database a chrobo.

@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.Toolbar
-import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
@@ -67,15 +66,12 @@ abstract class BaseFragment<
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        return if (isViewCreated) {
+    ) = if (isViewCreated) {
 //            viewBinding = DataBindingUtil.inflate(inflater, layoutId, container, false)
 //            viewBinding.lifecycleOwner = viewLifecycleOwner
-            viewBinding.root
-        } else {
-            super.onCreateView(inflater, container, savedInstanceState)
-        }
-
+        viewBinding.root
+    } else {
+        super.onCreateView(inflater, container, savedInstanceState)
     }
 
     /**
@@ -106,11 +102,15 @@ abstract class BaseFragment<
     }
 
     @CallSuper
-    protected open fun onPreInit() = Unit // Stub
+    protected open fun onPreInit() {
+        // Stub
+    }
 
 
     @CallSuper
-    protected open fun onInit() = Unit // Stub
+    protected open fun onInit() {
+        // Stub
+    }
 
     @CallSuper
     protected open fun onPostInit() {
@@ -123,7 +123,9 @@ abstract class BaseFragment<
         }
     }
 
-    protected open fun onLoadData() = Unit // Stub
+    protected open fun onLoadData() {
+        // Stub
+    }
 
     @CallSuper
     protected open fun onBindViewModel() {
@@ -153,10 +155,14 @@ abstract class BaseFragment<
     }
 
     @CallSuper
-    protected open fun onRoute(route: Route) = Unit // Stub
+    protected open fun onRoute(route: Route) {
+        // Stub
+    }
 
     @CallSuper
-    protected open fun onRestoreState(state: Bundle) = Unit // Stub
+    protected open fun onRestoreState(state: Bundle) {
+        // Stub
+    }
 
     final override fun onSaveInstanceState(state: Bundle) {
         onSaveState(state)
@@ -164,7 +170,9 @@ abstract class BaseFragment<
     }
 
     @CallSuper
-    protected open fun onSaveState(state: Bundle) = Unit // Stub
+    protected open fun onSaveState(state: Bundle) {
+        // Stub
+    }
 
     override fun onDestroy() {
         super.onDestroy()

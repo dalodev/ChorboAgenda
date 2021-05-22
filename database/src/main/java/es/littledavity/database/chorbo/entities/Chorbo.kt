@@ -5,7 +5,6 @@ package es.littledavity.database.chorbo.entities
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.PrimaryKey
 
 /**
  * Entity represents when a user adds a Chorbo, containing the different

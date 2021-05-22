@@ -5,7 +5,6 @@ package es.littledavity.data.contacts.datastores
 
 import es.littledavity.data.commons.Pagination
 import es.littledavity.data.contacts.DataContact
-import es.littledavity.data.contacts.entities.Contact
 import kotlinx.coroutines.flow.Flow
 
 interface ContactsLocalDataStore {

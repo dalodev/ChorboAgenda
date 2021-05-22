@@ -40,9 +40,9 @@ object ImageUtils {
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
     }
 
-    fun getDecodedBitmap(imageByteArray: ByteArray): Bitmap {
-        return BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.size)
-    }
+    fun getDecodedBitmap(
+        imageByteArray: ByteArray
+    ): Bitmap = BitmapFactory.decodeByteArray(imageByteArray, 0, imageByteArray.size)
 
     fun encodeImage(context: Context?, imageUri: Uri): String {
         val imageStream = context?.contentResolver?.openInputStream(imageUri)
@@ -81,7 +81,7 @@ object ImageUtils {
         }
         Timber.i("selectedImage: $selectedImage!!")
 
-        selectedImage?.let {
+        bm = selectedImage?.let {
             bm = getImageResized(context, selectedImage)
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 val rotation = getRotation(context, selectedImage, isCamera)

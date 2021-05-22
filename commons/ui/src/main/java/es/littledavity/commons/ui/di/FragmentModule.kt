@@ -4,7 +4,6 @@
 package es.littledavity.commons.ui.di
 
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,7 +15,5 @@ import com.paulrybitskyi.commons.navigation.navController
 internal object FragmentModule {
 
     @Provides
-    fun provideNavController(fragment: Fragment): NavController {
-        return fragment.navController
-    }
+    fun provideNavController(fragment: Fragment) = fragment.navController
 }

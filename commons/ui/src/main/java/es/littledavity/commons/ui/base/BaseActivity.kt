@@ -28,7 +28,8 @@ abstract class BaseActivity<
     protected abstract val viewBinding: VB
     protected abstract val viewModel: VM
 
-    @Inject lateinit var navigator: NA
+    @Inject
+    lateinit var navigator: NA
 
     var activityToolbar: Toolbar? = null
 
@@ -50,7 +51,9 @@ abstract class BaseActivity<
     }
 
     @CallSuper
-    protected open fun onPreInit() = Unit // Stub
+    protected open fun onPreInit() {
+        // Stub
+    }
 
     @CallSuper
     protected open fun onInit() {
@@ -86,7 +89,9 @@ abstract class BaseActivity<
         }
     }
 
-    protected open fun onLoadData() = Unit // Stub
+    protected open fun onLoadData() {
+        // Stub
+    }
 
     @CallSuper
     protected open fun onHandleCommand(command: Command) {
@@ -97,7 +102,9 @@ abstract class BaseActivity<
     }
 
     @CallSuper
-    protected open fun onRoute(route: Route) = Unit // Stub
+    protected open fun onRoute(route: Route) {
+        // Stub
+    }
 
     final override fun onRestoreInstanceState(state: Bundle) {
         super.onRestoreInstanceState(state)
@@ -106,7 +113,9 @@ abstract class BaseActivity<
     }
 
     @CallSuper
-    protected open fun onRestoreState(state: Bundle) = Unit // Stub
+    protected open fun onRestoreState(state: Bundle) {
+        // Stub
+    }
 
     final override fun onSaveInstanceState(state: Bundle) {
         onSaveState(state)
@@ -114,5 +123,7 @@ abstract class BaseActivity<
     }
 
     @CallSuper
-    protected open fun onSaveState(state: Bundle) = Unit // Stub
+    protected open fun onSaveState(state: Bundle) {
+        // Stub
+    }
 }

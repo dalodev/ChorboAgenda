@@ -10,7 +10,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.coroutineScope
 import androidx.lifecycle.flowWithLifecycle
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.launchIn
 
@@ -53,12 +52,7 @@ fun <T> LifecycleOwner.observe(
     )
 }
 
-fun <T> Flow<T>.observeIn(lifecycleOwner: LifecycleOwner): Job {
-    return flowWithLifecycle(lifecycleOwner.lifecycle)
-        .launchIn(lifecycleOwner.lifecycle.coroutineScope)
-}
+fun <T> Flow<T>.observeIn(lifecycleOwner: LifecycleOwner) = flowWithLifecycle(lifecycleOwner.lifecycle)
+    .launchIn(lifecycleOwner.lifecycle.coroutineScope)
 
-
-fun <T> Flow<T>.observeIn(fragment: Fragment): Job {
-    return observeIn(fragment.viewLifecycleOwner)
-}
+fun <T> Flow<T>.observeIn(fragment: Fragment) = observeIn(fragment.viewLifecycleOwner)

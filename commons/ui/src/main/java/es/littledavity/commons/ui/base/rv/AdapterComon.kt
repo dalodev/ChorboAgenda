@@ -32,9 +32,9 @@ interface HasListeners
 
 interface ItemDependencies
 
-object NoDependencies: ItemDependencies
+object NoDependencies : ItemDependencies
 
-interface Item<Model: Any, Dependencies: ItemDependencies> : ViewHolderFactory, Bindable {
+interface Item<Model : Any, Dependencies : ItemDependencies> : ViewHolderFactory, Bindable {
 
     val model: Model
 
@@ -43,9 +43,9 @@ interface Item<Model: Any, Dependencies: ItemDependencies> : ViewHolderFactory, 
 }
 
 abstract class AbstractItem<
-        Model: Any,
-        ViewHolder: RecyclerView.ViewHolder,
-        Dependencies: ItemDependencies
+        Model : Any,
+        ViewHolder : RecyclerView.ViewHolder,
+        Dependencies : ItemDependencies
         >(final override val model: Model) : Item<Model, Dependencies> {
 
     @Suppress("unchecked_cast")
@@ -53,40 +53,32 @@ abstract class AbstractItem<
         inflater: LayoutInflater,
         parent: ViewGroup,
         dependencies: ItemDependencies
-    ) : RecyclerView.ViewHolder {
-        return createViewHolder(
-            inflater = inflater,
-            parent = parent,
-            dependencies = (dependencies as Dependencies)
-        )
-    }
+    ) = createViewHolder(
+        inflater = inflater,
+        parent = parent,
+        dependencies = dependencies as Dependencies
+    )
 
     protected abstract fun createViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         dependencies: Dependencies
-    ) : ViewHolder
+    ): ViewHolder
 
     @Suppress("unchecked_cast")
     final override fun bind(viewHolder: RecyclerView.ViewHolder, dependencies: ItemDependencies) {
         performBinding(
-            viewHolder = (viewHolder as ViewHolder),
-            dependencies = (dependencies as Dependencies)
+            viewHolder = viewHolder as ViewHolder,
+            dependencies = dependencies as Dependencies
         )
     }
 
     protected abstract fun performBinding(viewHolder: ViewHolder, dependencies: Dependencies)
 
-    final override fun equals(other: Any?): Boolean {
-        return (model == (other as? Item<*, *>)?.model)
-    }
+    final override fun equals(other: Any?) = model == (other as? Item<*, *>)?.model
 
-    final override fun hashCode(): Int {
-        return model.hashCode()
-    }
+    final override fun hashCode() = model.hashCode()
 
-    final override fun toString(): String {
-        return model.toString()
-    }
+    final override fun toString() = model.toString()
 
 }

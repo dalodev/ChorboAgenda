@@ -8,7 +8,6 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import es.littledavity.database.ChorboagendaDatabase
-import es.littledavity.database.chorbo.tables.ChorboDao
 import javax.inject.Singleton
 
 @Module
@@ -17,7 +16,6 @@ internal object TablesModule {
 
     @Provides
     @Singleton
-    fun provideContactsTable(contactsDatabase: ChorboagendaDatabase): ChorboDao {
-        return contactsDatabase.chorboDao
-    }
+    fun provideContactsTable(contactsDatabase: ChorboagendaDatabase) = contactsDatabase.chorboDao
+
 }

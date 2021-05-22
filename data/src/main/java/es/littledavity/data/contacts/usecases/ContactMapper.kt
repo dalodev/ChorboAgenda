@@ -17,6 +17,4 @@ internal class ContactMapper @Inject constructor() {
     )
 }
 
-internal fun ContactMapper.mapToDomainContacts(dataGames: List<DataContact>): List<DomainContact> {
-    return dataGames.map(::mapToDomainContact)
-}
+internal fun ContactMapper.mapToDomainContacts(dataGames: List<DataContact>) = dataGames.map(::mapToDomainContact)

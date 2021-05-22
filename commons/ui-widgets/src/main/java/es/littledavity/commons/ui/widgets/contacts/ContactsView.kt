@@ -71,70 +71,58 @@ class ContactsView @JvmOverloads constructor(
         addOnScrollListener(onBottomReached = { _, _ -> onBottomReached?.invoke() })
     }
 
-    private fun initLayoutManager(context: Context): LinearLayoutManager {
-        return object : LinearLayoutManager(context) {
-
-            override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
-                return RecyclerView.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
-            }
-
+    private fun initLayoutManager(context: Context) = object : LinearLayoutManager(context) {
+        override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
+            return RecyclerView.LayoutParams(MATCH_PARENT, WRAP_CONTENT)
         }
     }
 
-    private fun initAdapter(context: Context): ContactsAdapter {
-        return ContactsAdapter(context)
-            .apply { listenerBinder = ::bindListener }
-            .also { adapter = it }
-    }
+    private fun initAdapter(context: Context) = ContactsAdapter(context)
+        .apply { listenerBinder = ::bindListener }
+        .also { adapter = it }
 
     private fun bindListener(item: ContactItem, viewHolder: RecyclerView.ViewHolder) {
-        if(viewHolder is ContactItem.ViewHolder) {
+        if (viewHolder is ContactItem.ViewHolder) {
             viewHolder.setOnGameClickListener { onContactClicked?.invoke(item.model) }
         }
     }
 
-    private fun initItemDecorator(): SpacingItemDecorator {
-        return SpacingItemDecorator(
-            spacing = getDimensionPixelSize(R.dimen.contacts_decorator_spacing),
-            sideFlags = SpacingItemDecorator.SIDE_BOTTOM,
-            itemExclusionPolicy = LastItemExclusionPolicy()
-        )
-    }
+    private fun initItemDecorator() = SpacingItemDecorator(
+        spacing = getDimensionPixelSize(R.dimen.contacts_decorator_spacing),
+        sideFlags = SpacingItemDecorator.SIDE_BOTTOM,
+        itemExclusionPolicy = LastItemExclusionPolicy()
+    )
 
     private fun initDefaults() {
         uiState = uiState
     }
 
-    private fun createDefaultUiState(): ContactsUiState {
-        return ContactsUiState.Empty(
-            iconId = R.drawable.gamepad_variant_outline,
-            title = getString(R.string.contacts_info_view_title)
-        )
-    }
+    private fun createDefaultUiState(): ContactsUiState = ContactsUiState.Empty(
+        iconId = R.drawable.gamepad_variant_outline,
+        title = getString(R.string.contacts_info_view_title)
+    )
 
     fun clearItems() {
         adapterItems = emptyList()
     }
 
-    private fun List<ContactModel>.toAdapterItems(): List<ContactItem> {
-        return map(::ContactItem)
-    }
+    private fun List<ContactModel>.toAdapterItems() = map(::ContactItem)
 
     private fun handleUiStateChange(newState: ContactsUiState) {
-        when(newState) {
-            is ContactsUiState.Empty -> onEmptyUiStateSelected(newState)
+        when (newState) {
+            is ContactsUiState.Empty -> onEmptyUiStateSelected()
             is ContactsUiState.Loading -> onLoadingStateSelected()
             is ContactsUiState.Result -> onResultUiStateSelected(newState)
         }
     }
 
-    private fun onEmptyUiStateSelected(uiState: ContactsUiState.Empty) {
+    private fun onEmptyUiStateSelected() {
         hideLoadingIndicators()
         hideRecyclerView()
     }
 
     private fun onLoadingStateSelected() {
-        if(adapterItems.isNotEmpty()) {
+        if (adapterItems.isNotEmpty()) {
             showSwipeRefresh()
         } else {
             showProgressBar()
@@ -175,7 +163,7 @@ class ContactsView @JvmOverloads constructor(
     }
 
     private fun showRecyclerView() = with(binding.recyclerView) {
-        if(isVisible) return
+        if (isVisible) return
 
         makeVisible()
         fadeIn()

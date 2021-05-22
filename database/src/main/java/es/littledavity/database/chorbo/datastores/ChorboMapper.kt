@@ -17,6 +17,4 @@ internal class ChorboMapper @Inject constructor() {
     )
 }
 
-internal fun ChorboMapper.mapToDataContact(databaseGames: List<DatabaseChorbo>): List<Contact> {
-    return databaseGames.map(::mapToDataContact)
-}
+internal fun ChorboMapper.mapToDataContact(databaseGames: List<DatabaseChorbo>) = databaseGames.map(::mapToDataContact)

@@ -31,7 +31,7 @@ abstract class AbstractRecyclerViewAdapter<IT: Item<*, in Dependencies>, Depende
     }
 
     private fun initItems(items: List<IT>) {
-        if(items.isNotEmpty()) {
+        if (items.isNotEmpty()) {
             submitList(items)
         }
     }
@@ -48,44 +48,35 @@ abstract class AbstractRecyclerViewAdapter<IT: Item<*, in Dependencies>, Depende
 
     private fun List<IT>.extractViewHolderFactories() {
         viewHolderFactories.clear()
-        for(item in this) {
+        for (item in this) {
             val viewType = item::class.toViewType()
 
-            if(viewHolderFactories[viewType] == null) {
+            if (viewHolderFactories[viewType] == null) {
                 viewHolderFactories[viewType] = item
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return viewHolderFactories[ViewType(viewType)]?.create(inflater, parent, dependencies)
-            ?: throw RuntimeException("The ViewHolder factory was not found.")
-    }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) =
+        viewHolderFactories[ViewType(viewType)]?.create(inflater, parent, dependencies)
+            ?: error("The ViewHolder factory was not found.")
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         with(this[position]) {
             bind(holder, dependencies)
 
-            if(holder is HasListeners) {
+            if (holder is HasListeners) {
                 listenerBinder?.invoke(this, holder)
             }
         }
     }
 
-    override fun getItemViewType(position: Int): Int {
-        return this[position]::class.toViewType().type
-    }
+    override fun getItemViewType(position: Int) = this[position]::class.toViewType().type
 
-    operator fun get(position: Int): IT {
-        return currentList[position]
-    }
+    operator fun get(position: Int): IT = currentList[position]
 
-    private fun KClass<out Item<*, *>>.toViewType(): ViewType {
-        return ViewType(this.qualifiedName.hashCode())
-    }
+    private fun KClass<out Item<*, *>>.toViewType() = ViewType(this.qualifiedName.hashCode())
 
-    override fun getItemId(position: Int): Long {
-        return this[position].itemId
-    }
+    override fun getItemId(position: Int) = this[position].itemId
 
 }

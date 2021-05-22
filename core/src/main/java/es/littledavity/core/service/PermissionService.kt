@@ -25,9 +25,7 @@ class PermissionService @Inject constructor(
         Dexter.withContext(context).withPermission(permission).withListener(listener).check()
     }
 
-    fun checkPermissions(permission: List<String>): Boolean {
-        return !permission.any {
-            ContextCompat.checkSelfPermission(context, it) != PackageManager.PERMISSION_GRANTED
-        }
+    fun checkPermissions(permission: List<String>) = !permission.any {
+        ContextCompat.checkSelfPermission(context, it) != PackageManager.PERMISSION_GRANTED
     }
 }
