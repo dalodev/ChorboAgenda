@@ -7,8 +7,8 @@ import android.content.Context
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.paulrybitskyi.commons.ktx.layoutInflater
-import com.paulrybitskyi.commons.utils.observeChanges
+import es.littledavity.commons.ui.extensions.layoutInflater
+import es.littledavity.commons.ui.extensions.observeChanges
 import kotlin.reflect.KClass
 
 private inline class ViewType(val type: Int)

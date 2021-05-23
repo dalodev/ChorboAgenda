@@ -6,10 +6,10 @@ package es.littledavity.commons.ui.widgets.contacts
 import android.content.Context
 import android.util.AttributeSet
 import com.google.android.material.card.MaterialCardView
-import com.paulrybitskyi.commons.ktx.getColor
-import com.paulrybitskyi.commons.ktx.getDimension
-import com.paulrybitskyi.commons.ktx.layoutInflater
-import com.paulrybitskyi.commons.ktx.onClick
+import es.littledavity.commons.ui.extensions.getColor
+import es.littledavity.commons.ui.extensions.getDimension
+import es.littledavity.commons.ui.extensions.layoutInflater
+import es.littledavity.commons.ui.extensions.onClick
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewContactBinding
 

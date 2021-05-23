@@ -24,7 +24,6 @@ dependencies {
     implementation(Deps.AndroidX.constraintLayout)
     implementation(Deps.AndroidX.fragmentKtx)
 
-    implementation(Deps.Commons.core)
     implementation(Deps.Misc.kotlinResult)
 
     implementation(Deps.Google.daggerHilt)
@@ -36,9 +35,12 @@ dependencies {
     //Test
     testImplementation(project(Deps.Local.librariesTest))
     testImplementation(Deps.Testing.jUnit)
+    testImplementation(Deps.Testing.assertJ)
     testImplementation(Deps.Testing.mockk)
+    testImplementation(Deps.Testing.coroutines)
     testImplementation(Deps.Testing.archCore)
     testImplementation(Deps.Testing.turbine)
-    testImplementation(Deps.Testing.assertJ)
 
+    androidTestImplementation(Deps.Testing.testRunner)
+    androidTestImplementation(Deps.Testing.jUnitExt)
 }

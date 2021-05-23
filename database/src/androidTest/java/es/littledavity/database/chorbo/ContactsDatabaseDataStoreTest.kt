@@ -7,8 +7,8 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import es.littledavity.database.chorbo.datastores.ContactsDatabaseDataStore
-import es.littledavity.database.chorbo.entities.Chorbo
-import es.littledavity.database.chorbo.tables.ChorboDao
+import es.littledavity.database.chorbo.entities.Contact
+import es.littledavity.database.chorbo.tables.ContactDao
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Before
@@ -18,24 +18,25 @@ import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
 class ContactsDatabaseDataStoreTest {
+
     @Mock
-    lateinit var chorboDao: ChorboDao
+    internal lateinit var contactDao: ContactDao
 
     @InjectMocks
-    lateinit var chorboRepository: ContactsDatabaseDataStore
+    internal lateinit var chorboRepository: ContactsDatabaseDataStore
 
-    private val chorbo = Chorbo(2, "Ángeles", "test", "+34", "España", "test", "test", "test")
+    private val chorbo = Contact(2, "Ángeles", "test", "+34")
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
 
     @Test
     fun getAllChorbosLiveData_ShouldInvokeCorrectDaoMethod() {
         chorboRepository.getAllChorboLiveData()
 
-        verify(chorboDao).getAllChorbosLiveData()
+        verify(contactDao).getAllChorbosLiveData()
     }
 
     @Test
@@ -43,7 +44,7 @@ class ContactsDatabaseDataStoreTest {
         runBlocking {
             chorboRepository.getChorbos()
 
-            verify(chorboDao).getChorbos()
+            verify(contactDao).getChorbos()
         }
     }
 
@@ -52,17 +53,17 @@ class ContactsDatabaseDataStoreTest {
         runBlocking {
             chorboRepository.getChorbos(0, 10)
 
-            verify(chorboDao).getChorbos(any(), any())
+            verify(contactDao).getChorbos(any(), any())
         }
     }
 
     @Test
     fun getChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
-        val chorboIdToFind = 1L
-        val chorboIdCaptor = argumentCaptor<Long>()
+        val chorboIdToFind = 1
+        val chorboIdCaptor = argumentCaptor<Int>()
         chorboRepository.getChorbo(chorboIdToFind)
 
-        verify(chorboDao).getChorbo(chorboIdCaptor.capture())
+        verify(contactDao).getChorbo(chorboIdCaptor.capture())
         assertEquals(chorboIdToFind, chorboIdCaptor.lastValue)
     }
 
@@ -70,36 +71,36 @@ class ContactsDatabaseDataStoreTest {
     fun deleteAllChorbos_ShouldInvokeCorrectDaoMethod() = runBlocking {
         chorboRepository.deleteAllChorbos()
 
-        verify(chorboDao).deleteAllChorbos()
+        verify(contactDao).deleteAllChorbos()
     }
 
     @Test
     fun deleteChorboById_ShouldInvokeCorrectDaoMethod() = runBlocking {
-        val chorboIdToDelete = 1L
-        val chorboIdCaptor = argumentCaptor<Long>()
+        val chorboIdToDelete = 1
+        val chorboIdCaptor = argumentCaptor<Int>()
         chorboRepository.deleteChorboById(chorboIdToDelete)
 
-        verify(chorboDao).deleteChorboById(chorboIdCaptor.capture())
+        verify(contactDao).deleteChorboById(chorboIdCaptor.capture())
         assertEquals(chorboIdToDelete, chorboIdCaptor.lastValue)
     }
 
     @Test
     fun deleteChorbosById_ShouldInvokeCorrectDaoMethod() = runBlocking {
-        val chorboIdToDelete = listOf(1L, 2L)
-        val chorboIdCaptor = argumentCaptor<List<Long>>()
+        val chorboIdToDelete = listOf(1, 2)
+        val chorboIdCaptor = argumentCaptor<List<Int>>()
         chorboRepository.deleteChorbosById(chorboIdToDelete)
 
-        verify(chorboDao).deleteChorbosById(chorboIdCaptor.capture())
+        verify(contactDao).deleteChorbosById(chorboIdCaptor.capture())
         assertEquals(chorboIdToDelete, chorboIdCaptor.lastValue)
     }
 
     @Test
     fun deleteChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
         val chorboToDelete = chorbo
-        val chorboCaptor = argumentCaptor<Chorbo>()
+        val chorboCaptor = argumentCaptor<Contact>()
         chorboRepository.deleteChorbo(chorboToDelete)
 
-        verify(chorboDao).deleteChorbo(chorboCaptor.capture())
+        verify(contactDao).deleteChorbo(chorboCaptor.capture())
         assertEquals(chorboToDelete, chorboCaptor.lastValue)
     }
 
@@ -110,10 +111,10 @@ class ContactsDatabaseDataStoreTest {
             chorbo,
             chorbo
         )
-        val chorbosInsertedCaptor = argumentCaptor<List<Chorbo>>()
+        val chorbosInsertedCaptor = argumentCaptor<List<Contact>>()
         chorboRepository.insertChorbos(chorbosToInsert)
 
-        verify(chorboDao).insertChorbos(chorbosInsertedCaptor.capture())
+        verify(contactDao).insertChorbos(chorbosInsertedCaptor.capture())
         assertEquals(chorbosToInsert, chorbosInsertedCaptor.lastValue)
     }
 

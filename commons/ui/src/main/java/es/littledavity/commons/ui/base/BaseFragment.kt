@@ -14,8 +14,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import androidx.viewbinding.ViewBinding
-import com.paulrybitskyi.commons.ktx.showLongToast
-import com.paulrybitskyi.commons.ktx.showShortToast
 import es.littledavity.commons.ui.base.events.Command
 import es.littledavity.commons.ui.base.events.GeneralCommand
 import es.littledavity.commons.ui.base.navigation.Navigator
@@ -24,6 +22,8 @@ import es.littledavity.commons.ui.extensions.observeIn
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
+import es.littledavity.commons.ui.extensions.showLongToast
+import es.littledavity.commons.ui.extensions.showShortToast
 
 abstract class BaseFragment<
         VB : ViewBinding,

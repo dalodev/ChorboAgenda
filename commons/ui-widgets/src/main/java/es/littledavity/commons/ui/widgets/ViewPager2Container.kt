@@ -7,7 +7,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.viewpager2.widget.ViewPager2
-import com.paulrybitskyi.commons.ktx.detachFromParent
+import es.littledavity.commons.ui.extensions.detachFromParent
 
 class ViewPager2Container @JvmOverloads constructor(
     context: Context,

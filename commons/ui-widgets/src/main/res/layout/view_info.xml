@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    tools:layout_gravity="center"
+    tools:parentTag="android.widget.LinearLayout">
+
+    <ImageView
+        android:id="@+id/iconIv"
+        android:layout_width="@dimen/info_view_icon_size"
+        android:layout_height="@dimen/info_view_icon_size"
+        android:layout_gravity="center_horizontal"
+        tools:src="@tools:sample/avatars"/>
+
+    <TextView
+        android:id="@+id/titleTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/info_view_title_margin_top"
+        android:gravity="center"
+        android:fontFamily="@string/font_family_medium"
+        android:textSize="@dimen/info_view_title_text_size"
+        android:textColor="@color/info_view_title_text_color"
+        android:lineSpacingExtra="@dimen/info_view_title_text_line_spacing_extra"
+        tools:text="Lorem ipsum dolor sit amet"/>
+
+    <TextView
+        android:id="@+id/descriptionTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/info_view_description_margin_top"
+        android:gravity="center"
+        android:fontFamily="@string/font_family_medium"
+        android:textSize="@dimen/info_view_description_text_size"
+        android:textColor="@color/info_view_description_text_color"
+        android:lineSpacingExtra="@dimen/info_view_description_text_line_spacing_extra"
+        android:visibility="gone"/>
+
+</merge>

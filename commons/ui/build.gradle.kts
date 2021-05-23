@@ -29,12 +29,6 @@ dependencies {
 
     implementation(Deps.Misc.timber)
 
-    implementation(Deps.Commons.core)
-    implementation(Deps.Commons.ktx)
-    implementation(Deps.Commons.widgets)
-    implementation(Deps.Commons.windowAnims)
-    implementation(Deps.Commons.navigation)
-
     implementation(Deps.Google.daggerHilt)
     kapt(Deps.Google.daggerHiltCompiler)
     //test

@@ -9,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
 import androidx.databinding.ViewDataBinding
+import com.nhaarman.mockitokotlin2.mock
+import es.littledavity.commons.ui.base.navigation.Navigator
 import org.mockito.MockitoAnnotations
 
 class BaseFragmentTest {
@@ -16,7 +18,7 @@ class BaseFragmentTest {
     lateinit var baseFragment: TestBaseFragment
 
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
     }
     /*
         @Test
@@ -60,7 +62,7 @@ class BaseFragmentTest {
                  baseFragment.requireCompatActivity()
              }
          }*/
-    class TestBaseFragment : BaseFragment<ViewDataBinding, BaseViewModel>(
+    class TestBaseFragment : BaseFragment<ViewDataBinding, BaseViewModel, Navigator>(
         layoutId = 0
     ) {
         override fun onCreateView(
@@ -69,11 +71,9 @@ class BaseFragmentTest {
             savedInstanceState: Bundle?
         ): View? = null
 
-        override fun onInitDependencyInjection() {}
-
-        override fun onInitDataBinding() {}
-
-        override fun onClearView() {}
-        override fun toolbar(): Toolbar? = null
+        override val viewBinding: ViewDataBinding
+            get() = mock()
+        override val viewModel: BaseViewModel
+            get() = mock()
     }
 }

@@ -7,10 +7,11 @@ import androidx.lifecycle.LiveData
 import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.core.providers.DispatcherProvider
 import es.littledavity.data.commons.Pagination
+import es.littledavity.data.contacts.DataContact
 import es.littledavity.data.contacts.datastores.ContactsLocalDataStore
-import es.littledavity.database.chorbo.DatabaseChorbo
-import es.littledavity.database.chorbo.entities.Chorbo
-import es.littledavity.database.chorbo.tables.ChorboDao
+import es.littledavity.database.chorbo.DatabaseContact
+import es.littledavity.database.chorbo.entities.Contact
+import es.littledavity.database.chorbo.tables.ContactDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.flowOn
@@ -22,31 +23,31 @@ import javax.inject.Singleton
 @Singleton
 @BindType
 internal class ContactsDatabaseDataStore @Inject constructor(
-    private val chorboDao: ChorboDao,
-    private val chorboMapper: ChorboMapper,
+    private val contactDao: ContactDao,
+    private val contactMapper: ContactMapper,
     private val dispatcherProvider: DispatcherProvider,
 ) : ContactsLocalDataStore {
 
     override suspend fun searchGames(
         searchQuery: String,
         pagination: Pagination
-    ) = chorboDao.searchContacts(
+    ): List<DataContact> = contactDao.searchContacts(
         searchQuery = searchQuery,
         offset = pagination.offset,
         limit = pagination.limit
-    ).let { contacts ->
+    ).let { databaseContacts ->
         withContext(dispatcherProvider.computation) {
-            chorboMapper.mapToDataContact(contacts)
+            contactMapper.mapToDataContact(databaseContacts)
         }
     }
 
-    override suspend fun observeContacts(pagination: Pagination) = chorboDao.observeLikedGames(
+    override suspend fun observeContacts(pagination: Pagination) = contactDao.observeContacts(
         offset = pagination.offset,
         limit = pagination.limit
     ).toDataGamesFlow()
 
-    private fun Flow<List<DatabaseChorbo>>.toDataGamesFlow() = distinctUntilChanged()
-        .map(chorboMapper::mapToDataContact)
+    private fun Flow<List<DatabaseContact>>.toDataGamesFlow() = distinctUntilChanged()
+        .map(contactMapper::mapToDataContact)
         .flowOn(dispatcherProvider.computation)
 
     /**
@@ -54,8 +55,8 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      *
      * @return [LiveData] List with chorbo.
      */
-    fun getAllChorboLiveData(): LiveData<List<Chorbo>> =
-        chorboDao.getAllChorbosLiveData()
+    fun getAllChorboLiveData(): LiveData<List<Contact>> =
+        contactDao.getAllChorbosLiveData()
 
     /**
      * Obtain all database added Chorbo ordering by name field.
@@ -63,7 +64,7 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      * @return List with chorbos.
      */
     suspend fun getChorbos() =
-        chorboDao.getChorbos()
+        contactDao.getChorbos()
 
     /**
      * Obtain database Chorbo by identifier.
@@ -72,8 +73,8 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      *
      * @return Chorbo if exist, otherwise null
      */
-    suspend fun getChorbo(chorboId: Int): Chorbo? =
-        chorboDao.getChorbo(chorboId)
+    suspend fun getChorbo(chorboId: Int): Contact? =
+        contactDao.getChorbo(chorboId)
 
     /**
      * Obtain all database added Chorbo ordering by name field.
@@ -83,13 +84,13 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      * @return List with chorbos.
      */
     suspend fun getChorbos(offset: Int, limit: Int) =
-        chorboDao.getChorbos(offset, limit)
+        contactDao.getChorbos(offset, limit)
 
     /**
      * Delete all database chorbo.
      */
     suspend fun deleteAllChorbos() =
-        chorboDao.deleteAllChorbos()
+        contactDao.deleteAllChorbos()
 
     /**
      * Delete database chorbo by identifier.
@@ -97,31 +98,31 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      * @param chorboId chorbo identifier.
      */
     suspend fun deleteChorboById(chorboId: Int) =
-        chorboDao.deleteChorboById(chorboId)
+        contactDao.deleteChorboById(chorboId)
 
     /**
      * Delete database chorbos by identifier.
      *
      * @param idList chorbos identifier.
      */
-    suspend fun deleteChorbosById(idList: List<Long>) =
-        chorboDao.deleteChorbosById(idList)
+    suspend fun deleteChorbosById(idList: List<Int>) =
+        contactDao.deleteChorbosById(idList)
 
     /**
      * Delete database chorbo.
      *
      * @param chorbo Chorbos.
      */
-    suspend fun deleteChorbo(chorbo: Chorbo) =
-        chorboDao.deleteChorbo(chorbo)
+    suspend fun deleteChorbo(chorbo: Contact) =
+        contactDao.deleteChorbo(chorbo)
 
     /**
      * Add to database a list of chorbos.
      *
      * @param chorbos List of chorbos.
      */
-    suspend fun insertChorbos(chorbos: List<Chorbo>) =
-        chorboDao.insertChorbos(chorbos)
+    suspend fun insertChorbos(chorbos: List<Contact>) =
+        contactDao.insertChorbos(chorbos)
 
     /**
      * Add to database a chrobo.
@@ -157,7 +158,7 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      *
      * @param chorbo Chorbo object.
      */
-    suspend fun insertChorbo(chorbo: Chorbo) {
-        chorboDao.insertChorbo(chorbo)
+    suspend fun insertChorbo(chorbo: Contact) {
+        contactDao.insertChorbo(chorbo)
     }
 }

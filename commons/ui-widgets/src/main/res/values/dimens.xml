@@ -4,6 +4,14 @@
     <!-- SearchToolbar -->
     <dimen name="search_toolbar_query_input_horizontal_margin">16dp</dimen>
     <dimen name="search_toolbar_query_input_text_size">20sp</dimen>
+    <dimen name="toolbar_elevation">4dp</dimen>
+    <dimen name="toolbar_button_container_size">@dimen/toolbar_height</dimen>
+    <dimen name="toolbar_height">56dp</dimen>
+    <dimen name="toolbar_button_icon_size">28dp</dimen>
+    <dimen name="toolbar_button_icon_padding">2dp</dimen>
+    <dimen name="toolbar_title_horizontal_padding_with_icon">16dp</dimen>
+    <dimen name="toolbar_title_horizontal_padding_without_icon">20dp</dimen>
+    <dimen name="toolbar_title_text_size">18sp</dimen>
 
     <!-- ContactImageView -->
     <dimen name="contact_image_card_elevation">2dp</dimen>
@@ -27,5 +35,13 @@
     <dimen name="contacts_info_view_horizontal_margin">30dp</dimen>
     <dimen name="contacts_info_view_title_text_size">17sp</dimen>
 
+    <!-- InfoView -->
+    <dimen name="info_view_icon_size">100dp</dimen>
+    <dimen name="info_view_title_margin_top">5dp</dimen>
+    <dimen name="info_view_title_text_size">18sp</dimen>
+    <dimen name="info_view_title_text_line_spacing_extra">4dp</dimen>
+    <dimen name="info_view_description_margin_top">5dp</dimen>
+    <dimen name="info_view_description_text_size">17sp</dimen>
+    <dimen name="info_view_description_text_line_spacing_extra">4dp</dimen>
 
 </resources>

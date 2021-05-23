@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="InfoView">
+        <attr name="infoView_iconSize" format="dimension"/>
+        <attr name="infoView_titleTextSize" format="dimension"/>
+        <attr name="infoView_descriptionTextSize" format="dimension"/>
+        <attr name="infoView_titleTextTopMargin" format="dimension"/>
+        <attr name="infoView_descriptionTextTopMargin" format="dimension"/>
+        <attr name="infoView_iconColor" format="color"/>
+        <attr name="infoView_titleTextColor" format="color"/>
+        <attr name="infoView_descriptionTextColor" format="color"/>
+        <attr name="infoView_titleTextFont" format="reference"/>
+        <attr name="infoView_descriptionTextFont" format="reference"/>
+        <attr name="infoView_icon" format="reference"/>
+        <attr name="infoView_titleText" format="string"/>
+        <attr name="infoView_descriptionText" format="string"/>
+    </declare-styleable>
+
+    <declare-styleable name="CustomToolbar">
+        <attr name="android:background"/>
+        <attr name="toolbar_buttonIconColor" format="color"/>
+        <attr name="toolbar_buttonRippleColor" format="color"/>
+        <attr name="toolbar_leftButtonIcon" format="reference"/>
+        <attr name="toolbar_rightButtonIcon" format="reference"/>
+        <attr name="toolbar_extraRightButtonIcon" format="reference"/>
+        <attr name="toolbar_titleText" format="string"/>
+        <attr name="toolbar_titleTextColor" format="color"/>
+        <attr name="toolbar_titleTextSize" format="dimension"/>
+        <attr name="toolbar_titleTextFont" format="reference"/>
+        <attr name="toolbar_titleTextGravity" format="enum">
+            <enum name="left" value="1"/>
+            <enum name="center" value="2"/>
+            <enum name="right" value="3"/>
+        </attr>
+    </declare-styleable>
+</resources>

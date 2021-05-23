@@ -5,7 +5,7 @@ package es.littledavity.database
 
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
-import es.littledavity.database.chorbo.tables.ChorboDao
+import es.littledavity.database.chorbo.tables.ContactDao
 import es.littledavity.testUtils.roboelectric.TestRobolectric
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
@@ -17,9 +17,10 @@ import org.mockito.MockitoAnnotations
 class ChorboagendaDatabaseTest : TestRobolectric() {
 
     @Mock
-    lateinit var chorboagendaDatabase: ChorboagendaDatabase
+    internal lateinit var chorboagendaDatabase: ChorboagendaDatabase
+
     @Mock
-    lateinit var chorboDao: ChorboDao
+    internal lateinit var contactDao: ContactDao
 
     @Before
     fun setUp() {
@@ -28,11 +29,11 @@ class ChorboagendaDatabaseTest : TestRobolectric() {
 
     @Test
     fun obtainChorboDao() {
-        doReturn(chorboDao).whenever(chorboagendaDatabase).chorboDao()
+        doReturn(contactDao).whenever(chorboagendaDatabase).contactDao
 
         assertThat(
-            chorboagendaDatabase.chorboDao(),
-            instanceOf(chorboDao::class.java)
+            chorboagendaDatabase.contactDao,
+            instanceOf(contactDao::class.java)
         )
     }
 }

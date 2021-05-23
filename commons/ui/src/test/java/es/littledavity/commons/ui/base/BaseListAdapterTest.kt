@@ -32,8 +32,10 @@ class BaseListAdapterTest : TestRobolectric() {
 
     @Mock
     lateinit var viewHolder: RecyclerView.ViewHolder
+
     @Mock
     lateinit var itemsSame: Comparator
+
     @Mock
     lateinit var contentsSame: Comparator
 
@@ -41,7 +43,7 @@ class BaseListAdapterTest : TestRobolectric() {
 
     @Before
     fun setUp() {
-        MockitoAnnotations.initMocks(this)
+        MockitoAnnotations.openMocks(this)
         val finalAdapter = TestBaseListAdapter()
         adapter = finalAdapter
     }
@@ -94,10 +96,10 @@ class BaseListAdapterTest : TestRobolectric() {
             parent: ViewGroup,
             inflater: LayoutInflater,
             viewType: Int
-        ): RecyclerView.ViewHolder {
-            return viewHolder
-        }
+        ) = viewHolder
 
-        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {}
+        override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+            //STUB
+        }
     }
 }

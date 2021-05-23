@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "8e29e3293c5c6861f88ae56a7bd33741",
+    "identityHash": "3e8fe1d8a8b589f4aec5517c6c85e232",
     "entities": [
       {
         "tableName": "chorbo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `image` TEXT NOT NULL, `countryCode` TEXT NOT NULL, `countryName` TEXT NOT NULL, `flag` TEXT NOT NULL, `whatsapp` TEXT NOT NULL, `instagram` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `image` TEXT NOT NULL, `phone` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -27,32 +27,8 @@
             "notNull": true
           },
           {
-            "fieldPath": "countryCode",
-            "columnName": "countryCode",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "countryName",
-            "columnName": "countryName",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "flag",
-            "columnName": "flag",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "whatsapp",
-            "columnName": "whatsapp",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "instagram",
-            "columnName": "instagram",
+            "fieldPath": "phone",
+            "columnName": "phone",
             "affinity": "TEXT",
             "notNull": true
           }
@@ -70,7 +46,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '8e29e3293c5c6861f88ae56a7bd33741')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3e8fe1d8a8b589f4aec5517c6c85e232')"
     ]
   }
 }

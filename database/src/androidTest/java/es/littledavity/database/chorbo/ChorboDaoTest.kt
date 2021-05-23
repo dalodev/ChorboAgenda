@@ -7,8 +7,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import es.littledavity.database.ChorboagendaDatabase
-import es.littledavity.database.chorbo.entities.Chorbo
-import es.littledavity.database.chorbo.tables.ChorboDao
+import es.littledavity.database.chorbo.entities.Contact
+import es.littledavity.database.chorbo.tables.ContactDao
 import es.littledavity.testUtils.livedata.getValue
 import es.littledavity.testUtils.roboelectric.TestRobolectric
 import kotlinx.coroutines.runBlocking
@@ -27,37 +27,25 @@ import org.junit.Test
 var instantTaskExecutorRule = InstantTaskExecutorRule()
 
 private lateinit var database: ChorboagendaDatabase
-private lateinit var chorboDao: ChorboDao
+private lateinit var contactDao: ContactDao
 private val fakeChorbos = listOf(
-    Chorbo(
+    Contact(
         id = 1,
         name = "Noemi",
         image = "test",
-        countryCode = "+34",
-        countryName = "España",
-        flag = "test",
-        whatsapp = "test",
-        instagram = "test"
+        phone = "test"
     ),
-    Chorbo(
+    Contact(
         id = 2,
         name = "Ximena",
         image = "test",
-        countryCode = "+34",
-        countryName = "España",
-        flag = "test",
-        whatsapp = "test",
-        instagram = "test"
+        phone = "test"
     ),
-    Chorbo(
+    Contact(
         id = 3,
         name = "Ángeles",
         image = "test",
-        countryCode = "+34",
-        countryName = "España",
-        flag = "test",
-        whatsapp = "test",
-        instagram = "test"
+        phone = "test"
     )
 )
 
@@ -73,7 +61,7 @@ class ChorboDaoTest : TestRobolectric() {
             .inMemoryDatabaseBuilder(context, ChorboagendaDatabase::class.java)
             .allowMainThreadQueries()
             .build()
-        chorboDao = database.chorboDao()
+        contactDao = database.contactDao
     }
 
     @After
@@ -83,133 +71,133 @@ class ChorboDaoTest : TestRobolectric() {
 
     @Test
     fun obtainAllChorboLiveData_WithoutData_ShouldReturnNull() {
-        val chorbos = chorboDao.getAllChorbosLiveData()
+        val chorbos = contactDao.getAllChorbosLiveData()
         assertTrue(getValue(chorbos).isNullOrEmpty())
     }
 
     @Test
     fun obtainAllChorboLiveData_WithData_ShouldReturnSorted() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
-        val chorbos = chorboDao.getAllChorbosLiveData()
+        contactDao.insertChorbos(fakeChorbos)
+        val chorbos = contactDao.getAllChorbosLiveData()
 
         assertEquals(fakeChorbos, getValue(chorbos))
     }
 
     @Test
     fun obtainAllCChorbos_WithoutData_ShouldReturnEmpty() = runBlocking {
-        assertTrue(chorboDao.getChorbos().isNullOrEmpty())
+        assertTrue(contactDao.getChorbos().isNullOrEmpty())
     }
 
     @Test
     fun obtainAllChorbos_WithData_ShouldReturnSorted() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
+        contactDao.insertChorbos(fakeChorbos)
 
-        assertEquals(fakeChorbos, chorboDao.getChorbos())
+        assertEquals(fakeChorbos, contactDao.getChorbos())
     }
 
     @Test
     fun obtainCChorboById_WithoutData_ShouldNotFound() = runBlocking {
         val chorboToFind = fakeChorbos.first()
 
-        assertNull(chorboDao.getChorbo(chorboToFind.id))
+        assertNull(contactDao.getChorbo(chorboToFind.id))
     }
 
     @Test
     fun obtainChorboById_WithData_ShouldFound() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
+        contactDao.insertChorbos(fakeChorbos)
 
         val chorboToFind = fakeChorbos.first()
-        assertEquals(chorboToFind, chorboDao.getChorbo(chorboToFind.id))
+        assertEquals(chorboToFind, contactDao.getChorbo(chorboToFind.id))
     }
 
     @Test
     fun insertChorbo_ShouldAdd() = runBlocking {
         fakeChorbos.forEach {
-            chorboDao.insertChorbo(it)
+            contactDao.insertChorbo(it)
         }
 
-        assertEquals(fakeChorbos, chorboDao.getChorbos())
+        assertEquals(fakeChorbos, contactDao.getChorbos())
     }
 
     @Test
     fun deleteAllChorbos_ShouldRemoveAll() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
-        chorboDao.deleteAllChorbos()
+        contactDao.insertChorbos(fakeChorbos)
+        contactDao.deleteAllChorbos()
 
-        assertTrue(chorboDao.getChorbos().isNullOrEmpty())
+        assertTrue(contactDao.getChorbos().isNullOrEmpty())
     }
 
     @Test
     fun deleteChorbo_Stored_ShouldRemoveIt() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
+        contactDao.insertChorbos(fakeChorbos)
 
         val chorboToRemove = fakeChorbos.first()
-        chorboDao.deleteChorbo(chorboToRemove)
+        contactDao.deleteChorbo(chorboToRemove)
 
-        assertThat(chorboDao.getChorbos(), not(hasItem(chorboToRemove)))
+        assertThat(contactDao.getChorbos(), not(hasItem(chorboToRemove)))
     }
 
     @Test
     fun deleteChorbo_NoStored_ShouldNotRemoveNothing() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
+        contactDao.insertChorbos(fakeChorbos)
 
-        val chorboToRemove = Chorbo(5, "test", "test", "+34", "España", "test", "test", "test")
-        chorboDao.deleteChorbo(chorboToRemove)
+        val chorboToRemove = Contact(5, "test", "test", "+34")
+        contactDao.deleteChorbo(chorboToRemove)
 
-        assertEquals(fakeChorbos, chorboDao.getChorbos())
+        assertEquals(fakeChorbos, contactDao.getChorbos())
     }
 
     @Test
     fun deleteChorboById_Stored_ShouldRemoveIt() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
+        contactDao.insertChorbos(fakeChorbos)
 
         val chorboToRemove = fakeChorbos.first()
-        chorboDao.deleteChorboById(chorboToRemove.id)
+        contactDao.deleteChorboById(chorboToRemove.id)
 
-        assertThat(chorboDao.getChorbos(), not(hasItem(chorboToRemove)))
+        assertThat(contactDao.getChorbos(), not(hasItem(chorboToRemove)))
     }
 
     @Test
     fun deleteChorbosById_Stored_ShouldRemoveIt() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
+        contactDao.insertChorbos(fakeChorbos)
 
         val chorboToRemove = listOf(fakeChorbos.first().id, fakeChorbos[2].id)
-        chorboDao.deleteChorbosById(chorboToRemove)
+        contactDao.deleteChorbosById(chorboToRemove)
 
-        assertThat(chorboDao.getChorbos(), not(hasItem(chorboToRemove)))
+        assertThat(contactDao.getChorbos(), not(hasItem(chorboToRemove)))
     }
 
     @Test
     fun deleteChorboById_NoStored_ShouldNotRemoveNothing() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
+        contactDao.insertChorbos(fakeChorbos)
 
-        val chorboNoStoredId = 100L
-        chorboDao.deleteChorboById(chorboNoStoredId)
+        val chorboNoStoredId = 100
+        contactDao.deleteChorboById(chorboNoStoredId)
 
-        assertEquals(fakeChorbos, chorboDao.getChorbos())
+        assertEquals(fakeChorbos, contactDao.getChorbos())
     }
 
     @Test
     fun deleteChorbosById_NoStored_ShouldNotRemoveNothing() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
+        contactDao.insertChorbos(fakeChorbos)
 
-        val chorboNoStoredId = listOf(100L, 200L)
-        chorboDao.deleteChorbosById(chorboNoStoredId)
+        val chorboNoStoredId = listOf(100, 200)
+        contactDao.deleteChorbosById(chorboNoStoredId)
 
-        assertEquals(fakeChorbos, chorboDao.getChorbos())
+        assertEquals(fakeChorbos, contactDao.getChorbos())
     }
 
     @Test
     fun obtainAllChorbosPaging_WithData_ShouldReturnNotEmpty() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
-        val chorbos = chorboDao.getChorbos(0, 10)
+        contactDao.insertChorbos(fakeChorbos)
+        val chorbos = contactDao.getChorbos(0, 10)
         assertTrue(chorbos.isNotEmpty())
     }
 
     @Test
     fun obtainAllChorbosPaging_WithoutData_ShouldReturnNull() = runBlocking {
-        chorboDao.insertChorbos(fakeChorbos)
-        val chorbos = chorboDao.getChorbos(3, 10)
+        contactDao.insertChorbos(fakeChorbos)
+        val chorbos = contactDao.getChorbos(3, 10)
         assertTrue(chorbos.isNullOrEmpty())
     }
 }

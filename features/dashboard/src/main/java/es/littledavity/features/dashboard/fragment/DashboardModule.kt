@@ -19,11 +19,8 @@ internal object DashboardModule {
     fun provideDashboardViewPagerAdapter(
         fragment: Fragment,
         fragmentFactory: DashboardAdapterFragmentFactory
-    ): DashboardViewPagerAdapter {
-        return DashboardViewPagerAdapter(
-            fragment = fragment,
-            fragmentFactory = fragmentFactory
-        )
-    }
-
+    ) = DashboardViewPagerAdapter(
+        fragment = fragment,
+        fragmentFactory = fragmentFactory
+    )
 }

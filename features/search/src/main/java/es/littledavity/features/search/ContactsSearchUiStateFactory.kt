@@ -38,11 +38,8 @@ internal class ContactsSearchUiStateFactoryImpl @Inject constructor(
         )
     }
 
-    override fun createWithLoadingState(): ContactsUiState {
-        return ContactsUiState.Loading
-    }
+    override fun createWithLoadingState() = ContactsUiState.Loading
 
-    override fun createWithResultState(contacts: List<Contact>): ContactsUiState {
-        return ContactsUiState.Result(contacts.map(contactsModelMapper::mapToContactModel))
-    }
+    override fun createWithResultState(contacts: List<Contact>) =
+        ContactsUiState.Result(contacts.map(contactsModelMapper::mapToContactModel))
 }

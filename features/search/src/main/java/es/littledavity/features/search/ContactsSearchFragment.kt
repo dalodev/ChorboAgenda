@@ -5,13 +5,13 @@ package es.littledavity.features.search
 
 import android.text.InputType
 import androidx.fragment.app.viewModels
-import com.paulrybitskyi.commons.ktx.applyWindowBottomInsetAsMargin
-import com.paulrybitskyi.commons.ktx.applyWindowTopInsetAsPadding
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.base.events.Command
 import es.littledavity.commons.ui.base.events.Route
 import es.littledavity.commons.ui.bindings.viewBinding
+import es.littledavity.commons.ui.extensions.applyWindowBottomInsetAsMargin
+import es.littledavity.commons.ui.extensions.applyWindowTopInsetAsPadding
 import es.littledavity.commons.ui.extensions.observeIn
 import es.littledavity.features.search.databinding.FragmentContactsSearchBinding
 import kotlinx.coroutines.flow.onEach
@@ -53,7 +53,7 @@ internal class ContactsSearchFragment : BaseFragment<
     private fun initSearchToolbar() = with(viewBinding.searchToolbar) {
         applyWindowTopInsetAsPadding()
 
-        inputType = (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS)
+        inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_CAP_WORDS
         hintText = getString(R.string.contacts_search_fragment_search_hint)
         onSearchActionRequested = viewModel::onSearchActionRequested
         onBackButtonClicked = { viewModel.onToolbarBackButtonClicked() }

@@ -3,15 +3,11 @@
  */
 package es.littledavity.database
 
-import es.littledavity.database.chorbo.DatabaseChorbo
+import es.littledavity.database.chorbo.DatabaseContact
 
-internal val DATABASE_CHORBO = DatabaseChorbo(
+internal val DATABASE_CHORBO = DatabaseContact(
     id = 1,
     name = "Name1",
     image = "",
-    countryCode = "",
-    countryName = "",
-    flag = "",
-    whatsapp = "",
-    instagram = "",
+    phone = ""
 )

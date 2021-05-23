@@ -13,16 +13,16 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
-import com.paulrybitskyi.commons.ktx.getColor
-import com.paulrybitskyi.commons.ktx.getDimension
-import com.paulrybitskyi.commons.ktx.getDimensionPixelSize
-import com.paulrybitskyi.commons.ktx.getDrawable
-import com.paulrybitskyi.commons.ktx.getString
-import com.paulrybitskyi.commons.ktx.setHorizontalPadding
-import com.paulrybitskyi.commons.ktx.views.setFontFamily
-import com.paulrybitskyi.commons.ktx.views.setTextSizeInPx
-import com.paulrybitskyi.commons.utils.observeChanges
 import dagger.hilt.android.AndroidEntryPoint
+import es.littledavity.commons.ui.extensions.getColor
+import es.littledavity.commons.ui.extensions.getDimension
+import es.littledavity.commons.ui.extensions.getDimensionPixelSize
+import es.littledavity.commons.ui.extensions.getDrawable
+import es.littledavity.commons.ui.extensions.getString
+import es.littledavity.commons.ui.extensions.observeChanges
+import es.littledavity.commons.ui.extensions.setFontFamily
+import es.littledavity.commons.ui.extensions.setHorizontalPadding
+import es.littledavity.commons.ui.extensions.setTextSizeInPx
 
 @AndroidEntryPoint
 class ContactImageView @JvmOverloads constructor(
@@ -37,12 +37,12 @@ class ContactImageView @JvmOverloads constructor(
             titleTv.isVisible = value
         }
 
-    var title: CharSequence
+  /*  var title: CharSequence
         set(value) {
             titleTv.text = value
         }
         get() = titleTv.text
-
+*/
     var imageUrl by observeChanges<String?>(null) { oldValue, newValue ->
         if (coverIv.drawable == null || oldValue != newValue) loadImage(newValue)
     }
@@ -117,7 +117,7 @@ class ContactImageView @JvmOverloads constructor(
         showTitle()
         coverIv.setImageDrawable(defaultDrawable)
     }
-
+/*
     private fun onImageLoadingStarted() {
         showTitle()
     }
@@ -129,7 +129,7 @@ class ContactImageView @JvmOverloads constructor(
     @Suppress("UNUSED_PARAMETER")
     private fun onImageLoadingFailed(error: Exception) {
         showTitle()
-    }
+    }*/
 
     private fun showTitle() {
         if (!isTitleVisible) return
@@ -137,7 +137,7 @@ class ContactImageView @JvmOverloads constructor(
         titleTv.isVisible = true
     }
 
-    private fun hideTitle() {
+   /* private fun hideTitle() {
         if (!isTitleVisible) return
 
         titleTv.isVisible = false
@@ -145,5 +145,5 @@ class ContactImageView @JvmOverloads constructor(
 
     fun disableRoundCorners() {
         radius = 0f
-    }
+    }*/
 }

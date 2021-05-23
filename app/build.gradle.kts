@@ -44,7 +44,6 @@ dependencies {
     implementation(Deps.Misc.hiltBinder)
     kapt(Deps.Misc.hiltBinderCompiler)
     coreLibraryDesugaring(Deps.Misc.desugaredLibs)
-    implementation(Deps.Commons.windowAnims)
     implementation(Deps.Misc.timber)
 
     testImplementation(Deps.Testing.jUnit)

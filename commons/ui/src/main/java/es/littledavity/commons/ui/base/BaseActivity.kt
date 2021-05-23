@@ -9,13 +9,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
-import com.paulrybitskyi.commons.ktx.showLongToast
-import com.paulrybitskyi.commons.ktx.showShortToast
 import es.littledavity.commons.ui.base.events.Command
 import es.littledavity.commons.ui.base.events.GeneralCommand
 import es.littledavity.commons.ui.base.navigation.Navigator
 import es.littledavity.commons.ui.base.events.Route
 import es.littledavity.commons.ui.extensions.observeIn
+import es.littledavity.commons.ui.extensions.showLongToast
+import es.littledavity.commons.ui.extensions.showShortToast
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 

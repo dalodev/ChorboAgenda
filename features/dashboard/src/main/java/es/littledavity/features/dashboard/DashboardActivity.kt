@@ -7,12 +7,12 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import com.paulrybitskyi.commons.window.anims.WindowAnimations
 import es.littledavity.commons.ui.extensions.overrideEnterTransition
 import javax.inject.Inject
 import androidx.navigation.fragment.NavHostFragment
-import com.paulrybitskyi.commons.ktx.intentFor
 import dagger.hilt.android.AndroidEntryPoint
+import es.littledavity.commons.ui.animations.WindowAnimations
+import es.littledavity.commons.ui.extensions.intentFor
 
 @AndroidEntryPoint
 class DashboardActivity : AppCompatActivity(R.layout.activity_dashboard) {
@@ -38,7 +38,7 @@ class DashboardActivity : AppCompatActivity(R.layout.activity_dashboard) {
     }
 
     private fun initNavGraph() {
-        val navHostFragment = (supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment)
+        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         val navController = navHostFragment.navController
         val graph = navController.navInflater.inflate(navGraphProvider.getNavGraphId())
 

@@ -3,6 +3,6 @@
  */
 package es.littledavity.database.chorbo
 
-import es.littledavity.database.chorbo.entities.Chorbo
+import es.littledavity.database.chorbo.entities.Contact
 
-internal typealias DatabaseChorbo = Chorbo
+internal typealias DatabaseContact = Contact

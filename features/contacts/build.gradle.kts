@@ -23,7 +23,6 @@ dependencies {
     implementation(Deps.Kotlin.coroutines)
     implementation(Deps.AndroidX.constraintLayout)
     implementation(Deps.AndroidX.fragmentKtx)
-    implementation(Deps.Commons.core)
 
     implementation(Deps.Google.daggerHilt)
     kapt(Deps.Google.daggerHiltCompiler)

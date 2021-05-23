@@ -11,21 +11,22 @@ import android.widget.FrameLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.paulrybitskyi.commons.ktx.getColor
-import com.paulrybitskyi.commons.ktx.getDimensionPixelSize
-import com.paulrybitskyi.commons.ktx.getString
-import com.paulrybitskyi.commons.ktx.layoutInflater
-import com.paulrybitskyi.commons.ktx.makeGone
-import com.paulrybitskyi.commons.ktx.makeInvisible
-import com.paulrybitskyi.commons.ktx.makeVisible
-import com.paulrybitskyi.commons.recyclerview.decorators.spacing.SpacingItemDecorator
-import com.paulrybitskyi.commons.recyclerview.decorators.spacing.policies.LastItemExclusionPolicy
-import com.paulrybitskyi.commons.recyclerview.utils.addOnScrollListener
-import com.paulrybitskyi.commons.recyclerview.utils.disableChangeAnimations
-import com.paulrybitskyi.commons.utils.observeChanges
+import es.littledavity.commons.ui.extensions.addOnScrollListener
 import es.littledavity.commons.ui.extensions.disableAfterAnimationEnds
+import es.littledavity.commons.ui.extensions.disableChangeAnimations
 import es.littledavity.commons.ui.extensions.fadeIn
+import es.littledavity.commons.ui.extensions.getColor
+import es.littledavity.commons.ui.extensions.getDimensionPixelSize
+import es.littledavity.commons.ui.extensions.getDrawable
+import es.littledavity.commons.ui.extensions.getString
+import es.littledavity.commons.ui.extensions.layoutInflater
+import es.littledavity.commons.ui.extensions.makeGone
+import es.littledavity.commons.ui.extensions.makeInvisible
+import es.littledavity.commons.ui.extensions.makeVisible
+import es.littledavity.commons.ui.extensions.observeChanges
 import es.littledavity.commons.ui.extensions.resetAnimation
+import es.littledavity.commons.ui.recyclerview.LastItemExclusionPolicy
+import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewContactsBinding
 
@@ -98,7 +99,7 @@ class ContactsView @JvmOverloads constructor(
     }
 
     private fun createDefaultUiState(): ContactsUiState = ContactsUiState.Empty(
-        iconId = R.drawable.gamepad_variant_outline,
+        iconId = R.drawable.account_heart_outline,
         title = getString(R.string.contacts_info_view_title)
     )
 
@@ -110,15 +111,25 @@ class ContactsView @JvmOverloads constructor(
 
     private fun handleUiStateChange(newState: ContactsUiState) {
         when (newState) {
-            is ContactsUiState.Empty -> onEmptyUiStateSelected()
+            is ContactsUiState.Empty -> onEmptyUiStateSelected(newState)
             is ContactsUiState.Loading -> onLoadingStateSelected()
             is ContactsUiState.Result -> onResultUiStateSelected(newState)
         }
     }
 
-    private fun onEmptyUiStateSelected() {
+    private fun onEmptyUiStateSelected(uiState: ContactsUiState.Empty) {
+        showEmptyView(uiState)
         hideLoadingIndicators()
         hideRecyclerView()
+    }
+
+    private fun showEmptyView(uiState: ContactsUiState.Empty) = with(binding.infoView) {
+        icon = getDrawable(uiState.iconId)
+        titleText = uiState.title
+
+        if (isVisible) return
+        makeVisible()
+        fadeIn()
     }
 
     private fun onLoadingStateSelected() {

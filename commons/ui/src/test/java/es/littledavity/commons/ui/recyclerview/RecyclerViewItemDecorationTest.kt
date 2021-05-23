@@ -244,7 +244,7 @@ class RecyclerViewItemDecorationTest {
         every { gridLayoutManager.spanCount } returns spanCount
         every { stateRecyclerView.itemCount } returns itemsCount
         every {
-            parentRecyclerView.getChildViewHolder(viewDecorate).adapterPosition
+            parentRecyclerView.getChildViewHolder(viewDecorate).absoluteAdapterPosition
         } returns position
 
         val outDecorate = Rect()
@@ -264,7 +264,7 @@ class RecyclerViewItemDecorationTest {
     ): Rect {
         every { stateRecyclerView.itemCount } returns itemsCount
         every {
-            parentRecyclerView.getChildViewHolder(viewDecorate).adapterPosition
+            parentRecyclerView.getChildViewHolder(viewDecorate).absoluteAdapterPosition
         } returns position
 
         val outDecorate = Rect()

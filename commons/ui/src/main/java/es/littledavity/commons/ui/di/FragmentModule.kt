@@ -8,7 +8,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.FragmentComponent
-import com.paulrybitskyi.commons.navigation.navController
+import es.littledavity.commons.ui.extensions.navController
 
 @Module
 @InstallIn(FragmentComponent::class)

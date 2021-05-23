@@ -16,6 +16,6 @@ internal object TablesModule {
 
     @Provides
     @Singleton
-    fun provideContactsTable(contactsDatabase: ChorboagendaDatabase) = contactsDatabase.chorboDao
+    fun provideContactsTable(contactsDatabase: ChorboagendaDatabase) = contactsDatabase.contactDao
 
 }

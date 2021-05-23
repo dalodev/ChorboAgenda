@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.paulrybitskyi.commons.widgets.toolbar.Toolbar
+    <es.littledavity.commons.ui.widgets.toolbar.Toolbar
         android:id="@+id/toolbar"
         style="@style/ChorboagendaTheme.Toolbar"
         android:layout_width="0dp"

@@ -8,6 +8,8 @@ plugins {
 }
 
 dependencies {
+    implementation(project(Deps.Local.data))
+    implementation(project(Deps.Local.core))
     implementation(project(Deps.Local.domain))
     implementation(project(Deps.Local.core))
 

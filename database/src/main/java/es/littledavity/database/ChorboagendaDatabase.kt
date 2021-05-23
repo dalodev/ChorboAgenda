@@ -6,8 +6,8 @@ package es.littledavity.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import es.littledavity.database.migrations.MIGRATION_1_2
-import es.littledavity.database.chorbo.entities.Chorbo
-import es.littledavity.database.chorbo.tables.ChorboDao
+import es.littledavity.database.chorbo.entities.Contact
+import es.littledavity.database.chorbo.tables.ContactDao
 
 /**
  * Chorboagenda room database storing the different requested information like: [Chorbo], etc...
@@ -15,17 +15,17 @@ import es.littledavity.database.chorbo.tables.ChorboDao
  * @see Database
  */
 @Database(
-    entities = [Chorbo::class],
+    entities = [Contact::class],
     version = Constants.VERSION
 )
 internal abstract class ChorboagendaDatabase : RoomDatabase() {
 
     /**
-     * Get [Chorbo] favorite data access object.
+     * Get [Contact] favorite data access object.
      *
-     * @return [Chorbo] favorite dao.
+     * @return [Contact] favorite dao.
      */
-    abstract val chorboDao: ChorboDao
+    abstract val contactDao: ContactDao
 }
 
 internal val MIGRATIONS = arrayOf(

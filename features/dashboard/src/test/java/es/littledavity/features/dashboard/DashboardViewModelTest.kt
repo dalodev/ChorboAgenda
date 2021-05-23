@@ -6,12 +6,17 @@ package es.littledavity.features.dashboard
 import app.cash.turbine.test
 import es.littledavity.features.dashboard.fragment.DashboardRoute
 import es.littledavity.features.dashboard.fragment.DashboardViewModel
-import kotlinx.coroutines.runBlocking
+import es.littledavity.testUtils.MainCoroutineRule
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
+import org.junit.Rule
 
 class DashboardViewModelTest {
+
+    @get:Rule
+    val mainCoroutineRule = MainCoroutineRule()
 
     private lateinit var viewModel: DashboardViewModel
 
@@ -21,7 +26,7 @@ class DashboardViewModelTest {
     }
 
     @Test
-    fun onClickSearch_shouldGoToSearchRoute() = runBlocking {
+    fun onClickSearch_shouldGoToSearchRoute() = mainCoroutineRule.runBlockingTest {
         viewModel.routeFlow.test {
             viewModel.onToolbarRightButtonClicked()
             assertThat(expectItem() is DashboardRoute.Search).isTrue

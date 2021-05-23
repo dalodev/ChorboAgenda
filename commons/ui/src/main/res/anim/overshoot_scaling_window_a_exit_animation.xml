@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shareInterpolator="false"
+    android:fillAfter="true">
+
+    <scale
+        android:fromXScale="@integer/overshoot_scaling_window_a_max_scale"
+        android:fromYScale="@integer/overshoot_scaling_window_a_max_scale"
+        android:toXScale="@integer/overshoot_scaling_window_a_min_scale"
+        android:toYScale="@integer/overshoot_scaling_window_a_min_scale"
+        android:pivotX="50%"
+        android:pivotY="50%"
+        android:duration="@integer/overshoot_scaling_animation_scale_element_duration"
+        android:interpolator="@android:anim/overshoot_interpolator"/>
+
+    <alpha
+        android:fromAlpha="@integer/overshoot_scaling_window_a_max_alpha"
+        android:toAlpha="@integer/overshoot_scaling_window_a_min_alpha"
+        android:duration="@integer/overshoot_scaling_animation_scale_element_duration"
+        android:interpolator="@android:anim/linear_interpolator"/>
+
+</set>

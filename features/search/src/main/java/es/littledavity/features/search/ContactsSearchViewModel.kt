@@ -68,16 +68,14 @@ internal class ContactsSearchViewModel @Inject constructor(
         onSearchActionRequested(savedStateHandle.get(KEY_SEARCH_QUERY) ?: "")
     }
 
-    private fun createEmptyContactsUiState(): ContactsUiState {
-        return uiStateFactory.createWithEmptyState(searchQuery)
-    }
+    private fun createEmptyContactsUiState() = uiStateFactory.createWithEmptyState(searchQuery)
 
     fun onToolbarBackButtonClicked() {
         route(ContactsSearchRoute.Back)
     }
 
     fun onSearchActionRequested(query: String) {
-        if (query.isEmpty() || (searchQuery == query)) return
+        if (query.isEmpty() || searchQuery == query) return
         searchQuery = query
         resetPagination()
         searchContacts()
@@ -89,7 +87,7 @@ internal class ContactsSearchViewModel @Inject constructor(
     }
 
     private fun searchContacts() = viewModelScope.launch {
-        if (searchQuery.orEmpty().isBlank()) {
+        if (searchQuery.isBlank()) {
             flowOf(createEmptyContactsUiState())
         } else {
             searchUseCase.execute(useCaseParams)
@@ -115,18 +113,16 @@ internal class ContactsSearchViewModel @Inject constructor(
         }
     }
 
-    private fun mapToUiState(contacts: List<Contact>): ContactsUiState {
-        return if (contacts.isEmpty()) {
-            createEmptyContactsUiState()
-        } else {
-            uiStateFactory.createWithResultState(contacts)
-        }
+    private fun mapToUiState(contacts: List<Contact>) = if (contacts.isEmpty()) {
+        createEmptyContactsUiState()
+    } else {
+        uiStateFactory.createWithResultState(contacts)
     }
 
     private fun isPerformingNewSearch() = totalContactsResult == null
 
     private fun aggregateResults(uiState: ContactsUiState): ContactsUiState {
-        if ((uiState !is ContactsUiState.Result) || (totalContactsResult == null)) {
+        if (uiState !is ContactsUiState.Result || totalContactsResult == null) {
             return uiState
         }
         val oldItems = checkNotNull(totalContactsResult).items
@@ -141,7 +137,7 @@ internal class ContactsSearchViewModel @Inject constructor(
         val paginationLimit = useCaseParams.pagination.limit
         val itemCount = uiState.items.size
 
-        hasMoreContactsToLoad = ((itemCount % paginationLimit) == 0)
+        hasMoreContactsToLoad = itemCount % paginationLimit == 0
     }
 
     private fun updateTotalContactsResult(uiState: ContactsUiState) {

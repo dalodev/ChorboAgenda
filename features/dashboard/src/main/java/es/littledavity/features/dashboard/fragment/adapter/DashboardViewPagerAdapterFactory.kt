@@ -17,10 +17,8 @@ internal class DashboardViewPagerAdapterFactoryImpl @Inject constructor(
 ) : DashboardViewPagerAdapterFactory {
 
 
-    override fun createAdapter(fragment: Fragment): DashboardViewPagerAdapter {
-        return DashboardViewPagerAdapter(
-            fragment = fragment,
-            fragmentFactory = fragmentFactory
-        )
-    }
+    override fun createAdapter(fragment: Fragment) = DashboardViewPagerAdapter(
+        fragment = fragment,
+        fragmentFactory = fragmentFactory
+    )
 }

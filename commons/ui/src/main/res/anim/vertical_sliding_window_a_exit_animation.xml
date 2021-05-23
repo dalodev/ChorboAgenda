@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:interpolator="@android:interpolator/linear">
+
+    <alpha
+        android:fromAlpha="@integer/vertical_sliding_window_a_alpha"
+        android:toAlpha="@integer/vertical_sliding_window_a_alpha"
+        android:duration="@integer/vertical_sliding_animation_duration"
+        android:zAdjustment="normal"/>
+
+</set>

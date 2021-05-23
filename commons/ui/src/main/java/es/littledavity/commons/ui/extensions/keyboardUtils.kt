@@ -5,8 +5,6 @@ package es.littledavity.commons.ui.extensions
 
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.paulrybitskyi.commons.ktx.getSystemService
-import com.paulrybitskyi.commons.ktx.postActionDelayed
 
 private const val KEYBOARD_SHOWING_DELAY = 300L
 

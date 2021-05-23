@@ -22,16 +22,12 @@ internal class ContactsUiStateFactoryImpl @Inject constructor(
     private val contactsModelMapper: ContactsModelMapper
 ) : ContactsUiStateFactory {
 
-    override fun createWithEmptyState(): ContactsUiState {
-        return ContactsUiState.Empty(
-            iconId = R.drawable.account_heart_outline,
-            title = stringProvider.getString(R.string.contacts_fragment_info_title)
-        )
-    }
+    override fun createWithEmptyState() = ContactsUiState.Empty(
+        iconId = R.drawable.account_heart_outline,
+        title = stringProvider.getString(R.string.contacts_fragment_info_title)
+    )
 
-    override fun createWithLoadingState(): ContactsUiState {
-        return ContactsUiState.Loading
-    }
+    override fun createWithLoadingState() = ContactsUiState.Loading
 
     override fun createWithResultState(contacts: List<Contact>): ContactsUiState {
         if (contacts.isEmpty()) return createWithEmptyState()

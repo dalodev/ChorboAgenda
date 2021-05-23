@@ -12,16 +12,21 @@ import es.littledavity.domain.contacts.usecases.SearchContactsUseCase
 import es.littledavity.testUtils.FakeDispatcherProvider
 import es.littledavity.testUtils.FakeErrorMapper
 import es.littledavity.testUtils.FakeLogger
+import es.littledavity.testUtils.MainCoroutineRule
 import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
-import kotlinx.coroutines.runBlocking
-import org.assertj.core.api.Assertions
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
+import org.junit.Rule
 import org.junit.Test
+import kotlinx.coroutines.test.runBlockingTest
 
-class ContactsSearchViewModelTest {
+internal class ContactsSearchViewModelTest {
+
+    @get:Rule
+    val mainCoroutineRule = MainCoroutineRule()
 
     private lateinit var viewModel: ContactsSearchViewModel
 
@@ -32,8 +37,9 @@ class ContactsSearchViewModelTest {
     @Before
     fun setup() {
         MockKAnnotations.init(this)
+        logger = FakeLogger()
         viewModel = ContactsSearchViewModel(
-            searchContactsUseCase = searchContactsUseCase,
+            searchUseCase = searchContactsUseCase,
             uiStateFactory = FakeGamesSearchUiStateFactory(),
             dispatcherProvider = FakeDispatcherProvider(),
             errorMapper = FakeErrorMapper(),
@@ -42,43 +48,34 @@ class ContactsSearchViewModelTest {
         )
     }
 
-    private fun setupSavedStateHandle(): SavedStateHandle {
-        return mockk(relaxed = true) {
-            every { get<String>(any()) } returns ""
-        }
+    private fun setupSavedStateHandle(): SavedStateHandle = mockk(relaxed = true) {
+        every { get<String>(any()) } returns ""
     }
 
     @Test
-    fun onToolbarBackButtonClicked_shouldRoute() = runBlocking {
+    fun onToolbarBackButtonClicked_shouldRoute() = mainCoroutineRule.runBlockingTest {
 
         viewModel.routeFlow.test {
-            Assertions.assertThat(expectItem() is ContactsSearchRoute.Back).isTrue
+            viewModel.onToolbarBackButtonClicked()
+            assertThat(expectItem() is ContactsSearchRoute.Back).isTrue
         }
     }
 
     private class FakeGamesSearchUiStateFactory : ContactsSearchUiStateFactory {
 
-        override fun createWithEmptyState(searchQuery: String): ContactsUiState {
-            return ContactsUiState.Empty(iconId = -1, title = "title")
-        }
+        override fun createWithEmptyState(searchQuery: String) = ContactsUiState.Empty(iconId = -1, title = "title")
 
-        override fun createWithLoadingState(): ContactsUiState {
-            return ContactsUiState.Loading
-        }
+        override fun createWithLoadingState() = ContactsUiState.Loading
 
-        override fun createWithResultState(contacts: List<Contact>): ContactsUiState {
-            return ContactsUiState.Result(
-                contacts.map {
-                    ContactModel(
-                        id = it.id,
-                        image = it.image,
-                        name = it.name,
-                        phone = it.phone
-                    )
-                }
-            )
-        }
-
+        override fun createWithResultState(contacts: List<Contact>) = ContactsUiState.Result(
+            contacts.map {
+                ContactModel(
+                    id = it.id,
+                    image = it.image,
+                    name = it.name,
+                    phone = it.phone
+                )
+            }
+        )
     }
-
 }

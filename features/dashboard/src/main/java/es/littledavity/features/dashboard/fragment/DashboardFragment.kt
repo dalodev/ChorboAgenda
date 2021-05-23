@@ -7,15 +7,15 @@ import android.os.Bundle
 import android.os.Parcelable
 import android.view.MenuItem
 import androidx.fragment.app.viewModels
-import com.paulrybitskyi.commons.ktx.applyWindowBottomInsetAsMargin
-import com.paulrybitskyi.commons.ktx.applyWindowTopInsetAsPadding
-import com.paulrybitskyi.commons.ktx.getColor
-import com.paulrybitskyi.commons.ktx.getSerializable
-import com.paulrybitskyi.commons.material.utils.setItemColors
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.base.events.Route
 import es.littledavity.commons.ui.bindings.viewBinding
+import es.littledavity.commons.ui.extensions.applyWindowBottomInsetAsMargin
+import es.littledavity.commons.ui.extensions.applyWindowTopInsetAsPadding
+import es.littledavity.commons.ui.extensions.getColor
+import es.littledavity.commons.ui.extensions.getSerializable
+import es.littledavity.commons.ui.extensions.setItemColors
 import es.littledavity.features.dashboard.R
 import es.littledavity.features.dashboard.databinding.FragmentDashboardBinding
 import es.littledavity.features.dashboard.fragment.DashboardPage.Companion.toDashboardPageFromMenuItemId
@@ -83,10 +83,8 @@ internal class DashboardFragment : BaseFragment<
         isUserInputEnabled = false
     }
 
-    private fun initViewPagerAdapter(): DashboardViewPagerAdapter {
-        return viewPagerAdapterFactory.createAdapter(this)
-            .also { viewPagerAdapter = it }
-    }
+    private fun initViewPagerAdapter() = viewPagerAdapterFactory.createAdapter(this)
+        .also { viewPagerAdapter = it }
 
     private fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
         viewBinding.viewPagerContainer.viewPager.setCurrentItem(
@@ -97,14 +95,12 @@ internal class DashboardFragment : BaseFragment<
         return true
     }
 
-    private fun MenuItem.toPagePosition(): Int {
-        return itemId.toDashboardPageFromMenuItemId().position
-    }
+    private fun MenuItem.toPagePosition() = itemId.toDashboardPageFromMenuItemId().position
 
     override fun onRoute(route: Route) {
         super.onRoute(route)
 
-        when(route) {
+        when (route) {
             is DashboardRoute.Search -> navigator.goToSearch()
         }
     }

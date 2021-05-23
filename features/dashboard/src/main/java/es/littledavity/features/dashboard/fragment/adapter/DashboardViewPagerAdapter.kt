@@ -14,16 +14,11 @@ internal class DashboardViewPagerAdapter(
 ) : FragmentStateAdapter(fragment) {
 
 
-    override fun createFragment(position: Int): Fragment {
-        return when(position.toDashboardPageFromPosition()) {
-            DashboardPage.CONTACTS -> fragmentFactory.contactsFragment()
-            //TODO add bottom nav navigations
-        }
+    override fun createFragment(position: Int) = when (position.toDashboardPageFromPosition()) {
+        DashboardPage.CONTACTS -> fragmentFactory.contactsFragment()
+        //TODO add bottom nav navigations
     }
 
-
-    override fun getItemCount(): Int {
-        return DashboardPage.values().size
-    }
+    override fun getItemCount() = DashboardPage.values().size
 
 }

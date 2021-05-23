@@ -24,9 +24,6 @@ dependencies {
     implementation(Deps.AndroidX.constraintLayout)
     implementation(Deps.AndroidX.fragmentKtx)
 
-    implementation(Deps.Commons.core)
-    implementation(Deps.Commons.ktx)
-
     implementation(Deps.Google.daggerHilt)
     kapt(Deps.Google.daggerHiltCompiler)
     implementation(Deps.Misc.hiltBinder)
@@ -36,6 +33,7 @@ dependencies {
     testImplementation(project(Deps.Local.librariesTest))
     testImplementation(Deps.Testing.jUnit)
     testImplementation(Deps.Testing.mockk)
+    testImplementation(Deps.Testing.coroutines)
     testImplementation(Deps.Testing.archCore)
     testImplementation(Deps.Testing.turbine)
     testImplementation(Deps.Testing.assertJ)

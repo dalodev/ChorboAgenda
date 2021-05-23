@@ -12,17 +12,17 @@ import android.view.inputmethod.EditorInfo
 import android.widget.FrameLayout
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
-import com.paulrybitskyi.commons.ktx.endMargin
-import com.paulrybitskyi.commons.ktx.getColor
-import com.paulrybitskyi.commons.ktx.getDimension
-import com.paulrybitskyi.commons.ktx.getDimensionPixelSize
-import com.paulrybitskyi.commons.ktx.layoutInflater
-import com.paulrybitskyi.commons.ktx.onClick
-import com.paulrybitskyi.commons.ktx.setScale
-import com.paulrybitskyi.commons.ktx.startMargin
-import com.paulrybitskyi.commons.ktx.views.onTextChanged
+import es.littledavity.commons.ui.extensions.endMargin
+import es.littledavity.commons.ui.extensions.getColor
+import es.littledavity.commons.ui.extensions.getDimension
+import es.littledavity.commons.ui.extensions.getDimensionPixelSize
 import es.littledavity.commons.ui.extensions.hideKeyboard
+import es.littledavity.commons.ui.extensions.layoutInflater
+import es.littledavity.commons.ui.extensions.onClick
+import es.littledavity.commons.ui.extensions.onTextChanged
+import es.littledavity.commons.ui.extensions.setScale
 import es.littledavity.commons.ui.extensions.showKeyboard
+import es.littledavity.commons.ui.extensions.startMargin
 import es.littledavity.commons.ui.widgets.databinding.ViewSearchToolbarBinding
 
 class SearchToolbar @JvmOverloads constructor(
