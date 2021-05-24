@@ -118,12 +118,12 @@ class ContactsView @JvmOverloads constructor(
     }
 
     private fun onEmptyUiStateSelected(uiState: ContactsUiState.Empty) {
-        showEmptyView(uiState)
+        showInfoView(uiState)
         hideLoadingIndicators()
         hideRecyclerView()
     }
 
-    private fun showEmptyView(uiState: ContactsUiState.Empty) = with(binding.infoView) {
+    private fun showInfoView(uiState: ContactsUiState.Empty) = with(binding.infoView) {
         icon = getDrawable(uiState.iconId)
         titleText = uiState.title
 
@@ -132,11 +132,17 @@ class ContactsView @JvmOverloads constructor(
         fadeIn()
     }
 
+    private fun hideInfoView() = with(binding.infoView) {
+        makeGone()
+        resetAnimation()
+    }
+
     private fun onLoadingStateSelected() {
         if (adapterItems.isNotEmpty()) {
             showSwipeRefresh()
         } else {
             showProgressBar()
+            hideInfoView()
             hideRecyclerView()
         }
     }
@@ -145,6 +151,7 @@ class ContactsView @JvmOverloads constructor(
         adapterItems = uiState.items.toAdapterItems()
 
         showRecyclerView()
+        hideInfoView()
         hideLoadingIndicators()
     }
 

@@ -15,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:toolbar_rightButtonIcon="@drawable/search"
+        app:toolbar_extraRightButtonIcon="@drawable/add"
         app:toolbar_titleText="@string/dashboard_toolbar_title" />
 
     <es.littledavity.commons.ui.widgets.ViewPager2Container

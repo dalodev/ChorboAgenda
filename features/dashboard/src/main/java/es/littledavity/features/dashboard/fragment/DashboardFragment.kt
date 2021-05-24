@@ -66,6 +66,7 @@ internal class DashboardFragment : BaseFragment<
         enableBack = false
         applyWindowTopInsetAsPadding()
         onRightButtonClickListener = { viewModel.onToolbarRightButtonClicked() }
+        onExtraRightButtonClickListener = { viewModel.onExtraToolbarRightButtonClicked() }
     }
 
     private fun initBottomNavigation() = with(viewBinding.bottomNav) {

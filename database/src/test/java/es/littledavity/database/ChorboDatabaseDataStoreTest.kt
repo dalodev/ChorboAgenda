@@ -1,9 +1,13 @@
 package es.littledavity.database
 
 import app.cash.turbine.test
+import es.littledavity.core.providers.TimestampProvider
+import es.littledavity.data.contacts.DataContact
 import es.littledavity.database.chorbo.datastores.ContactMapper
 import es.littledavity.database.chorbo.datastores.ContactsDatabaseDataStore
+import es.littledavity.database.chorbo.datastores.SaveContactFactory
 import es.littledavity.database.chorbo.datastores.mapToDatabaseContacts
+import es.littledavity.database.chorbo.entities.Contact
 import es.littledavity.database.chorbo.tables.ContactDao
 import es.littledavity.testUtils.DATA_CONTACTS
 import es.littledavity.testUtils.DATA_PAGINATION
@@ -25,16 +29,20 @@ class ChorboDatabaseDataStoreTest {
     private lateinit var contactMapper: ContactMapper
     private lateinit var dataStore: ContactsDatabaseDataStore
 
+    @MockK
+    private lateinit var timestampProvider: TimestampProvider
+
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
 
-        contactMapper = ContactMapper()
+        contactMapper = ContactMapper(timestampProvider)
 
         dataStore = ContactsDatabaseDataStore(
             contactDao = contactDao,
             contactMapper = contactMapper,
-            dispatcherProvider = FakeDispatcherProvider()
+            dispatcherProvider = FakeDispatcherProvider(),
+            saveContactFactory = FakeSaveContactFactory()
         )
     }
 
@@ -53,5 +61,16 @@ class ChorboDatabaseDataStoreTest {
             assertThat(expectItem()).isEqualTo(DATA_CONTACTS)
             expectComplete()
         }
+    }
+
+    private class FakeSaveContactFactory : SaveContactFactory {
+
+        override fun createContact(contact: DataContact) = Contact(
+            id = 1,
+            name = "test",
+            image = null,
+            phone = "test",
+            createTimestamp = 500L
+        )
     }
 }

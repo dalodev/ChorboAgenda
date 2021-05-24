@@ -19,7 +19,9 @@ class ChorboTest {
             id = chorboId,
             name = chorboName,
             image = image,
-            phone = whatsapp
+            phone = whatsapp,
+            createTimestamp = 500L
+
         )
         assertEquals(chorboId, chorboFavorite.id)
         assertEquals(chorboName, chorboFavorite.name)

@@ -33,19 +33,22 @@ private val fakeChorbos = listOf(
         id = 1,
         name = "Noemi",
         image = "test",
-        phone = "test"
+        phone = "test",
+        createTimestamp = 500L
     ),
     Contact(
         id = 2,
         name = "Ximena",
         image = "test",
-        phone = "test"
+        phone = "test",
+        createTimestamp = 500L
     ),
     Contact(
         id = 3,
         name = "Ángeles",
         image = "test",
-        phone = "test"
+        phone = "test",
+        createTimestamp = 500L
     )
 )
 
@@ -141,7 +144,7 @@ class ChorboDaoTest : TestRobolectric() {
     fun deleteChorbo_NoStored_ShouldNotRemoveNothing() = runBlocking {
         contactDao.insertChorbos(fakeChorbos)
 
-        val chorboToRemove = Contact(5, "test", "test", "+34")
+        val chorboToRemove = Contact(5, "test", "test", "+34", 500L)
         contactDao.deleteChorbo(chorboToRemove)
 
         assertEquals(fakeChorbos, contactDao.getChorbos())

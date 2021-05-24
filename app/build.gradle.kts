@@ -11,7 +11,6 @@ plugins {
     detekt()
 }
 
-
 android {
     compileOptions {
         isCoreLibraryDesugaringEnabled = true

@@ -26,7 +26,26 @@ internal class ContactsDatabaseDataStore @Inject constructor(
     private val contactDao: ContactDao,
     private val contactMapper: ContactMapper,
     private val dispatcherProvider: DispatcherProvider,
+    private val saveContactFactory: SaveContactFactory
 ) : ContactsLocalDataStore {
+
+    override suspend fun insertChorbo(chorbo: DataContact) = contactDao.insertChorbo(
+        withContext(dispatcherProvider.computation) {
+            saveContactFactory.createContact(chorbo)
+        }
+    )
+
+    /**
+     * Add to database a list of chorbos.
+     *
+     * @param chorbos List of chorbos.
+     */
+    override suspend fun insertChorbos(chorbos: List<DataContact>) =
+        contactDao.insertChorbos(
+            withContext(dispatcherProvider.computation) {
+                contactMapper.mapToDatabaseContacts(chorbos)
+            }
+        )
 
     override suspend fun searchGames(
         searchQuery: String,
@@ -50,6 +69,7 @@ internal class ContactsDatabaseDataStore @Inject constructor(
         .map(contactMapper::mapToDataContact)
         .flowOn(dispatcherProvider.computation)
 
+    //Old
     /**
      * Obtain all database added chorbo ordering by name field.
      *
@@ -115,14 +135,6 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      */
     suspend fun deleteChorbo(chorbo: Contact) =
         contactDao.deleteChorbo(chorbo)
-
-    /**
-     * Add to database a list of chorbos.
-     *
-     * @param chorbos List of chorbos.
-     */
-    suspend fun insertChorbos(chorbos: List<Contact>) =
-        contactDao.insertChorbos(chorbos)
 
     /**
      * Add to database a chrobo.

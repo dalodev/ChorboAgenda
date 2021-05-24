@@ -6,6 +6,7 @@ package es.littledavity.database.chorbo
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
+import es.littledavity.data.contacts.DataContact
 import es.littledavity.database.chorbo.datastores.ContactsDatabaseDataStore
 import es.littledavity.database.chorbo.entities.Contact
 import es.littledavity.database.chorbo.tables.ContactDao
@@ -25,7 +26,7 @@ class ContactsDatabaseDataStoreTest {
     @InjectMocks
     internal lateinit var chorboRepository: ContactsDatabaseDataStore
 
-    private val chorbo = Contact(2, "Ángeles", "test", "+34")
+    private val chorbo = DataContact(2, "Ángeles", "test", "+34")
 
     @Before
     fun setUp() {
@@ -96,7 +97,7 @@ class ContactsDatabaseDataStoreTest {
 
     @Test
     fun deleteChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
-        val chorboToDelete = chorbo
+        val chorboToDelete = Contact(chorbo.id, chorbo.name, chorbo.image, chorbo.phone, 500L)
         val chorboCaptor = argumentCaptor<Contact>()
         chorboRepository.deleteChorbo(chorboToDelete)
 

@@ -3,17 +3,21 @@
  */
 package es.littledavity.database.chorbo.datastores
 
+import es.littledavity.core.providers.TimestampProvider
 import es.littledavity.data.contacts.DataContact
 import es.littledavity.database.chorbo.DatabaseContact
 import javax.inject.Inject
 
-internal class ContactMapper @Inject constructor() {
+internal class ContactMapper @Inject constructor(
+    private val timestampProvider: TimestampProvider
+) {
 
     fun mapToDatabaseContact(dataContact: DataContact) = DatabaseContact(
         id = dataContact.id,
         name = dataContact.name,
         image = dataContact.image,
-        phone = dataContact.phone
+        phone = dataContact.phone,
+        createTimestamp = timestampProvider.getUnixTimestamp()
     )
 
     fun mapToDataContact(databaseContact: DatabaseContact) = DataContact(

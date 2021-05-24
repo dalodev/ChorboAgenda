@@ -64,6 +64,7 @@ object Deps {
         const val featuresContacts = ":features:contacts"
         const val featuresSearch = ":features:search"
         const val featuresNew = ":features:new"
+        const val featuresInfo = ":features:info"
     }
 
     object Kotlin {

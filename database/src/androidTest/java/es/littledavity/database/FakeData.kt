@@ -9,5 +9,6 @@ internal val DATABASE_CHORBO = DatabaseContact(
     id = 1,
     name = "Name1",
     image = "",
-    phone = ""
+    phone = "",
+    createTimestamp = 500L
 )

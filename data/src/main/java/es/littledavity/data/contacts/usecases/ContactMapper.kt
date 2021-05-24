@@ -15,6 +15,13 @@ internal class ContactMapper @Inject constructor() {
         image = contact.image,
         phone = contact.phone
     )
+
+    fun mapToDataContact(contact: DomainContact) = DataContact(
+        id = contact.id,
+        name = contact.name,
+        image = contact.image,
+        phone = contact.phone
+    )
 }
 
 internal fun ContactMapper.mapToDomainContacts(dataGames: List<DataContact>) = dataGames.map(::mapToDomainContact)

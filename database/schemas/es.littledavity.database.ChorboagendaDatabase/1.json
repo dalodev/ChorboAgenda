@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "3e8fe1d8a8b589f4aec5517c6c85e232",
+    "identityHash": "b4a727a10918879f6279d278d3358f90",
     "entities": [
       {
         "tableName": "chorbo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `name` TEXT NOT NULL, `image` TEXT NOT NULL, `phone` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `image` TEXT, `phone` TEXT NOT NULL, `create_timestamp` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -24,12 +24,18 @@
             "fieldPath": "image",
             "columnName": "image",
             "affinity": "TEXT",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "phone",
             "columnName": "phone",
             "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createTimestamp",
+            "columnName": "create_timestamp",
+            "affinity": "INTEGER",
             "notNull": true
           }
         ],
@@ -37,7 +43,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": false
+          "autoGenerate": true
         },
         "indices": [],
         "foreignKeys": []
@@ -46,7 +52,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3e8fe1d8a8b589f4aec5517c6c85e232')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b4a727a10918879f6279d278d3358f90')"
     ]
   }
 }
