@@ -113,7 +113,7 @@ class ContactsDatabaseDataStoreTest {
             chorbo
         )
         val chorbosInsertedCaptor = argumentCaptor<List<Contact>>()
-        chorboRepository.insertChorbos(chorbosToInsert)
+        chorboRepository.insertContacts(chorbosToInsert)
 
         verify(contactDao).insertChorbos(chorbosInsertedCaptor.capture())
         assertEquals(chorbosToInsert, chorbosInsertedCaptor.lastValue)

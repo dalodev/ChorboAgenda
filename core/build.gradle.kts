@@ -28,6 +28,7 @@ dependencies {
     implementation(Deps.Misc.timber)
     implementation(Deps.Misc.dexter)
     implementation(Deps.Misc.kotlinResult)
+    implementation(Deps.Kotlin.serialization)
 
     implementation(Deps.Google.daggerHilt)
     kapt(Deps.Google.daggerHiltCompiler)

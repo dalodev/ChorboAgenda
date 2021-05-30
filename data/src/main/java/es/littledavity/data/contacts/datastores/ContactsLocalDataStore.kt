@@ -9,11 +9,13 @@ import kotlinx.coroutines.flow.Flow
 
 interface ContactsLocalDataStore {
 
-    suspend fun insertChorbos(chorbos: List<DataContact>)
+    suspend fun getContact(id: Int): DataContact?
 
-    suspend fun insertChorbo(chorbo: DataContact)
+    suspend fun insertContacts(chorbos: List<DataContact>)
 
-    suspend fun searchGames(
+    suspend fun insertContact(chorbo: DataContact)
+
+    suspend fun searchContacts(
         searchQuery: String,
         pagination: Pagination
     ): List<DataContact>

@@ -7,7 +7,7 @@ import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
-import es.littledavity.domain.contacts.Contact
+import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.domain.contacts.usecases.SearchContactsUseCase
 import es.littledavity.testUtils.FakeDispatcherProvider
 import es.littledavity.testUtils.FakeErrorMapper

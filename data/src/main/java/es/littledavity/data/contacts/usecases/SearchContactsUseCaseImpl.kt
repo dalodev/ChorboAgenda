@@ -6,7 +6,7 @@ package es.littledavity.data.contacts.usecases
 import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.core.providers.DispatcherProvider
 import es.littledavity.core.utils.asSuccess
-import es.littledavity.domain.contacts.Contact
+import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.domain.contacts.usecases.SearchContactsUseCase
 import es.littledavity.domain.contacts.usecases.SearchContactsUseCase.Params
 import kotlinx.coroutines.flow.flow
@@ -41,7 +41,7 @@ internal class SearchContactsUseCaseImpl @Inject constructor(
         val pagination = params.pagination.toDataPagination()
 
         return gamesDataStores.local
-            .searchGames(params.searchQuery, pagination)
+            .searchContacts(params.searchQuery, pagination)
             .let(contactMapper::mapToDomainContacts)
             .asSuccess()
             // Delaying to give a sense of "loading" since it's really fast without it

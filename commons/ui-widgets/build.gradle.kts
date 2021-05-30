@@ -27,6 +27,7 @@ dependencies {
     implementation(project(Deps.Local.domain))
     implementation(project(Deps.Local.core))
     implementation(project(Deps.Local.commonsUi))
+    implementation(project(Deps.Local.librariesImageLoading))
 
     implementation(Deps.AndroidX.recyclerView)
     implementation(Deps.AndroidX.constraintLayout)

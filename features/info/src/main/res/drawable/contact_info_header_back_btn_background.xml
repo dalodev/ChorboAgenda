@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- The Lowest Layer To Set the Padding -->
+
+    <item>
+
+        <shape android:shape="rectangle">
+
+            <padding
+                android:top="@dimen/contact_info_header_back_button_drawable_bg_padding"
+                android:bottom="@dimen/contact_info_header_back_button_drawable_bg_padding"
+                android:left="@dimen/contact_info_header_back_button_drawable_bg_padding"
+                android:right="@dimen/contact_info_header_back_button_drawable_bg_padding"/>
+
+            <solid android:color="@android:color/transparent"/>
+
+        </shape>
+
+    </item>
+
+    <!-- The Layer To Set The Default Background Color -->
+
+    <item>
+
+        <shape android:shape="oval">
+
+            <solid android:color="@color/contact_info_header_back_button_drawable_middleground_color"/>
+
+        </shape>
+
+    </item>
+
+    <!-- The Layer To Set The Background Color On Click -->
+
+    <item>
+
+        <ripple android:color="?attr/colorControlHighlight">
+
+            <item android:id="@android:id/mask">
+
+                <shape android:shape="oval">
+
+                    <padding
+                        android:top="@dimen/contact_info_header_back_button_drawable_fog_padding"
+                        android:bottom="@dimen/contact_info_header_back_button_drawable_fog_padding"
+                        android:left="@dimen/contact_info_header_back_button_drawable_fog_padding"
+                        android:right="@dimen/contact_info_header_back_button_drawable_fog_padding"/>
+
+                    <solid android:color="@android:color/white"/>
+
+                </shape>
+
+            </item>
+
+        </ripple>
+
+    </item>
+
+</layer-list>

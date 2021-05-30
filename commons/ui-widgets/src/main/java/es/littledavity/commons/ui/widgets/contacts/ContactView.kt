@@ -33,7 +33,7 @@ class ContactView @JvmOverloads constructor(
         }
         get() = binding.name.text
 
-    var phone: CharSequence
+    var phone: CharSequence?
         set(value) {
             binding.phone.text = value
         }

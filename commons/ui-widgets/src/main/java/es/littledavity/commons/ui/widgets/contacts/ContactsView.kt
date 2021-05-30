@@ -99,7 +99,7 @@ class ContactsView @JvmOverloads constructor(
     }
 
     private fun createDefaultUiState(): ContactsUiState = ContactsUiState.Empty(
-        iconId = R.drawable.account_heart_outline,
+        iconId = R.drawable.contact_outline,
         title = getString(R.string.contacts_info_view_title)
     )
 

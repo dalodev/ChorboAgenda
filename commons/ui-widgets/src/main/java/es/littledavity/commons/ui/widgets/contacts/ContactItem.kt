@@ -34,7 +34,7 @@ internal class ContactItem(model: ContactModel) : AbstractItem<
     ) : RecyclerView.ViewHolder(view), HasListeners {
 
         fun bind(model: ContactModel) = with(view) {
-            image = model.image
+            image = model.coverImageUrl
             name = model.name
             phone = model.phone
         }

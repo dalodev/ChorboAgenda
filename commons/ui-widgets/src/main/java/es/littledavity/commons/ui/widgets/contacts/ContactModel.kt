@@ -5,7 +5,9 @@ package es.littledavity.commons.ui.widgets.contacts
 
 data class ContactModel(
     val id: Int,
-    val image: String?,
+    val coverImageUrl: String?,
     val name: String,
-    val phone: String
+    val phone: String?,
+    val creationDate: String,
+    val instagram: String?
 )

@@ -16,7 +16,7 @@ import es.littledavity.core.utils.Logger
 import es.littledavity.core.utils.onError
 import es.littledavity.domain.commons.entities.Pagination
 import es.littledavity.domain.commons.entities.nextOffsetPage
-import es.littledavity.domain.contacts.Contact
+import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.domain.contacts.usecases.SearchContactsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

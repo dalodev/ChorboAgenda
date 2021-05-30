@@ -3,6 +3,9 @@
  */
 package es.littledavity.data.contacts
 
-import es.littledavity.data.contacts.entities.Contact
+import es.littledavity.data.contacts.entities.*
 
 typealias DataContact = Contact
+typealias DataImage = Image
+typealias DataCreationDate = CreationDate
+typealias DataCreationDateCategory = CreationDateCategory

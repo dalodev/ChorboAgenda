@@ -14,7 +14,7 @@ internal class SaveContactUseCaseImpl @Inject constructor(
 ) : SaveContactUseCase {
 
     override suspend fun execute(params: SaveContactUseCase.Params) {
-        contactsLocalDataStore.insertChorbo(contactMapper.mapToDataContact(params.contact))
+        contactsLocalDataStore.insertContact(contactMapper.mapToDataContact(params.contact))
     }
 
 }

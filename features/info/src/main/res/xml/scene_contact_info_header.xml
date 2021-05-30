@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ConstraintSet android:id="@+id/expanded">
+
+        <Constraint android:id="@id/galleryScrimView">
+
+            <PropertySet android:visibility="invisible" />
+
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@color/contact_info_header_gallery_scrim_bg_color_expanded" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/pageIndicatorTv">
+
+            <PropertySet app:visibilityMode="ignore" />
+
+        </Constraint>
+
+        <Constraint android:id="@+id/backdropCv">
+
+            <CustomAttribute
+                app:attributeName="cardElevation"
+                app:customDimension="@dimen/contact_info_header_backdrop_elevation_expanded" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/nameTv">
+
+            <Transform
+                android:scaleX="1.0"
+                android:scaleY="1.0" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/phoneTv">
+
+            <PropertySet app:visibilityMode="ignore" />
+
+        </Constraint>
+
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/collapsed">
+
+        <Constraint android:id="@id/galleryView">
+
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="@dimen/contact_info_header_gallery_height_collapsed"
+                app:layout_constraintBottom_toTopOf="@id/backdropCv"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/galleryScrimView">
+
+            <PropertySet android:visibility="visible" />
+
+            <CustomAttribute
+                app:attributeName="backgroundColor"
+                app:customColorValue="@color/contact_info_header_gallery_scrim_bg_color_collapsed" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/pageIndicatorTv">
+
+            <PropertySet app:visibilityMode="ignore" />
+
+            <Transform android:translationX="@dimen/contact_info_header_page_indicator_transition_delta_x" />
+
+        </Constraint>
+
+        <Constraint android:id="@+id/backdropCv">
+
+            <CustomAttribute
+                app:attributeName="cardElevation"
+                app:customDimension="@dimen/contact_info_header_backdrop_elevation_collapsed" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/coverView">
+
+            <PropertySet android:visibility="invisible" />
+
+            <Transform
+                android:translationX="@dimen/contact_info_header_cover_transition_delta_x"
+                android:translationY="@dimen/contact_info_header_cover_transition_delta_y" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/likeBtn">
+
+            <PropertySet android:alpha="0" />
+
+            <Transform
+                android:scaleX="0"
+                android:scaleY="0" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/nameTv">
+
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/contact_info_header_first_title_margin_start_collapsed"
+                android:layout_marginEnd="@dimen/contact_info_header_first_title_margin_end_collapsed"
+                app:layout_constraintBottom_toBottomOf="@id/galleryView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/backBtnIv"
+                app:layout_constraintTop_toTopOf="@id/galleryView" />
+
+            <Transform
+                android:scaleX="1.1"
+                android:scaleY="1.1" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/phoneTv">
+
+            <PropertySet
+                android:alpha="0"
+                app:visibilityMode="ignore" />
+
+            <Transform android:translationX="@dimen/contact_info_header_secondary_text_transition_delta_x" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/creationDateTv">
+
+            <PropertySet android:visibility="invisible" />
+
+            <Transform android:translationX="@dimen/contact_info_header_secondary_text_transition_delta_x" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/instagramTv">
+
+            <PropertySet android:visibility="invisible" />
+
+            <Transform android:translationX="@dimen/contact_info_header_secondary_text_transition_delta_x" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/ratingIv">
+
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/contact_info_header_info_view_vertical_margin"
+                android:layout_marginBottom="@dimen/contact_info_header_info_view_vertical_margin"
+                app:layout_constraintBottom_toTopOf="@id/recyclerView"
+                app:layout_constraintEnd_toStartOf="@id/countryNameIv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/galleryView" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/countryNameIv">
+
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/contact_info_header_info_view_vertical_margin"
+                android:layout_marginBottom="@dimen/contact_info_header_info_view_vertical_margin"
+                app:layout_constraintBottom_toTopOf="@id/recyclerView"
+                app:layout_constraintEnd_toStartOf="@id/ageTv"
+                app:layout_constraintStart_toEndOf="@id/ratingIv"
+                app:layout_constraintTop_toBottomOf="@id/galleryView" />
+
+        </Constraint>
+
+        <Constraint android:id="@id/ageTv">
+
+            <Layout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/contact_info_header_info_view_vertical_margin"
+                android:layout_marginBottom="@dimen/contact_info_header_info_view_vertical_margin"
+                app:layout_constraintBottom_toTopOf="@id/recyclerView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/countryNameIv"
+                app:layout_constraintTop_toBottomOf="@id/galleryView" />
+
+        </Constraint>
+
+    </ConstraintSet>
+
+    <Transition
+        app:constraintSetEnd="@id/collapsed"
+        app:constraintSetStart="@id/expanded"
+        app:duration="@integer/contact_info_header_animation_duration"
+        app:motionInterpolator="easeInOut">
+
+        <KeyFrameSet>
+
+            <KeyTrigger
+                app:framePosition="1"
+                app:motionTarget="@id/galleryView"
+                app:triggerId="@+id/configureGallery" />
+
+            <KeyAttribute
+                android:alpha="0"
+                android:translationX="@dimen/contact_info_header_secondary_text_transition_delta_x"
+                app:framePosition="15"
+                app:motionTarget="@id/phoneTv" />
+
+            <KeyAttribute
+                android:alpha="0"
+                android:translationX="@dimen/contact_info_header_secondary_text_transition_delta_x"
+                app:framePosition="15"
+                app:motionTarget="@id/creationDateTv" />
+
+            <KeyAttribute
+                android:alpha="0"
+                android:translationX="@dimen/contact_info_header_secondary_text_transition_delta_x"
+                app:framePosition="15"
+                app:motionTarget="@id/instagramTv" />
+
+            <KeyAttribute
+                android:alpha="0"
+                android:translationX="@dimen/contact_info_header_cover_transition_delta_x"
+                android:translationY="@dimen/contact_info_header_cover_transition_delta_y"
+                app:framePosition="60"
+                app:motionTarget="@id/coverView" />
+
+            <KeyAttribute
+                android:alpha="0"
+                android:scaleX="0"
+                android:scaleY="0"
+                app:framePosition="60"
+                app:motionTarget="@id/likeBtn" />
+
+            <KeyAttribute
+                android:translationX="@dimen/contact_info_header_page_indicator_transition_delta_x"
+                app:framePosition="80"
+                app:motionTarget="@id/pageIndicatorTv" />
+
+            <KeyTrigger
+                app:framePosition="95"
+                app:motionTarget="@id/nameTv"
+                app:triggerId="@+id/trimFirstTitle" />
+
+        </KeyFrameSet>
+
+        <OnSwipe
+            app:dragDirection="dragUp"
+            app:moveWhenScrollAtTop="true"
+            app:onTouchUp="decelerateAndComplete"
+            app:touchAnchorId="@id/recyclerView"
+            app:touchAnchorSide="top"
+            app:touchRegionId="@id/recyclerView" />
+
+    </Transition>
+
+</MotionScene>

@@ -53,6 +53,7 @@ object Deps {
 
         const val app = ":app"
         const val librariesTest = ":libraries:test_utils"
+        const val librariesImageLoading = ":libraries:image_loading"
         const val commonsUi = ":commons:ui"
         const val commonsUiWidgets = ":commons:ui-widgets"
         const val core = ":core"

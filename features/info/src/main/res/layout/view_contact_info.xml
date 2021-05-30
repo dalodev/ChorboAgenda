@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:background="@color/colorContentContainer"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/mainView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutDescription="@xml/scene_contact_info_header">
+
+        <es.littledavity.features.info.widgets.main.header.gallery.ContactGalleryView
+            android:id="@+id/galleryView"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/contact_info_header_gallery_height_expanded"
+            android:elevation="@dimen/contact_info_header_backdrop_elevation"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@tools:sample/cities" />
+
+        <View
+            android:id="@+id/galleryScrimView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            android:elevation="@dimen/contact_info_header_backdrop_elevation"
+            app:layout_constraintBottom_toBottomOf="@id/galleryView"
+            app:layout_constraintEnd_toEndOf="@id/galleryView"
+            app:layout_constraintStart_toStartOf="@id/galleryView"
+            app:layout_constraintTop_toTopOf="@id/galleryView" />
+
+        <ImageView
+            android:id="@+id/backBtnIv"
+            android:layout_width="@dimen/contact_info_header_back_button_size"
+            android:layout_height="@dimen/contact_info_header_back_button_size"
+            android:background="@drawable/contact_info_header_back_btn_background"
+            android:elevation="@dimen/contact_info_header_backdrop_elevation"
+            android:scaleType="centerInside"
+            android:src="@drawable/arrow_left"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/contact_info_header_back_button_icon_color"
+            tools:tint="@color/contact_info_header_back_button_icon_color" />
+
+        <TextView
+            android:id="@+id/pageIndicatorTv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/contact_info_header_page_indicator_margin"
+            android:background="@drawable/contact_info_header_page_indicator_background"
+            android:elevation="@dimen/contact_info_header_backdrop_elevation"
+            android:paddingStart="@dimen/contact_info_header_page_indicator_horizontal_padding"
+            android:paddingTop="@dimen/contact_info_header_page_indicator_vertical_padding"
+            android:paddingEnd="@dimen/contact_info_header_page_indicator_horizontal_padding"
+            android:paddingBottom="@dimen/contact_info_header_page_indicator_vertical_padding"
+            android:textColor="@color/contact_info_header_page_indicator_text_color"
+            android:textSize="@dimen/contact_info_header_page_indicator_text_size"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_marginTop="@dimen/contact_info_header_page_indicator_margin"
+            tools:text="1/12"
+            tools:visibility="visible" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/backdropCv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:cardBackgroundColor="@color/contact_info_header_backdrop_background_color"
+            app:cardCornerRadius="@dimen/contact_info_header_backdrop_corner_radius"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/galleryView" />
+
+        <Space
+            android:id="@+id/coverViewSpace"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/contact_info_header_cover_space"
+            app:layout_constraintBottom_toBottomOf="@id/galleryView"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <es.littledavity.commons.ui.widgets.ContactImageView
+            android:id="@+id/coverView"
+            android:layout_width="@dimen/contact_info_header_cover_width"
+            android:layout_height="@dimen/contact_info_header_cover_height"
+            android:layout_marginStart="@dimen/contact_info_header_cover_margin_start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/coverViewSpace"
+            tools:background="@tools:sample/cities"
+            tools:cardElevation="@dimen/contact_info_header_backdrop_elevation"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/likeBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/contact_info_header_like_btn_margin_end"
+            android:backgroundTint="@color/contact_info_header_like_btn_color"
+            android:elevation="@dimen/contact_info_header_like_btn_elevation"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="@id/galleryView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/galleryView"
+            app:maxImageSize="@dimen/contact_info_header_like_btn_max_image_size"
+            app:srcCompat="@drawable/heart_animated_selector"
+            app:tint="@color/contact_info_header_like_btn_icon_color"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/nameTv"
+            style="@style/Chorboagenda.ContactInfo.Header.Title"
+            android:layout_marginTop="@dimen/contact_info_header_title_margin_start"
+            android:layout_marginEnd="@dimen/contact_info_header_first_title_margin_end_expanded"
+            android:maxLines="1"
+            app:layout_constraintEnd_toStartOf="@id/likeBtn"
+            app:layout_constraintStart_toEndOf="@id/coverView"
+            app:layout_constraintTop_toBottomOf="@id/galleryView"
+            tools:text="David" />
+
+        <TextView
+            android:id="@+id/phoneTv"
+            style="@style/Chorboagenda.ContactInfo.Header.Title"
+            android:layout_marginEnd="@dimen/contact_info_header_second_title_margin_end"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:maxLines="2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/coverView"
+            app:layout_constraintTop_toBottomOf="@id/nameTv"
+            tools:text="+34 615 87 02 23" />
+
+        <TextView
+            android:id="@+id/creationDateTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/contact_info_header_release_date_horizontal_margin"
+            android:layout_marginTop="@dimen/contact_info_header_release_date_margin_top"
+            android:layout_marginEnd="@dimen/contact_info_header_release_date_horizontal_margin"
+            android:elevation="@dimen/contact_info_header_backdrop_elevation"
+            android:fontFamily="@string/font_family_medium"
+            android:gravity="start"
+            android:textColor="@color/contact_info_header_release_date_text_color"
+            android:textSize="@dimen/contact_info_header_release_date_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/coverView"
+            app:layout_constraintTop_toBottomOf="@id/phoneTv"
+            tools:text="Feb 06, 2018 (3 years ago)" />
+
+        <TextView
+            android:id="@+id/instagramTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/contact_info_header_developer_name_horizontal_margin"
+            android:layout_marginEnd="@dimen/contact_info_header_developer_name_horizontal_margin"
+            android:elevation="@dimen/contact_info_header_backdrop_elevation"
+            android:fontFamily="@string/font_family_medium"
+            android:gravity="start"
+            android:textColor="@color/contact_info_header_developer_name_text_color"
+            android:textSize="@dimen/contact_info_header_developer_name_text_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/coverView"
+            app:layout_constraintTop_toBottomOf="@id/creationDateTv"
+            tools:text="\@instagram" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/bottomBarrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:barrierMargin="@dimen/contact_info_header_bottom_barrier_margin"
+            app:constraint_referenced_ids="coverView, instagramTv" />
+
+        <es.littledavity.commons.ui.widgets.contacts.InfoView
+            android:id="@+id/ratingIv"
+            style="@style/Chorboagenda.ContactInfo.Header.InfoView"
+            app:infoView_icon="@drawable/contact_outline"
+            app:layout_constraintBottom_toTopOf="@id/recyclerView"
+            app:layout_constraintEnd_toStartOf="@+id/countryNameIv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
+            tools:infoView_titleText="10/10" />
+
+        <es.littledavity.commons.ui.widgets.contacts.InfoView
+            android:id="@+id/countryNameIv"
+            style="@style/Chorboagenda.ContactInfo.Header.InfoView"
+            app:infoView_icon="@drawable/contact_outline"
+            app:layout_constraintBottom_toTopOf="@id/recyclerView"
+            app:layout_constraintEnd_toStartOf="@+id/ageTv"
+            app:layout_constraintStart_toEndOf="@id/ratingIv"
+            app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
+            tools:infoView_titleText="Spain" />
+
+        <es.littledavity.commons.ui.widgets.contacts.InfoView
+            android:id="@+id/ageTv"
+            style="@style/Chorboagenda.ContactInfo.Header.InfoView"
+            app:infoView_icon="@drawable/contact_outline"
+            app:layout_constraintBottom_toTopOf="@id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/countryNameIv"
+            app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
+            tools:infoView_titleText="25 years" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/ratingIv" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:indeterminateTint="@color/colorProgressBar"
+        tools:visibility="gone" />
+
+    <es.littledavity.commons.ui.widgets.contacts.InfoView
+        android:id="@+id/infoView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="@dimen/contact_info_info_view_horizontal_margin"
+        android:layout_marginEnd="@dimen/contact_info_info_view_horizontal_margin"
+        app:infoView_iconColor="@color/colorInfoView"
+        app:infoView_titleText="@string/contact_info_info_view_title"
+        app:infoView_titleTextColor="@color/colorInfoView"
+        app:infoView_titleTextSize="@dimen/contact_info_info_view_title_text_size"
+        tools:infoView_icon="@drawable/account_heart_outline"
+        tools:visibility="gone" />
+</merge>

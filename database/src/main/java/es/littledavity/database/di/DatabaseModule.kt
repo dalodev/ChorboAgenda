@@ -13,6 +13,8 @@ import dagger.hilt.components.SingletonComponent
 import es.littledavity.database.ChorboagendaDatabase
 import es.littledavity.database.Constants
 import es.littledavity.database.MIGRATIONS
+import es.littledavity.database.commons.RoomTypeConverter
+import es.littledavity.database.commons.addTypeConverters
 import javax.inject.Singleton
 
 @Module
@@ -22,11 +24,14 @@ internal object DatabaseModule {
     @Provides
     @Singleton
     fun provideChorboagendaDatabase(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        typeConverters: Set<@JvmSuppressWildcards RoomTypeConverter>
     ) = Room.databaseBuilder(
         context,
         ChorboagendaDatabase::class.java,
         Constants.DATABASE_NAME
-    ).addMigrations(*MIGRATIONS).build()
+    ).addTypeConverters(typeConverters)
+        .addMigrations(*MIGRATIONS)
+        .build()
 
 }

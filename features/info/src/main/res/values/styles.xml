@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Chorboagenda.ContactInfo"/>
+
+    <style name="Chorboagenda.ContactInfo.Header"/>
+
+    <style name="Chorboagenda.ContactInfo.Header.Title">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">@dimen/contact_info_header_title_margin_start</item>
+        <item name="android:elevation">@dimen/contact_info_header_backdrop_elevation</item>
+        <item name="android:gravity">start|center_vertical</item>
+        <item name="android:textColor">@color/contact_info_header_title_text_color</item>
+        <item name="android:textSize">@dimen/contact_info_header_title_text_size</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+    </style>
+
+    <style name="Chorboagenda.ContactInfo.Header.InfoView">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/contact_info_header_info_view_vertical_margin</item>
+        <item name="android:elevation">@dimen/contact_info_header_backdrop_elevation</item>
+        <item name="layout_constraintTop_toBottomOf">@id/bottomBarrier</item>
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintHorizontal_bias">0.25</item>
+        <item name="infoView_iconSize">@dimen/contact_info_header_info_view_icon_size</item>
+        <item name="infoView_iconColor">@color/contact_info_header_info_view_icon_color</item>
+        <item name="infoView_titleTextSize">@dimen/contact_info_header_info_view_title_text_size</item>
+        <item name="infoView_titleTextColor">@color/contact_info_header_info_view_title_color</item>
+    </style>
+</resources>

@@ -13,7 +13,7 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
 import androidx.core.content.ContextCompat
-import es.littledavity.domain.contacts.Contact
+import es.littledavity.domain.contacts.entities.Contact
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream

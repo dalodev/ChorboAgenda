@@ -23,6 +23,9 @@ import es.littledavity.commons.ui.extensions.observeChanges
 import es.littledavity.commons.ui.extensions.setFontFamily
 import es.littledavity.commons.ui.extensions.setHorizontalPadding
 import es.littledavity.commons.ui.extensions.setTextSizeInPx
+import es.littledavity.imageLoading.Config
+import es.littledavity.imageLoading.ImageLoader
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ContactImageView @JvmOverloads constructor(
@@ -37,22 +40,23 @@ class ContactImageView @JvmOverloads constructor(
             titleTv.isVisible = value
         }
 
-  /*  var title: CharSequence
+    var title: CharSequence
         set(value) {
             titleTv.text = value
         }
         get() = titleTv.text
-*/
+
     var imageUrl by observeChanges<String?>(null) { oldValue, newValue ->
         if (coverIv.drawable == null || oldValue != newValue) loadImage(newValue)
     }
 
-    private var defaultDrawable = checkNotNull(getDrawable(android.R.drawable.screen_background_dark))
+    private var defaultDrawable = checkNotNull(getDrawable(R.drawable.contact_outline))
 
     private lateinit var titleTv: AppCompatTextView
     private lateinit var coverIv: AppCompatImageView
 
-//    @Inject lateinit var imageLoader: ImageLoader
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
     init {
         initCard()
@@ -117,7 +121,7 @@ class ContactImageView @JvmOverloads constructor(
         showTitle()
         coverIv.setImageDrawable(defaultDrawable)
     }
-/*
+
     private fun onImageLoadingStarted() {
         showTitle()
     }
@@ -129,7 +133,7 @@ class ContactImageView @JvmOverloads constructor(
     @Suppress("UNUSED_PARAMETER")
     private fun onImageLoadingFailed(error: Exception) {
         showTitle()
-    }*/
+    }
 
     private fun showTitle() {
         if (!isTitleVisible) return
@@ -137,13 +141,13 @@ class ContactImageView @JvmOverloads constructor(
         titleTv.isVisible = true
     }
 
-   /* private fun hideTitle() {
-        if (!isTitleVisible) return
+     private fun hideTitle() {
+         if (!isTitleVisible) return
 
-        titleTv.isVisible = false
-    }
+         titleTv.isVisible = false
+     }
 
-    fun disableRoundCorners() {
-        radius = 0f
-    }*/
+     fun disableRoundCorners() {
+         radius = 0f
+     }
 }

@@ -7,7 +7,7 @@ import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.commons.ui.widgets.contacts.ContactsModelMapper
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.core.providers.StringProvider
-import es.littledavity.domain.contacts.Contact
+import es.littledavity.domain.contacts.entities.Contact
 import javax.inject.Inject
 
 internal interface ContactsSearchUiStateFactory {

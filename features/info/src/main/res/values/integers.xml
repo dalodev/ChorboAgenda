@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="contact_info_header_animation_duration">400</integer>
+    <integer name="contact_summary_content_max_lines">4</integer>
+    <integer name="contact_summary_content_animation_duration">300</integer>
+</resources>

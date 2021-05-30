@@ -7,7 +7,7 @@ import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.commons.ui.widgets.contacts.ContactsModelMapper
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.core.providers.StringProvider
-import es.littledavity.domain.contacts.Contact
+import es.littledavity.domain.contacts.entities.Contact
 import javax.inject.Inject
 
 interface ContactsUiStateFactory {
@@ -23,7 +23,7 @@ internal class ContactsUiStateFactoryImpl @Inject constructor(
 ) : ContactsUiStateFactory {
 
     override fun createWithEmptyState() = ContactsUiState.Empty(
-        iconId = R.drawable.account_heart_outline,
+        iconId = R.drawable.contact_outline,
         title = stringProvider.getString(R.string.contacts_fragment_info_title)
     )
 

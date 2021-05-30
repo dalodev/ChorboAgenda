@@ -29,7 +29,13 @@ internal class ContactsDatabaseDataStore @Inject constructor(
     private val saveContactFactory: SaveContactFactory
 ) : ContactsLocalDataStore {
 
-    override suspend fun insertChorbo(chorbo: DataContact) = contactDao.insertChorbo(
+    override suspend fun getContact(id: Int) = contactDao.getChorbo(id)?.let { databaseContact ->
+        withContext(dispatcherProvider.computation) {
+            contactMapper.mapToDataContact(databaseContact)
+        }
+    }
+
+    override suspend fun insertContact(chorbo: DataContact) = contactDao.insertChorbo(
         withContext(dispatcherProvider.computation) {
             saveContactFactory.createContact(chorbo)
         }
@@ -40,14 +46,14 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      *
      * @param chorbos List of chorbos.
      */
-    override suspend fun insertChorbos(chorbos: List<DataContact>) =
+    override suspend fun insertContacts(chorbos: List<DataContact>) =
         contactDao.insertChorbos(
             withContext(dispatcherProvider.computation) {
                 contactMapper.mapToDatabaseContacts(chorbos)
             }
         )
 
-    override suspend fun searchGames(
+    override suspend fun searchContacts(
         searchQuery: String,
         pagination: Pagination
     ): List<DataContact> = contactDao.searchContacts(

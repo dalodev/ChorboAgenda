@@ -50,7 +50,7 @@ class ChorboDatabaseDataStoreTest {
     fun searchesChorbosSuccessfully() = runBlockingTest {
         val dbContacts = contactMapper.mapToDatabaseContacts(DATA_CONTACTS)
         coEvery { contactDao.searchContacts(any(), any(), any()) } returns dbContacts
-        assertThat(dataStore.searchGames("", DATA_PAGINATION)).isEqualTo(DATA_CONTACTS)
+        assertThat(dataStore.searchContacts("", DATA_PAGINATION)).isEqualTo(DATA_CONTACTS)
     }
 
     @Test

@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "b4a727a10918879f6279d278d3358f90",
+    "identityHash": "0dc8ab5452b7d096873ff75883338f58",
     "entities": [
       {
         "tableName": "chorbo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `image` TEXT, `phone` TEXT NOT NULL, `create_timestamp` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `image` TEXT, `phone` TEXT, `artworks` TEXT NOT NULL, `screenshots` TEXT NOT NULL, `create_timestamp` INTEGER NOT NULL, `age` TEXT NOT NULL, `rating` TEXT, `creation_date` TEXT NOT NULL, `country` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -30,12 +30,48 @@
             "fieldPath": "phone",
             "columnName": "phone",
             "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "artworks",
+            "columnName": "artworks",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "screenshots",
+            "columnName": "screenshots",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
             "fieldPath": "createTimestamp",
             "columnName": "create_timestamp",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "age",
+            "columnName": "age",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "rating",
+            "columnName": "rating",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "creationDate",
+            "columnName": "creation_date",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "country",
+            "columnName": "country",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -47,12 +83,61 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "liked_contacts",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `contact_id` INTEGER NOT NULL, `like_timestamp` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "contactId",
+            "columnName": "contact_id",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "likeTimestamp",
+            "columnName": "like_timestamp",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [
+          {
+            "name": "index_liked_contacts_contact_id",
+            "unique": false,
+            "columnNames": [
+              "contact_id"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_liked_contacts_contact_id` ON `${TABLE_NAME}` (`contact_id`)"
+          },
+          {
+            "name": "index_liked_contacts_like_timestamp",
+            "unique": false,
+            "columnNames": [
+              "like_timestamp"
+            ],
+            "createSql": "CREATE INDEX IF NOT EXISTS `index_liked_contacts_like_timestamp` ON `${TABLE_NAME}` (`like_timestamp`)"
+          }
+        ],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'b4a727a10918879f6279d278d3358f90')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0dc8ab5452b7d096873ff75883338f58')"
     ]
   }
 }
