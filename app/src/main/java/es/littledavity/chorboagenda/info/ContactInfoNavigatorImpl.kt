@@ -12,7 +12,13 @@ internal class ContactInfoNavigatorImpl @Inject constructor(
 ) : ContactInfoNavigator {
 
     override fun goToImageViewer(title: String?, initialPosition: Int, imageUrls: List<String>) {
-        //TODO
+        navController.navigate(
+            ContactInfoFragmentDirections.actionImageViewerFragment(
+                title,
+                initialPosition,
+                imageUrls.toTypedArray()
+            )
+        )
     }
 
     override fun goToInfo(contactId: Int) {

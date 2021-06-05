@@ -97,12 +97,12 @@ class ContactImageView @JvmOverloads constructor(
     }
 
     private fun loadImage(url: String?) {
-        if (url == null) {
+        if (url == null || url.isEmpty()) {
             showDefaultImage()
             return
         }
 
-        /*imageLoader.loadImage(
+        imageLoader.loadImage(
             Config.Builder()
                 .fit()
                 .centerCrop()
@@ -114,7 +114,7 @@ class ContactImageView @JvmOverloads constructor(
                 .onSuccess(::onImageLoadingSucceeded)
                 .onFailure(::onImageLoadingFailed)
                 .build()
-        )*/
+        )
     }
 
     private fun showDefaultImage() {

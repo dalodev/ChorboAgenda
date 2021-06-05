@@ -24,7 +24,5 @@ inline fun ViewPager2.registerOnPageChangeCallback(
         ) {
             onPageScrolled(position, positionOffset, positionOffsetPixels)
         }
-
-    }
-        .also(::registerOnPageChangeCallback)
+    }.also(::registerOnPageChangeCallback)
 }

@@ -18,7 +18,7 @@ internal class ContactGalleryImageView constructor(
     defStyleAttrs: Int = 0
 ) : AppCompatImageView(context, attrs, defStyleAttrs) {
 
-    private var defaultBackgroundDrawable = checkNotNull(getDrawable(R.drawable.gallery_image_default))
+    private var defaultBackgroundDrawable = checkNotNull(getDrawable(R.drawable.hearts_placeholder))
 
     var model by observeChanges<ContactGalleryModel?>(null) { _, newModel ->
         newModel?.let(::onModelChanged)

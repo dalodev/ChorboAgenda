@@ -66,6 +66,8 @@ object Deps {
         const val featuresSearch = ":features:search"
         const val featuresNew = ":features:new"
         const val featuresInfo = ":features:info"
+        const val featuresImageLoading = ":features:image_loading"
+        const val featuresImageViewer = ":features:image_viewer"
     }
 
     object Kotlin {

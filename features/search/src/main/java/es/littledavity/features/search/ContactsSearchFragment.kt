@@ -81,6 +81,7 @@ internal class ContactsSearchFragment : BaseFragment<
     override fun onRoute(route: Route) {
         super.onRoute(route)
         when (route) {
+            is ContactsSearchRoute.Info -> navigator.goToInfo(route.contactId)
             is ContactsSearchRoute.Back -> navigator.goBack()
         }
     }

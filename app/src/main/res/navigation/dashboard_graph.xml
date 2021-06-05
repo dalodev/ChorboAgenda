@@ -20,6 +20,11 @@
         android:name="es.littledavity.features.info.ContactInfoFragment"
         tools:layout="@layout/fragment_contact_info" />
 
+    <fragment
+        android:id="@+id/imageViewerFragment"
+        tools:layout="@layout/fragment_image_viewer"
+        android:name="es.littledavity.features.image.viewer.ImageViewerFragment"/>
+
     <action
         android:id="@+id/action_searchFragment"
         app:destination="@+id/searchFragment"
@@ -39,6 +44,30 @@
         <argument
             android:name="contact_id"
             app:argType="integer" />
+
+    </action>
+
+    <action
+        android:id="@+id/action_imageViewerFragment"
+        app:destination="@+id/imageViewerFragment"
+        app:enterAnim="@anim/horizontal_sliding_window_b_enter_animation"
+        app:exitAnim="@anim/horizontal_sliding_window_a_exit_animation"
+        app:popEnterAnim="@anim/horizontal_sliding_window_a_enter_animation"
+        app:popExitAnim="@anim/horizontal_sliding_window_b_exit_animation">
+
+        <argument
+            android:name="title"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true"/>
+
+        <argument
+            android:name="initial_position"
+            app:argType="integer"/>
+
+        <argument
+            android:name="image_urls"
+            app:argType="string[]"/>
 
     </action>
 </navigation>

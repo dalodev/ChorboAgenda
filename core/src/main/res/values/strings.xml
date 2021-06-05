@@ -7,5 +7,6 @@
     <string name="error_api_server_message">The server is not responding! Please try again later.</string>
     <string name="error_api_unknown_message">Could not perform the request! Please try again later.</string>
     <string name="unknown">Unknown</string>
+    <string name="action_share_via">Share via…</string>
 
 </resources>

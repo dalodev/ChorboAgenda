@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ImageViewerItemView -->
+    <dimen name="image_viewer_item_info_view_horizontal_margin">30dp</dimen>
+    <dimen name="image_viewer_item_info_view_title_text_size">17sp</dimen>
+
+    <!-- ImageViewerView -->
+    <dimen name="image_viewer_page_margin">8dp</dimen>
+</resources>
