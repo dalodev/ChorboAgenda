@@ -13,6 +13,10 @@ internal enum class DashboardPage(
     CONTACTS(
         position = 0,
         menuItemId = R.id.dashboard_bottom_navigation_item_contacts
+    ),
+    LIKES(
+        position = 1,
+        menuItemId = R.id.dashboard_bottom_navigation_item_likes
     );
 
     internal companion object {

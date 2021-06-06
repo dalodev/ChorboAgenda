@@ -7,4 +7,8 @@
         android:title="@string/dashboard_bottom_navigation_item_contacts"
         android:icon="@drawable/contact_phone"/>
 
+    <item
+        android:id="@+id/dashboard_bottom_navigation_item_likes"
+        android:title="@string/dashboard_bottom_navigation_item_likes"
+        android:icon="@drawable/heart"/>
 </menu>

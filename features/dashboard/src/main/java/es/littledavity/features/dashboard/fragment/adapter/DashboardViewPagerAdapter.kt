@@ -16,6 +16,7 @@ internal class DashboardViewPagerAdapter(
 
     override fun createFragment(position: Int) = when (position.toDashboardPageFromPosition()) {
         DashboardPage.CONTACTS -> fragmentFactory.contactsFragment()
+        DashboardPage.LIKES -> fragmentFactory.likesFragment()
         //TODO add bottom nav navigations
     }
 

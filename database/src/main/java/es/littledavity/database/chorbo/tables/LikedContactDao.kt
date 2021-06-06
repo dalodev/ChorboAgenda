@@ -40,10 +40,10 @@ internal interface LikedContactDao {
 
     @Query(
         """
-        SELECT g.* FROM ${Contact.Schema.TABLE_NAME} AS g 
-        INNER JOIN ${LikedContact.Schema.TABLE_NAME} AS lg 
-        ON lg.${LikedContact.Schema.CONTACT_ID} = g.${Contact.Schema.ID} 
-        ORDER BY lg.${LikedContact.Schema.LIKE_TIMESTAMP} DESC 
+        SELECT c.* FROM ${Contact.Schema.TABLE_NAME} AS c 
+        INNER JOIN ${LikedContact.Schema.TABLE_NAME} AS lc 
+        ON lc.${LikedContact.Schema.CONTACT_ID} = c.${Contact.Schema.ID} 
+        ORDER BY lc.${LikedContact.Schema.LIKE_TIMESTAMP} DESC 
         LIMIT :offset, :limit
         """
     )

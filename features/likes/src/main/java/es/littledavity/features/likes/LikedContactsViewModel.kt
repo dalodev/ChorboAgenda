@@ -1,7 +1,4 @@
-/*
- * Copyright 2021 dev.id
- */
-package es.littledavity.features.contacts
+package es.littledavity.features.likes
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -16,7 +13,7 @@ import es.littledavity.core.utils.onError
 import es.littledavity.domain.commons.entities.hasDefaultLimit
 import es.littledavity.domain.commons.entities.nextLimitPage
 import es.littledavity.domain.contacts.commons.ObserveContactsUseCaseParams
-import es.littledavity.domain.contacts.usecases.ObserveContactsUseCase
+import es.littledavity.domain.contacts.usecases.likes.ObserveLikedContactsUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
@@ -33,20 +30,22 @@ import javax.inject.Inject
 private const val SUBSEQUENT_EMISSION_DELAY = 500L
 
 @HiltViewModel
-class ContactsViewModel @Inject constructor(
-    private val observeContactsUseCase: ObserveContactsUseCase,
-    private val uiStateFactory: ContactsUiStateFactory,
+class LikedContactsViewModel @Inject constructor(
+    private val observeLikedContactsUseCase: ObserveLikedContactsUseCase,
+    private val uiStateFactory: LikedContactsUiStateFactory,
     private val dispatcherProvider: DispatcherProvider,
-    private val logger: Logger,
-    private val errorMapper: ErrorMapper
+    private val errorMapper: ErrorMapper,
+    private val logger: Logger
 ) : BaseViewModel() {
 
     private var isObservingContacts = false
-    private var contactsObservingJob: Job? = null
-    private var observeContactsUseCaseParams = ObserveContactsUseCaseParams()
     private var hasMoreContactsToLoad = false
 
+    private var observeContactsUseCaseParams = ObserveContactsUseCaseParams()
+    private var contactsObservingJob: Job? = null
+
     private val _uiState = MutableStateFlow(uiStateFactory.createWithEmptyState())
+
     val uiState: StateFlow<ContactsUiState>
         get() = _uiState
 
@@ -56,12 +55,13 @@ class ContactsViewModel @Inject constructor(
 
     private fun observeContacts() {
         if (isObservingContacts) return
+
         contactsObservingJob = viewModelScope.launch {
-            observeContactsUseCase.execute(observeContactsUseCaseParams)
+            observeLikedContactsUseCase.execute(observeContactsUseCaseParams)
                 .map(uiStateFactory::createWithResultState)
                 .flowOn(dispatcherProvider.computation)
                 .onError {
-                    logger.error(logTag, "Failed to load contacts", it)
+                    logger.error(logTag, "failed to load liked contacts.", it)
                     dispatchCommand(GeneralCommand.ShowLongToast(errorMapper.mapToMessage(it)))
                     emit(uiStateFactory.createWithEmptyState())
                 }
@@ -78,15 +78,9 @@ class ContactsViewModel @Inject constructor(
         }
     }
 
-    fun onContactClicked(contact: ContactModel) {
-        route(ContactsRoute.Info(contact.id))
+    private fun isSubsequentEmission(): Boolean {
+        return !observeContactsUseCaseParams.pagination.hasDefaultLimit()
     }
-
-    fun onBottomReached() {
-        observeNewContactsBatch()
-    }
-
-    private fun isSubsequentEmission() = !observeContactsUseCaseParams.pagination.hasDefaultLimit()
 
     private fun configureNextLoad(uiState: ContactsUiState) {
         if (uiState !is ContactsUiState.Result) return
@@ -94,7 +88,15 @@ class ContactsViewModel @Inject constructor(
         val paginationLimit = observeContactsUseCaseParams.pagination.limit
         val itemCount = uiState.items.size
 
-        hasMoreContactsToLoad = paginationLimit == itemCount
+        hasMoreContactsToLoad = (paginationLimit == itemCount)
+    }
+
+    fun onContactClicked(contact: ContactModel) {
+        route(LikedContactsRoute.Info(contact.id))
+    }
+
+    fun onBottomReached() {
+        observeNewContactsBatch()
     }
 
     private fun observeNewContactsBatch() {
@@ -109,4 +111,5 @@ class ContactsViewModel @Inject constructor(
             observeContacts()
         }
     }
+
 }

@@ -7,4 +7,5 @@ import androidx.fragment.app.Fragment
 
 interface DashboardAdapterFragmentFactory {
     fun contactsFragment(): Fragment
+    fun likesFragment(): Fragment
 }

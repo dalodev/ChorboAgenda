@@ -37,6 +37,7 @@ dependencies {
     implementation(project(Deps.Local.featuresSearch))
     implementation(project(Deps.Local.featuresInfo))
     implementation(project(Deps.Local.featuresImageViewer))
+    implementation(project(Deps.Local.featuresLikes))
 
     implementation(Deps.AndroidX.navFragmentKtx)
 
