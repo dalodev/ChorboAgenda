@@ -13,6 +13,7 @@ import es.littledavity.commons.ui.extensions.navigationBarColor
 import es.littledavity.commons.ui.extensions.observeIn
 import es.littledavity.commons.ui.extensions.statusBarColor
 import es.littledavity.commons.ui.extensions.window
+import es.littledavity.core.sharers.TextSharer
 import es.littledavity.features.image.viewer.databinding.FragmentImageViewerBinding
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
@@ -28,6 +29,9 @@ internal class ImageViewerFragment : BaseFragment<
     override val viewModel by viewModels<ImageViewerViewModel>()
 
     private var originalStatusBarColor: Int = 0
+
+    @Inject
+    lateinit var textSharer: TextSharer
 
     override fun onInit() {
         super.onInit()
@@ -100,7 +104,7 @@ internal class ImageViewerFragment : BaseFragment<
     }
 
     private fun shareText(text: String) {
-//        textSharer.share(requireActivity(), text)
+        textSharer.share(requireActivity(), text)
     }
 
     private fun resetSystemWindows() {

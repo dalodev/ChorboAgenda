@@ -19,20 +19,17 @@ dependencies {
     implementation(project(Deps.Local.core))
     implementation(project(Deps.Local.commonsUi))
     implementation(project(Deps.Local.commonsUiWidgets))
-    implementation(project(Deps.Local.librariesImageLoading))
 
     implementation(Deps.Kotlin.coroutines)
     implementation(Deps.AndroidX.constraintLayout)
     implementation(Deps.AndroidX.fragmentKtx)
-    implementation(Deps.Google.materialComponents)
-    implementation(Deps.Misc.kotlinResult)
-
 
     implementation(Deps.Google.daggerHilt)
     kapt(Deps.Google.daggerHiltCompiler)
     implementation(Deps.Misc.hiltBinder)
     kapt(Deps.Misc.hiltBinderCompiler)
 
+    //Test
     testImplementation(project(Deps.Local.librariesTest))
     testImplementation(Deps.Testing.jUnit)
     testImplementation(Deps.Testing.mockk)

@@ -9,6 +9,7 @@ import es.littledavity.domain.DomainContact
 import es.littledavity.domain.DomainCreationDate
 import es.littledavity.domain.DomainCreationDateCategory
 import es.littledavity.domain.DomainImage
+import es.littledavity.domain.commons.entities.Error
 
 val DATA_CONTACT = DataContact(
     id = 1,
@@ -48,3 +49,6 @@ val DOMAIN_CONTACTS = listOf(
     DOMAIN_CONTACT.copy(id = 2),
     DOMAIN_CONTACT.copy(id = 3)
 )
+
+val DOMAIN_ERROR_API = Error.ApiError.ClientError("message")
+val DOMAIN_ERROR_NOT_FOUND = Error.NotFound("message")
