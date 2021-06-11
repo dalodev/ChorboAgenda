@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- LikedContactsFragment -->
-    <string name="liked_contacts_fragment_info_title">You haven\'t liked any games yet</string>
+    <string name="liked_contacts_fragment_info_title">You haven\'t liked any contacts yet</string>
 </resources>

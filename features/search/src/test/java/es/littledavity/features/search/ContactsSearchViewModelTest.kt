@@ -40,7 +40,7 @@ internal class ContactsSearchViewModelTest {
         logger = FakeLogger()
         viewModel = ContactsSearchViewModel(
             searchUseCase = searchContactsUseCase,
-            uiStateFactory = FakeGamesSearchUiStateFactory(),
+            uiStateFactory = FakecontactsSearchUiStateFactory(),
             dispatcherProvider = FakeDispatcherProvider(),
             errorMapper = FakeErrorMapper(),
             logger = logger,
@@ -61,7 +61,7 @@ internal class ContactsSearchViewModelTest {
         }
     }
 
-    private class FakeGamesSearchUiStateFactory : ContactsSearchUiStateFactory {
+    private class FakecontactsSearchUiStateFactory : ContactsSearchUiStateFactory {
 
         override fun createWithEmptyState(searchQuery: String) = ContactsUiState.Empty(iconId = -1, title = "title")
 

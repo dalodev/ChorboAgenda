@@ -4,7 +4,6 @@ import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.domain.contacts.entities.Image
 import javax.inject.Inject
 
-
 enum class IgdbImageSize(internal val rawSize: String) {
 
     SMALL_COVER("cover_small"),
@@ -28,7 +27,6 @@ enum class IgdbImageExtension(internal val rawExtension: String) {
 
     JPG("jpg"),
     PNG("png")
-
 }
 
 interface IgdbImageUrlFactory {
@@ -40,7 +38,6 @@ interface IgdbImageUrlFactory {
     )
 
     fun createUrl(image: Image, config: Config): String?
-
 }
 
 fun IgdbImageUrlFactory.createUrls(
@@ -57,14 +54,10 @@ fun IgdbImageUrlFactory.createUrls(
 @BindType
 internal class IgdbImageUrlFactoryImpl @Inject constructor() : IgdbImageUrlFactory {
 
-
     private companion object {
-
         private const val IMAGE_URL_TEMPLATE = "https://images.igdb.com/igdb/image/upload/t_%s/%s.%s"
         private const val IMAGE_TYPE_RETINA_EXTENSION = "_2x"
-
     }
-
 
     override fun createUrl(image: Image, config: IgdbImageUrlFactory.Config): String? {
         if(image.id.isBlank()) return null
@@ -87,6 +80,4 @@ internal class IgdbImageUrlFactoryImpl @Inject constructor() : IgdbImageUrlFacto
             }
         }
     }
-
-
 }

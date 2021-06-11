@@ -24,7 +24,7 @@ private const val LOCAL_SEARCH_DELAY_TIMEOUT = 150L
 @Singleton
 @BindType
 internal class SearchContactsUseCaseImpl @Inject constructor(
-    private val gamesDataStores: ContactsDataStores,
+    private val contactsDataStores: ContactsDataStores,
     private val dispatcherProvider: DispatcherProvider,
     private val contactMapper: ContactMapper
 ) : SearchContactsUseCase {
@@ -40,7 +40,7 @@ internal class SearchContactsUseCaseImpl @Inject constructor(
     ): DomainResult<List<Contact>> {
         val pagination = params.pagination.toDataPagination()
 
-        return gamesDataStores.local
+        return contactsDataStores.local
             .searchContacts(params.searchQuery, pagination)
             .let(contactMapper::mapToDomainContacts)
             .asSuccess()

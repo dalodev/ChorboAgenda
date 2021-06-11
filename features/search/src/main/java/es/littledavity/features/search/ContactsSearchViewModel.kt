@@ -94,7 +94,7 @@ internal class ContactsSearchViewModel @Inject constructor(
                 .map(::mapToUiState)
                 .flowOn(dispatcherProvider.computation)
                 .onError {
-                    logger.error(logTag, "Failed to search games.", it)
+                    logger.error(logTag, "Failed to search contacts.", it)
                     dispatchCommand(GeneralCommand.ShowLongToast(errorMapper.mapToMessage(it)))
                     emit(createEmptyContactsUiState())
                 }
@@ -150,10 +150,10 @@ internal class ContactsSearchViewModel @Inject constructor(
     }
 
     fun onBottomReached() {
-        loadMoreGames()
+        loadMorecontacts()
     }
 
-    private fun loadMoreGames() {
+    private fun loadMorecontacts() {
         if (!hasMoreContactsToLoad) return
 
         pagination = pagination.nextOffsetPage()

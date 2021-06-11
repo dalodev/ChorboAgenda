@@ -69,9 +69,9 @@ internal class ContactsDatabaseDataStore @Inject constructor(
     override suspend fun observeContacts(pagination: Pagination) = contactDao.observeContacts(
         offset = pagination.offset,
         limit = pagination.limit
-    ).toDataGamesFlow()
+    ).toDatacontactsFlow()
 
-    private fun Flow<List<DatabaseContact>>.toDataGamesFlow() = distinctUntilChanged()
+    private fun Flow<List<DatabaseContact>>.toDatacontactsFlow() = distinctUntilChanged()
         .map(contactMapper::mapToDataContact)
         .flowOn(dispatcherProvider.computation)
 

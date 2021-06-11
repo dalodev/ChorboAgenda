@@ -3,9 +3,12 @@
  */
 package es.littledavity.features.dashboard.fragment
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.MenuItem
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.base.BaseFragment
@@ -45,6 +48,13 @@ internal class DashboardFragment : BaseFragment<
     @Inject
     lateinit var viewPagerAdapterFactory: DashboardViewPagerAdapterFactory
 
+    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            viewModel.onExtraToolbarRightButtonClicked()
+        }
+    }
+
     override fun onInit() {
         super.onInit()
         initToolbar()
@@ -66,7 +76,12 @@ internal class DashboardFragment : BaseFragment<
         enableBack = false
         applyWindowTopInsetAsPadding()
         onRightButtonClickListener = { viewModel.onToolbarRightButtonClicked() }
-        onExtraRightButtonClickListener = { viewModel.onExtraToolbarRightButtonClicked() }
+        onExtraRightButtonClickListener = {
+            val intent = Intent()
+            intent.type = "image/*"
+            intent.action = Intent.ACTION_GET_CONTENT
+            resultLauncher.launch(intent)
+        }
     }
 
     private fun initBottomNavigation() = with(viewBinding.bottomNav) {
