@@ -7,7 +7,7 @@ import javax.inject.Inject
 interface ImageViewerContactUrlFactory {
     fun createCoverImageUrl(contact: Contact): String?
     fun createGalleryImageUrls(contact: Contact): List<String>
-    fun createSceenShotImageUrls(contact: Contact): List<String>
+    fun createScreenShotImageUrls(contact: Contact): List<String>
 }
 
 @BindType
@@ -26,7 +26,7 @@ internal class ImageViewerContactUrlFactoryImpl @Inject constructor(
         contact.gallery, IgdbImageUrlFactory.Config(IMAGE_SIZE)
     )
 
-    override fun createSceenShotImageUrls(contact: Contact) = igdbImageUrlFactory.createUrls(
+    override fun createScreenShotImageUrls(contact: Contact) = igdbImageUrlFactory.createUrls(
         contact.screenshots,
         IgdbImageUrlFactory.Config(IMAGE_SIZE)
     )

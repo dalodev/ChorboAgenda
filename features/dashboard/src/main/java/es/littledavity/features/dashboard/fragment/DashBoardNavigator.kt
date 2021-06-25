@@ -7,4 +7,5 @@ import es.littledavity.commons.ui.base.navigation.Navigator
 
 interface DashBoardNavigator: Navigator {
     fun goToSearch()
+    fun goToAddContact()
 }

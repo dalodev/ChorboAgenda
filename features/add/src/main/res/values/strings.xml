@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AddContactFragment -->
+    <string name="add_contact_toolbar_title">Create contact</string>
+    <string name="add_contact_name_hint">Name</string>
+    <string name="add_contact_phone_hint">Phone</string>
+
+</resources>

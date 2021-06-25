@@ -22,8 +22,13 @@
 
     <fragment
         android:id="@+id/imageViewerFragment"
-        tools:layout="@layout/fragment_image_viewer"
-        android:name="es.littledavity.features.image.viewer.ImageViewerFragment"/>
+        android:name="es.littledavity.features.image.viewer.ImageViewerFragment"
+        tools:layout="@layout/fragment_image_viewer" />
+
+    <fragment
+        android:id="@+id/addContactFragment"
+        android:name="es.littledavity.features.add.AddContactFragment"
+        tools:layout="@layout/fragment_add_contact" />
 
     <action
         android:id="@+id/action_searchFragment"
@@ -59,15 +64,23 @@
             android:name="title"
             android:defaultValue="@null"
             app:argType="string"
-            app:nullable="true"/>
+            app:nullable="true" />
 
         <argument
             android:name="initial_position"
-            app:argType="integer"/>
+            app:argType="integer" />
 
         <argument
             android:name="image_urls"
-            app:argType="string[]"/>
+            app:argType="string[]" />
 
     </action>
+
+    <action
+        android:id="@+id/action_addContactFragment"
+        app:destination="@+id/addContactFragment"
+        app:enterAnim="@anim/overshoot_scaling_window_b_enter_animation"
+        app:exitAnim="@anim/overshoot_scaling_window_a_exit_animation"
+        app:popEnterAnim="@anim/overshoot_scaling_window_a_enter_animation"
+        app:popExitAnim="@anim/overshoot_scaling_window_b_exit_animation" />
 </navigation>

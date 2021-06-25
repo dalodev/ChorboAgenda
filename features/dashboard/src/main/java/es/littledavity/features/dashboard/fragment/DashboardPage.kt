@@ -14,8 +14,12 @@ internal enum class DashboardPage(
         position = 0,
         menuItemId = R.id.dashboard_bottom_navigation_item_contacts
     ),
-    LIKES(
+    ADD_CONTACT(
         position = 1,
+        menuItemId = R.id.dashboard_bottom_navigation_item_add
+    ),
+    LIKES(
+        position = 2,
         menuItemId = R.id.dashboard_bottom_navigation_item_likes
     );
 

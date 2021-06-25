@@ -33,10 +33,8 @@ internal class ContactHeaderController(
     private var areWindowInsetsApplied = false
 
     private val hasDefaultBackgroundImage: Boolean
-        get() = (
-                (backgroundImageModels.isEmpty()) &&
-                        (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage)
-                )
+        get() = ((backgroundImageModels.isEmpty()) &&
+                (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage))
 
     private val isPageIndicatorEnabled: Boolean
         get() = binding.galleryView.galleryModels.isNotEmpty()
@@ -132,7 +130,7 @@ internal class ContactHeaderController(
             }
         }
 
-        if(backgroundImageModels != model.backgroundImageModels) backgroundImageModels = model.backgroundImageModels
+        if (backgroundImageModels != model.backgroundImageModels) backgroundImageModels = model.backgroundImageModels
         if (name != model.name) name = model.name
         if (creationDate != model.creationDate) creationDate = model.creationDate
         if (instagram != model.instagram) instagram = model.instagram

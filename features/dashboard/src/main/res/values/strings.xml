@@ -3,5 +3,6 @@
     <string name="dashboard_toolbar_title">Dashboard</string>
     <string name="dashboard_bottom_navigation_item_contacts">Contacts</string>
     <string name="dashboard_bottom_navigation_item_likes">Likes</string>
+    <string name="dashboard_bottom_navigation_item_add">add</string>
 
 </resources>

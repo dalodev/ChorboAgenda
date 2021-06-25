@@ -17,4 +17,8 @@ internal class DashboardNavigatorImpl @Inject constructor(
     override fun goToSearch() {
         navController.navigate(DashboardFragmentDirections.actionSearchFragment())
     }
+
+    override fun goToAddContact() {
+        navController.navigate(DashboardFragmentDirections.actionAddContactFragment())
+    }
 }

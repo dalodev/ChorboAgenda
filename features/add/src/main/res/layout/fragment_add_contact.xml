@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorContentContainer">
+
+    <es.littledavity.commons.ui.widgets.toolbar.Toolbar
+        android:id="@+id/toolbar"
+        style="@style/ChorboagendaTheme.Toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:toolbar_leftButtonIcon="@drawable/arrow_left"
+        app:toolbar_rightButtonIcon="@drawable/done"
+        app:toolbar_titleText="@string/add_contact_toolbar_title" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/photoView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/add_contact_photo_height_expanded"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/addPhotoView"
+        android:layout_width="@dimen/add_contact_add_photo_image_size"
+        android:layout_height="@dimen/add_contact_add_photo_image_size"
+        app:layout_constraintBottom_toBottomOf="@+id/photoView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        android:background="@drawable/add_photo" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nameInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/add_content_input_start"
+        android:layout_marginTop="@dimen/add_content_input_start"
+        android:layout_marginEnd="@dimen/add_content_input_start"
+        android:hint="@string/add_contact_name_hint"
+        android:textColor="@color/add_contact_input_text_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/photoView">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nameEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/phoneInputLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/add_content_input_start"
+        android:layout_marginTop="@dimen/add_content_input_start"
+        android:layout_marginEnd="@dimen/add_content_input_start"
+        android:hint="@string/add_contact_name_hint"
+        android:textColor="@color/add_contact_input_text_color"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameInputLayout">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/phoneEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -69,6 +69,7 @@ object Deps {
         const val featuresImageLoading = ":features:image_loading"
         const val featuresImageViewer = ":features:image_viewer"
         const val featuresLikes = ":features:likes"
+        const val featuresAdd = ":features:add"
     }
 
     object Kotlin {

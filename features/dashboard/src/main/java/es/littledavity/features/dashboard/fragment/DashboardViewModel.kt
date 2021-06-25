@@ -22,6 +22,10 @@ class DashboardViewModel @Inject constructor(
         route(DashboardRoute.Search)
     }
 
+    fun onAddContactButtonClicked() {
+        route(DashboardRoute.Add)
+    }
+
     fun onExtraToolbarRightButtonClicked() {
         viewModelScope.launch {
             saveContactUseCase.execute(

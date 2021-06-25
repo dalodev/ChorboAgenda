@@ -12,8 +12,6 @@ internal interface ContactInfoUiStateFactory {
         contact: Contact,
         isLiked: Boolean
     ): ContactInfoUiState
-
-
 }
 
 @BindType(installIn = BindType.Component.VIEW_MODEL)

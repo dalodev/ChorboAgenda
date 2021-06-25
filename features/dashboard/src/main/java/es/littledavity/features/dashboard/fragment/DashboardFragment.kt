@@ -48,13 +48,6 @@ internal class DashboardFragment : BaseFragment<
     @Inject
     lateinit var viewPagerAdapterFactory: DashboardViewPagerAdapterFactory
 
-    var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            viewModel.onExtraToolbarRightButtonClicked()
-        }
-    }
-
     override fun onInit() {
         super.onInit()
         initToolbar()
@@ -76,12 +69,6 @@ internal class DashboardFragment : BaseFragment<
         enableBack = false
         applyWindowTopInsetAsPadding()
         onRightButtonClickListener = { viewModel.onToolbarRightButtonClicked() }
-        onExtraRightButtonClickListener = {
-            val intent = Intent()
-            intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
-            resultLauncher.launch(intent)
-        }
     }
 
     private fun initBottomNavigation() = with(viewBinding.bottomNav) {
@@ -103,12 +90,16 @@ internal class DashboardFragment : BaseFragment<
         .also { viewPagerAdapter = it }
 
     private fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        viewBinding.viewPagerContainer.viewPager.setCurrentItem(
-            menuItem.toPagePosition(),
+        return if (menuItem.toPagePosition() == DashboardPage.ADD_CONTACT.position) {
+            viewModel.onAddContactButtonClicked()
             false
-        )
-
-        return true
+        } else {
+            viewBinding.viewPagerContainer.viewPager.setCurrentItem(
+                menuItem.toPagePosition(),
+                false
+            )
+            true
+        }
     }
 
     private fun MenuItem.toPagePosition() = itemId.toDashboardPageFromMenuItemId().position
@@ -118,6 +109,7 @@ internal class DashboardFragment : BaseFragment<
 
         when (route) {
             is DashboardRoute.Search -> navigator.goToSearch()
+            is DashboardRoute.Add -> navigator.goToAddContact()
         }
     }
 

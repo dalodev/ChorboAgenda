@@ -164,7 +164,7 @@ internal class ContactInfoViewModelTest {
             return listOf("url", "url", "url")
         }
 
-        override fun createSceenShotImageUrls(contact: Contact): List<String> {
+        override fun createScreenShotImageUrls(contact: Contact): List<String> {
             return listOf("url", "url", "url")
         }
     }
