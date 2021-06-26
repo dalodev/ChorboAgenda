@@ -41,6 +41,14 @@
         <item name="android:textColor">@color/textHeadline</item>
     </style>
 
+    <style name="EditTextHint" parent="TextAppearance.Title">
+        <item name="android:colorAccent">@android:color/white</item>
+        <item name="android:textColorHint">@color/colorAccent</item>
+        <item name="colorControlNormal">@color/textHeadline</item>
+        <item name="colorControlActivated">@color/colorAccent</item>
+        <item name="colorControlHighlight">@color/colorAccent</item>
+    </style>
+
     <style name="TextAppearance.CardTitle" parent="@style/TextAppearance.MaterialComponents.Body1">
         <item name="android:textColor">@color/textBody</item>
         <item name="android:background">@android:color/transparent</item>

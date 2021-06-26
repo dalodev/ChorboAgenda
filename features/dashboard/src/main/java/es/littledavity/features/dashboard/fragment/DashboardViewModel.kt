@@ -14,9 +14,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class DashboardViewModel @Inject constructor(
-    private val saveContactUseCase: SaveContactUseCase
-) : BaseViewModel() {
+class DashboardViewModel @Inject constructor() : BaseViewModel() {
 
     fun onToolbarRightButtonClicked() {
         route(DashboardRoute.Search)
@@ -24,26 +22,5 @@ class DashboardViewModel @Inject constructor(
 
     fun onAddContactButtonClicked() {
         route(DashboardRoute.Add)
-    }
-
-    fun onExtraToolbarRightButtonClicked() {
-        viewModelScope.launch {
-            saveContactUseCase.execute(
-                SaveContactUseCase.Params(
-                    Contact(
-                        id = 0,
-                        image = null,
-                        name = "David",
-                        phone = "615870223",
-                        age = "28",
-                        country = "Espana",
-                        creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
-                        rating = "5/10",
-                        gallery = emptyList(),
-                        screenshots = emptyList()
-                    )
-                )
-            )
-        }
     }
 }

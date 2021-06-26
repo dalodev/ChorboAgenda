@@ -22,59 +22,82 @@
         android:id="@+id/photoView"
         android:layout_width="0dp"
         android:layout_height="@dimen/add_contact_photo_height_expanded"
+        app:layout_constraintBottom_toTopOf="@id/nameLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/toolbar"
+        app:layout_constraintVertical_bias="0.1"
+        app:layout_constraintVertical_chainStyle="packed" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/addPhotoView"
         android:layout_width="@dimen/add_contact_add_photo_image_size"
         android:layout_height="@dimen/add_contact_add_photo_image_size"
+        android:background="@drawable/add_photo"
+        android:backgroundTint="@color/colorInfoView"
         app:layout_constraintBottom_toBottomOf="@+id/photoView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar"
-        android:background="@drawable/add_photo" />
+        app:layout_constraintEnd_toEndOf="@id/photoView"
+        app:layout_constraintStart_toStartOf="@id/photoView"
+        app:layout_constraintTop_toTopOf="@id/photoView" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/nameInputLayout"
-        android:layout_width="0dp"
+        android:id="@+id/nameLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/add_content_input_start"
         android:layout_marginTop="@dimen/add_content_input_start"
         android:layout_marginEnd="@dimen/add_content_input_start"
         android:hint="@string/add_contact_name_hint"
-        android:textColor="@color/add_contact_input_text_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:textColorHint="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
+        app:hintTextColor="@color/colorAccent"
+        app:layout_constraintBottom_toTopOf="@id/phoneLayout"
         app:layout_constraintTop_toBottomOf="@id/photoView">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/nameEditText"
+            android:id="@+id/nameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:gravity="center"
+            android:inputType="textCapWords"
+            android:maxLines="1"
+            android:padding="@dimen/add_contact_name_padding"
+            android:textColor="@color/colorSecondaryText"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            tools:text="David" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/phoneInputLayout"
-        android:layout_width="0dp"
+        android:id="@+id/phoneLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/add_content_input_start"
         android:layout_marginTop="@dimen/add_content_input_start"
         android:layout_marginEnd="@dimen/add_content_input_start"
-        android:hint="@string/add_contact_name_hint"
-        android:textColor="@color/add_contact_input_text_color"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nameInputLayout">
+        android:gravity="center"
+        android:hint="@string/add_contact_phone_hint"
+        android:textColorHint="@color/colorAccent"
+        app:boxStrokeColor="@color/colorAccent"
+        app:hintTextColor="@color/colorAccent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nameLayout">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/phoneEditText"
+            android:id="@+id/phoneText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="text" />
+            android:gravity="center"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:padding="@dimen/add_contact_name_padding"
+            android:textColor="@color/colorSecondaryText"
+            android:textColorHighlight="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            tools:text="615870223" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

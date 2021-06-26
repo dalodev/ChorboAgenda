@@ -3,4 +3,5 @@
     <dimen name="add_content_input_start">36dp</dimen>
     <dimen name="add_contact_photo_height_expanded">240dp</dimen>
     <dimen name="add_contact_add_photo_image_size">64dp</dimen>
+    <dimen name="add_contact_name_padding">12dp</dimen>
 </resources>
