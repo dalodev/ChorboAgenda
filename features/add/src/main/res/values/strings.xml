@@ -4,5 +4,10 @@
     <string name="add_contact_toolbar_title">Create contact</string>
     <string name="add_contact_name_hint">Name*</string>
     <string name="add_contact_phone_hint">Phone</string>
+    <string name="add_contact_retry">Retry</string>
+    <string name="add_contact_save_contact">Save contact</string>
+    <string name="add_contact_name_error">Invalid Name</string>
+    <string name="add_contact_photo_permission_error">You must give storage permissions</string>
+    <string name="add_contact_settings_button">Settings</string>
 
 </resources>

@@ -1,8 +1,7 @@
 package es.littledavity.features.add
 
 import com.paulrybitskyi.hiltbinder.BindType
-import es.littledavity.commons.ui.widgets.contacts.ContactModel
-import es.littledavity.core.providers.StringProvider
+import es.littledavity.commons.ui.widgets.contacts.ContactsModelMapper
 import es.littledavity.domain.contacts.entities.Contact
 import javax.inject.Inject
 
@@ -10,12 +9,13 @@ interface AddContactUiStateFactory {
     fun createWithNewState(): AddContactUiState
     fun createWithLoadingState(): AddContactUiState
     fun createWithErrorState(): AddContactUiState
+    fun createWithPermissionError(navigation: () -> Unit): AddContactUiState
     fun createWithResultState(contact: Contact): AddContactUiState
 }
 
 @BindType(installIn = BindType.Component.VIEW_MODEL)
 internal class AddContactUiStateFactoryImpl @Inject constructor(
-    private val stringProvider: StringProvider
+    private val contactModelMapper: ContactsModelMapper
 ) : AddContactUiStateFactory {
     override fun createWithNewState() = AddContactUiState.New
 
@@ -23,15 +23,10 @@ internal class AddContactUiStateFactoryImpl @Inject constructor(
 
     override fun createWithErrorState() = AddContactUiState.Error
 
-    override fun createWithResultState(contact: Contact) = AddContactUiState.Result(
-        ContactModel(
-            id = 0,
-            "avatarImage", //TODO file path string
-            name = "name",
-            phone = null,
-            creationDate = "",
-            instagram = null
-        )
-    )
+    override fun createWithPermissionError(navigation: () -> Unit) =
+        AddContactUiState.ErrorPermission(navigation)
 
+    override fun createWithResultState(contact: Contact) = AddContactUiState.Result(
+        contactModelMapper.mapToContactModel(contact)
+    )
 }

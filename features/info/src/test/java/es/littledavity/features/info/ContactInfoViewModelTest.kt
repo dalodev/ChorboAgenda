@@ -147,7 +147,8 @@ internal class ContactInfoViewModelTest {
                         instagram = "@test",
                         creationDate = "creation_date",
                         name = "name",
-                        imageUrl = null
+                        imageUrl = null,
+                        phone = "123"
                     )
                 )
             )

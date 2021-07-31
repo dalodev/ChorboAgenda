@@ -6,6 +6,7 @@ package es.littledavity.features.search
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
+import es.littledavity.commons.ui.widgets.contacts.ContactsModelMapper
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.domain.contacts.usecases.SearchContactsUseCase
@@ -34,13 +35,16 @@ internal class ContactsSearchViewModelTest {
     private lateinit var searchContactsUseCase: SearchContactsUseCase
     private lateinit var logger: FakeLogger
 
+    @MockK
+    private lateinit var contactsModelMapper: ContactsModelMapper
+
     @Before
     fun setup() {
         MockKAnnotations.init(this)
         logger = FakeLogger()
         viewModel = ContactsSearchViewModel(
             searchUseCase = searchContactsUseCase,
-            uiStateFactory = FakecontactsSearchUiStateFactory(),
+            uiStateFactory = FakecontactsSearchUiStateFactory(contactsModelMapper),
             dispatcherProvider = FakeDispatcherProvider(),
             errorMapper = FakeErrorMapper(),
             logger = logger,
@@ -61,21 +65,18 @@ internal class ContactsSearchViewModelTest {
         }
     }
 
-    private class FakecontactsSearchUiStateFactory : ContactsSearchUiStateFactory {
+    private class FakecontactsSearchUiStateFactory(val contactsModelMapper: ContactsModelMapper) :
+        ContactsSearchUiStateFactory {
 
-        override fun createWithEmptyState(searchQuery: String) = ContactsUiState.Empty(iconId = -1, title = "title")
+        override fun createWithEmptyState(searchQuery: String) =
+            ContactsUiState.Empty(iconId = -1, title = "title")
 
         override fun createWithLoadingState() = ContactsUiState.Loading
 
         override fun createWithResultState(contacts: List<Contact>) = ContactsUiState.Result(
-            contacts.map {
-                ContactModel(
-                    id = it.id,
-                    image = it.image,
-                    name = it.name,
-                    phone = it.phone
-                )
-            }
+            contacts.map(
+                contactsModelMapper::mapToContactModel
+            )
         )
     }
 }

@@ -83,4 +83,13 @@
         app:exitAnim="@anim/overshoot_scaling_window_a_exit_animation"
         app:popEnterAnim="@anim/overshoot_scaling_window_a_enter_animation"
         app:popExitAnim="@anim/overshoot_scaling_window_b_exit_animation" />
+
+    <action
+        android:id="@+id/action_dashboardFragment"
+        app:destination="@+id/dashboardFragment"
+        app:enterAnim="@anim/overshoot_scaling_window_b_enter_animation"
+        app:exitAnim="@anim/overshoot_scaling_window_a_exit_animation"
+        app:popEnterAnim="@anim/overshoot_scaling_window_a_enter_animation"
+        app:popExitAnim="@anim/overshoot_scaling_window_b_exit_animation" />
+
 </navigation>

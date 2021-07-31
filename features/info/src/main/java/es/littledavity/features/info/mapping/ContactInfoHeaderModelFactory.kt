@@ -25,10 +25,11 @@ internal class ContactInfoHeaderModelFactoryImpl @Inject constructor(
         imageUrl = contact.createImageUrl(),
         name = contact.name,
         creationDate = contact.formatCreationDate(),
-        instagram = contact.phone,
+        instagram = contact.instagram,
         rating = contact.rating,
         age = contact.age,
-        country = contact.country
+        country = contact.country,
+        phone = contact.phone
     )
 
     private fun Contact.createBackgroundImageModels(): List<ContactHeaderImageModel> {
@@ -42,7 +43,10 @@ internal class ContactInfoHeaderModelFactoryImpl @Inject constructor(
 
     private fun Contact.createImageUrl(): String? {
         return image?.let { cover ->
-            igdbImageUrlFactory.createUrl(cover, IgdbImageUrlFactory.Config(IgdbImageSize.BIG_COVER))
+            igdbImageUrlFactory.createUrl(
+                cover,
+                IgdbImageUrlFactory.Config(IgdbImageSize.BIG_COVER)
+            )
         }
     }
 

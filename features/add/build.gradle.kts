@@ -24,6 +24,7 @@ dependencies {
     implementation(Deps.AndroidX.constraintLayout)
     implementation(Deps.AndroidX.fragmentKtx)
     implementation(Deps.AndroidX.coreKtx)
+    implementation(Deps.Misc.dexter)
 
     implementation(Deps.Google.materialComponents)
 

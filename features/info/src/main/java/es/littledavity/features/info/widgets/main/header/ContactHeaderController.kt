@@ -1,6 +1,7 @@
 package es.littledavity.features.info.widgets.main.header
 
 import android.content.Context
+import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.doOnPreDraw
@@ -21,6 +22,7 @@ import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
 import es.littledavity.features.info.widgets.main.model.ContactInfoHeaderModel
 import es.littledavity.features.info.widgets.mapToContactGalleryModels
+import java.util.*
 
 internal class ContactHeaderController(
     context: Context,
@@ -28,7 +30,8 @@ internal class ContactHeaderController(
     private val stringProvider: StringProvider
 ) {
 
-    private val pageIndicatorTopMargin = context.getDimensionPixelSize(R.dimen.contact_info_header_page_indicator_margin)
+    private val pageIndicatorTopMargin =
+        context.getDimensionPixelSize(R.dimen.contact_info_header_page_indicator_margin)
 
     private var areWindowInsetsApplied = false
 
@@ -64,6 +67,13 @@ internal class ContactHeaderController(
     private var name by observeChanges("") { oldName, newName ->
         onNameChanged(oldName, newName)
     }
+
+    private var phone: CharSequence?
+        set(value) {
+            binding.phoneTv.text = PhoneNumberUtils.formatNumber(value.toString(), "ES")
+            isPhoneVisible = value != null
+        }
+        get() = binding.phoneTv.text
 
     private var creationDate: CharSequence
         set(value) {
@@ -130,8 +140,10 @@ internal class ContactHeaderController(
             }
         }
 
-        if (backgroundImageModels != model.backgroundImageModels) backgroundImageModels = model.backgroundImageModels
+        if (backgroundImageModels != model.backgroundImageModels) backgroundImageModels =
+            model.backgroundImageModels
         if (name != model.name) name = model.name
+        if (phone != model.phone) phone = model.phone
         if (creationDate != model.creationDate) creationDate = model.creationDate
         if (instagram != model.instagram) instagram = model.instagram
         if (rating != model.rating) rating = model.rating ?: "0/10"
@@ -166,7 +178,12 @@ internal class ContactHeaderController(
 
     private fun initMotionLayoutListener() {
         binding.mainView.addTransitionListener(
-            onTransitionTrigger = { triggerId, positive, _ -> onTransitionTrigger(triggerId, positive) }
+            onTransitionTrigger = { triggerId, positive, _ ->
+                onTransitionTrigger(
+                    triggerId,
+                    positive
+                )
+            }
         )
     }
 
@@ -228,20 +245,7 @@ internal class ContactHeaderController(
         if ((oldTitle == newTitle) || newTitle.isBlank()) return
 
         val firstNameTv = binding.nameTv
-        val secondNameTv = binding.phoneTv
-
         firstNameTv.text = newTitle
-        firstNameTv.doOnPreDraw {
-            if (firstNameTv.lineCount == 1) {
-                isPhoneVisible = false
-            } else {
-                val firstTitleWidth = firstNameTv.width.toFloat()
-                val firstTitleVisibleTextEndIndex = (firstNameTv.getOffsetForPosition(firstTitleWidth, 0f) + 1)
-                val secondTitleText = newTitle.substring(firstTitleVisibleTextEndIndex)
-
-                secondNameTv.text = secondTitleText
-            }
-        }
     }
 
     private fun initGalleryView() = with(binding.galleryView) {

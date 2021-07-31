@@ -3,12 +3,9 @@
  */
 package es.littledavity.features.dashboard.fragment
 
-import android.app.Activity
-import android.content.Intent
 import android.os.Bundle
 import android.os.Parcelable
 import android.view.MenuItem
-import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.base.BaseFragment
@@ -125,7 +122,9 @@ internal class DashboardFragment : BaseFragment<
         super.onSaveState(state)
 
         // Saving the adapter's state since for some reason it does not do this by itself
-        state.putParcelable(KEY_ADAPTER_STATE, viewPagerAdapter.saveState())
+        if (this::viewPagerAdapter.isInitialized) {
+            state.putParcelable(KEY_ADAPTER_STATE, viewPagerAdapter.saveState())
+        }
         state.putSerializable(
             KEY_SELECTED_PAGE,
             viewBinding.bottomNav.selectedItemId.toDashboardPageFromMenuItemId()

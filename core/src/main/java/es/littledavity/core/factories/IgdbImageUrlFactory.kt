@@ -44,7 +44,7 @@ fun IgdbImageUrlFactory.createUrls(
     images: List<Image>,
     config: IgdbImageUrlFactory.Config
 ): List<String> {
-    if(images.isEmpty()) return emptyList()
+    if (images.isEmpty()) return emptyList()
 
     return images.mapNotNull { image ->
         createUrl(image, config)
@@ -52,15 +52,11 @@ fun IgdbImageUrlFactory.createUrls(
 }
 
 @BindType
-internal class IgdbImageUrlFactoryImpl @Inject constructor() : IgdbImageUrlFactory {
-
-    private companion object {
-        private const val IMAGE_URL_TEMPLATE = "https://images.igdb.com/igdb/image/upload/t_%s/%s.%s"
-        private const val IMAGE_TYPE_RETINA_EXTENSION = "_2x"
-    }
+internal class IgdbImageUrlFactoryImpl @Inject constructor(
+) : IgdbImageUrlFactory {
 
     override fun createUrl(image: Image, config: IgdbImageUrlFactory.Config): String? {
-        if(image.id.isBlank()) return null
+        if (image.id?.isBlank() == true) return null
         return image.id
         /*return String.format(
             IMAGE_URL_TEMPLATE,
@@ -74,10 +70,6 @@ internal class IgdbImageUrlFactoryImpl @Inject constructor() : IgdbImageUrlFacto
     private fun constructType(config: IgdbImageUrlFactory.Config): String {
         return buildString {
             append(config.size.rawSize)
-
-            if(config.withRetinaSize) {
-                append(IMAGE_TYPE_RETINA_EXTENSION)
-            }
         }
     }
 }

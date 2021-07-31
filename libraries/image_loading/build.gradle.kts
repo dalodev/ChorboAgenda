@@ -11,6 +11,7 @@ dependencies {
     implementation(Deps.Square.picasso)
     implementation(Deps.Commons.ktx)
 
+    implementation(Deps.AndroidX.coreKtx)
     implementation(Deps.Google.daggerHilt)
     kapt(Deps.Google.daggerHiltCompiler)
 

@@ -64,7 +64,7 @@ class FragmentExtensionsTest : TestRobolectric() {
         val identifierViewModel = "TestViewModel"
 
         fragmentScenario.onFragment {
-            it.viewModel(identifierViewModel) { TestViewModel() }
+//            it.viewModel(identifierViewModel) { TestViewModel() }
             ViewModelProvider(it).get("Wrong Identifier", TestViewModel::class.java)
         }
     }

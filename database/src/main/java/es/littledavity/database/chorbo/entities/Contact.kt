@@ -25,7 +25,9 @@ internal data class Contact(
     @ColumnInfo(name = Schema.AGE) val age: String,
     @ColumnInfo(name = Schema.RATING) val rating: String?,
     @ColumnInfo(name = Schema.CREATION_DATE) val creationDate: CreationDate,
-    @ColumnInfo(name = Schema.COUNTRY) val country: String
+    @ColumnInfo(name = Schema.COUNTRY) val country: String,
+    @ColumnInfo(name = Schema.INSTAGRAM) val instagram: String?,
+
 ) {
 
     object Schema {
@@ -38,5 +40,6 @@ internal data class Contact(
         const val RATING = "rating"
         const val CREATION_DATE = "creation_date"
         const val COUNTRY = "country"
+        const val INSTAGRAM = "instagram"
     }
 }

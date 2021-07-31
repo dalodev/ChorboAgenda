@@ -24,13 +24,13 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
 import androidx.annotation.IntegerRes
 import androidx.annotation.LayoutRes
-import androidx.annotation.StringRes
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.res.use
 import androidx.core.hardware.fingerprint.FingerprintManagerCompat
+import com.google.android.material.snackbar.Snackbar
 import es.littledavity.core.commons.SdkInfo
 import java.util.Locale
 
@@ -77,7 +77,7 @@ val Context.displayMetrics: DisplayMetrics
 @get:SuppressLint("NewApi")
 val Context.locale: Locale
     get() = with(resources.configuration) {
-        if(SdkInfo.IS_AT_LEAST_NOUGAT) {
+        if (SdkInfo.IS_AT_LEAST_NOUGAT) {
             locales[0]
         } else {
             locale
@@ -177,6 +177,21 @@ fun Context.inflateView(
     )
 }
 
+fun View.showSnackBar(
+    message: CharSequence,
+    actionMessage: CharSequence,
+    action: (() -> Unit)? = null
+): Snackbar {
+    return Snackbar.make(
+        this,
+        message,
+        Snackbar.LENGTH_LONG
+    ).apply {
+        setAction(actionMessage) { action?.invoke() }
+        show()
+    }
+}
+
 
 fun Context.showShortToast(message: CharSequence): Toast {
     return showToast(message, duration = Toast.LENGTH_SHORT)
@@ -195,7 +210,10 @@ fun Context.showToast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT)
 
 
 fun Context.isPermissionGranted(permission: String): Boolean {
-    return (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED)
+    return (ContextCompat.checkSelfPermission(
+        this,
+        permission
+    ) == PackageManager.PERMISSION_GRANTED)
 }
 
 

@@ -4,6 +4,7 @@
 package es.littledavity.database.chorbo.datastores
 
 import es.littledavity.core.providers.TimestampProvider
+import es.littledavity.data.services.ImageGalleryService
 import es.littledavity.data.contacts.DataContact
 import es.littledavity.data.contacts.DataCreationDate
 import es.littledavity.data.contacts.DataCreationDateCategory
@@ -15,30 +16,32 @@ import es.littledavity.database.chorbo.DatabaseImage
 import javax.inject.Inject
 
 internal class ContactMapper @Inject constructor(
-    private val timestampProvider: TimestampProvider
+    private val timestampProvider: TimestampProvider,
+    private val imageGalleryService: ImageGalleryService
 ) {
 
     fun mapToDatabaseContact(dataContact: DataContact) = DatabaseContact(
         id = dataContact.id,
         name = dataContact.name,
-        image = dataContact.image?.toDatabaseImage(),
+        image = dataContact.image?.toDatabaseImage(dataContact),
         phone = dataContact.phone,
-        artworks = dataContact.gallery.toDatabaseImages(),
-        screenshots = dataContact.screenshots.toDatabaseImages(),
+        artworks = dataContact.gallery.toDatabaseImages(dataContact),
+        screenshots = dataContact.screenshots.toDatabaseImages(dataContact),
         createTimestamp = timestampProvider.getUnixTimestamp(),
         age = dataContact.age,
         rating = dataContact.rating,
         creationDate = dataContact.creationDate.toDatabaseCreationDate(),
-        country = dataContact.country
+        country = dataContact.country,
+        instagram = dataContact.instagram
     )
 
-    private fun DataImage.toDatabaseImage() = DatabaseImage(
-        id = id,
+    private fun DataImage.toDatabaseImage(dataContact: DataContact) = DatabaseImage(
+        id = imageGalleryService.createMediaFile(dataContact),
         width = width,
         height = height
     )
 
-    private fun List<DataImage>.toDatabaseImages() = map { it.toDatabaseImage() }
+    private fun List<DataImage>.toDatabaseImages(dataContact: DataContact) = map { it.toDatabaseImage(dataContact) }
 
     private fun DataCreationDate.toDatabaseCreationDate() = DatabaseCreationDate(
         date = this.date,
@@ -56,7 +59,8 @@ internal class ContactMapper @Inject constructor(
         age = databaseContact.age,
         rating = databaseContact.rating,
         creationDate = databaseContact.creationDate.toDataCreationDate(),
-        country = databaseContact.country
+        country = databaseContact.country,
+        instagram = databaseContact.instagram
     )
 
     private fun DatabaseImage.toDataImage() = DataImage(

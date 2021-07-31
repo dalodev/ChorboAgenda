@@ -3,6 +3,7 @@ package es.littledavity.features.contacts
 import app.cash.turbine.test
 import es.littledavity.commons.ui.base.events.GeneralCommand
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
+import es.littledavity.commons.ui.widgets.contacts.ContactsModelMapper
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.domain.DomainContact
 import es.littledavity.domain.contacts.usecases.ObserveContactsUseCase
@@ -33,6 +34,10 @@ class ContactsViewModelTest {
     private lateinit var logger: FakeLogger
     private lateinit var viewModel: ContactsViewModel
 
+    @MockK
+    private lateinit var contactsModelMapper: ContactsModelMapper
+
+
     @Before
     fun setup() {
         MockKAnnotations.init(this)
@@ -40,7 +45,7 @@ class ContactsViewModelTest {
         logger = FakeLogger()
         viewModel = ContactsViewModel(
             observeContactsUseCase = observeContactsUseCase,
-            uiStateFactory = FakeUiStateFactory(),
+            uiStateFactory = FakeUiStateFactory(contactsModelMapper),
             dispatcherProvider = FakeDispatcherProvider(),
             errorMapper = FakeErrorMapper(),
             logger = logger
@@ -72,21 +77,23 @@ class ContactsViewModelTest {
     }
 
     @Test
-    fun DispatchesToastShowingCommandWhenContactsLoadingFails() = mainCoroutineRule.runBlockingTest {
-        coEvery { observeContactsUseCase.execute(any()) } returns flow { throw Exception("Error") }
-        viewModel.commandFlow.test {
-            viewModel.loadData()
-            assertThat(expectItem() is GeneralCommand.ShowLongToast).isTrue
+    fun DispatchesToastShowingCommandWhenContactsLoadingFails() =
+        mainCoroutineRule.runBlockingTest {
+            coEvery { observeContactsUseCase.execute(any()) } returns flow { throw Exception("Error") }
+            viewModel.commandFlow.test {
+                viewModel.loadData()
+                assertThat(expectItem() is GeneralCommand.ShowLongToast).isTrue
+            }
         }
-    }
 
     @Test
     fun RouteToInoScreenWhenContactIsClicked() = mainCoroutineRule.runBlockingTest {
         val contactModel = ContactModel(
             id = 1,
             name = "name",
-            image = "image",
-            phone = "1231412"
+            coverImageUrl = "image",
+            phone = "1231412",
+            creationDate = ""
         )
         viewModel.routeFlow.test {
             viewModel.onContactClicked(contactModel)
@@ -96,7 +103,8 @@ class ContactsViewModelTest {
         }
     }
 
-    private class FakeUiStateFactory : ContactsUiStateFactory {
+    private class FakeUiStateFactory(val contactsModelMapper: ContactsModelMapper) :
+        ContactsUiStateFactory {
 
         override fun createWithEmptyState(): ContactsUiState {
             return ContactsUiState.Empty(iconId = -1, title = "title")
@@ -108,14 +116,7 @@ class ContactsViewModelTest {
 
         override fun createWithResultState(contacts: List<DomainContact>): ContactsUiState {
             return ContactsUiState.Result(
-                contacts.map {
-                    ContactModel(
-                        id = it.id,
-                        name = it.name,
-                        image = it.image,
-                        phone = it.phone
-                    )
-                }
+                contacts.map(contactsModelMapper::mapToContactModel)
             )
         }
     }

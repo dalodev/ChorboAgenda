@@ -13,7 +13,7 @@ interface ContactsLocalDataStore {
 
     suspend fun insertContacts(chorbos: List<DataContact>)
 
-    suspend fun insertContact(chorbo: DataContact)
+    suspend fun insertContact(chorbo: DataContact): Flow<DataContact>
 
     suspend fun searchContacts(
         searchQuery: String,

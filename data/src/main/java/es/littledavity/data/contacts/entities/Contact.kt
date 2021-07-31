@@ -14,5 +14,6 @@ data class Contact(
     val country: String,
     val creationDate: CreationDate,
     val rating: String?,
+    val instagram: String?,
 
 )

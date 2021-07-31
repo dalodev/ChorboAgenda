@@ -1,6 +1,7 @@
 package es.littledavity.imageLoading
 
 import android.widget.ImageView
+import androidx.core.net.toUri
 import com.paulrybitskyi.hiltbinder.BindType
 import com.squareup.picasso.Picasso
 import java.io.File
@@ -16,7 +17,7 @@ internal class PicassoImageLoader @Inject constructor(
     override fun loadImage(config: Config) {
         config.onStart?.invoke()
 
-        val requestCreator = picasso.load(File(config.imageUrl))
+        val requestCreator = picasso.load(config.imageUrl.toUri())
 
         if (config.shouldCenterCrop) requestCreator.centerCrop()
         if (config.shouldCenterInside) requestCreator.centerInside()

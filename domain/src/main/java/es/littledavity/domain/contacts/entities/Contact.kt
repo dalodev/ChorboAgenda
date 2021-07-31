@@ -5,13 +5,14 @@ package es.littledavity.domain.contacts.entities
 
 data class Contact(
     val id: Int,
-    val image: Image?,
-    val name: String,
-    val phone: String?,
+    var image: Image?,
+    var name: String,
+    var phone: String?,
     val gallery: List<Image>,
     val screenshots: List<Image>,
-    val creationDate: CreationDate,
+    var creationDate: CreationDate?,
     val age: String,
     val rating: String?,
-    val country: String
+    val country: String,
+    val instagram: String?
 )

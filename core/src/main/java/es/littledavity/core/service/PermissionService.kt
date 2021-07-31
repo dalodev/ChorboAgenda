@@ -9,23 +9,36 @@ import androidx.core.content.ContextCompat
 import com.karumi.dexter.Dexter
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener
 import com.karumi.dexter.listener.single.PermissionListener
+import com.paulrybitskyi.hiltbinder.BindType
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class PermissionService @Inject constructor(
-    internal val context: Context
-) {
+interface PermissionService {
     fun requestPermissions(
+        permissions: List<String>,
+        listener: MultiplePermissionsListener
+    )
+
+    fun requestPermission(permission: String, listener: PermissionListener)
+    fun checkPermissions(permission: List<String>): Boolean
+}
+
+@BindType
+class PermissionServiceImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+) : PermissionService {
+    override fun requestPermissions(
         permissions: List<String>,
         listener: MultiplePermissionsListener
     ) {
         Dexter.withContext(context).withPermissions(permissions).withListener(listener).check()
     }
 
-    fun requestPermission(permission: String, listener: PermissionListener) {
+    override fun requestPermission(permission: String, listener: PermissionListener) {
         Dexter.withContext(context).withPermission(permission).withListener(listener).check()
     }
 
-    fun checkPermissions(permission: List<String>) = !permission.any {
+    override fun checkPermissions(permission: List<String>) = !permission.any {
         ContextCompat.checkSelfPermission(context, it) != PackageManager.PERMISSION_GRANTED
     }
 }

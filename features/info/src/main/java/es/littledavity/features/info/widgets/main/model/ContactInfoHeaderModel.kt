@@ -11,5 +11,6 @@ internal data class ContactInfoHeaderModel(
     val age: String,
     val country: String,
     val rating: String?,
+    val phone: String?,
     val instagram: String?
 )

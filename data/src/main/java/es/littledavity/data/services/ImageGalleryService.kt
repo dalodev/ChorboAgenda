@@ -1,7 +1,7 @@
 /*
  * Copyright 2021 dev.id
  */
-package es.littledavity.core.service
+package es.littledavity.data.services
 
 import android.content.ContentValues
 import android.content.Context
@@ -13,19 +13,34 @@ import android.os.Environment
 import android.provider.MediaStore
 import android.util.Base64
 import androidx.core.content.ContextCompat
-import es.littledavity.domain.contacts.entities.Contact
+import androidx.core.net.toUri
+import com.paulrybitskyi.hiltbinder.BindType
+import dagger.hilt.android.qualifiers.ApplicationContext
+import es.littledavity.data.contacts.DataContact
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.UUID
+import javax.inject.Inject
 
-class ImageGalleryService constructor(
-    internal val context: Context
-) {
+interface ImageGalleryService {
+    fun createMediaFile(contact: DataContact): String?
+}
+
+@BindType
+internal class ImageGalleryServiceImpl @Inject constructor(
+    @ApplicationContext private val context: Context
+) : ImageGalleryService {
 
     companion object {
         private const val QUALITY = 100
+    }
+
+    override fun createMediaFile(contact: DataContact): String? {
+        val bitmapImage = contact.image?.id?.toUri()?.let(::getBitmap)
+        bitmapImage?.let { return saveMediaImage(it, contact) }
+        return null
     }
 
     fun getBitmap(uri: Uri): Bitmap {
@@ -78,7 +93,7 @@ class ImageGalleryService constructor(
         return file.path
     }
 
-    fun saveMediaImage(imageToSave: Bitmap, chorbo: Contact): String {
+    fun saveMediaImage(imageToSave: Bitmap, chorbo: DataContact): String {
         val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${chorbo.name}"
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, chorbo.id)
@@ -103,7 +118,7 @@ class ImageGalleryService constructor(
         return uri.toString()
     }
 
-    fun saveMediaImage(imageToSave: Bitmap, chorbo: Contact, fileName: String): String {
+    fun saveMediaImage(imageToSave: Bitmap, chorbo: DataContact, fileName: String): String {
         val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${chorbo.name}"
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)

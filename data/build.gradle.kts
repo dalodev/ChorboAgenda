@@ -31,6 +31,7 @@ dependencies {
     implementation(project(Deps.Local.core))
 
     implementation(Deps.Kotlin.coroutines)
+    implementation(Deps.AndroidX.coreKtx)
 
     implementation(Deps.AndroidX.prefsDataStore)
     implementation(Deps.AndroidX.protoDataStore)

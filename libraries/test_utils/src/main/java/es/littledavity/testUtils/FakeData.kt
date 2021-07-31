@@ -21,7 +21,8 @@ val DATA_CONTACT = DataContact(
     creationDate = CreationDate(1L, 1, CreationDateCategory.YYYY_MMMM_DD),
     age = "18",
     country = "Espana",
-    rating = "10/10"
+    rating = "10/10",
+    instagram = "@Littledavity"
 )
 val DATA_CONTACTS = listOf(
     DATA_CONTACT.copy(id = 1),
@@ -41,7 +42,8 @@ val DOMAIN_CONTACT = DomainContact(
     creationDate = DomainCreationDate(1L, 1, DomainCreationDateCategory.YYYY_MMMM_DD),
     age = "18",
     country = "Espana",
-    rating = "10/10"
+    rating = "10/10",
+    instagram = "@Littledavity"
 )
 
 val DOMAIN_CONTACTS = listOf(

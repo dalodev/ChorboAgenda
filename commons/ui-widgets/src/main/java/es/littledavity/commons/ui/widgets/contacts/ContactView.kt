@@ -4,6 +4,8 @@
 package es.littledavity.commons.ui.widgets.contacts
 
 import android.content.Context
+import android.telephony.PhoneNumberUtils
+import android.telephony.TelephonyManager
 import android.util.AttributeSet
 import com.google.android.material.card.MaterialCardView
 import es.littledavity.commons.ui.extensions.getColor
@@ -12,6 +14,7 @@ import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.onClick
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewContactBinding
+import java.util.*
 
 class ContactView @JvmOverloads constructor(
     context: Context,
@@ -35,7 +38,11 @@ class ContactView @JvmOverloads constructor(
 
     var phone: CharSequence?
         set(value) {
-            binding.phone.text = value
+            binding.phone.text = PhoneNumberUtils.formatNumber(
+                value.toString(),
+                "ES"
+            )
+
         }
         get() = binding.phone.text
 

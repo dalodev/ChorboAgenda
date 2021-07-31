@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "0dc8ab5452b7d096873ff75883338f58",
+    "identityHash": "3a7df6aaa9baaac78452617490ede922",
     "entities": [
       {
         "tableName": "chorbo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `image` TEXT, `phone` TEXT, `artworks` TEXT NOT NULL, `screenshots` TEXT NOT NULL, `create_timestamp` INTEGER NOT NULL, `age` TEXT NOT NULL, `rating` TEXT, `creation_date` TEXT NOT NULL, `country` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `image` TEXT, `phone` TEXT, `artworks` TEXT NOT NULL, `screenshots` TEXT NOT NULL, `create_timestamp` INTEGER NOT NULL, `age` TEXT NOT NULL, `rating` TEXT, `creation_date` TEXT NOT NULL, `country` TEXT NOT NULL, `instagram` TEXT)",
         "fields": [
           {
             "fieldPath": "id",
@@ -73,6 +73,12 @@
             "columnName": "country",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "instragram",
+            "columnName": "instagram",
+            "affinity": "TEXT",
+            "notNull": false
           }
         ],
         "primaryKey": {
@@ -137,7 +143,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '0dc8ab5452b7d096873ff75883338f58')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3a7df6aaa9baaac78452617490ede922')"
     ]
   }
 }

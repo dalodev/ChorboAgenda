@@ -6,5 +6,6 @@ sealed class AddContactUiState {
     object New : AddContactUiState()
     object Loading : AddContactUiState()
     object Error : AddContactUiState()
-    data class Result(val item: ContactModel) : AddContactUiState()
+    data class ErrorPermission(val navigation: () -> Unit) : AddContactUiState()
+    data class Result(val model: ContactModel) : AddContactUiState()
 }

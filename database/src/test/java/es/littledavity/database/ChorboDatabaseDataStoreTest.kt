@@ -3,11 +3,14 @@ package es.littledavity.database
 import app.cash.turbine.test
 import es.littledavity.core.providers.TimestampProvider
 import es.littledavity.data.contacts.DataContact
+import es.littledavity.data.services.ImageGalleryService
 import es.littledavity.database.chorbo.datastores.ContactMapper
 import es.littledavity.database.chorbo.datastores.ContactsDatabaseDataStore
 import es.littledavity.database.chorbo.datastores.SaveContactFactory
 import es.littledavity.database.chorbo.datastores.mapToDatabaseContacts
 import es.littledavity.database.chorbo.entities.Contact
+import es.littledavity.database.chorbo.entities.CreationDate
+import es.littledavity.database.chorbo.entities.CreationDateCategory
 import es.littledavity.database.chorbo.tables.ContactDao
 import es.littledavity.testUtils.DATA_CONTACTS
 import es.littledavity.testUtils.DATA_PAGINATION
@@ -32,11 +35,14 @@ class ChorboDatabaseDataStoreTest {
     @MockK
     private lateinit var timestampProvider: TimestampProvider
 
+    @MockK
+    private lateinit var imageGalleryService: ImageGalleryService
+
     @Before
     fun setup() {
         MockKAnnotations.init(this, relaxUnitFun = true)
 
-        contactMapper = ContactMapper(timestampProvider)
+        contactMapper = ContactMapper(timestampProvider, imageGalleryService)
 
         dataStore = ContactsDatabaseDataStore(
             contactDao = contactDao,
@@ -70,7 +76,14 @@ class ChorboDatabaseDataStoreTest {
             name = "test",
             image = null,
             phone = "test",
-            createTimestamp = 500L
+            createTimestamp = 500L,
+            age = "1",
+            country = "test",
+            artworks = emptyList(),
+            creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
+            instagram = "test",
+            rating = "test",
+            screenshots = emptyList()
         )
     }
 }

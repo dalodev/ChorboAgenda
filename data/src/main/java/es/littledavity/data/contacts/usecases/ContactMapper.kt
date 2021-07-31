@@ -25,7 +25,8 @@ internal class ContactMapper @Inject constructor() {
         age = contact.age,
         country = contact.country,
         creationDate = contact.creationDate.toDomainCreationDates(),
-        rating = contact.rating
+        rating = contact.rating,
+        instagram = contact.instagram
     )
 
     private fun DataImage.toDomainImage(): DomainImage {
@@ -56,7 +57,8 @@ internal class ContactMapper @Inject constructor() {
         age = contact.age,
         country = contact.country,
         creationDate = contact.creationDate.toDataCreationDate(),
-        rating = contact.rating
+        rating = contact.rating,
+        instagram = contact.instagram
     )
 
     private fun DomainImage.toDataImage(): DataImage {
@@ -71,11 +73,12 @@ internal class ContactMapper @Inject constructor() {
         return map { it.toDataImage() }
     }
 
-    private fun DomainCreationDate.toDataCreationDate() = DataCreationDate(
-        date = this.date,
-        year = this.year,
-        category = DataCreationDateCategory.valueOf(this.category.name)
+    private fun DomainCreationDate?.toDataCreationDate() = DataCreationDate(
+        date = this?.date,
+        year = this?.year,
+        category = DataCreationDateCategory.valueOf(this?.category?.name.orEmpty())
     )
 }
 
-internal fun ContactMapper.mapToDomainContacts(datacontacts: List<DataContact>) = datacontacts.map(::mapToDomainContact)
+internal fun ContactMapper.mapToDomainContacts(dataContacts: List<DataContact>) =
+    dataContacts.map(::mapToDomainContact)
