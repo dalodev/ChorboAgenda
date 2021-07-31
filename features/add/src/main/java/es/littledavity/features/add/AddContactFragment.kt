@@ -63,7 +63,6 @@ class AddContactFragment : BaseFragment<
 
     private fun initAddContactView() = with(viewBinding.addContactView) {
         onPhotoClicked = { viewModel.onPhotoClicked(resultLauncher) }
-        onRetryButtonClicked = viewModel::onRetryButtonClicked
     }
 
     override fun onRoute(route: Route) {

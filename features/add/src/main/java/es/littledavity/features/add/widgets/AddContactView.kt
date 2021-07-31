@@ -28,7 +28,6 @@ class AddContactView @JvmOverloads constructor(
     }
 
     var onPhotoClicked: (() -> Unit)? = null
-    var onRetryButtonClicked: (() -> Unit)? = null
 
     val name: String
         get() = binding.nameLayout.editText?.text.toString()
@@ -56,7 +55,6 @@ class AddContactView @JvmOverloads constructor(
     }
 
     private fun onNewStateSelected() {
-        onRetryButtonClicked?.invoke()
         showMainView()
         hideProgressBar()
     }

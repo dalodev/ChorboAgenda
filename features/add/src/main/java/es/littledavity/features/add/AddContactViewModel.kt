@@ -109,10 +109,6 @@ class AddContactViewModel @Inject constructor(
     private fun createResultAddContactUiState() =
         uiStateFactory.createWithResultState(currentContact)
 
-    fun onRetryButtonClicked() {
-        _uiState.value = uiStateFactory.createWithNewState()
-    }
-
     fun onPhotoClicked(resultLauncher: ActivityResultLauncher<String>) {
         permissionService.requestPermission(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
