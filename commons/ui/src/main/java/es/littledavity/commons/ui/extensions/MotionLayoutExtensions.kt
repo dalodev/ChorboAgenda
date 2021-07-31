@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.commons.ui.extensions
 
 import androidx.constraintlayout.motion.widget.MotionLayout

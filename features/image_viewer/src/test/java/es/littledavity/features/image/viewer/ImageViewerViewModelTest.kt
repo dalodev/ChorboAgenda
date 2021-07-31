@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.image.viewer
 
 import androidx.lifecycle.SavedStateHandle
@@ -47,7 +50,7 @@ internal class ImageViewerViewModelTest {
     @Test
     fun whenPageIsChanged_shouldEmitSelectedPosition() = mainCoroutineRule.runBlockingTest {
         viewModel.selectedPosition.test {
-            viewModel.onPageChanged(0)
+            viewModel.onPageChanged(10)
             assertThat(expectItem() == INITIAL_POSITION).isTrue
             assertThat(expectItem() == 10).isTrue
         }

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.data.contacts.usecases.likes
 
 import com.paulrybitskyi.hiltbinder.BindType

@@ -8,6 +8,9 @@ import androidx.room.Room
 import androidx.test.platform.app.InstrumentationRegistry
 import es.littledavity.database.ChorboagendaDatabase
 import es.littledavity.database.chorbo.entities.Contact
+import es.littledavity.database.chorbo.entities.CreationDate
+import es.littledavity.database.chorbo.entities.CreationDateCategory
+import es.littledavity.database.chorbo.entities.Image
 import es.littledavity.database.chorbo.tables.ContactDao
 import es.littledavity.testUtils.livedata.getValue
 import es.littledavity.testUtils.roboelectric.TestRobolectric
@@ -32,23 +35,44 @@ private val fakeChorbos = listOf(
     Contact(
         id = 1,
         name = "Noemi",
-        image = "test",
+        image = Image("test", 1, 1),
         phone = "test",
-        createTimestamp = 500L
+        createTimestamp = 500L,
+        age = "18",
+        artworks = emptyList(),
+        country = "test",
+        creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
+        instagram = "test",
+        rating = "10",
+        screenshots = emptyList()
     ),
     Contact(
-        id = 2,
-        name = "Ximena",
-        image = "test",
+        id = 1,
+        name = "Noemi",
+        image = Image("test", 1, 1),
         phone = "test",
-        createTimestamp = 500L
+        createTimestamp = 500L,
+        age = "18",
+        artworks = emptyList(),
+        country = "test",
+        creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
+        instagram = "test",
+        rating = "10",
+        screenshots = emptyList()
     ),
     Contact(
-        id = 3,
-        name = "Ángeles",
-        image = "test",
+        id = 1,
+        name = "Noemi",
+        image = Image("test", 1, 1),
         phone = "test",
-        createTimestamp = 500L
+        createTimestamp = 500L,
+        age = "18",
+        artworks = emptyList(),
+        country = "test",
+        creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
+        instagram = "test",
+        rating = "10",
+        screenshots = emptyList()
     )
 )
 
@@ -144,7 +168,7 @@ class ChorboDaoTest : TestRobolectric() {
     fun deleteChorbo_NoStored_ShouldNotRemoveNothing() = runBlocking {
         contactDao.insertChorbos(fakeChorbos)
 
-        val chorboToRemove = Contact(5, "test", "test", "+34", 500L)
+        val chorboToRemove = fakeChorbos[0]
         contactDao.deleteChorbo(chorboToRemove)
 
         assertEquals(fakeChorbos, contactDao.getChorbos())

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.contacts
 
 import app.cash.turbine.test
@@ -34,10 +37,6 @@ class ContactsViewModelTest {
     private lateinit var logger: FakeLogger
     private lateinit var viewModel: ContactsViewModel
 
-    @MockK
-    private lateinit var contactsModelMapper: ContactsModelMapper
-
-
     @Before
     fun setup() {
         MockKAnnotations.init(this)
@@ -45,7 +44,7 @@ class ContactsViewModelTest {
         logger = FakeLogger()
         viewModel = ContactsViewModel(
             observeContactsUseCase = observeContactsUseCase,
-            uiStateFactory = FakeUiStateFactory(contactsModelMapper),
+            uiStateFactory = FakeUiStateFactory(),
             dispatcherProvider = FakeDispatcherProvider(),
             errorMapper = FakeErrorMapper(),
             logger = logger
@@ -103,7 +102,7 @@ class ContactsViewModelTest {
         }
     }
 
-    private class FakeUiStateFactory(val contactsModelMapper: ContactsModelMapper) :
+    private class FakeUiStateFactory :
         ContactsUiStateFactory {
 
         override fun createWithEmptyState(): ContactsUiState {
@@ -116,7 +115,15 @@ class ContactsViewModelTest {
 
         override fun createWithResultState(contacts: List<DomainContact>): ContactsUiState {
             return ContactsUiState.Result(
-                contacts.map(contactsModelMapper::mapToContactModel)
+                contacts.map {
+                    ContactModel(
+                        id = it.id,
+                        name = it.name,
+                        coverImageUrl = it.image?.id,
+                        phone = it.phone,
+                        creationDate = "test"
+                    )
+                }
             )
         }
     }

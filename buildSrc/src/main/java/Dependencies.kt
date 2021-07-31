@@ -222,6 +222,7 @@ object Deps {
         const val testRoboelectric = "org.robolectric:robolectric:$roboelectricVersion"
         const val mockitoKotlin2 = "com.nhaarman.mockitokotlin2:mockito-kotlin:$mockitoVersion"
         const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion"
+        const val mockitoCore = "org.mockito:mockito-core:$mockitoKotlinVersion"
         const val testRules = "androidx.test:rules:$rulesVersion"
         const val coreTest = "androidx.test:core:$testCoreVersion"
         const val fragmentTest = "androidx.fragment:fragment-testing:$fragmentVersion"

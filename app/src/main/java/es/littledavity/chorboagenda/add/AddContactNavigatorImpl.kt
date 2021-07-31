@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.chorboagenda.add
 
 import android.content.Context
@@ -11,7 +14,6 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import es.littledavity.features.add.AddContactFragmentDirections
 import es.littledavity.features.add.AddContactNavigator
 import javax.inject.Inject
-
 
 @BindType(installIn = BindType.Component.FRAGMENT)
 class AddContactNavigatorImpl @Inject constructor(

@@ -69,7 +69,19 @@ dependencies {
     androidTestImplementation(Deps.Testing.turbine)
     androidTestImplementation(Deps.Testing.room)
     androidTestImplementation(Deps.Testing.mockitoKotlin2)
-    androidTestImplementation(Deps.Testing.testRoboelectric)
+    androidTestImplementation(Deps.Testing.testRoboelectric) {
+        exclude("org.apache.maven", "maven-artifact")
+        exclude("org.apache.maven", "maven-artifact-manager")
+        exclude("org.apache.maven", "maven-model")
+        exclude("org.apache.maven", "maven-plugin-registry")
+        exclude("org.apache.maven", "maven-profile")
+        exclude("org.apache.maven", "maven-project")
+        exclude("org.apache.maven", "maven-settings")
+        exclude("org.apache.maven", "maven-error-diagnostics")
+        exclude("org.apache.maven", "maven-ant-tasks")
+        exclude("org.apache.maven.wagon")
+        exclude("org.codehaus.plexus")
+    }
 
     androidTestImplementation(Deps.Testing.daggerHilt)
     kaptAndroidTest(Deps.Google.daggerHiltCompiler)

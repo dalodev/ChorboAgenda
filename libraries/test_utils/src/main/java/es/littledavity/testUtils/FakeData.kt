@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.testUtils
 
 import es.littledavity.data.commons.DataPagination
@@ -15,7 +18,7 @@ val DATA_CONTACT = DataContact(
     id = 1,
     name = "name",
     phone = "12345123",
-    image = DataImage("", 1, 1),
+    image = DataImage("test", 1, 1),
     gallery = emptyList(),
     screenshots = emptyList(),
     creationDate = CreationDate(1L, 1, CreationDateCategory.YYYY_MMMM_DD),
@@ -36,7 +39,7 @@ val DOMAIN_CONTACT = DomainContact(
     id = 1,
     name = "name",
     phone = "1234515",
-    image = DomainImage("", 1, 1),
+    image = DomainImage("test", 1, 1),
     gallery = emptyList(),
     screenshots = emptyList(),
     creationDate = DomainCreationDate(1L, 1, DomainCreationDateCategory.YYYY_MMMM_DD),

@@ -20,5 +20,5 @@
         <item name="android:lines">1</item>
         <item name="android:singleLine">true</item>
     </style>
-    
+
 </resources>

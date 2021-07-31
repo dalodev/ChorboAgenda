@@ -1,10 +1,12 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.imageLoading
 
 import android.widget.ImageView
 import androidx.core.net.toUri
 import com.paulrybitskyi.hiltbinder.BindType
 import com.squareup.picasso.Picasso
-import java.io.File
 import javax.inject.Inject
 import javax.inject.Singleton
 

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.info.widgets.main.model
 
 import es.littledavity.features.info.widgets.main.header.ContactHeaderImageModel

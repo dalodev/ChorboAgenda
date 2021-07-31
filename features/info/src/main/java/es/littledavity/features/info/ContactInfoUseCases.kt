@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.info
 
 import es.littledavity.domain.contacts.usecases.GetContactUseCase

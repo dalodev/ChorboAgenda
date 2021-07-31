@@ -39,7 +39,7 @@ dependencies {
     // Protobuf-generated classes extend Protobuf's public
     // class, which is needed to be present in the classpath
     // of the dependant modules
-    api(Deps.Google.protobuf)
+//    api(Deps.Google.protobuf)
 
     implementation(Deps.Misc.kotlinResult)
 

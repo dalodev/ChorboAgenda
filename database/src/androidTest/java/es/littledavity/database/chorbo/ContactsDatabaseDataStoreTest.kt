@@ -7,6 +7,9 @@ import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.argumentCaptor
 import com.nhaarman.mockitokotlin2.verify
 import es.littledavity.data.contacts.DataContact
+import es.littledavity.data.contacts.entities.CreationDate
+import es.littledavity.data.contacts.entities.CreationDateCategory
+import es.littledavity.data.contacts.entities.Image
 import es.littledavity.database.chorbo.datastores.ContactsDatabaseDataStore
 import es.littledavity.database.chorbo.entities.Contact
 import es.littledavity.database.chorbo.tables.ContactDao
@@ -26,7 +29,19 @@ class ContactsDatabaseDataStoreTest {
     @InjectMocks
     internal lateinit var chorboRepository: ContactsDatabaseDataStore
 
-    private val chorbo = DataContact(2, "Ángeles", "test", "+34")
+    private val chorbo = DataContact(
+        2,
+        Image("test", 1, 1),
+        "test",
+        "+34",
+        age = "18",
+        gallery = emptyList(),
+        country = "test",
+        creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
+        instagram = "test",
+        rating = "10",
+        screenshots = emptyList()
+    )
 
     @Before
     fun setUp() {
@@ -97,7 +112,28 @@ class ContactsDatabaseDataStoreTest {
 
     @Test
     fun deleteChorbo_ShouldInvokeCorrectDaoMethod() = runBlocking {
-        val chorboToDelete = Contact(chorbo.id, chorbo.name, chorbo.image, chorbo.phone, 500L)
+        val chorboToDelete = Contact(
+            chorbo.id,
+            chorbo.name,
+            es.littledavity.database.chorbo.entities.Image(
+                chorbo.image?.id,
+                chorbo.image?.width,
+                chorbo.image?.height
+            ),
+            chorbo.phone,
+            age = "18",
+            artworks = emptyList(),
+            country = "test",
+            creationDate = es.littledavity.database.chorbo.entities.CreationDate(
+                1L,
+                2021,
+                es.littledavity.database.chorbo.entities.CreationDateCategory.YYYY_MMMM_DD
+            ),
+            instagram = "test",
+            rating = "10",
+            screenshots = emptyList(),
+            createTimestamp = 1L
+        )
         val chorboCaptor = argumentCaptor<Contact>()
         chorboRepository.deleteChorbo(chorboToDelete)
 

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.database.chorbo.tables
 
 import androidx.room.Dao
@@ -16,7 +19,7 @@ internal interface LikedContactDao {
 
     @Query(
         """
-        DELETE FROM ${LikedContact.Schema.TABLE_NAME} 
+        DELETE FROM ${LikedContact.Schema.TABLE_NAME}
         WHERE ${LikedContact.Schema.CONTACT_ID} = :gameId
         """
     )
@@ -24,7 +27,7 @@ internal interface LikedContactDao {
 
     @Query(
         """
-        SELECT COUNT(*) FROM ${LikedContact.Schema.TABLE_NAME} 
+        SELECT COUNT(*) FROM ${LikedContact.Schema.TABLE_NAME}
         WHERE ${LikedContact.Schema.CONTACT_ID} = :gameId
         """
     )
@@ -32,7 +35,7 @@ internal interface LikedContactDao {
 
     @Query(
         """
-        SELECT COUNT(*) FROM ${LikedContact.Schema.TABLE_NAME} 
+        SELECT COUNT(*) FROM ${LikedContact.Schema.TABLE_NAME}
         WHERE ${LikedContact.Schema.CONTACT_ID} = :gameId
         """
     )
@@ -40,10 +43,10 @@ internal interface LikedContactDao {
 
     @Query(
         """
-        SELECT c.* FROM ${Contact.Schema.TABLE_NAME} AS c 
-        INNER JOIN ${LikedContact.Schema.TABLE_NAME} AS lc 
-        ON lc.${LikedContact.Schema.CONTACT_ID} = c.${Contact.Schema.ID} 
-        ORDER BY lc.${LikedContact.Schema.LIKE_TIMESTAMP} DESC 
+        SELECT c.* FROM ${Contact.Schema.TABLE_NAME} AS c
+        INNER JOIN ${LikedContact.Schema.TABLE_NAME} AS lc
+        ON lc.${LikedContact.Schema.CONTACT_ID} = c.${Contact.Schema.ID}
+        ORDER BY lc.${LikedContact.Schema.LIKE_TIMESTAMP} DESC
         LIMIT :offset, :limit
         """
     )

@@ -37,7 +37,19 @@ dependencies {
     testImplementation(Deps.Testing.archCore)
     testImplementation(Deps.Testing.mockk)
     testImplementation(Deps.Testing.mockitoKotlin2)
-    testImplementation(Deps.Testing.testRoboelectric)
+    testImplementation(Deps.Testing.testRoboelectric) {
+        exclude("org.apache.maven", "maven-artifact")
+        exclude("org.apache.maven", "maven-artifact-manager")
+        exclude("org.apache.maven", "maven-model")
+        exclude("org.apache.maven", "maven-plugin-registry")
+        exclude("org.apache.maven", "maven-profile")
+        exclude("org.apache.maven", "maven-project")
+        exclude("org.apache.maven", "maven-settings")
+        exclude("org.apache.maven", "maven-error-diagnostics")
+        exclude("org.apache.maven", "maven-ant-tasks")
+        exclude("org.apache.maven.wagon")
+        exclude("org.codehaus.plexus")
+    }
     testImplementation(Deps.Testing.fragmentTest)
 
 }

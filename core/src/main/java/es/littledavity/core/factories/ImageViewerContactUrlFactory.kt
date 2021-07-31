@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.core.factories
 
 import com.paulrybitskyi.hiltbinder.BindType

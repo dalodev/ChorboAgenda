@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.image.viewer
 
 import android.view.WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
