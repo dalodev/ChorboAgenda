@@ -18,7 +18,8 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - uses: actions/cache@v2
+      - name: Cache
+        uses: actions/cache@v2.1.6
           with:
             path: |
               ~/.gradle/caches
