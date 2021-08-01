@@ -10,7 +10,9 @@ import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.base.events.Route
 import es.littledavity.commons.ui.bindings.viewBinding
+import es.littledavity.commons.ui.extensions.applyWindowBottomInsetAsMargin
 import es.littledavity.commons.ui.extensions.applyWindowTopInsetAsPadding
+import es.littledavity.commons.ui.extensions.hideKeyboard
 import es.littledavity.commons.ui.extensions.observeIn
 import es.littledavity.features.add.databinding.FragmentAddContactBinding
 import kotlinx.coroutines.flow.onEach
@@ -61,7 +63,13 @@ class AddContactFragment : BaseFragment<
     }
 
     private fun initAddContactView() = with(viewBinding.addContactView) {
+        applyWindowBottomInsetAsMargin()
         onPhotoClicked = { viewModel.onPhotoClicked(resultLauncher) }
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewBinding.toolbar.hideKeyboard()
     }
 
     override fun onRoute(route: Route) {
