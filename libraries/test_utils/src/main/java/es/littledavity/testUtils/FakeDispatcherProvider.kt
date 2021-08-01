@@ -11,10 +11,7 @@ class FakeDispatcherProvider : DispatcherProvider {
 
     private val testDispatcher = TestCoroutineDispatcher()
 
-
     override val main: CoroutineDispatcher = testDispatcher
     override val io: CoroutineDispatcher = testDispatcher
     override val computation: CoroutineDispatcher = testDispatcher
-
-
 }

@@ -6,7 +6,11 @@ package plugins
 val ktlint by configurations.creating
 
 dependencies {
-    ktlint(Deps.Plugins.ktlint)
+    ktlint(Deps.Plugins.ktlint) {
+        attributes {
+            attribute(Bundling.BUNDLING_ATTRIBUTE, objects.named(Bundling.EXTERNAL))
+        }
+    }
 }
 
 val outputDir = "${project.buildDir}/reports/ktlint/"

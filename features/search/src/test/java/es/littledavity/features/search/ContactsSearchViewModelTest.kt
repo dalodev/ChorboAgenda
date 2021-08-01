@@ -5,7 +5,6 @@ package es.littledavity.features.search
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
-import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.commons.ui.widgets.contacts.ContactsModelMapper
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.domain.contacts.entities.Contact
@@ -18,11 +17,11 @@ import io.mockk.MockKAnnotations
 import io.mockk.every
 import io.mockk.impl.annotations.MockK
 import io.mockk.mockk
+import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import kotlinx.coroutines.test.runBlockingTest
 
 internal class ContactsSearchViewModelTest {
 

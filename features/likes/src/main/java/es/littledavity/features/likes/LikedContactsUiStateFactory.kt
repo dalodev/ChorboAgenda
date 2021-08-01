@@ -28,10 +28,8 @@ internal class LikedContactsUiStateFactoryImpl @Inject constructor(
 
     override fun createWithLoadingState() = ContactsUiState.Loading
 
-
     override fun createWithResultState(contacts: List<Contact>): ContactsUiState {
         if (contacts.isEmpty()) return createWithEmptyState()
         return ContactsUiState.Result(contacts.map(likedContactModelMapper::mapToContactModel))
     }
-
 }

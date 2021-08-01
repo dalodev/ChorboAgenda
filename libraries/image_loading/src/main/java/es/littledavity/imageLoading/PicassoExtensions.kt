@@ -21,7 +21,6 @@ internal fun RequestCreator.into(
         override fun onError(error: java.lang.Exception) {
             onFailure?.invoke(error)
         }
-
     }
 
     into(target, callback)

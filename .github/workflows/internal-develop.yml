@@ -94,8 +94,8 @@ jobs:
       - name: Upload Reports
         uses: actions/upload-artifact@v2
         with:
-          name: Test-Reports
-          path: app/build/reports
+          name: reports
+          path: app/build/test-report
         if: always()
 
   report:

@@ -10,5 +10,4 @@ interface ContactsSearchNavigator : Navigator {
     fun goToInfo(contactId: Int)
 
     fun goBack()
-
 }

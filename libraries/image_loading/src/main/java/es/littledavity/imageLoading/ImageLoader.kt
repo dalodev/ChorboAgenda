@@ -10,5 +10,4 @@ interface ImageLoader {
     fun loadImage(config: Config)
 
     fun cancelRequests(target: ImageView)
-
 }

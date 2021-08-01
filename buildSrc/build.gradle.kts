@@ -17,7 +17,7 @@ kotlinDslPluginOptions {
 }
 
 object PluginsVersions {
-    const val GRADLE_VERSIONS = "4.2.0"
+    const val GRADLE_VERSIONS = "7.0.0"
     const val KOTLIN = "1.4.32"
     const val SPOTLESS = "4.0.0"
     const val DETEKT = "1.17.1"
@@ -29,7 +29,7 @@ kotlinDslPluginOptions {
 }
 
 dependencies {
-    implementation("com.android.tools.build:gradle:4.2.1")
+    implementation("com.android.tools.build:gradle:7.0.0")
     implementation("org.jetbrains.kotlin:kotlin-gradle-plugin:${PluginsVersions.KOTLIN}")
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginsVersions.DETEKT}")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${PluginsVersions.SPOTLESS}")

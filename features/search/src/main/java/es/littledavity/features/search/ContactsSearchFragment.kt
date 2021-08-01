@@ -18,9 +18,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 internal class ContactsSearchFragment : BaseFragment<
-        FragmentContactsSearchBinding,
-        ContactsSearchViewModel,
-        ContactsSearchNavigator>(
+    FragmentContactsSearchBinding,
+    ContactsSearchViewModel,
+    ContactsSearchNavigator>(
     R.layout.fragment_contacts_search
 ) {
 

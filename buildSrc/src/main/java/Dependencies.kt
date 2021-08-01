@@ -21,7 +21,7 @@ object Versions {
     const val gradleVersionsPlugin = "0.38.0"
     const val protobufPlugin = "0.8.15"
     const val navigation = "2.3.5"
-    const val daggerHilt = "2.34-beta"
+    const val daggerHilt = "2.38.1"
     const val coroutines = "1.4.3"
     const val room = "2.3.0-rc01"
     const val spotless = "4.0.0"
@@ -34,7 +34,7 @@ object Deps {
 
     object Plugins {
 
-        private const val gradlePluginVersion = "4.2.0" // also in buildSrc build.gradle.kts file
+        private const val gradlePluginVersion = "7.0.0" // also in buildSrc build.gradle.kts file
 
         const val androidGradle = "com.android.tools.build:gradle:${gradlePluginVersion}"
         const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"

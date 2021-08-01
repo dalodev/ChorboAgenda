@@ -12,9 +12,9 @@ import es.littledavity.features.splash.databinding.ActivitySplashBinding
 
 @AndroidEntryPoint
 internal class SplashActivity : BaseActivity<
-        ActivitySplashBinding,
-        SplashViewModel,
-        SplashNavigator>() {
+    ActivitySplashBinding,
+    SplashViewModel,
+    SplashNavigator>() {
 
     override val viewBinding by viewBinding(ActivitySplashBinding::inflate)
     override val viewModel by viewModels<SplashViewModel>()

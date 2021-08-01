@@ -114,5 +114,4 @@ class LikedContactsViewModel @Inject constructor(
             observeContacts()
         }
     }
-
 }

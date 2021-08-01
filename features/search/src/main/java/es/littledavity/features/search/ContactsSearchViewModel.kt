@@ -63,7 +63,6 @@ internal class ContactsSearchViewModel @Inject constructor(
     val uiState: StateFlow<ContactsUiState>
         get() = _uiState
 
-
     init {
         onSearchActionRequested(savedStateHandle.get(KEY_SEARCH_QUERY) ?: "")
     }

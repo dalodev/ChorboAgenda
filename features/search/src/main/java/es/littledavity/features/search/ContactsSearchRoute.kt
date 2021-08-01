@@ -11,6 +11,6 @@ internal sealed class ContactsSearchCommand : Command {
 }
 
 internal sealed class ContactsSearchRoute : Route {
-    data class Info(val contactId: Int): ContactsSearchRoute()
-    object Back: ContactsSearchRoute()
+    data class Info(val contactId: Int) : ContactsSearchRoute()
+    object Back : ContactsSearchRoute()
 }

@@ -14,9 +14,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class LikedContactsFragment : BaseFragment<
-        FragmentLikedContactsBinding,
-        LikedContactsViewModel,
-        LikedContactsNavigator>(R.layout.fragment_liked_contacts) {
+    FragmentLikedContactsBinding,
+    LikedContactsViewModel,
+    LikedContactsNavigator>(R.layout.fragment_liked_contacts) {
 
     override val viewBinding by viewBinding(FragmentLikedContactsBinding::bind)
     override val viewModel by viewModels<LikedContactsViewModel>()
