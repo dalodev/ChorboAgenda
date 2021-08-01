@@ -206,6 +206,7 @@ object Deps {
         private const val testCoreVersion = "1.3.0"
         private const val fragmentVersion = "1.3.0-beta01"
         private const val playCoreVerion = "1.8.3"
+        private const val mavenAntTaskVersion = "2.1.3"
 
         const val jUnit = "junit:junit:$jUnitVersion"
         const val jUnitExt = "androidx.test.ext:junit:$jUnitExtVersion"
@@ -227,6 +228,7 @@ object Deps {
         const val coreTest = "androidx.test:core:$testCoreVersion"
         const val fragmentTest = "androidx.fragment:fragment-testing:$fragmentVersion"
         const val playCore = "com.google.android.play:core:$playCoreVerion"
+        const val mavenAntTask = "org.apache.maven:maven-ant-tasks:$mavenAntTaskVersion"
     }
 
     object Misc {

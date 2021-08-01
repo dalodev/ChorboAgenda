@@ -59,6 +59,7 @@ dependencies {
     testImplementation(Deps.Testing.coroutines)
     testImplementation(Deps.Testing.turbine)
     testImplementation(Deps.Testing.mockitoKotlin2)
+    testImplementation(Deps.Testing.mavenAntTask)
 
     androidTestImplementation(project(Deps.Local.librariesTest))
     androidTestImplementation(Deps.Testing.testRunner)
