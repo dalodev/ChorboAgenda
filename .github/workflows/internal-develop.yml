@@ -1,4 +1,4 @@
-name: Release
+name: Develop
 
 on:
   # Triggers the workflow on every push to develop
@@ -15,15 +15,13 @@ jobs:
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
 
       - uses: actions/cache@v2
           with:
             path: |
               ~/.gradle/caches
               ~/.gradle/wrapper
-            key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
       - name: Set up JDK 1.8
           uses: actions/setup-java@v1
