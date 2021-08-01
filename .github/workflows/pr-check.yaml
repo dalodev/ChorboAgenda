@@ -75,7 +75,7 @@ jobs:
         run: ./gradlew detekt
 
       - name: Run unit tests
-        run: ./gradlew test --stacktrace
+        run: ./gradlew testDebugUnitTest --stacktrace
 
       - name: Upload Reports
         uses: actions/upload-artifact@v2
