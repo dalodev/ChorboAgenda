@@ -93,7 +93,7 @@ object Deps {
         private const val swipeRefreshLayoutVersion = "1.1.0"
         private const val lifecycleVersion = "2.4.0-alpha01"
         private const val browserVersion = "1.3.0"
-        private const val coreKtxVersion = "1.5.0-rc01"
+        private const val coreKtxVersion = "1.6.0"
         private const val fragmentKtxVersion = "1.3.2"
         private const val dataStoreVersion = "1.0.0-alpha08"
         private const val pagingVersion = "2.1.2"
