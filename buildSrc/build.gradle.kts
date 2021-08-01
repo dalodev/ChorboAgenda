@@ -18,7 +18,7 @@ kotlinDslPluginOptions {
 
 object PluginsVersions {
     const val GRADLE_VERSIONS = "7.0.0"
-    const val KOTLIN = "1.4.32"
+    const val KOTLIN = "1.5.21"
     const val SPOTLESS = "4.0.0"
     const val DETEKT = "1.17.1"
     const val KTLINT = "0.41.0"

@@ -79,7 +79,7 @@ class BaseListAdapterTest : TestRobolectric() {
         adapter.submitList(mutableListOf("item1", "item2"))
         adapter.submitList(mutableListOf("item6", "item4", "item2"))
 
-        verify(contentsSame, after(100).atLeastOnce()).invoke(anyString(), anyString())
+        verify(itemsSame, after(100).atLeastOnce()).invoke(anyString(), anyString())
     }
 
     @Test

@@ -16,7 +16,7 @@ class BaseViewHolderTest {
     private val binding: ViewDataBinding = mock()
     private val rootView: View = mock()
 
-    @Test
+   /* @Test
     fun createBaseViewHolder_ShouldInitializeCorrectly() {
         doReturn(rootView).whenever(binding).root
 
@@ -24,9 +24,10 @@ class BaseViewHolderTest {
 
         assertEquals(binding, baseViewHolder.binding)
         assertEquals(binding.root, baseViewHolder.itemView)
-    }
+    }*/
 
-    inner class TestBaseViewHolder : es.littledavity.commons.ui.base.BaseViewHolder<ViewDataBinding>(
-        binding = binding
-    )
+    inner class TestBaseViewHolder :
+        es.littledavity.commons.ui.base.BaseViewHolder<ViewDataBinding>(
+            binding = binding
+        )
 }

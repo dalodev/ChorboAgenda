@@ -17,7 +17,7 @@ object AppConfig {
 
 object Versions {
 
-    const val kotlin = "1.4.32" // also in buildSrc build.gradle.kts file
+    const val kotlin = "1.5.21" // also in buildSrc build.gradle.kts file
     const val gradleVersionsPlugin = "0.38.0"
     const val protobufPlugin = "0.8.15"
     const val navigation = "2.3.5"
@@ -195,7 +195,7 @@ object Deps {
         private const val jUnitExtVersion = "1.1.2"
         private const val assertJVersion = "3.19.0"
         private const val mockkVersion = "1.11.0"
-        private const val turbineVersion = "0.4.1"
+        private const val turbineVersion = "0.6.0"
         private const val testRunnerVersion = "1.3.0"
         private const val archCoreVersion = "2.1.0"
         private const val mockWebServerVersion = "4.9.1"
