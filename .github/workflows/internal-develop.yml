@@ -18,9 +18,6 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Ktlint Check
-        - run: ./gradlew ktlintCheck
-
       - uses: actions/cache@v2
           with:
             path: |
