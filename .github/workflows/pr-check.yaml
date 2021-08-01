@@ -48,8 +48,8 @@ test:
   needs: build
   strategy:
     matrix:
-      api-level: [21, 23, 29]
-      target: [default]
+      api-level: [ 21, 23, 29 ]
+      target: [ default ]
 
   steps:
     - name: Checkout the code

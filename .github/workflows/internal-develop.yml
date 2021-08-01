@@ -6,8 +6,10 @@ on:
     branches:
       - develop
 
+  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build_and_publish:
     runs-on: ubuntu-latest
@@ -21,7 +23,10 @@ jobs:
             path: |
               ~/.gradle/caches
               ~/.gradle/wrapper
-          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+            key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: Copy gradle properties file
+          run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
       - name: Set up JDK 1.8
           uses: actions/setup-java@v1
@@ -30,6 +35,12 @@ jobs:
 
       - name: Build the app
           run: ./gradlew assembleDebug
+
+      - name: Upload apk
+          uses: actions/upload-artifact@v2
+          with:
+            name: debug apk
+            path: app/build/outputs/apk/debug/app-debug.apk
 
 test:
   runs-on: macos-latest
@@ -43,30 +54,30 @@ test:
         - name: Checkout the code
           uses: actions/checkout@v2
 
-            - uses: actions/cache@v2
-                with:
-                path: |
-                  ~/.gradle/caches
-                  ~/.gradle/wrapper
-                key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+        - uses: actions/cache@v2
+            with:
+            path: |
+              ~/.gradle/caches
+              ~/.gradle/wrapper
+            key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
 
-            - name: Copy  gradle properties file
-              run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+        - name: Copy  gradle properties file
+          run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
 
-            - name: Set up JDK 1.8
-              uses: actions/setup-java@v1
-              with:
-                java-version: 1.8
+        - name: Set up JDK 1.8
+          uses: actions/setup-java@v1
+          with:
+            java-version: 1.8
 
-            - name: Run detekt
-              run: ./gradlew detektCheck
+        - name: Run detekt
+          run: ./gradlew detektCheck
 
-            - name: Run unit tests
-                run: ./gradlew test --stacktrace
+        - name: Run unit tests
+            run: ./gradlew test --stacktrace
 
-            - name: Upload Reports
-                uses: actions/upload-artifact@v2
-                with:
-                  name: Test-Reports
-                  path: app/build/reports
-                if: always()
+        - name: Upload Reports
+            uses: actions/upload-artifact@v2
+            with:
+              name: Test-Reports
+              path: app/build/reports
+            if: always()
