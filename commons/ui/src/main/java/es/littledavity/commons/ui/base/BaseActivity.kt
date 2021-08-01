@@ -11,8 +11,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.viewbinding.ViewBinding
 import es.littledavity.commons.ui.base.events.Command
 import es.littledavity.commons.ui.base.events.GeneralCommand
-import es.littledavity.commons.ui.base.navigation.Navigator
 import es.littledavity.commons.ui.base.events.Route
+import es.littledavity.commons.ui.base.navigation.Navigator
 import es.littledavity.commons.ui.extensions.observeIn
 import es.littledavity.commons.ui.extensions.showLongToast
 import es.littledavity.commons.ui.extensions.showShortToast
@@ -20,10 +20,10 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 abstract class BaseActivity<
-        VB : ViewBinding,
-        VM : BaseViewModel,
-        NA : Navigator
-        > : AppCompatActivity() {
+    VB : ViewBinding,
+    VM : BaseViewModel,
+    NA : Navigator
+    > : AppCompatActivity() {
 
     protected abstract val viewBinding: VB
     protected abstract val viewModel: VM

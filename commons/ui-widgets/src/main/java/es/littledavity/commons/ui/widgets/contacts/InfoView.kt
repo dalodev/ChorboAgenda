@@ -13,10 +13,10 @@ import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
-import es.littledavity.commons.ui.extensions.getString
-import es.littledavity.commons.ui.extensions.getFont
 import es.littledavity.commons.ui.extensions.getColor
 import es.littledavity.commons.ui.extensions.getDimensionPixelSize
+import es.littledavity.commons.ui.extensions.getFont
+import es.littledavity.commons.ui.extensions.getString
 import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.setColor
 import es.littledavity.commons.ui.extensions.setLayoutParamsSize
@@ -136,14 +136,12 @@ class InfoView @JvmOverloads constructor(
         }
         get() = binding.iconIv.drawable
 
-
     init {
         orientation = VERTICAL
         gravity = Gravity.CENTER
 
         attrs?.let { extractAttributes(it, defStyleAttr) }
     }
-
 
     private fun extractAttributes(attrs: AttributeSet, defStyleAttr: Int) {
         context.withStyledAttributes(

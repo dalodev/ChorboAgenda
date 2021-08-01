@@ -11,8 +11,7 @@ import es.littledavity.features.likes.LikedContactsFragment
 import javax.inject.Inject
 
 @BindType(installIn = BindType.Component.FRAGMENT)
-internal class DashboardAdapterFragmentFactoryImpl @Inject constructor(
-) : DashboardAdapterFragmentFactory {
+internal class DashboardAdapterFragmentFactoryImpl @Inject constructor() : DashboardAdapterFragmentFactory {
     override fun contactsFragment() = ContactsFragment()
     override fun addFragment() = AddContactFragment()
     override fun likesFragment() = LikedContactsFragment()

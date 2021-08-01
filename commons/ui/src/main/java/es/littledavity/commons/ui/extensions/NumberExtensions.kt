@@ -31,51 +31,41 @@ val Int.isTransparent: Boolean
 val Int.isTranslucent: Boolean
     get() = (Color.alpha(this) in 2..254)
 
-
 fun Int.dpToPx(context: Context): Int {
     return toFloat().dpToPx(context).roundToInt()
 }
-
 
 fun Float.dpToPx(context: Context): Float {
     return (this * context.displayMetrics.density)
 }
 
-
 fun Int.spToPx(context: Context): Int {
     return toFloat().spToPx(context).roundToInt()
 }
-
 
 fun Float.spToPx(context: Context): Float {
     return (this * context.displayMetrics.scaledDensity)
 }
 
-
 fun Int.pxToDp(context: Context): Int {
     return toFloat().pxToDp(context).roundToInt()
 }
-
 
 fun Float.pxToDp(context: Context): Float {
     return (this / context.displayMetrics.density)
 }
 
-
 fun Int.pxToSp(context: Context): Int {
     return toFloat().pxToSp(context).roundToInt()
 }
-
 
 fun Float.pxToSp(context: Context): Float {
     return (this / context.displayMetrics.scaledDensity)
 }
 
-
 fun Int.containsBits(bits: Int): Boolean {
     return ((this and bits) == bits)
 }
-
 
 /**
  * Adjusts value of the alpha channel of the color.
@@ -94,11 +84,9 @@ fun @receiver:ColorInt Int.adjustAlpha(@FloatRange(from = 0.0, to = 1.0) alpha: 
     return Color.argb(alphaChannel, redChannel, greenChannel, blueChannel)
 }
 
-
 fun @receiver:ColorInt Int.withHalfAlpha(): Int {
     return adjustAlpha(alpha = 0.5f)
 }
-
 
 fun @receiver:ColorInt Int.toColorStateList(): ColorStateList {
     return ColorStateList.valueOf(this)

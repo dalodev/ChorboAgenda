@@ -151,7 +151,6 @@ internal class ContactInfoView @JvmOverloads constructor(
         makeVisible()
     }
 
-
     private fun hideProgressBar() = with(binding.progressBar) {
         makeGone()
     }
@@ -175,8 +174,7 @@ internal class ContactInfoView @JvmOverloads constructor(
 
     private fun ContactInfoModel.toAdapterItems(): List<Item<*, NoDependencies>> {
         return buildList {
-            //TODO add items to info list
-
+            // TODO add items to info list
         }
     }
 
@@ -187,7 +185,7 @@ internal class ContactInfoView @JvmOverloads constructor(
 
     private fun bindListener(item: Item<*, NoDependencies>, viewHolder: RecyclerView.ViewHolder) {
         when (viewHolder) {
-            //TODO create viewholder for earch item with listener invoke
+            // TODO create viewholder for earch item with listener invoke
         }
     }
 }

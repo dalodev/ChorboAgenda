@@ -29,9 +29,7 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
     private val viewBindingFactory: (View) -> T
 ) : ReadOnlyProperty<Fragment, T> {
 
-
     private var binding: T? = null
-
 
     init {
         // Keeping a view reference up until Fragment's onDestroy is called
@@ -41,10 +39,8 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
             override fun onDestroy(owner: LifecycleOwner) {
                 binding = null
             }
-
         })
     }
-
 
     override fun getValue(thisRef: Fragment, property: KProperty<*>): T {
         if (binding != null) {
@@ -60,6 +56,4 @@ class FragmentViewBindingDelegate<T : ViewBinding>(
         return viewBindingFactory(thisRef.requireView())
             .also { binding = it }
     }
-
-
 }

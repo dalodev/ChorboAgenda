@@ -20,5 +20,4 @@ internal class DashboardViewPagerAdapter(
     }
 
     override fun getItemCount() = DashboardPage.values().size
-
 }

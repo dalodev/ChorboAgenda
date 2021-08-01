@@ -23,10 +23,10 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 internal class ImageViewerFragment : BaseFragment<
-        FragmentImageViewerBinding,
-        ImageViewerViewModel,
-        ImageViewerNavigator
-        >(R.layout.fragment_image_viewer) {
+    FragmentImageViewerBinding,
+    ImageViewerViewModel,
+    ImageViewerNavigator
+    >(R.layout.fragment_image_viewer) {
 
     override val viewBinding by viewBinding(FragmentImageViewerBinding::bind)
     override val viewModel by viewModels<ImageViewerViewModel>()

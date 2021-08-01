@@ -8,7 +8,11 @@ import app.cash.turbine.test
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.domain.contacts.usecases.SaveContactUseCase
-import es.littledavity.testUtils.*
+import es.littledavity.testUtils.DOMAIN_CONTACT
+import es.littledavity.testUtils.FakeDispatcherProvider
+import es.littledavity.testUtils.FakeErrorMapper
+import es.littledavity.testUtils.FakeLogger
+import es.littledavity.testUtils.MainCoroutineRule
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
@@ -116,5 +120,4 @@ class AddContactViewModelTest {
             )
         }
     }
-
 }

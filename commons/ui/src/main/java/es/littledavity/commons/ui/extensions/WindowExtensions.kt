@@ -16,19 +16,16 @@ var Window.isBackgroundDimmingEnabled: Boolean
     }
     get() = ((attributes.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND) == WindowManager.LayoutParams.FLAG_DIM_BEHIND)
 
-
 fun Window.makeScreenAlwaysAwake() {
     addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 }
-
 
 fun Window.makeScreenSleepable() {
     clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
 }
 
-
 fun Window.setScreenAlwaysAwake(isScreenAlwaysAwake: Boolean) {
-    if(isScreenAlwaysAwake) {
+    if (isScreenAlwaysAwake) {
         makeScreenAlwaysAwake()
     } else {
         makeScreenSleepable()

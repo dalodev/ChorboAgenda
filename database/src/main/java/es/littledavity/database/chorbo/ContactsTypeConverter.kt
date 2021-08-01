@@ -7,7 +7,9 @@ import androidx.room.ProvidedTypeConverter
 import androidx.room.TypeConverter
 import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.core.JsonConverter
-import es.littledavity.database.chorbo.entities.*
+import es.littledavity.database.chorbo.entities.CreationDate
+import es.littledavity.database.chorbo.entities.CreationDateCategory
+import es.littledavity.database.chorbo.entities.Image
 import es.littledavity.database.commons.RoomTypeConverter
 import javax.inject.Inject
 
@@ -32,7 +34,6 @@ internal class ContactsTypeConverter @Inject constructor(
         return jsonConverter.toJson(images)
     }
 
-
     @TypeConverter
     fun toImages(json: String): List<Image> {
         return (jsonConverter.fromJson(json) ?: emptyList())
@@ -52,7 +53,6 @@ internal class ContactsTypeConverter @Inject constructor(
     fun fromCreationDateCategory(category: CreationDateCategory): String {
         return jsonConverter.toJson(category)
     }
-
 
     @TypeConverter
     fun toCreationDateCategory(json: String): CreationDateCategory {

@@ -25,9 +25,14 @@ import es.littledavity.domain.contacts.entities.CreationDate
 import es.littledavity.domain.contacts.entities.CreationDateCategory
 import es.littledavity.domain.contacts.entities.Image
 import es.littledavity.domain.contacts.usecases.SaveContactUseCase
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
-import java.util.*
+import java.util.Calendar
 import javax.inject.Inject
 
 private const val IMAGE_TYPE = "image/*"
@@ -131,7 +136,8 @@ class AddContactViewModel @Inject constructor(
                         route(AddContactRoute.SettingsApp)
                     }
                 }
-            })
+            }
+        )
     }
 
     private fun createContact() = Contact(

@@ -6,7 +6,6 @@ package es.littledavity.features.contacts
 import app.cash.turbine.test
 import es.littledavity.commons.ui.base.events.GeneralCommand
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
-import es.littledavity.commons.ui.widgets.contacts.ContactsModelMapper
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.domain.DomainContact
 import es.littledavity.domain.contacts.usecases.ObserveContactsUseCase
@@ -20,11 +19,11 @@ import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.test.runBlockingTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import kotlinx.coroutines.test.runBlockingTest
-import org.assertj.core.api.Assertions.assertThat
 
 class ContactsViewModelTest {
 

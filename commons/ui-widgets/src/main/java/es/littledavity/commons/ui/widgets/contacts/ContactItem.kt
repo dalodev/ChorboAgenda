@@ -11,10 +11,12 @@ import es.littledavity.commons.ui.base.rv.HasListeners
 import es.littledavity.commons.ui.base.rv.HasUniqueIdentifier
 import es.littledavity.commons.ui.base.rv.NoDependencies
 
-internal class ContactItem(model: ContactModel) : AbstractItem<
+internal class ContactItem(model: ContactModel) :
+    AbstractItem<
         ContactModel,
         ContactItem.ViewHolder,
-        NoDependencies>(model), HasUniqueIdentifier<Int> {
+        NoDependencies>(model),
+    HasUniqueIdentifier<Int> {
 
     override val uniqueIdentifier: Int
         get() = model.id

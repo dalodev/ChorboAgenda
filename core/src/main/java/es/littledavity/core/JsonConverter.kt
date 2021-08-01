@@ -4,10 +4,10 @@
 package es.littledavity.core
 
 import es.littledavity.core.utils.decodeFromStringOrNull
-import javax.inject.Inject
-import javax.inject.Singleton
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
+import javax.inject.Inject
+import javax.inject.Singleton
 
 @Singleton
 class JsonConverter @Inject constructor(val json: Json) {

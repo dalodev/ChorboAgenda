@@ -15,7 +15,6 @@ fun <T> observeChanges(
     }
 }
 
-
 fun <T> vetoable(
     initialValue: T,
     onChange: (oldValue: T, newValue: T) -> Boolean

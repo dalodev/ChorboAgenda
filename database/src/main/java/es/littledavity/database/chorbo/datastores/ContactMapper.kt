@@ -4,11 +4,11 @@
 package es.littledavity.database.chorbo.datastores
 
 import es.littledavity.core.providers.TimestampProvider
-import es.littledavity.data.services.ImageGalleryService
 import es.littledavity.data.contacts.DataContact
 import es.littledavity.data.contacts.DataCreationDate
 import es.littledavity.data.contacts.DataCreationDateCategory
 import es.littledavity.data.contacts.DataImage
+import es.littledavity.data.services.ImageGalleryService
 import es.littledavity.database.chorbo.DatabaseContact
 import es.littledavity.database.chorbo.DatabaseCreationDate
 import es.littledavity.database.chorbo.DatabaseCreationDateCategory
@@ -76,7 +76,6 @@ internal class ContactMapper @Inject constructor(
         year = this.year,
         category = DataCreationDateCategory.valueOf(this.category.name)
     )
-
 }
 
 internal fun ContactMapper.mapToDatabaseContacts(dataContacts: List<DataContact>) =

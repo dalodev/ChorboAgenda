@@ -43,7 +43,6 @@ internal class ContactInfoHeaderModelFactoryImpl @Inject constructor(
             .map(ContactHeaderImageModel::UrlImage)
     }
 
-
     private fun Contact.createImageUrl(): String? {
         return image?.let { cover ->
             igdbImageUrlFactory.createUrl(
@@ -54,5 +53,4 @@ internal class ContactInfoHeaderModelFactoryImpl @Inject constructor(
     }
 
     private fun Contact.formatCreationDate() = creationDateFormatter.formatReleaseDate(this)
-
 }

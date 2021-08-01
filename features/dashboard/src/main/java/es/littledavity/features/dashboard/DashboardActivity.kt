@@ -7,12 +7,12 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
-import es.littledavity.commons.ui.extensions.overrideEnterTransition
-import javax.inject.Inject
 import androidx.navigation.fragment.NavHostFragment
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.animations.WindowAnimations
 import es.littledavity.commons.ui.extensions.intentFor
+import es.littledavity.commons.ui.extensions.overrideEnterTransition
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class DashboardActivity : AppCompatActivity(R.layout.activity_dashboard) {

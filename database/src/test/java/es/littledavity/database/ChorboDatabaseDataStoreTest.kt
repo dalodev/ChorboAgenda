@@ -3,7 +3,6 @@
  */
 package es.littledavity.database
 
-import app.cash.turbine.test
 import es.littledavity.core.providers.TimestampProvider
 import es.littledavity.data.contacts.DataContact
 import es.littledavity.data.services.ImageGalleryService
@@ -21,7 +20,6 @@ import es.littledavity.testUtils.FakeDispatcherProvider
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before

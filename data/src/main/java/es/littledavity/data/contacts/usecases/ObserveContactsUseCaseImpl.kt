@@ -5,8 +5,8 @@ package es.littledavity.data.contacts.usecases
 
 import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.core.providers.DispatcherProvider
-import es.littledavity.data.contacts.datastores.ContactsLocalDataStore
 import es.littledavity.data.commons.utils.toDataPagination
+import es.littledavity.data.contacts.datastores.ContactsLocalDataStore
 import es.littledavity.domain.contacts.commons.ObserveContactsUseCaseParams
 import es.littledavity.domain.contacts.usecases.ObserveContactsUseCase
 import kotlinx.coroutines.flow.flowOn

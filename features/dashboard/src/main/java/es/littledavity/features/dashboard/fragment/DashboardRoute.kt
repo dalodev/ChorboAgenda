@@ -9,5 +9,4 @@ internal sealed class DashboardRoute : Route {
 
     object Search : DashboardRoute()
     object Add : DashboardRoute()
-
 }

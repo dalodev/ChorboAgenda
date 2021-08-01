@@ -15,12 +15,11 @@ import es.littledavity.commons.ui.extensions.observeIn
 import es.littledavity.features.add.databinding.FragmentAddContactBinding
 import kotlinx.coroutines.flow.onEach
 
-
 @AndroidEntryPoint
 class AddContactFragment : BaseFragment<
-        FragmentAddContactBinding,
-        AddContactViewModel,
-        AddContactNavigator>(
+    FragmentAddContactBinding,
+    AddContactViewModel,
+    AddContactNavigator>(
     R.layout.fragment_add_contact
 ) {
 

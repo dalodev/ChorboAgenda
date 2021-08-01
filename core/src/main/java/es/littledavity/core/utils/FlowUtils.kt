@@ -7,13 +7,13 @@ import com.github.michaelbull.result.Err
 import com.github.michaelbull.result.Ok
 import com.github.michaelbull.result.Result
 import es.littledavity.domain.commons.DomainException
+import es.littledavity.domain.commons.entities.Error
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.FlowCollector
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onCompletion
 import java.io.Serializable
-import es.littledavity.domain.commons.entities.Error
 
 data class Tuple4<T1, T2, T3, T4>(
     val first: T1,

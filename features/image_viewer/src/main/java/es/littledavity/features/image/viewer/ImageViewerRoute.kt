@@ -8,14 +8,12 @@ import es.littledavity.commons.ui.base.events.Route
 
 internal sealed class ImageViewerCommand : Command {
 
-    data class ShareText(val text: String): ImageViewerCommand()
+    data class ShareText(val text: String) : ImageViewerCommand()
 
     object ResetSystemWindows : ImageViewerCommand()
-
 }
 
 internal sealed class ImageViewerRoute : Route {
 
     object Back : ImageViewerRoute()
-
 }

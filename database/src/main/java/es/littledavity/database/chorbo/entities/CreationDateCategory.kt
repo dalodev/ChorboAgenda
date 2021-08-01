@@ -16,5 +16,4 @@ internal enum class CreationDateCategory {
     YYYYQ4,
 
     TBD
-
 }

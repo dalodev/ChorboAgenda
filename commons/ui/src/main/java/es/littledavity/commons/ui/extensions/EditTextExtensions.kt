@@ -20,7 +20,6 @@ var EditText.isEditingEnabled: Boolean
     set(value) { isFocusable = value }
     get() = isFocusable
 
-
 /**
  * Sets a cursor drawable of the EditText.
  *
@@ -33,7 +32,7 @@ var EditText.isEditingEnabled: Boolean
  * @param drawable The drawable to set
  */
 fun EditText.setCursorDrawable(drawable: Drawable) {
-    if(SdkInfo.IS_AT_LEAST_PIE) {
+    if (SdkInfo.IS_AT_LEAST_PIE) {
         return
     }
 
@@ -57,7 +56,6 @@ fun EditText.setCursorDrawable(drawable: Drawable) {
         // Ignore
     }
 }
-
 
 inline fun EditText.onTextChanged(crossinline callback: (String) -> Unit): TextWatcher {
     return doOnTextChanged { text, _, _, _ ->

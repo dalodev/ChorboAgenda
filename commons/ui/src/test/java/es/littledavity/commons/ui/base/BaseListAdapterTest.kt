@@ -99,7 +99,7 @@ class BaseListAdapterTest : TestRobolectric() {
         ) = viewHolder
 
         override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-            //STUB
+            // STUB
         }
     }
 }

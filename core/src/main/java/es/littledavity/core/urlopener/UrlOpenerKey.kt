@@ -20,7 +20,5 @@ internal annotation class UrlOpenerKey(val type: Type) {
         NATIVE_APP,
         CUSTOM_TAB,
         BROWSER
-
     }
-
 }

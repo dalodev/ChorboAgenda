@@ -21,5 +21,4 @@ interface ContactsLocalDataStore {
     ): List<DataContact>
 
     suspend fun observeContacts(pagination: Pagination): Flow<List<DataContact>>
-
 }

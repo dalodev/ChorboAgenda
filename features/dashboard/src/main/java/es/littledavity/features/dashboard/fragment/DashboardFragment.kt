@@ -25,16 +25,15 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 internal class DashboardFragment : BaseFragment<
-        FragmentDashboardBinding,
-        DashboardViewModel,
-        DashBoardNavigator
-        >(R.layout.fragment_dashboard) {
+    FragmentDashboardBinding,
+    DashboardViewModel,
+    DashBoardNavigator
+    >(R.layout.fragment_dashboard) {
 
     private companion object {
         private const val KEY_ADAPTER_STATE = "adapter_state"
         private const val KEY_SELECTED_PAGE = "selected_page"
         private val DEFAULT_SELECTED_PAGE = DashboardPage.CONTACTS
-
     }
 
     override val viewBinding by viewBinding(FragmentDashboardBinding::bind)

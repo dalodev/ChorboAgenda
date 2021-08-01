@@ -29,5 +29,4 @@ internal class ContactInfoUiStateFactoryImpl @Inject constructor(
     override fun createWithResultState(contact: Contact, isLiked: Boolean) = ContactInfoUiState.Result(
         modelFactory.createInfoModel(contact, isLiked)
     )
-
 }

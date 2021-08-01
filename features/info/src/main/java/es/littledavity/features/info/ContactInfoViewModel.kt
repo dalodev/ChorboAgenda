@@ -98,7 +98,6 @@ internal class ContactInfoViewModel @Inject constructor(
             }
             .onCompletion { isObservingContactData = false }
             .collect { _uiState.value = it }
-
     }
 
     private suspend fun getContact(): Flow<Contact> = useCases.getContactUseCase.execute(
@@ -153,5 +152,4 @@ internal class ContactInfoViewModel @Inject constructor(
                 .execute(ToggleContactLikeStateUseCase.Params(contactId))
         }
     }
-
 }

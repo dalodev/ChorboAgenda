@@ -43,10 +43,10 @@ interface Item<Model : Any, Dependencies : ItemDependencies> : ViewHolderFactory
 }
 
 abstract class AbstractItem<
-        Model : Any,
-        ViewHolder : RecyclerView.ViewHolder,
-        Dependencies : ItemDependencies
-        >(final override val model: Model) : Item<Model, Dependencies> {
+    Model : Any,
+    ViewHolder : RecyclerView.ViewHolder,
+    Dependencies : ItemDependencies
+    >(final override val model: Model) : Item<Model, Dependencies> {
 
     @Suppress("unchecked_cast")
     final override fun create(
@@ -80,5 +80,4 @@ abstract class AbstractItem<
     final override fun hashCode() = model.hashCode()
 
     final override fun toString() = model.toString()
-
 }

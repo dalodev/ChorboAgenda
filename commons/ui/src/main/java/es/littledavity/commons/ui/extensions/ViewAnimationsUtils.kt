@@ -9,7 +9,6 @@ import android.view.animation.DecelerateInterpolator
 private const val DATA_SET_ANIMATION_DURATION = 500L
 private val DATA_SET_ANIMATION_INTERPOLATOR = DecelerateInterpolator(1.5F)
 
-
 fun View.fadeIn() {
     animate()
         .alpha(1f)
@@ -18,12 +17,10 @@ fun View.fadeIn() {
         .start()
 }
 
-
 fun View.resetAnimation() {
     cancelActiveAnimations()
     alpha = 0f
 }
-
 
 fun View.cancelActiveAnimations() {
     clearAnimation()

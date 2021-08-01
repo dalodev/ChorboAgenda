@@ -7,11 +7,11 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import es.littledavity.database.chorbo.ContactsTypeConverter
-import es.littledavity.database.migrations.MIGRATION_1_2
 import es.littledavity.database.chorbo.entities.Contact
 import es.littledavity.database.chorbo.entities.LikedContact
 import es.littledavity.database.chorbo.tables.ContactDao
 import es.littledavity.database.chorbo.tables.LikedContactDao
+import es.littledavity.database.migrations.MIGRATION_1_2
 
 /**
  * Chorboagenda room database storing the different requested information like: [Contact], etc...

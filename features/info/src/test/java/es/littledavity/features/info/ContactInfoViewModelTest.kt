@@ -6,6 +6,8 @@ package es.littledavity.features.info
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.github.michaelbull.result.Err
+import com.github.michaelbull.result.Ok
+import es.littledavity.commons.ui.base.events.GeneralCommand
 import es.littledavity.core.factories.ImageViewerContactUrlFactory
 import es.littledavity.domain.DomainContact
 import es.littledavity.domain.contacts.entities.Contact
@@ -14,6 +16,8 @@ import es.littledavity.features.info.widgets.ContactInfoUiState
 import es.littledavity.features.info.widgets.main.model.ContactInfoHeaderModel
 import es.littledavity.features.info.widgets.main.model.ContactInfoModel
 import es.littledavity.testUtils.DOMAIN_CONTACT
+import es.littledavity.testUtils.DOMAIN_ERROR_API
+import es.littledavity.testUtils.DOMAIN_ERROR_NOT_FOUND
 import es.littledavity.testUtils.FakeDispatcherProvider
 import es.littledavity.testUtils.FakeErrorMapper
 import es.littledavity.testUtils.FakeLogger
@@ -24,14 +28,10 @@ import io.mockk.every
 import io.mockk.mockk
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
+import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import com.github.michaelbull.result.Ok
-import es.littledavity.commons.ui.base.events.GeneralCommand
-import es.littledavity.testUtils.DOMAIN_ERROR_API
-import es.littledavity.testUtils.DOMAIN_ERROR_NOT_FOUND
-import org.assertj.core.api.Assertions.assertThat
 
 internal class ContactInfoViewModelTest {
 

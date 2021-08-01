@@ -10,7 +10,7 @@ internal sealed class ContactInfoCommand : Command {
     data class OpenUrl(val url: String) : ContactInfoCommand()
 }
 
-internal sealed class ContactInfoRoute: Route {
+internal sealed class ContactInfoRoute : Route {
     data class Info(val contactId: Int) : ContactInfoRoute()
 
     data class ImageViewer(

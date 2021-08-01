@@ -36,7 +36,6 @@ fun PackageManager.getNativeAppPackageForUrl(url: String): String? {
         .firstOrNull()
 }
 
-
 /**
  * Checks if the given url can be opened by a native application on the device.
  *

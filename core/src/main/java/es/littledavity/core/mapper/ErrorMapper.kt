@@ -7,8 +7,8 @@ import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.core.R
 import es.littledavity.core.providers.StringProvider
 import es.littledavity.domain.commons.DomainException
-import javax.inject.Inject
 import es.littledavity.domain.commons.entities.Error
+import javax.inject.Inject
 
 interface ErrorMapper {
     fun mapToMessage(error: Throwable): String

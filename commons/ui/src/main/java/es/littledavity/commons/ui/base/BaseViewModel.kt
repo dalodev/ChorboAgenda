@@ -18,7 +18,7 @@ abstract class BaseViewModel : ViewModel(), Loggable {
     private val _commandChannel = Channel<Command>(Channel.BUFFERED)
     private val _routeChannel = Channel<Route>(Channel.BUFFERED)
 
-    val commandFlow: Flow<Command> =_commandChannel.receiveAsFlow()
+    val commandFlow: Flow<Command> = _commandChannel.receiveAsFlow()
     val routeFlow: Flow<Route> = _routeChannel.receiveAsFlow()
 
     protected fun dispatchCommand(command: Command) {

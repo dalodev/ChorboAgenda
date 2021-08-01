@@ -7,7 +7,6 @@ import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import androidx.constraintlayout.widget.ConstraintSet
-import androidx.core.view.doOnPreDraw
 import androidx.core.view.isVisible
 import es.littledavity.commons.ui.extensions.DimensionSnapshotType
 import es.littledavity.commons.ui.extensions.addTransitionListener
@@ -25,7 +24,6 @@ import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
 import es.littledavity.features.info.widgets.main.model.ContactInfoHeaderModel
 import es.littledavity.features.info.widgets.mapToContactGalleryModels
-import java.util.*
 
 internal class ContactHeaderController(
     context: Context,
@@ -39,8 +37,10 @@ internal class ContactHeaderController(
     private var areWindowInsetsApplied = false
 
     private val hasDefaultBackgroundImage: Boolean
-        get() = ((backgroundImageModels.isEmpty()) &&
-                (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage))
+        get() = (
+            (backgroundImageModels.isEmpty()) &&
+                (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage)
+            )
 
     private val isPageIndicatorEnabled: Boolean
         get() = binding.galleryView.galleryModels.isNotEmpty()
@@ -296,5 +296,4 @@ internal class ContactHeaderController(
 
         binding.galleryScrimView.makeGone()
     }
-
 }

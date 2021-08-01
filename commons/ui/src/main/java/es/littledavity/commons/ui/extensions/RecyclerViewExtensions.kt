@@ -41,7 +41,6 @@ inline fun RecyclerView.addOnScrollListener(
         override fun onTopReached(recyclerView: RecyclerView, reachedCompletely: Boolean) = onTopReached(recyclerView, reachedCompletely)
         override fun onMiddleReached(recyclerView: RecyclerView, direction: RecyclerViewScrollListener.Direction) = onMiddleReached(recyclerView, direction)
         override fun onBottomReached(recyclerView: RecyclerView, reachedCompletely: Boolean) = onBottomReached(recyclerView, reachedCompletely)
-
     }
 
     return RecyclerViewScrollListener(
@@ -51,7 +50,6 @@ inline fun RecyclerView.addOnScrollListener(
         .also(::addOnScrollListener)
 }
 
-
 fun RecyclerView.recreateItemViews() {
     val savedAdapter = adapter
 
@@ -59,45 +57,37 @@ fun RecyclerView.recreateItemViews() {
     adapter = savedAdapter
 }
 
-
 fun RecyclerView.disableScrollbars() {
     isVerticalScrollBarEnabled = false
     isHorizontalScrollBarEnabled = false
 }
 
-
 fun RecyclerView.disableOverScrollMode() {
     overScrollMode = RecyclerView.OVER_SCROLL_NEVER
 }
-
 
 fun RecyclerView.disableAddAnimations() {
     itemAnimator?.addDuration = 0L
 }
 
-
 fun RecyclerView.disableRemovalAnimations() {
     itemAnimator?.removeDuration = 0L
 }
-
 
 fun RecyclerView.disableMoveAnimations() {
     itemAnimator?.moveDuration = 0L
 }
 
-
 fun RecyclerView.disableUpdateAnimations() {
     itemAnimator?.changeDuration = 0L
 }
-
 
 fun RecyclerView.disableChangeAnimations() {
     (itemAnimator as? DefaultItemAnimator)?.supportsChangeAnimations = false
 }
 
-
 fun RecyclerView.disableAnimations() {
-    if(itemAnimator != null) {
+    if (itemAnimator != null) {
         itemAnimator = null
     }
 }

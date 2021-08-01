@@ -27,7 +27,7 @@ fun TypedArray.getFont(
     @StyleableRes index: Int,
     default: Typeface
 ): Typeface {
-    return if(SdkInfo.IS_AT_LEAST_OREO) {
+    return if (SdkInfo.IS_AT_LEAST_OREO) {
         (getFont(index) ?: default)
     } else {
         getResourceId(index, -1)

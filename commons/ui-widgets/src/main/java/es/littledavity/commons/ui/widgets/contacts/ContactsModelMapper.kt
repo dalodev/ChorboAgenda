@@ -37,5 +37,4 @@ internal class ContactsModelMapperImpl @Inject constructor(
     }
 
     private fun Contact.formatCreationDate() = creationDateFormatter.formatReleaseDate(this)
-
 }

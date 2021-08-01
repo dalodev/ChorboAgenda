@@ -78,7 +78,6 @@ fun ImageView.setSrcVector(@DrawableRes drawable: Int) {
     this.setImageResource(drawable)
 }*/
 
-
 /**
  * Set image loaded from url.
  *

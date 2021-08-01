@@ -6,18 +6,18 @@ package es.littledavity.data.contacts.usecases
 import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.core.providers.DispatcherProvider
 import es.littledavity.core.utils.asSuccess
+import es.littledavity.core.utils.resultOrError
+import es.littledavity.data.commons.utils.toDataPagination
+import es.littledavity.data.contacts.datastores.ContactsDataStores
+import es.littledavity.domain.commons.DomainResult
 import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.domain.contacts.usecases.SearchContactsUseCase
 import es.littledavity.domain.contacts.usecases.SearchContactsUseCase.Params
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 import javax.inject.Singleton
-import es.littledavity.core.utils.resultOrError
-import es.littledavity.data.contacts.datastores.ContactsDataStores
-import es.littledavity.data.commons.utils.toDataPagination
-import es.littledavity.domain.commons.DomainResult
-import kotlinx.coroutines.delay
 
 private const val LOCAL_SEARCH_DELAY_TIMEOUT = 150L
 

@@ -3,7 +3,7 @@
 
     <string name="text_font_family_medium" translatable="false">sans-serif-medium</string>
     <string name="gallery">Gallery</string>
-    <string name="cover">Cover</string>
+    <string name="cover">Profile picture</string>
     <string name="url_opener_not_found">No app was found capable of opening the URL!</string>
     <string name="text_sharing_message_template">Hey, check out this %1$s - %2$s</string>
     <string name="image">image</string>

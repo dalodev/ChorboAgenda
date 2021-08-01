@@ -20,6 +20,8 @@ import es.littledavity.commons.ui.extensions.endMargin
 import es.littledavity.commons.ui.extensions.getColor
 import es.littledavity.commons.ui.extensions.getDimension
 import es.littledavity.commons.ui.extensions.getDimensionPixelSize
+import es.littledavity.commons.ui.extensions.getFont
+import es.littledavity.commons.ui.extensions.getString
 import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.observeChanges
 import es.littledavity.commons.ui.extensions.onClick
@@ -28,8 +30,6 @@ import es.littledavity.commons.ui.extensions.setHorizontalPadding
 import es.littledavity.commons.ui.extensions.setLayoutParamsSize
 import es.littledavity.commons.ui.extensions.setTextSizeInPx
 import es.littledavity.commons.ui.extensions.updatePadding
-import es.littledavity.commons.ui.extensions.getString
-import es.littledavity.commons.ui.extensions.getFont
 import es.littledavity.commons.ui.extensions.verticalPadding
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewToolbarBinding
@@ -203,18 +203,24 @@ class Toolbar @JvmOverloads constructor(
 
     private fun initButtonInfos() {
         buttonInfos.apply {
-            add(ButtonInfo(
-                containerView = binding.leftBtnContainer,
-                iconView = binding.leftBtnIv
-            ))
-            add(ButtonInfo(
-                containerView = binding.rightBtnContainer,
-                iconView = binding.rightBtnIv
-            ))
-            add(ButtonInfo(
-                containerView = binding.extraRightBtnContainer,
-                iconView = binding.extraRightBtnIv
-            ))
+            add(
+                ButtonInfo(
+                    containerView = binding.leftBtnContainer,
+                    iconView = binding.leftBtnIv
+                )
+            )
+            add(
+                ButtonInfo(
+                    containerView = binding.rightBtnContainer,
+                    iconView = binding.rightBtnIv
+                )
+            )
+            add(
+                ButtonInfo(
+                    containerView = binding.extraRightBtnContainer,
+                    iconView = binding.extraRightBtnIv
+                )
+            )
         }
     }
 
@@ -260,9 +266,9 @@ class Toolbar @JvmOverloads constructor(
     }
 
     private fun updateExtraRightButtonContainerPosition() {
-        if(!isExtraRightButtonVisible) return
+        if (!isExtraRightButtonVisible) return
 
-        if(isRightButtonVisible) {
+        if (isRightButtonVisible) {
             binding.extraRightBtnContainer.endMargin = buttonConfig.buttonContainerSize
         } else {
             binding.extraRightBtnContainer.clearEndMargin()
@@ -273,7 +279,7 @@ class Toolbar @JvmOverloads constructor(
         val leftPadding = calculateTitleLeftPadding()
         val rightPadding = calculateTitleRightPadding()
 
-        if(titleTextGravity == TitleGravity.CENTER) {
+        if (titleTextGravity == TitleGravity.CENTER) {
             binding.titleTv.setHorizontalPadding(max(leftPadding, rightPadding))
         } else {
             binding.titleTv.updatePadding(
@@ -284,7 +290,7 @@ class Toolbar @JvmOverloads constructor(
     }
 
     private fun calculateTitleLeftPadding(): Int {
-        return if(isLeftButtonVisible) {
+        return if (isLeftButtonVisible) {
             (buttonConfig.buttonContainerSize + titleConfig.horizontalPaddingWithIcon)
         } else {
             titleConfig.horizontalPaddingWithoutIcon
@@ -295,15 +301,15 @@ class Toolbar @JvmOverloads constructor(
         var totalPadding = 0
         val buttonContainerSize = buttonConfig.buttonContainerSize
 
-        if(isRightButtonVisible) {
+        if (isRightButtonVisible) {
             totalPadding += buttonContainerSize
         }
 
-        if(isExtraRightButtonVisible) {
+        if (isExtraRightButtonVisible) {
             totalPadding += buttonContainerSize
         }
 
-        totalPadding += if(isRightButtonVisible || isExtraRightButtonVisible) {
+        totalPadding += if (isRightButtonVisible || isExtraRightButtonVisible) {
             titleConfig.horizontalPaddingWithIcon
         } else {
             titleConfig.horizontalPaddingWithoutIcon
@@ -313,7 +319,7 @@ class Toolbar @JvmOverloads constructor(
     }
 
     private fun updateTitleGravity() {
-        if(!areBothRightButtonsVisible) return
+        if (!areBothRightButtonsVisible) return
 
         // When both right buttons are visible, resetting
         // the gravity to the LEFT value to avoid bad UI
@@ -322,11 +328,11 @@ class Toolbar @JvmOverloads constructor(
 
     private fun checkNewTitleGravity(newTitleGravity: TitleGravity) {
         val canNotAssignNewTitleGravity = (
-                areBothRightButtonsVisible &&
-                        (newTitleGravity != TitleGravity.LEFT)
-                )
+            areBothRightButtonsVisible &&
+                (newTitleGravity != TitleGravity.LEFT)
+            )
 
-        if(canNotAssignNewTitleGravity) {
+        if (canNotAssignNewTitleGravity) {
             throw IllegalStateException(
                 """
                 Toolbar does not support setting any other title gravity

@@ -8,10 +8,10 @@ import es.littledavity.features.dashboard.fragment.DashboardRoute
 import es.littledavity.features.dashboard.fragment.DashboardViewModel
 import es.littledavity.testUtils.MainCoroutineRule
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Test
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
 import org.junit.Rule
+import org.junit.Test
 
 class DashboardViewModelTest {
 
@@ -32,5 +32,4 @@ class DashboardViewModelTest {
             assertThat(expectItem() is DashboardRoute.Search).isTrue
         }
     }
-
 }

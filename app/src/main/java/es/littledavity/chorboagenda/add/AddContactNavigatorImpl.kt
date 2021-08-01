@@ -29,7 +29,7 @@ class AddContactNavigatorImpl @Inject constructor(
     }
 
     override fun goEdit() {
-        //TODO
+        // TODO
     }
 
     override fun goSettingsApp() {

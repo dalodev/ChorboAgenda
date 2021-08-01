@@ -52,7 +52,6 @@ internal class ImageViewerViewModel @Inject constructor(
         _toolbarTitle = MutableStateFlow("")
 
         observeSelectedPositionChanges()
-
     }
 
     private fun getSelectedPosition(): Int {

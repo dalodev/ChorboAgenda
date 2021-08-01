@@ -20,9 +20,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 internal class ContactInfoFragment : BaseFragment<
-        FragmentContactInfoBinding,
-        ContactInfoViewModel,
-        ContactInfoNavigator>(
+    FragmentContactInfoBinding,
+    ContactInfoViewModel,
+    ContactInfoNavigator>(
     R.layout.fragment_contact_info
 ) {
     override val viewBinding by viewBinding(FragmentContactInfoBinding::bind)
@@ -68,7 +68,7 @@ internal class ContactInfoFragment : BaseFragment<
     }
 
     private fun openUrl(url: String) {
-        if(!urlOpener.openUrl(url, requireActivity())) {
+        if (!urlOpener.openUrl(url, requireActivity())) {
             showShortToast(getString(R.string.url_opener_not_found))
         }
     }

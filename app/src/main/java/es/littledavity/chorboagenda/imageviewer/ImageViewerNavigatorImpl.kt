@@ -9,11 +9,10 @@ import es.littledavity.features.image.viewer.ImageViewerNavigator
 import javax.inject.Inject
 
 @BindType(installIn = BindType.Component.FRAGMENT)
-internal class ImageViewerNavigatorImol @Inject constructor(
+internal class ImageViewerNavigatorImpl @Inject constructor(
     private val navController: NavController
 ) : ImageViewerNavigator {
     override fun goBack() {
         navController.popBackStack()
     }
-
 }

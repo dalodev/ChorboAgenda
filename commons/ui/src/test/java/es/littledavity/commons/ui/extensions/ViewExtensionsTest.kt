@@ -4,7 +4,6 @@
 package es.littledavity.commons.ui.extensions
 
 import android.view.View
-import com.nhaarman.mockitokotlin2.any
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.MockK
 import org.junit.Assert.assertEquals

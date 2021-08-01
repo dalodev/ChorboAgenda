@@ -23,7 +23,6 @@ enum class IgdbImageSize(internal val rawSize: String) {
 
     HD("720p"),
     FULL_HD("1080p")
-
 }
 
 enum class IgdbImageExtension(internal val rawExtension: String) {
@@ -55,8 +54,7 @@ fun IgdbImageUrlFactory.createUrls(
 }
 
 @BindType
-internal class IgdbImageUrlFactoryImpl @Inject constructor(
-) : IgdbImageUrlFactory {
+internal class IgdbImageUrlFactoryImpl @Inject constructor() : IgdbImageUrlFactory {
 
     override fun createUrl(image: Image, config: IgdbImageUrlFactory.Config): String? {
         if (image.id?.isBlank() == true) return null
@@ -68,7 +66,6 @@ internal class IgdbImageUrlFactoryImpl @Inject constructor(
             config.extension.rawExtension
         )*/
     }
-
 
     private fun constructType(config: IgdbImageUrlFactory.Config): String {
         return buildString {

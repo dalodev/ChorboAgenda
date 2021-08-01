@@ -12,21 +12,17 @@ fun View.applyWindowStartInsetAsMargin() {
     applyWindowInsetsAsMargin(applyStartInset = true)
 }
 
-
 fun View.applyWindowTopInsetAsMargin() {
     applyWindowInsetsAsMargin(applyTopInset = true)
 }
-
 
 fun View.applyWindowEndInsetAsMargin() {
     applyWindowInsetsAsMargin(applyEndInset = true)
 }
 
-
 fun View.applyWindowBottomInsetAsMargin() {
     applyWindowInsetsAsMargin(applyBottomInset = true)
 }
-
 
 fun View.applyWindowInsetsAsMargin(
     applyStartInset: Boolean = false,
@@ -41,26 +37,21 @@ fun View.applyWindowInsetsAsMargin(
     applyBottomInset = applyBottomInset
 )
 
-
 fun View.applyWindowStartInsetAsPadding() {
     applyWindowInsetsAsPadding(applyStartInset = true)
 }
-
 
 fun View.applyWindowTopInsetAsPadding() {
     applyWindowInsetsAsPadding(applyTopInset = true)
 }
 
-
 fun View.applyWindowEndInsetAsPadding() {
     applyWindowInsetsAsPadding(applyEndInset = true)
 }
 
-
 fun View.applyWindowBottomInsetAsPadding() {
     applyWindowInsetsAsPadding(applyBottomInset = true)
 }
-
 
 fun View.applyWindowInsetsAsPadding(
     applyStartInset: Boolean = false,
@@ -75,7 +66,6 @@ fun View.applyWindowInsetsAsPadding(
     applyBottomInset = applyBottomInset
 )
 
-
 fun View.applyWindowInsets(
     type: DimensionSnapshotType,
     applyStartInset: Boolean = false,
@@ -84,18 +74,17 @@ fun View.applyWindowInsets(
     applyBottomInset: Boolean = false
 ) {
     doOnApplyWindowInsets(type) { targetView, insets, dimensions ->
-        val start = (dimensions.start + (if(applyStartInset) insets.getCompatSystemWindowInsetLeft() else 0))
-        val top = (dimensions.top + (if(applyTopInset) insets.getCompatSystemWindowInsetTop() else 0))
-        val end = (dimensions.end + (if(applyEndInset) insets.getCompatSystemWindowInsetRight() else 0))
-        val bottom = (dimensions.bottom + (if(applyBottomInset) insets.getCompatSystemWindowInsetBottom() else 0))
+        val start = (dimensions.start + (if (applyStartInset) insets.getCompatSystemWindowInsetLeft() else 0))
+        val top = (dimensions.top + (if (applyTopInset) insets.getCompatSystemWindowInsetTop() else 0))
+        val end = (dimensions.end + (if (applyEndInset) insets.getCompatSystemWindowInsetRight() else 0))
+        val bottom = (dimensions.bottom + (if (applyBottomInset) insets.getCompatSystemWindowInsetBottom() else 0))
 
-        when(type) {
+        when (type) {
             DimensionSnapshotType.MARGINS -> targetView.setMargins(start, top, end, bottom)
             DimensionSnapshotType.PADDING -> targetView.updatePadding(start, top, end, bottom)
         }
     }
 }
-
 
 fun View.doOnApplyWindowInsets(
     type: DimensionSnapshotType,
@@ -111,9 +100,8 @@ fun View.doOnApplyWindowInsets(
     requestApplyInsetsWhenAttached()
 }
 
-
 private fun View.createDimensionSnapshot(type: DimensionSnapshotType): DimensionSnapshot {
-    return when(type) {
+    return when (type) {
 
         DimensionSnapshotType.MARGINS -> DimensionSnapshot(
             start = this.startMargin,
@@ -128,10 +116,8 @@ private fun View.createDimensionSnapshot(type: DimensionSnapshotType): Dimension
             end = this.endPadding,
             bottom = this.bottomPadding
         )
-
     }
 }
-
 
 fun View.requestApplyInsetsWhenAttached() {
     if (isAttachedToWindow) {
@@ -145,63 +131,55 @@ fun View.requestApplyInsetsWhenAttached() {
             }
 
             override fun onViewDetachedFromWindow(view: View) = Unit
-
         })
     }
 }
 
-
 @Suppress("DEPRECATION")
 @SuppressLint("NewApi")
 fun WindowInsets.getCompatSystemWindowInsetLeft(): Int {
-    return if(SdkInfo.IS_AT_LEAST_11) {
+    return if (SdkInfo.IS_AT_LEAST_11) {
         getInsets(WindowInsets.Type.systemBars()).left
     } else {
         systemWindowInsetLeft
     }
 }
 
-
 @Suppress("DEPRECATION")
 @SuppressLint("NewApi")
 fun WindowInsets.getCompatSystemWindowInsetTop(): Int {
-    return if(SdkInfo.IS_AT_LEAST_11) {
+    return if (SdkInfo.IS_AT_LEAST_11) {
         getInsets(WindowInsets.Type.systemBars()).top
     } else {
         systemWindowInsetTop
     }
 }
 
-
 @Suppress("DEPRECATION")
 @SuppressLint("NewApi")
 fun WindowInsets.getCompatSystemWindowInsetRight(): Int {
-    return if(SdkInfo.IS_AT_LEAST_11) {
+    return if (SdkInfo.IS_AT_LEAST_11) {
         getInsets(WindowInsets.Type.systemBars()).right
     } else {
         systemWindowInsetRight
     }
 }
 
-
 @Suppress("DEPRECATION")
 @SuppressLint("NewApi")
 fun WindowInsets.getCompatSystemWindowInsetBottom(): Int {
-    return if(SdkInfo.IS_AT_LEAST_11) {
+    return if (SdkInfo.IS_AT_LEAST_11) {
         getInsets(WindowInsets.Type.systemBars()).bottom
     } else {
         systemWindowInsetBottom
     }
 }
 
-
 enum class DimensionSnapshotType {
 
     MARGINS,
     PADDING
-
 }
-
 
 data class DimensionSnapshot(
     val start: Int,

@@ -33,5 +33,4 @@ internal object DatabaseModule {
     ).addTypeConverters(typeConverters)
         .addMigrations(*MIGRATIONS)
         .build()
-
 }

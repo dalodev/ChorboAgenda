@@ -16,7 +16,6 @@ internal class DashboardViewPagerAdapterFactoryImpl @Inject constructor(
     private val fragmentFactory: DashboardAdapterFragmentFactory
 ) : DashboardViewPagerAdapterFactory {
 
-
     override fun createAdapter(fragment: Fragment) = DashboardViewPagerAdapter(
         fragment = fragment,
         fragmentFactory = fragmentFactory

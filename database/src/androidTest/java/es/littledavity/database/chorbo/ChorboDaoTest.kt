@@ -15,12 +15,12 @@ import es.littledavity.database.chorbo.tables.ContactDao
 import es.littledavity.testUtils.livedata.getValue
 import es.littledavity.testUtils.roboelectric.TestRobolectric
 import kotlinx.coroutines.runBlocking
+import org.hamcrest.MatcherAssert.assertThat
 import org.hamcrest.Matchers.hasItem
 import org.hamcrest.Matchers.not
 import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
-import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule

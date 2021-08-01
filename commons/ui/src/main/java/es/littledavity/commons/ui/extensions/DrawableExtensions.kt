@@ -15,7 +15,7 @@ import androidx.annotation.ColorInt
 import androidx.core.graphics.drawable.DrawableCompat
 
 fun Drawable.setColor(@ColorInt color: Int): Drawable {
-    return when(val newDrawable = mutate()) {
+    return when (val newDrawable = mutate()) {
         is RippleDrawable -> newDrawable.apply { setColor(color.toColorStateList()) }
         is GradientDrawable -> newDrawable.apply { setColor(color) }
 
@@ -23,18 +23,16 @@ fun Drawable.setColor(@ColorInt color: Int): Drawable {
     }
 }
 
-
 fun Drawable.setGradientColors(
     @ColorInt startColor: Int,
     @ColorInt endColor: Int
 ): Drawable {
-    return if(this is GradientDrawable) {
+    return if (this is GradientDrawable) {
         mutate().apply { colors = intArrayOf(startColor, endColor) }
     } else {
         this
     }
 }
-
 
 fun Drawable.setSize(size: Int) {
     applyBounds(
@@ -45,7 +43,6 @@ fun Drawable.setSize(size: Int) {
     )
 }
 
-
 fun Drawable.applyBounds(
     left: Int,
     top: Int,
@@ -55,14 +52,12 @@ fun Drawable.applyBounds(
     return apply { setBounds(left, top, right, bottom) }
 }
 
-
 fun Drawable.setTintList(states: Array<IntArray>, colors: IntArray) {
     DrawableCompat.setTintList(
         DrawableCompat.wrap(this),
         ColorStateList(states, colors)
     )
 }
-
 
 fun Drawable.toBitmap(
     config: Bitmap.Config = Bitmap.Config.ARGB_8888

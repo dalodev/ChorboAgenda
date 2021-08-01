@@ -15,7 +15,7 @@ fun View.showKeyboard(withDelay: Boolean = false) {
         context.getSystemService<InputMethodManager>().showSoftInput(this, 0)
     }
 
-    if(withDelay) {
+    if (withDelay) {
         postActionDelayed(KEYBOARD_SHOWING_DELAY, action)
     } else {
         action()

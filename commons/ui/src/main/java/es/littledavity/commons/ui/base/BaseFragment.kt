@@ -16,20 +16,20 @@ import androidx.lifecycle.viewModelScope
 import androidx.viewbinding.ViewBinding
 import es.littledavity.commons.ui.base.events.Command
 import es.littledavity.commons.ui.base.events.GeneralCommand
-import es.littledavity.commons.ui.base.navigation.Navigator
 import es.littledavity.commons.ui.base.events.Route
+import es.littledavity.commons.ui.base.navigation.Navigator
 import es.littledavity.commons.ui.extensions.observeIn
+import es.littledavity.commons.ui.extensions.showLongToast
+import es.littledavity.commons.ui.extensions.showShortToast
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
-import es.littledavity.commons.ui.extensions.showLongToast
-import es.littledavity.commons.ui.extensions.showShortToast
 
 abstract class BaseFragment<
-        VB : ViewBinding,
-        VM : BaseViewModel,
-        NA : Navigator
-        >(
+    VB : ViewBinding,
+    VM : BaseViewModel,
+    NA : Navigator
+    >(
     @LayoutRes private val layoutId: Int
 ) : Fragment(layoutId) {
 
@@ -106,7 +106,6 @@ abstract class BaseFragment<
         // Stub
     }
 
-
     @CallSuper
     protected open fun onInit() {
         // Stub
@@ -138,7 +137,6 @@ abstract class BaseFragment<
             .onEach(::onHandleCommand)
             .observeIn(this)
     }
-
 
     private fun bindViewModelRoutes() {
         viewModel.routeFlow

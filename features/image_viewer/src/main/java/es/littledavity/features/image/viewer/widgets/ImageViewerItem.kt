@@ -10,9 +10,9 @@ import es.littledavity.commons.ui.base.rv.AbstractItem
 import es.littledavity.commons.ui.base.rv.NoDependencies
 
 internal class ImageViewerItem(model: String) : AbstractItem<
-        String,
-        ImageViewerItem.ViewHolder,
-        NoDependencies>(model) {
+    String,
+    ImageViewerItem.ViewHolder,
+    NoDependencies>(model) {
 
     override fun createViewHolder(
         inflater: LayoutInflater,

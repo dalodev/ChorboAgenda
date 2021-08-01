@@ -8,8 +8,16 @@ import android.util.AttributeSet
 import android.widget.FrameLayout
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
-import com.google.android.material.snackbar.Snackbar
-import es.littledavity.commons.ui.extensions.*
+import es.littledavity.commons.ui.extensions.fadeIn
+import es.littledavity.commons.ui.extensions.getString
+import es.littledavity.commons.ui.extensions.layoutInflater
+import es.littledavity.commons.ui.extensions.makeGone
+import es.littledavity.commons.ui.extensions.makeInvisible
+import es.littledavity.commons.ui.extensions.makeVisible
+import es.littledavity.commons.ui.extensions.observeChanges
+import es.littledavity.commons.ui.extensions.onClick
+import es.littledavity.commons.ui.extensions.resetAnimation
+import es.littledavity.commons.ui.extensions.showSnackBar
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.features.add.AddContactUiState
 import es.littledavity.features.add.R
@@ -114,5 +122,4 @@ class AddContactView @JvmOverloads constructor(
     private fun showAddPhotoView() = with(binding.addPhotoView) {
         isVisible = binding.photoView.drawable == null
     }
-
 }

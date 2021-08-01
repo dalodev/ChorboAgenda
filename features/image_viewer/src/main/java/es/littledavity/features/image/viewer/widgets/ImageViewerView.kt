@@ -81,7 +81,7 @@ internal class ImageViewerView @JvmOverloads constructor(
     }
 
     private fun onSelectedPositionChanged(newPosition: Int) {
-        if(binding.viewPager.currentItem == newPosition) return
+        if (binding.viewPager.currentItem == newPosition) return
 
         binding.viewPager.setCurrentItem(newPosition, false)
     }
@@ -105,5 +105,4 @@ internal class ImageViewerView @JvmOverloads constructor(
 
         return viewHolder?.itemView as? ImageViewerItemView
     }
-
 }

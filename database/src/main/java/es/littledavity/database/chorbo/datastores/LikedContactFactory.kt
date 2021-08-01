@@ -22,5 +22,4 @@ internal class LikedContactFactoryImpl @Inject constructor(
         contactId = contactId,
         likeTimestamp = timestampProvider.getUnixTimestamp()
     )
-
 }

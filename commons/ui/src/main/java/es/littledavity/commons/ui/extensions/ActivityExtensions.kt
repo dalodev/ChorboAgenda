@@ -18,7 +18,7 @@ import es.littledavity.core.commons.SdkInfo
  * @param windowAnimations The animations to use for the entering window
  */
 fun Activity.overrideEnterTransition(windowAnimations: WindowAnimations) {
-    if(windowAnimations.id == WindowAnimations.DEFAULT_ANIMATIONS.id) {
+    if (windowAnimations.id == WindowAnimations.DEFAULT_ANIMATIONS.id) {
         return
     }
 
@@ -38,26 +38,21 @@ var Activity.navigationBarColor: Int
     set(@ColorInt value) { window.navigationBarColor = value }
     get() = window.navigationBarColor
 
-
 fun Activity.makeScreenAlwaysAwake() {
     window.makeScreenAlwaysAwake()
 }
-
 
 fun Activity.makeScreenSleepable() {
     window.makeScreenSleepable()
 }
 
-
 fun Activity.setScreenAlwaysAwake(isScreenAlwaysAwake: Boolean) {
     window.setScreenAlwaysAwake(isScreenAlwaysAwake)
 }
 
-
 fun Activity.setSoftInputMode(mode: Int) {
     window.setSoftInputMode(mode)
 }
-
 
 @Suppress("DEPRECATION")
 @SuppressLint("NewApi")
@@ -67,7 +62,7 @@ fun Activity.setTaskDescription(
     @ColorInt primaryColor: Int
 ) {
     setTaskDescription(
-        if(SdkInfo.IS_AT_LEAST_PIE) {
+        if (SdkInfo.IS_AT_LEAST_PIE) {
             ActivityManager.TaskDescription(label, iconId, primaryColor)
         } else {
             ActivityManager.TaskDescription(

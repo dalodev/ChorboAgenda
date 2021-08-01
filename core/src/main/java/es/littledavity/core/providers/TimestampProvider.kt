@@ -16,5 +16,4 @@ internal class TimestampProviderImpl @Inject constructor() : TimestampProvider {
 
     override fun getUnixTimestamp(timeUnit: TimeUnit) =
         timeUnit.convert(System.currentTimeMillis(), TimeUnit.MILLISECONDS)
-
 }

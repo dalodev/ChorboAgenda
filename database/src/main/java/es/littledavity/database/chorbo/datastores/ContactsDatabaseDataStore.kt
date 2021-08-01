@@ -12,7 +12,11 @@ import es.littledavity.data.contacts.datastores.ContactsLocalDataStore
 import es.littledavity.database.chorbo.DatabaseContact
 import es.littledavity.database.chorbo.entities.Contact
 import es.littledavity.database.chorbo.tables.ContactDao
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -79,7 +83,7 @@ internal class ContactsDatabaseDataStore @Inject constructor(
         .map(contactMapper::mapToDataContact)
         .flowOn(dispatcherProvider.computation)
 
-    //Old
+    // Old
     /**
      * Obtain all database added chorbo ordering by name field.
      *

@@ -13,7 +13,7 @@ import kotlin.reflect.KClass
 
 private inline class ViewType(val type: Int)
 
-abstract class AbstractRecyclerViewAdapter<IT: Item<*, in Dependencies>, Dependencies: ItemDependencies>(
+abstract class AbstractRecyclerViewAdapter<IT : Item<*, in Dependencies>, Dependencies : ItemDependencies>(
     context: Context,
     items: List<IT> = emptyList(),
     dependencies: ItemDependencies = NoDependencies
@@ -78,5 +78,4 @@ abstract class AbstractRecyclerViewAdapter<IT: Item<*, in Dependencies>, Depende
     private fun KClass<out Item<*, *>>.toViewType() = ViewType(this.qualifiedName.hashCode())
 
     override fun getItemId(position: Int) = this[position].itemId
-
 }

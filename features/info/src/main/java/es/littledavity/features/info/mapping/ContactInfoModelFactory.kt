@@ -25,5 +25,4 @@ internal class ContactInfoModelFactoryImpl @Inject constructor(
         id = contact.id,
         headerModel = headerModelFactory.createHeaderModel(contact, isLiked),
     )
-
 }

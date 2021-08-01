@@ -21,7 +21,6 @@ internal class RelativeDateFormatterImpl @Inject constructor(
     private val stringProvider: StringProvider
 ) : RelativeDateFormatter {
 
-
     override fun formatRelativeDate(dateTime: LocalDateTime): String {
         val currentDateTime = timeProvider.getCurrentDateTime()
         val isDateTimeInFuture = currentDateTime.isBefore(dateTime)
@@ -72,7 +71,6 @@ internal class RelativeDateFormatterImpl @Inject constructor(
         else getString(R.string.timestamp_right_now)
     }
 
-
     private fun formatPastDate(dateTime: LocalDateTime, currentDateTime: LocalDateTime): String {
         val yearCount = ChronoUnit.YEARS.between(dateTime, currentDateTime).toInt()
         if (yearCount > 0L) return getQuantityString(
@@ -114,5 +112,4 @@ internal class RelativeDateFormatterImpl @Inject constructor(
     }
 
     private fun getString(id: Int) = stringProvider.getString(id)
-
 }

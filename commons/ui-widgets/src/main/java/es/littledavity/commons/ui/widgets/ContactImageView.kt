@@ -141,13 +141,13 @@ class ContactImageView @JvmOverloads constructor(
         titleTv.isVisible = true
     }
 
-     private fun hideTitle() {
-         if (!isTitleVisible) return
+    private fun hideTitle() {
+        if (!isTitleVisible) return
 
-         titleTv.isVisible = false
-     }
+        titleTv.isVisible = false
+    }
 
-     fun disableRoundCorners() {
-         radius = 0f
-     }
+    fun disableRoundCorners() {
+        radius = 0f
+    }
 }

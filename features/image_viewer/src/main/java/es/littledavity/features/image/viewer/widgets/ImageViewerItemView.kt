@@ -55,15 +55,15 @@ internal class ImageViewerItemView @JvmOverloads constructor(
     @Inject
     lateinit var stringProvider: StringProvider
 
-     init {
-         initPhotoView()
-     }
+    init {
+        initPhotoView()
+    }
 
-     private fun initPhotoView() = with(binding.photoView) {
-         minimumScale = DEFAULT_MIN_SCALE
-         mediumScale = DEFAULT_MID_SCALE
-         maximumScale = DEFAULT_MAX_SCALE
-     }
+    private fun initPhotoView() = with(binding.photoView) {
+        minimumScale = DEFAULT_MIN_SCALE
+        mediumScale = DEFAULT_MID_SCALE
+        maximumScale = DEFAULT_MAX_SCALE
+    }
 
     private fun loadUrlImage(url: String) {
         imageLoader.loadImage(
