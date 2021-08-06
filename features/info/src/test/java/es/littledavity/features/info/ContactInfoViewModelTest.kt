@@ -54,7 +54,8 @@ internal class ContactInfoViewModelTest {
             stringProvider = FakeStringProvider(),
             errorMapper = FakeErrorMapper(),
             logger = logger,
-            savedStateHandle = setupSavedStateHandle()
+            savedStateHandle = setupSavedStateHandle(),
+            permissionService = mockk()
         )
     }
 
@@ -75,9 +76,9 @@ internal class ContactInfoViewModelTest {
         coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
         viewModel.uiState.test {
             viewModel.loadData(resultEmissionDelay = 0L)
-            assertThat(expectItem() is ContactInfoUiState.Empty).isTrue
-            assertThat(expectItem() is ContactInfoUiState.Loading).isTrue
-            assertThat(expectItem() is ContactInfoUiState.Result).isTrue
+            assertThat(awaitItem() is ContactInfoUiState.Empty).isTrue
+            assertThat(awaitItem() is ContactInfoUiState.Loading).isTrue
+            assertThat(awaitItem() is ContactInfoUiState.Result).isTrue
         }
     }
 
@@ -93,7 +94,7 @@ internal class ContactInfoViewModelTest {
         coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Err(DOMAIN_ERROR_NOT_FOUND))
         viewModel.commandFlow.test {
             viewModel.loadData(resultEmissionDelay = 0L)
-            assertThat(expectItem() is GeneralCommand.ShowLongToast).isTrue
+            assertThat(awaitItem() is GeneralCommand.ShowLongToast).isTrue
         }
     }
 
@@ -102,7 +103,7 @@ internal class ContactInfoViewModelTest {
         viewModel.routeFlow.test {
             coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
             viewModel.onGalleryClicked(position = 0)
-            assertThat(expectItem() is ContactInfoRoute.ImageViewer).isTrue
+            assertThat(awaitItem() is ContactInfoRoute.ImageViewer).isTrue
         }
     }
 
@@ -110,7 +111,7 @@ internal class ContactInfoViewModelTest {
     fun whenBackButtonIsClicked_shouldRouteToPrevious() = mmainCoroutineRule.runBlockingTest {
         viewModel.routeFlow.test {
             viewModel.onBackButtonClicked()
-            assertThat(expectItem() is ContactInfoRoute.Back).isTrue
+            assertThat(awaitItem() is ContactInfoRoute.Back).isTrue
         }
     }
 
@@ -119,8 +120,8 @@ internal class ContactInfoViewModelTest {
         coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
 
         viewModel.routeFlow.test {
-            viewModel.onCoverClicked()
-            assertThat(expectItem() is ContactInfoRoute.ImageViewer).isTrue
+            viewModel.onImageClicked()
+            assertThat(awaitItem() is ContactInfoRoute.ImageViewer).isTrue
         }
     }
 
@@ -151,10 +152,15 @@ internal class ContactInfoViewModelTest {
                         creationDate = "creation_date",
                         name = "name",
                         imageUrl = null,
-                        phone = "123"
-                    )
+                        phone = "123",
+                    ),
+                    info = emptyList()
                 )
             )
+        }
+
+        override fun createWithPermissionError(navigation: () -> Unit): ContactInfoUiState {
+            return ContactInfoUiState.ErrorPermission(navigation)
         }
     }
 

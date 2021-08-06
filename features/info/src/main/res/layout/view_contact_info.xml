@@ -27,8 +27,8 @@
             android:id="@+id/galleryScrimView"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
             android:elevation="@dimen/contact_info_header_backdrop_elevation"
+            android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@id/galleryView"
             app:layout_constraintEnd_toEndOf="@id/galleryView"
             app:layout_constraintStart_toStartOf="@id/galleryView"
@@ -114,24 +114,47 @@
             app:tint="@color/contact_info_header_like_btn_icon_color"
             tools:ignore="ContentDescription" />
 
-        <TextView
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addGalleryImagesBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/contact_info_header_like_btn_margin_end"
+            android:layout_marginBottom="@dimen/contact_info_header_like_btn_margin_end"
+            android:backgroundTint="@color/contact_info_header_like_btn_color"
+            android:elevation="@dimen/contact_info_header_like_btn_elevation"
+            app:borderWidth="0dp"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@id/likeBtn"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/add_images"
+            app:tint="@color/contact_info_header_like_btn_icon_color"
+            tools:ignore="ContentDescription" />
+
+        <EditText
             android:id="@+id/nameTv"
             style="@style/Chorboagenda.ContactInfo.Header.Title"
             android:layout_marginTop="@dimen/contact_info_header_title_margin_start"
             android:layout_marginEnd="@dimen/contact_info_header_first_title_margin_end_expanded"
+            android:background="@null"
             android:maxLines="1"
+            android:textColorHint="@color/colorHintTextSecondary"
+            android:hint="@string/contact_info_header_name_hint"
             app:layout_constraintEnd_toStartOf="@id/likeBtn"
             app:layout_constraintStart_toEndOf="@id/coverView"
             app:layout_constraintTop_toBottomOf="@id/galleryView"
             tools:text="David" />
 
-        <TextView
+        <EditText
             android:id="@+id/phoneTv"
             style="@style/Chorboagenda.ContactInfo.Header.Title"
             android:layout_marginEnd="@dimen/contact_info_header_second_title_margin_end"
+            android:background="@null"
             android:ellipsize="end"
+            android:hint="@string/contact_info_header_phone_hint"
             android:includeFontPadding="false"
-            android:maxLines="2"
+            android:inputType="phone"
+            android:maxLines="1"
+            android:textColorHint="@color/colorHintTextSecondary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/coverView"
             app:layout_constraintTop_toBottomOf="@id/nameTv"
@@ -154,16 +177,20 @@
             app:layout_constraintTop_toBottomOf="@id/phoneTv"
             tools:text="Feb 06, 2018 (3 years ago)" />
 
-        <TextView
+        <EditText
             android:id="@+id/instagramTv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/contact_info_header_developer_name_horizontal_margin"
             android:layout_marginEnd="@dimen/contact_info_header_developer_name_horizontal_margin"
+            android:background="@null"
             android:elevation="@dimen/contact_info_header_backdrop_elevation"
             android:fontFamily="@string/font_family_medium"
             android:gravity="start"
+            android:hint="@string/contact_info_header_instagram_hint"
+            android:inputType="text"
             android:textColor="@color/contact_info_header_developer_name_text_color"
+            android:textColorHint="@color/colorHintTextSecondary"
             android:textSize="@dimen/contact_info_header_developer_name_text_size"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/coverView"
@@ -181,17 +208,23 @@
         <es.littledavity.commons.ui.widgets.contacts.InfoView
             android:id="@+id/ratingIv"
             style="@style/Chorboagenda.ContactInfo.Header.InfoView"
+            app:infoView_editMode="true"
+            app:infoView_hintText="@string/contact_info_rating_hint"
             app:infoView_icon="@drawable/star_rating"
+            app:infoView_maxLength="2"
             app:layout_constraintBottom_toTopOf="@id/recyclerView"
             app:layout_constraintEnd_toStartOf="@+id/countryNameIv"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/bottomBarrier"
-            tools:infoView_titleText="10/10" />
+            tools:infoView_titleText="10" />
 
         <es.littledavity.commons.ui.widgets.contacts.InfoView
             android:id="@+id/countryNameIv"
             style="@style/Chorboagenda.ContactInfo.Header.InfoView"
+            app:infoView_editMode="true"
+            app:infoView_hintText="@string/contact_info_country_hint"
             app:infoView_icon="@drawable/location"
+            app:infoView_maxLength="10"
             app:layout_constraintBottom_toTopOf="@id/recyclerView"
             app:layout_constraintEnd_toStartOf="@+id/ageTv"
             app:layout_constraintStart_toEndOf="@id/ratingIv"
@@ -201,7 +234,10 @@
         <es.littledavity.commons.ui.widgets.contacts.InfoView
             android:id="@+id/ageTv"
             style="@style/Chorboagenda.ContactInfo.Header.InfoView"
+            app:infoView_editMode="true"
+            app:infoView_hintText="@string/contact_info_age_hint"
             app:infoView_icon="@drawable/contact_outline"
+            app:infoView_maxLength="2"
             app:layout_constraintBottom_toTopOf="@id/recyclerView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/countryNameIv"

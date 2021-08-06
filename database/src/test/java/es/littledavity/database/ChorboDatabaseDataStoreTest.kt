@@ -69,7 +69,7 @@ class ChorboDatabaseDataStoreTest {
         val dbContacts = contactMapper.mapToDatabaseContacts(DATA_CONTACTS)
         coEvery { contactDao.observeContacts(any(), any()) } returns flowOf(dbContacts)
         dataStore.observeContacts(DATA_PAGINATION).test {
-            assertThat(expectItem()).isEqualTo(DATA_CONTACTS)
+            assertThat(awaitItem()).isEqualTo(DATA_CONTACTS)
             expectComplete()
         }
     }*/

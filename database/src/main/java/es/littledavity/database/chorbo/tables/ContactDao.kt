@@ -10,6 +10,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
+import es.littledavity.database.chorbo.DatabaseContact
 import es.littledavity.database.chorbo.entities.Contact
 import kotlinx.coroutines.flow.Flow
 
@@ -118,7 +119,7 @@ internal interface ContactDao {
      * @param chorbo Chorbo.
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertChorbo(chorbo: Contact)
+    suspend fun insertChorbo(chorbo: Contact): Long
 
     /**
      * Update a chorbo list.

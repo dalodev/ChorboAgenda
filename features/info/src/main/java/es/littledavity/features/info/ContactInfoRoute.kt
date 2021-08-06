@@ -20,4 +20,5 @@ internal sealed class ContactInfoRoute : Route {
     ) : ContactInfoRoute()
 
     object Back : ContactInfoRoute()
+    object SettingsApp : ContactInfoRoute()
 }

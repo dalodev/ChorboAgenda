@@ -43,7 +43,7 @@ internal class ImageViewerViewModelTest {
     fun whenToolbarRightClicked_shouldDispatchTextSharing() = mainCoroutineRule.runBlockingTest {
         viewModel.commandFlow.test {
             viewModel.onToolbarRightButtonClicked()
-            assertThat(expectItem() is ImageViewerCommand.ShareText).isTrue
+            assertThat(awaitItem() is ImageViewerCommand.ShareText).isTrue
         }
     }
 
@@ -51,8 +51,8 @@ internal class ImageViewerViewModelTest {
     fun whenPageIsChanged_shouldEmitSelectedPosition() = mainCoroutineRule.runBlockingTest {
         viewModel.selectedPosition.test {
             viewModel.onPageChanged(10)
-            assertThat(expectItem() == INITIAL_POSITION).isTrue
-            assertThat(expectItem() == 10).isTrue
+            assertThat(awaitItem() == INITIAL_POSITION).isTrue
+            assertThat(awaitItem() == 10).isTrue
         }
     }
 
@@ -60,7 +60,7 @@ internal class ImageViewerViewModelTest {
     fun whenPageIsChanged_shouldEmitsToolbarTitle() = mainCoroutineRule.runBlockingTest {
         viewModel.toolbarTitle.test {
             viewModel.onPageChanged(10)
-            assertThat(expectItem()).isNotEmpty()
+            assertThat(awaitItem()).isNotEmpty()
         }
     }
 
@@ -68,7 +68,7 @@ internal class ImageViewerViewModelTest {
     fun whenBackButtonIsClicked_shouldDispatchesSystemWindowsReset() = mainCoroutineRule.runBlockingTest {
         viewModel.commandFlow.test {
             viewModel.onBackPressed()
-            assertThat(expectItem() is ImageViewerCommand.ResetSystemWindows).isTrue
+            assertThat(awaitItem() is ImageViewerCommand.ResetSystemWindows).isTrue
         }
     }
 
@@ -76,7 +76,7 @@ internal class ImageViewerViewModelTest {
     fun whenBackButtonIsClicked_shouldRoutesToPreviousScreen() = mainCoroutineRule.runBlockingTest {
         viewModel.routeFlow.test {
             viewModel.onBackPressed()
-            assertThat(expectItem() is ImageViewerRoute.Back).isTrue
+            assertThat(awaitItem() is ImageViewerRoute.Back).isTrue
         }
     }
 }

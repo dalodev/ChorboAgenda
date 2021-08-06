@@ -9,6 +9,7 @@
     <color name="colorSecondaryText">#809aaf</color>
     <color name="colorNavigationBar">#282d38</color>
     <color name="colorProgressBar">@color/colorAccent</color>
+    <color name="colorHintTextSecondary">#40809aaf</color>
 
     <!--Text colors-->
     <color name="textHeadline">#1f1f1f</color>

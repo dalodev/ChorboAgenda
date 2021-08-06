@@ -9,4 +9,5 @@ interface ContactInfoNavigator : Navigator {
     fun goToImageViewer(title: String?, initialPosition: Int, imageUrls: List<String>)
     fun goToInfo(contactId: Int)
     fun goBack()
+    fun goSettingsApp()
 }

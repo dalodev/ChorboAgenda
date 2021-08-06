@@ -3,6 +3,8 @@
  */
 package es.littledavity.features.info
 
+import android.net.Uri
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.base.BaseFragment
@@ -20,9 +22,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 internal class ContactInfoFragment : BaseFragment<
-    FragmentContactInfoBinding,
-    ContactInfoViewModel,
-    ContactInfoNavigator>(
+        FragmentContactInfoBinding,
+        ContactInfoViewModel,
+        ContactInfoNavigator>(
     R.layout.fragment_contact_info
 ) {
     override val viewBinding by viewBinding(FragmentContactInfoBinding::bind)
@@ -30,6 +32,11 @@ internal class ContactInfoFragment : BaseFragment<
 
     @Inject
     lateinit var urlOpener: UrlOpener
+
+    private var resultLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            viewModel.updatePhoto(uri)
+        }
 
     override fun onInit() {
         super.onInit()
@@ -40,7 +47,8 @@ internal class ContactInfoFragment : BaseFragment<
         applyWindowBottomInsetAsMargin()
         onGalleryClicked = viewModel::onGalleryClicked
         onBackButtonClicked = viewModel::onBackButtonClicked
-        onImageClicked = viewModel::onCoverClicked
+        onImageClicked = viewModel::onImageClicked
+        onImageLongClicked = { viewModel.onImageLongClicked(resultLauncher) }
         onLikeButtonClicked = viewModel::onLikeButtonClicked
     }
 
@@ -79,6 +87,7 @@ internal class ContactInfoFragment : BaseFragment<
             is ContactInfoRoute.ImageViewer -> navigateToImageViewer(route)
             is ContactInfoRoute.Info -> navigator.goToInfo(route.contactId)
             is ContactInfoRoute.Back -> navigator.goBack()
+            is ContactInfoRoute.SettingsApp -> navigator.goSettingsApp()
         }
     }
 

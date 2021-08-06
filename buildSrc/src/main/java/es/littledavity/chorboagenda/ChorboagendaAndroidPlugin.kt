@@ -64,12 +64,12 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
             // See: https://github.com/Kotlin/kotlinx.coroutines/tree/master/kotlinx-coroutines-debug#debug-agent-and-android
             packagingOptions {
                 // for JNA and JNA-platform
-                exclude("META-INF/AL2.0")
-                exclude("META-INF/LGPL2.1")
+                excludes.add("META-INF/AL2.0")
+                excludes.add("META-INF/LGPL2.1")
                 // for byte-buddy
-                exclude("META-INF/licenses/ASM")
-                pickFirst("win32-x86-64/attach_hotspot_windows.dll")
-                pickFirst("win32-x86/attach_hotspot_windows.dll")
+                excludes.add("META-INF/licenses/ASM")
+                pickFirsts.add("win32-x86-64/attach_hotspot_windows.dll")
+                pickFirsts.add("win32-x86/attach_hotspot_windows.dll")
             }
         }
     }

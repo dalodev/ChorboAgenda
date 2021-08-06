@@ -4,7 +4,7 @@
 package es.littledavity.data.contacts.entities
 
 data class Contact(
-    val id: Int,
+    var id: Int,
     val image: Image?,
     val name: String,
     val phone: String?,

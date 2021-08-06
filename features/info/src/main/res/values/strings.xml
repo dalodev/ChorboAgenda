@@ -3,4 +3,12 @@
     <!-- ContactInfoView -->
     <string name="contact_info_header_page_indicator_template">%1$d/%2$d</string>
     <string name="contact_info_info_view_title">No Data Available</string>
+    <string name="info_contact_photo_permission_error">You must give storage permissions</string>
+    <string name="info_contact_settings_button">Settings</string>
+    <string name="contact_info_header_phone_hint">Type phone here</string>
+    <string name="contact_info_header_name_hint">Type name here</string>
+    <string name="contact_info_header_instagram_hint">Type instagram here</string>
+    <string name="contact_info_rating_hint">Score</string>
+    <string name="contact_info_country_hint">Location</string>
+    <string name="contact_info_age_hint">Age</string>
 </resources>

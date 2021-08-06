@@ -6,22 +6,27 @@ package es.littledavity.commons.ui.widgets.contacts
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
+import android.text.InputType
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.View
 import android.widget.LinearLayout
 import androidx.annotation.ColorInt
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
+import es.littledavity.commons.ui.bindings.onTextChange
 import es.littledavity.commons.ui.extensions.getColor
 import es.littledavity.commons.ui.extensions.getDimensionPixelSize
 import es.littledavity.commons.ui.extensions.getFont
 import es.littledavity.commons.ui.extensions.getString
 import es.littledavity.commons.ui.extensions.layoutInflater
+import es.littledavity.commons.ui.extensions.onClick
 import es.littledavity.commons.ui.extensions.setColor
 import es.littledavity.commons.ui.extensions.setLayoutParamsSize
 import es.littledavity.commons.ui.extensions.setSingleLineTextEnabled
 import es.littledavity.commons.ui.extensions.setTextSizeInPx
+import es.littledavity.commons.ui.extensions.showKeyboard
 import es.littledavity.commons.ui.extensions.topMargin
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewInfoBinding
@@ -54,19 +59,19 @@ class InfoView @JvmOverloads constructor(
         }
         get() = binding.descriptionTv.isVisible
 
-    var iconSize: Int = getDimensionPixelSize(R.dimen.info_view_icon_size)
+    private var iconSize: Int = getDimensionPixelSize(R.dimen.info_view_icon_size)
         set(value) {
             field = value
             binding.iconIv.setLayoutParamsSize(value)
         }
 
-    var titleTextTopMargin: Int
+    private var titleTextTopMargin: Int
         set(value) {
             binding.titleTv.topMargin = value
         }
         get() = binding.titleTv.topMargin
 
-    var descriptionTextTopMargin: Int
+    private var descriptionTextTopMargin: Int
         set(value) {
             binding.descriptionTv.topMargin = value
         }
@@ -105,13 +110,13 @@ class InfoView @JvmOverloads constructor(
         }
         get() = binding.descriptionTv.textSize
 
-    var titleTextTypeface: Typeface
+    private var titleTextTypeface: Typeface
         set(value) {
             binding.titleTv.typeface = value
         }
         get() = binding.titleTv.typeface
 
-    var descriptionTextTypeface: Typeface
+    private var descriptionTextTypeface: Typeface
         set(value) {
             binding.descriptionTv.typeface = value
         }
@@ -120,10 +125,11 @@ class InfoView @JvmOverloads constructor(
     var titleText: CharSequence
         set(value) {
             binding.titleTv.text = value
+            binding.titleTvEdit.setText(value)
         }
         get() = binding.titleTv.text
 
-    var descriptionText: CharSequence
+    private var descriptionText: CharSequence
         set(value) {
             isDescriptionTextVisible = value.isNotBlank()
             binding.descriptionTv.text = value
@@ -135,6 +141,29 @@ class InfoView @JvmOverloads constructor(
             binding.iconIv.setImageDrawable(value?.setColor(iconColor))
         }
         get() = binding.iconIv.drawable
+
+    private var editMode: Boolean
+        set(value) {
+            binding.titleTvEdit.isVisible = value
+            binding.titleTv.isVisible = !value
+        }
+        get() = binding.titleTvEdit.isVisible
+
+    private var maxLength: Int = 10
+        set(value) {
+            field = value
+            with(binding.titleTvEdit) {
+                onTextChange {
+                    isEnabled = it.length < value
+                }
+            }
+        }
+
+    private var hintText: CharSequence = ""
+        set(value) {
+            field = value
+            binding.titleTvEdit.hint = value
+        }
 
     init {
         orientation = VERTICAL
@@ -163,6 +192,19 @@ class InfoView @JvmOverloads constructor(
             icon = getDrawable(R.styleable.InfoView_infoView_icon)
             titleText = getString(R.styleable.InfoView_infoView_titleText, titleText)
             descriptionText = getString(R.styleable.InfoView_infoView_descriptionText, descriptionText)
+            editMode = getBoolean(R.styleable.InfoView_infoView_editMode, false)
+            maxLength = getInteger(R.styleable.InfoView_infoView_maxLength, 10)
+            hintText = getString(R.styleable.InfoView_infoView_hintText, context.getString(R.string.dash))
+            if (editMode) {
+                binding.titleTvEdit.enableEditText()
+                enableEditText()
+            }
         }
+    }
+
+    private fun View.enableEditText() = this.onClick {
+        binding.titleTvEdit.isEnabled = true
+        binding.titleTvEdit.requestFocus()
+        showKeyboard(true)
     }
 }

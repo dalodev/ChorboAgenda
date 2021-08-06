@@ -76,9 +76,8 @@ class AddContactFragment : BaseFragment<
         super.onRoute(route)
         when (route) {
             is AddContactRoute.Back -> navigator.goBack()
-            is AddContactRoute.List -> navigator.goList()
             is AddContactRoute.SettingsApp -> navigator.goSettingsApp()
-            is AddContactRoute.Edit -> navigator.goEdit(route.contactId)
+            is AddContactRoute.GoToInfo -> navigator.goToInfo(route.contactId)
         }
     }
 }

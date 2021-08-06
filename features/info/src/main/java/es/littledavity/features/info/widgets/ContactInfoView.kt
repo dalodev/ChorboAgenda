@@ -16,12 +16,14 @@ import es.littledavity.commons.ui.base.rv.NoDependencies
 import es.littledavity.commons.ui.extensions.disableChangeAnimations
 import es.littledavity.commons.ui.extensions.fadeIn
 import es.littledavity.commons.ui.extensions.getDimensionPixelSize
+import es.littledavity.commons.ui.extensions.getString
 import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.makeGone
 import es.littledavity.commons.ui.extensions.makeInvisible
 import es.littledavity.commons.ui.extensions.makeVisible
 import es.littledavity.commons.ui.extensions.observeChanges
 import es.littledavity.commons.ui.extensions.resetAnimation
+import es.littledavity.commons.ui.extensions.showSnackBar
 import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
 import es.littledavity.core.providers.StringProvider
 import es.littledavity.features.info.R
@@ -56,7 +58,9 @@ internal class ContactInfoView @JvmOverloads constructor(
     var onGalleryClicked: ((Int) -> Unit)? = null
     var onBackButtonClicked: (() -> Unit)? = null
     var onImageClicked: (() -> Unit)? = null
+    var onImageLongClicked: (() -> Unit)? = null
     var onLikeButtonClicked: (() -> Unit)? = null
+    var onAddGalleryImagesClicked: (() -> Unit)? = null
 
     init {
         initContactHeaderController(context)
@@ -77,6 +81,9 @@ internal class ContactInfoView @JvmOverloads constructor(
             }
             onLikeButtonClicked = {
                 this@ContactInfoView.onLikeButtonClicked?.invoke()
+            }
+            onCoverLongClicked = {
+                this@ContactInfoView.onImageLongClicked?.invoke()
             }
         }.also { headerController = it }
     }
@@ -111,6 +118,7 @@ internal class ContactInfoView @JvmOverloads constructor(
         when (newState) {
             is ContactInfoUiState.Empty -> onEmptyStateSelected()
             is ContactInfoUiState.Loading -> onLoadingStateSelected()
+            is ContactInfoUiState.ErrorPermission -> onErrorPermissionSelected(newState.navigation)
             is ContactInfoUiState.Result -> onResultStateSelected(newState)
         }
     }
@@ -187,5 +195,13 @@ internal class ContactInfoView @JvmOverloads constructor(
         when (viewHolder) {
             // TODO create viewholder for earch item with listener invoke
         }
+    }
+
+    private fun onErrorPermissionSelected(navigation: () -> Unit) {
+        binding.root.showSnackBar(
+            getString(R.string.info_contact_photo_permission_error),
+            getString(R.string.info_contact_settings_button),
+            navigation
+        )
     }
 }

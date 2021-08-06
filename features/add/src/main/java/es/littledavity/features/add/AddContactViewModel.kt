@@ -5,8 +5,9 @@ package es.littledavity.features.add
 
 import android.Manifest
 import android.net.Uri
-import android.telephony.PhoneNumberUtils
+import android.util.Patterns
 import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.viewModelScope
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -65,7 +66,8 @@ class AddContactViewModel @Inject constructor(
 
     fun onToolbarRightButtonClicked(name: String, phone: String) {
         val nameError = name.isBlank()
-        val phoneError = PhoneNumberUtils.formatNumber(phone, "ES") == null
+        val phoneError = if (phone.isBlank()) false
+        else !isValidNumber(phone)
         val canDone = !nameError && !phoneError
         currentContact.name = name
         currentContact.phone = phone
@@ -102,7 +104,7 @@ class AddContactViewModel @Inject constructor(
                 }.collect {
                     _uiState.value = it
                     val contactId = (it as? AddContactUiState.Result)?.model?.id
-                    contactId?.let { route(AddContactRoute.Edit(contactId)) }?.let {
+                    contactId?.let { route(AddContactRoute.GoToInfo(contactId)) }?.let {
                         route(AddContactRoute.List)
                     }
                 }
@@ -116,10 +118,9 @@ class AddContactViewModel @Inject constructor(
     }
 
     private fun createErrorAddContactUiState(
-        phoneError: Boolean = true,
-        nameError: Boolean = false
-    ) =
-        uiStateFactory.createWithErrorState(nameError, phoneError)
+        nameError: Boolean = true,
+        phoneError: Boolean = false
+    ) = uiStateFactory.createWithErrorState(nameError, phoneError)
 
     private fun createResultAddContactUiState() =
         uiStateFactory.createWithResultState(currentContact)
@@ -149,6 +150,9 @@ class AddContactViewModel @Inject constructor(
             }
         )
     }
+
+    private fun isValidNumber(phone: String) =
+        phone.isNotBlank() && Patterns.PHONE.matcher(phone).matches() && phone.length > 6 && phone.length < 13
 
     private fun createContact() = Contact(
         id = 0,

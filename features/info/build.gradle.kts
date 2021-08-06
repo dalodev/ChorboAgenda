@@ -26,7 +26,7 @@ dependencies {
     implementation(Deps.AndroidX.fragmentKtx)
     implementation(Deps.Google.materialComponents)
     implementation(Deps.Misc.kotlinResult)
-
+    implementation(Deps.Misc.dexter)
 
     implementation(Deps.Google.daggerHilt)
     kapt(Deps.Google.daggerHiltCompiler)

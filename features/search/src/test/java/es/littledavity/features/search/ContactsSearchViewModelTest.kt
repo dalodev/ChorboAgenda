@@ -60,7 +60,7 @@ internal class ContactsSearchViewModelTest {
 
         viewModel.routeFlow.test {
             viewModel.onToolbarBackButtonClicked()
-            assertThat(expectItem() is ContactsSearchRoute.Back).isTrue
+            assertThat(awaitItem() is ContactsSearchRoute.Back).isTrue
         }
     }
 

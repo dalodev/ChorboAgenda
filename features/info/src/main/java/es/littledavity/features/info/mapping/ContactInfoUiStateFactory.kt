@@ -15,6 +15,8 @@ internal interface ContactInfoUiStateFactory {
         contact: Contact,
         isLiked: Boolean
     ): ContactInfoUiState
+    fun createWithPermissionError(navigation: () -> Unit): ContactInfoUiState
+
 }
 
 @BindType(installIn = BindType.Component.VIEW_MODEL)
@@ -29,4 +31,6 @@ internal class ContactInfoUiStateFactoryImpl @Inject constructor(
     override fun createWithResultState(contact: Contact, isLiked: Boolean) = ContactInfoUiState.Result(
         modelFactory.createInfoModel(contact, isLiked)
     )
+    override fun createWithPermissionError(navigation: () -> Unit) =
+        ContactInfoUiState.ErrorPermission(navigation)
 }

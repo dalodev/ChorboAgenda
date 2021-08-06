@@ -30,7 +30,7 @@ internal class SplashViewModelTest {
 
         viewModel.routeFlow.test {
             viewModel.init()
-            assertThat(expectItem() is SplashRoute.Dashboard).isTrue
+            assertThat(awaitItem() is SplashRoute.Dashboard).isTrue
         }
     }
 }

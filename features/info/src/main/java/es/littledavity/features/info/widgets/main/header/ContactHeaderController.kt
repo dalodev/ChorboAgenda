@@ -8,6 +8,7 @@ import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
+import es.littledavity.commons.ui.bindings.onLongClick
 import es.littledavity.commons.ui.extensions.DimensionSnapshotType
 import es.littledavity.commons.ui.extensions.addTransitionListener
 import es.littledavity.commons.ui.extensions.doOnApplyWindowInsets
@@ -17,6 +18,7 @@ import es.littledavity.commons.ui.extensions.isChecked
 import es.littledavity.commons.ui.extensions.makeGone
 import es.littledavity.commons.ui.extensions.observeChanges
 import es.littledavity.commons.ui.extensions.onClick
+import es.littledavity.commons.ui.extensions.onTextChanged
 import es.littledavity.commons.ui.extensions.postAction
 import es.littledavity.commons.ui.extensions.updateConstraintSets
 import es.littledavity.core.providers.StringProvider
@@ -38,9 +40,9 @@ internal class ContactHeaderController(
 
     private val hasDefaultBackgroundImage: Boolean
         get() = (
-            (backgroundImageModels.isEmpty()) &&
-                (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage)
-            )
+                (backgroundImageModels.isEmpty()) &&
+                        (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage)
+                )
 
     private val isPageIndicatorEnabled: Boolean
         get() = binding.galleryView.galleryModels.isNotEmpty()
@@ -73,7 +75,17 @@ internal class ContactHeaderController(
 
     private var phone: CharSequence?
         set(value) {
-            binding.phoneTv.text = PhoneNumberUtils.formatNumber(value.toString(), "ES")
+            with(binding.phoneTv) {
+                setText(PhoneNumberUtils.formatNumber(value.toString(), "ES"))
+                setOnFocusChangeListener { v, hasFocus ->
+                    if (!hasFocus) setText(
+                        PhoneNumberUtils.formatNumber(
+                            binding.phoneTv.text.toString(),
+                            "ES"
+                        )
+                    )
+                }
+            }
             isPhoneVisible = value != null
         }
         get() = binding.phoneTv.text
@@ -86,7 +98,7 @@ internal class ContactHeaderController(
 
     private var instagram: CharSequence?
         set(value) {
-            binding.instagramTv.text = value
+            binding.instagramTv.setText(value)
             isInstagramVisible = value != null
         }
         get() = binding.instagramTv.text
@@ -118,6 +130,7 @@ internal class ContactHeaderController(
     var onGalleryClicked: ((Int) -> Unit)? = null
     var onBackButtonClicked: (() -> Unit)? = null
     var onCoverClicked: (() -> Unit)? = null
+    var onCoverLongClicked: (() -> Unit)? = null
     var onLikeButtonClicked: (() -> Unit)? = null
 
     init {
@@ -149,7 +162,7 @@ internal class ContactHeaderController(
         if (phone != model.phone) phone = model.phone
         if (creationDate != model.creationDate) creationDate = model.creationDate
         if (instagram != model.instagram) instagram = model.instagram
-        if (rating != model.rating) rating = model.rating ?: "0/10"
+        if (rating != model.rating) rating = model.rating.orEmpty()
         if (country != model.country) country = model.country
         if (age != model.age) age = model.age
     }
@@ -248,7 +261,7 @@ internal class ContactHeaderController(
         if ((oldTitle == newTitle) || newTitle.isBlank()) return
 
         val firstNameTv = binding.nameTv
-        firstNameTv.text = newTitle
+        firstNameTv.setText(newTitle)
     }
 
     private fun initGalleryView() = with(binding.galleryView) {
@@ -281,6 +294,7 @@ internal class ContactHeaderController(
         cardElevation = getDimension(R.dimen.contact_info_header_backdrop_elevation)
         isTitleVisible = false
         onClick { onCoverClicked?.invoke() }
+        onLongClick { onCoverLongClicked?.invoke() }
     }
 
     private fun initLikeButton() {

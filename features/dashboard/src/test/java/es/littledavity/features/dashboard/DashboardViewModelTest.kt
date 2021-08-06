@@ -29,7 +29,7 @@ class DashboardViewModelTest {
     fun onClickSearch_shouldGoToSearchRoute() = mainCoroutineRule.runBlockingTest {
         viewModel.routeFlow.test {
             viewModel.onToolbarRightButtonClicked()
-            assertThat(expectItem() is DashboardRoute.Search).isTrue
+            assertThat(awaitItem() is DashboardRoute.Search).isTrue
         }
     }
 }

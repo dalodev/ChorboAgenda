@@ -56,9 +56,9 @@ class ContactsViewModelTest {
 
         viewModel.uiState.test {
             viewModel.loadData()
-            val emptyState = expectItem()
-            val loadingState = expectItem()
-            val resultState = expectItem()
+            val emptyState = awaitItem()
+            val loadingState = awaitItem()
+            val resultState = awaitItem()
 
             assertThat(emptyState is ContactsUiState.Empty).isTrue
             assertThat(loadingState is ContactsUiState.Loading).isTrue
@@ -80,7 +80,7 @@ class ContactsViewModelTest {
             coEvery { observeContactsUseCase.execute(any()) } returns flow { throw Exception("Error") }
             viewModel.commandFlow.test {
                 viewModel.loadData()
-                assertThat(expectItem() is GeneralCommand.ShowLongToast).isTrue
+                assertThat(awaitItem() is GeneralCommand.ShowLongToast).isTrue
             }
         }
 
@@ -95,7 +95,7 @@ class ContactsViewModelTest {
         )
         viewModel.routeFlow.test {
             viewModel.onContactClicked(contactModel)
-            val route = expectItem()
+            val route = awaitItem()
             assertThat(route is ContactsRoute.Info).isTrue
             assertThat((route as ContactsRoute.Info).contactId).isEqualTo(contactModel.id)
         }

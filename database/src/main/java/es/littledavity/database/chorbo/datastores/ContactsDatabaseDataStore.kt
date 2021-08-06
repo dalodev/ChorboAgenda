@@ -37,11 +37,12 @@ internal class ContactsDatabaseDataStore @Inject constructor(
     }
 
     override suspend fun insertContact(chorbo: DataContact): Flow<DataContact> {
-        contactDao.insertChorbo(
+        val id = contactDao.insertChorbo(
             withContext(dispatcherProvider.computation) {
                 saveContactFactory.createContact(chorbo)
             }
         )
+        chorbo.id = id.toInt()
         return flowOf(chorbo)
     }
 
@@ -83,7 +84,7 @@ internal class ContactsDatabaseDataStore @Inject constructor(
         .map(contactMapper::mapToDataContact)
         .flowOn(dispatcherProvider.computation)
 
-    // Old
+// Old
     /**
      * Obtain all database added chorbo ordering by name field.
      *
@@ -156,28 +157,28 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      * @param id Chorbo identifier.
      * @param name Chorbo name.
      */
-    /*suspend fun insertChorbo(
-        id: Int,
-        name: String,
-        image: String,
-        countryCode: String,
-        countryName: String,
-        flag: String,
-        whatsapp: String,
-        instagram: String
-    ) {
-        val chorbo = Chorbo(
-            id = id,
-            name = name,
-            image = image,
-            countryCode = countryCode,
-            countryName = countryName,
-            flag = flag,
-            whatsapp = whatsapp,
-            instagram = instagram
-        )
-        chorboDao.insertChorbo(chorbo)
-    }*/
+/*suspend fun insertChorbo(
+    id: Int,
+    name: String,
+    image: String,
+    countryCode: String,
+    countryName: String,
+    flag: String,
+    whatsapp: String,
+    instagram: String
+) {
+    val chorbo = Chorbo(
+        id = id,
+        name = name,
+        image = image,
+        countryCode = countryCode,
+        countryName = countryName,
+        flag = flag,
+        whatsapp = whatsapp,
+        instagram = instagram
+    )
+    chorboDao.insertChorbo(chorbo)
+}*/
 
     /**
      * Add to database a chrobo.

@@ -3,8 +3,16 @@
  */
 package es.littledavity.features.info
 
+import android.Manifest
+import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.karumi.dexter.PermissionToken
+import com.karumi.dexter.listener.PermissionDeniedResponse
+import com.karumi.dexter.listener.PermissionGrantedResponse
+import com.karumi.dexter.listener.PermissionRequest
+import com.karumi.dexter.listener.single.PermissionListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import es.littledavity.commons.ui.base.BaseViewModel
 import es.littledavity.commons.ui.base.events.GeneralCommand
@@ -12,16 +20,19 @@ import es.littledavity.core.factories.ImageViewerContactUrlFactory
 import es.littledavity.core.mapper.ErrorMapper
 import es.littledavity.core.providers.DispatcherProvider
 import es.littledavity.core.providers.StringProvider
+import es.littledavity.core.service.PermissionService
 import es.littledavity.core.utils.Logger
 import es.littledavity.core.utils.combine
 import es.littledavity.core.utils.onError
 import es.littledavity.core.utils.resultOrError
 import es.littledavity.domain.contacts.entities.Contact
+import es.littledavity.domain.contacts.entities.Image
 import es.littledavity.domain.contacts.usecases.GetContactUseCase
 import es.littledavity.domain.contacts.usecases.ObserveContactLikeStateUseCase
 import es.littledavity.domain.contacts.usecases.ToggleContactLikeStateUseCase
 import es.littledavity.features.info.mapping.ContactInfoUiStateFactory
 import es.littledavity.features.info.widgets.ContactInfoUiState
+import es.littledavity.features.info.widgets.main.model.ContactInfoModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -38,6 +49,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 private const val PARAM_CONTACT_ID = "contact_id"
+private const val IMAGE_TYPE = "image/*"
 
 @HiltViewModel
 internal class ContactInfoViewModel @Inject constructor(
@@ -49,11 +61,16 @@ internal class ContactInfoViewModel @Inject constructor(
     private val stringProvider: StringProvider,
     private val errorMapper: ErrorMapper,
     private val logger: Logger,
+    private val permissionService: PermissionService
 ) : BaseViewModel() {
 
     private var isObservingContactData = false
 
     private val contactId = checkNotNull(savedStateHandle.get<Int>(PARAM_CONTACT_ID))
+
+    private var currentContact: Contact? = null
+
+    private var isContactLiked = false
 
     private val _uiState = MutableStateFlow<ContactInfoUiState>(ContactInfoUiState.Empty)
 
@@ -74,12 +91,14 @@ internal class ContactInfoViewModel @Inject constructor(
     private suspend fun observeContactDataInternal(resultEmissionDelay: Long) {
         getContact()
             .flatMapConcat { contact ->
+                currentContact = contact
                 combine(
                     flowOf(contact),
                     observeContactLikeState(contact)
                 )
             }
             .map { (contact, isContactLiked) ->
+                this.isContactLiked = isContactLiked
                 uiStateFactory.createWithResultState(
                     contact,
                     isContactLiked
@@ -135,7 +154,7 @@ internal class ContactInfoViewModel @Inject constructor(
         }
     }
 
-    fun onCoverClicked() {
+    fun onImageClicked() {
         navigateToImageViewer(
             title = stringProvider.getString(R.string.cover),
             contactImageUrlsProvider = { game ->
@@ -146,10 +165,47 @@ internal class ContactInfoViewModel @Inject constructor(
         )
     }
 
+    fun onImageLongClicked(resultLauncher: ActivityResultLauncher<String>) {
+        permissionService.requestPermission(
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            object : PermissionListener {
+                override fun onPermissionGranted(report: PermissionGrantedResponse?) {
+                    resultLauncher.launch(IMAGE_TYPE)
+                }
+
+                override fun onPermissionDenied(report: PermissionDeniedResponse?) {
+                    _uiState.value = uiStateFactory.createWithPermissionError {
+                        route(ContactInfoRoute.SettingsApp)
+                    }
+                }
+
+                override fun onPermissionRationaleShouldBeShown(
+                    p0: PermissionRequest?,
+                    p1: PermissionToken?
+                ) {
+                    _uiState.value = uiStateFactory.createWithPermissionError {
+                        route(ContactInfoRoute.SettingsApp)
+                    }
+                }
+            }
+        )
+    }
+
     fun onLikeButtonClicked() {
         viewModelScope.launch {
             useCases.toggleContactLikeStateUseCase
                 .execute(ToggleContactLikeStateUseCase.Params(contactId))
+        }
+    }
+
+    fun updatePhoto(uri: Uri?) {
+        if (uri == null) return
+        currentContact?.image = Image(uri.toString())
+        currentContact?.let {
+            _uiState.value = uiStateFactory.createWithResultState(
+                it,
+                isContactLiked
+            )
         }
     }
 }

@@ -7,5 +7,6 @@
     <string name="url_opener_not_found">No app was found capable of opening the URL!</string>
     <string name="text_sharing_message_template">Hey, check out this %1$s - %2$s</string>
     <string name="image">image</string>
+    <string name="dash">-</string>
 
 </resources>

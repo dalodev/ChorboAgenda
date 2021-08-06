@@ -18,7 +18,13 @@
     <fragment
         android:id="@+id/infoFragment"
         android:name="es.littledavity.features.info.ContactInfoFragment"
-        tools:layout="@layout/fragment_contact_info" />
+        tools:layout="@layout/fragment_contact_info">
+        <action
+            android:id="@+id/action_toDashboard"
+            app:destination="@id/dashboardFragment"
+            app:popUpTo="@+id/dashboardFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
     <fragment
         android:id="@+id/imageViewerFragment"
@@ -96,18 +102,5 @@
         app:exitAnim="@anim/overshoot_scaling_window_a_exit_animation"
         app:popEnterAnim="@anim/overshoot_scaling_window_a_enter_animation"
         app:popExitAnim="@anim/overshoot_scaling_window_b_exit_animation" />
-
-    <action
-        android:id="@+id/action_editContactFragment"
-        app:destination="@+id/editContactFragment"
-        app:enterAnim="@anim/horizontal_sliding_window_b_enter_animation"
-        app:exitAnim="@anim/horizontal_sliding_window_a_exit_animation"
-        app:popEnterAnim="@anim/horizontal_sliding_window_a_enter_animation"
-        app:popExitAnim="@anim/horizontal_sliding_window_b_exit_animation">
-
-        <argument
-            android:name="contact_id"
-            app:argType="integer" />
-    </action>
 
 </navigation>

@@ -7,7 +7,6 @@ import es.littledavity.commons.ui.base.navigation.Navigator
 
 interface AddContactNavigator : Navigator {
     fun goBack()
-    fun goList()
-    fun goEdit(contactId: Int)
+    fun goToInfo(contactId: Int)
     fun goSettingsApp()
 }

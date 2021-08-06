@@ -4,6 +4,7 @@
 package es.littledavity.features.add
 
 import android.net.Uri
+import android.util.Patterns
 import app.cash.turbine.test
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.domain.contacts.entities.Contact
@@ -54,7 +55,7 @@ class AddContactViewModelTest {
     fun onToolbarRightButtonClickedShouldGoBack() = mainCoroutineRule.runBlockingTest {
         viewModel.routeFlow.test {
             viewModel.onToolbarBackButtonClicked()
-            assertThat(expectItem() is AddContactRoute.Back).isTrue
+            assertThat(awaitItem() is AddContactRoute.Back).isTrue
         }
     }
 
@@ -63,8 +64,8 @@ class AddContactViewModelTest {
         mainCoroutineRule.runBlockingTest {
             viewModel.uiState.test {
                 viewModel.onToolbarRightButtonClicked("", "")
-                assertThat(expectItem() is AddContactUiState.New).isTrue
-                assertThat(expectItem() is AddContactUiState.Error).isTrue
+                assertThat(awaitItem() is AddContactUiState.New).isTrue
+                assertThat(awaitItem() is AddContactUiState.Error).isTrue
             }
         }
 
@@ -73,8 +74,8 @@ class AddContactViewModelTest {
         viewModel.uiState.test {
             val uri = mockk<Uri>()
             viewModel.updatePhoto(uri)
-            assertThat(expectItem() is AddContactUiState.New).isTrue
-            assertThat((expectItem() as AddContactUiState.Result).model.coverImageUrl).isEqualTo("test")
+            assertThat(awaitItem() is AddContactUiState.New).isTrue
+            assertThat((awaitItem() as AddContactUiState.Result).model.coverImageUrl).isEqualTo("test")
         }
     }
 
@@ -83,10 +84,10 @@ class AddContactViewModelTest {
         mainCoroutineRule.runBlockingTest {
             coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
             viewModel.uiState.test {
-                viewModel.onToolbarRightButtonClicked("test", "123")
-                assertThat(expectItem() is AddContactUiState.New).isTrue
-                assertThat(expectItem() is AddContactUiState.Loading).isTrue
-                assertThat((expectItem() as AddContactUiState.Result).model.name).isEqualTo("test")
+                viewModel.onToolbarRightButtonClicked("test", "")
+                assertThat(awaitItem() is AddContactUiState.New).isTrue
+                assertThat(awaitItem() is AddContactUiState.Loading).isTrue
+                assertThat((awaitItem() as AddContactUiState.Result).model.name).isEqualTo("test")
             }
         }
 
@@ -100,8 +101,8 @@ class AddContactViewModelTest {
             return AddContactUiState.Loading
         }
 
-        override fun createWithErrorState(): AddContactUiState {
-            return AddContactUiState.Error
+        override fun createWithErrorState(nameError: Boolean, phoneError: Boolean): AddContactUiState {
+            return AddContactUiState.Error(false, false)
         }
 
         override fun createWithPermissionError(navigation: () -> Unit): AddContactUiState {

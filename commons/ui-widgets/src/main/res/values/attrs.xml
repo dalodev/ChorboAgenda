@@ -15,6 +15,9 @@
         <attr name="infoView_icon" format="reference"/>
         <attr name="infoView_titleText" format="string"/>
         <attr name="infoView_descriptionText" format="string"/>
+        <attr name="infoView_editMode" format="boolean"/>
+        <attr name="infoView_maxLength" format="integer"/>
+        <attr name="infoView_hintText" format="string"/>
     </declare-styleable>
 
     <declare-styleable name="CustomToolbar">

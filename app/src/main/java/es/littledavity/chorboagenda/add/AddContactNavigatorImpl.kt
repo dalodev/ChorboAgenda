@@ -24,12 +24,8 @@ class AddContactNavigatorImpl @Inject constructor(
         navController.popBackStack()
     }
 
-    override fun goList() {
-        navController.navigate(AddContactFragmentDirections.actionDashboardFragment())
-    }
-
-    override fun goEdit(contactId: Int) {
-        navController.navigate(EditContactFragmentDirections.actionEditContactFragment(contactId))
+    override fun goToInfo(contactId: Int) {
+        navController.navigate(EditContactFragmentDirections.actionInfoFragment(contactId))
     }
 
     override fun goSettingsApp() {
