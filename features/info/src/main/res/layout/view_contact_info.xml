@@ -181,7 +181,7 @@
         <es.littledavity.commons.ui.widgets.contacts.InfoView
             android:id="@+id/ratingIv"
             style="@style/Chorboagenda.ContactInfo.Header.InfoView"
-            app:infoView_icon="@drawable/contact_outline"
+            app:infoView_icon="@drawable/star_rating"
             app:layout_constraintBottom_toTopOf="@id/recyclerView"
             app:layout_constraintEnd_toStartOf="@+id/countryNameIv"
             app:layout_constraintStart_toStartOf="parent"
@@ -191,7 +191,7 @@
         <es.littledavity.commons.ui.widgets.contacts.InfoView
             android:id="@+id/countryNameIv"
             style="@style/Chorboagenda.ContactInfo.Header.InfoView"
-            app:infoView_icon="@drawable/contact_outline"
+            app:infoView_icon="@drawable/location"
             app:layout_constraintBottom_toTopOf="@id/recyclerView"
             app:layout_constraintEnd_toStartOf="@+id/ageTv"
             app:layout_constraintStart_toEndOf="@id/ratingIv"

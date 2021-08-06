@@ -7,10 +7,12 @@ import es.littledavity.data.contacts.DataContact
 import es.littledavity.data.contacts.DataCreationDate
 import es.littledavity.data.contacts.DataCreationDateCategory
 import es.littledavity.data.contacts.DataImage
+import es.littledavity.data.contacts.DataInfo
 import es.littledavity.domain.DomainContact
 import es.littledavity.domain.DomainCreationDate
 import es.littledavity.domain.DomainCreationDateCategory
 import es.littledavity.domain.DomainImage
+import es.littledavity.domain.DomainInfo
 import javax.inject.Inject
 
 internal class ContactMapper @Inject constructor() {
@@ -26,8 +28,16 @@ internal class ContactMapper @Inject constructor() {
         country = contact.country,
         creationDate = contact.creationDate.toDomainCreationDates(),
         rating = contact.rating,
-        instagram = contact.instagram
+        instagram = contact.instagram,
+        info = contact.info.toDomainInfo()
     )
+
+    private fun List<DataInfo>.toDomainInfo() = map {
+        DomainInfo(
+            title = it.title,
+            description = it.description
+        )
+    }
 
     private fun DataImage.toDomainImage(): DomainImage {
         return DomainImage(
@@ -58,8 +68,16 @@ internal class ContactMapper @Inject constructor() {
         country = contact.country,
         creationDate = contact.creationDate.toDataCreationDate(),
         rating = contact.rating,
-        instagram = contact.instagram
+        instagram = contact.instagram,
+        info = contact.info.toDataInfo()
     )
+
+    private fun List<DomainInfo>.toDataInfo() = map {
+        DataInfo(
+            title = it.title,
+            description = it.description
+        )
+    }
 
     private fun DomainImage.toDataImage(): DataImage {
         return DataImage(

@@ -10,6 +10,7 @@ import es.littledavity.core.JsonConverter
 import es.littledavity.database.chorbo.entities.CreationDate
 import es.littledavity.database.chorbo.entities.CreationDateCategory
 import es.littledavity.database.chorbo.entities.Image
+import es.littledavity.database.chorbo.entities.Info
 import es.littledavity.database.commons.RoomTypeConverter
 import javax.inject.Inject
 
@@ -18,6 +19,16 @@ import javax.inject.Inject
 internal class ContactsTypeConverter @Inject constructor(
     private val jsonConverter: JsonConverter
 ) : RoomTypeConverter {
+
+    @TypeConverter
+    fun fromInfoList(infoList: List<Info>?): String {
+        return jsonConverter.toJson(infoList)
+    }
+
+    @TypeConverter
+    fun toInfoList(json: String): List<Info> {
+        return (jsonConverter.fromJson(json) ?: emptyList())
+    }
 
     @TypeConverter
     fun fromImage(image: Image?): String {

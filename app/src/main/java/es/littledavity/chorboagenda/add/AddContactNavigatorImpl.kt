@@ -7,12 +7,12 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.provider.Settings
-import androidx.core.content.ContextCompat.startActivity
 import androidx.navigation.NavController
 import com.paulrybitskyi.hiltbinder.BindType
 import dagger.hilt.android.qualifiers.ApplicationContext
 import es.littledavity.features.add.AddContactFragmentDirections
 import es.littledavity.features.add.AddContactNavigator
+import es.littledavity.features.edit.EditContactFragmentDirections
 import javax.inject.Inject
 
 @BindType(installIn = BindType.Component.FRAGMENT)
@@ -28,8 +28,8 @@ class AddContactNavigatorImpl @Inject constructor(
         navController.navigate(AddContactFragmentDirections.actionDashboardFragment())
     }
 
-    override fun goEdit() {
-        // TODO
+    override fun goEdit(contactId: Int) {
+        navController.navigate(EditContactFragmentDirections.actionEditContactFragment(contactId))
     }
 
     override fun goSettingsApp() {

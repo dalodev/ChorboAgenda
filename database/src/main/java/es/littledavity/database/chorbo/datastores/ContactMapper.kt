@@ -4,11 +4,9 @@
 package es.littledavity.database.chorbo.datastores
 
 import es.littledavity.core.providers.TimestampProvider
-import es.littledavity.data.contacts.DataContact
-import es.littledavity.data.contacts.DataCreationDate
-import es.littledavity.data.contacts.DataCreationDateCategory
-import es.littledavity.data.contacts.DataImage
+import es.littledavity.data.contacts.*
 import es.littledavity.data.services.ImageGalleryService
+import es.littledavity.database.chorbo.*
 import es.littledavity.database.chorbo.DatabaseContact
 import es.littledavity.database.chorbo.DatabaseCreationDate
 import es.littledavity.database.chorbo.DatabaseCreationDateCategory
@@ -32,8 +30,16 @@ internal class ContactMapper @Inject constructor(
         rating = dataContact.rating,
         creationDate = dataContact.creationDate.toDatabaseCreationDate(),
         country = dataContact.country,
-        instagram = dataContact.instagram
+        instagram = dataContact.instagram,
+        infoList = dataContact.info.toDatabaseInfo()
     )
+
+    private fun List<DataInfo>.toDatabaseInfo() = map {
+        DatabaseInfo(
+            title = it.title,
+            description = it.description
+        )
+    }
 
     private fun DataImage.toDatabaseImage(dataContact: DataContact) = DatabaseImage(
         id = imageGalleryService.createMediaFile(dataContact),
@@ -41,7 +47,8 @@ internal class ContactMapper @Inject constructor(
         height = height
     )
 
-    private fun List<DataImage>.toDatabaseImages(dataContact: DataContact) = map { it.toDatabaseImage(dataContact) }
+    private fun List<DataImage>.toDatabaseImages(dataContact: DataContact) =
+        map { it.toDatabaseImage(dataContact) }
 
     private fun DataCreationDate.toDatabaseCreationDate() = DatabaseCreationDate(
         date = this.date,
@@ -60,8 +67,16 @@ internal class ContactMapper @Inject constructor(
         rating = databaseContact.rating,
         creationDate = databaseContact.creationDate.toDataCreationDate(),
         country = databaseContact.country,
-        instagram = databaseContact.instagram
+        instagram = databaseContact.instagram,
+        info = databaseContact.infoList.toDataInfo()
     )
+
+    private fun List<DatabaseInfo>.toDataInfo() = map {
+        DataInfo(
+            title = it.title,
+            description = it.description
+        )
+    }
 
     private fun DatabaseImage.toDataImage() = DataImage(
         id = id,

@@ -25,7 +25,8 @@ val DATA_CONTACT = DataContact(
     age = "18",
     country = "Espana",
     rating = "10/10",
-    instagram = "@Littledavity"
+    instagram = "@Littledavity",
+    info = emptyList()
 )
 val DATA_CONTACTS = listOf(
     DATA_CONTACT.copy(id = 1),
@@ -46,7 +47,8 @@ val DOMAIN_CONTACT = DomainContact(
     age = "18",
     country = "Espana",
     rating = "10/10",
-    instagram = "@Littledavity"
+    instagram = "@Littledavity",
+    info = emptyList()
 )
 
 val DOMAIN_CONTACTS = listOf(

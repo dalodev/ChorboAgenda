@@ -24,5 +24,6 @@ internal class ContactInfoModelFactoryImpl @Inject constructor(
     override fun createInfoModel(contact: Contact, isLiked: Boolean) = ContactInfoModel(
         id = contact.id,
         headerModel = headerModelFactory.createHeaderModel(contact, isLiked),
+        info = contact.info
     )
 }

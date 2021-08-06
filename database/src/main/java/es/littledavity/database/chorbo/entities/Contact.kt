@@ -27,6 +27,7 @@ internal data class Contact(
     @ColumnInfo(name = Schema.CREATION_DATE) val creationDate: CreationDate,
     @ColumnInfo(name = Schema.COUNTRY) val country: String,
     @ColumnInfo(name = Schema.INSTAGRAM) val instagram: String?,
+    @ColumnInfo(name = Schema.INFO_LIST) val infoList: List<Info>,
 
 ) {
 
@@ -41,5 +42,6 @@ internal data class Contact(
         const val CREATION_DATE = "creation_date"
         const val COUNTRY = "country"
         const val INSTAGRAM = "instagram"
+        const val INFO_LIST = "info_list"
     }
 }

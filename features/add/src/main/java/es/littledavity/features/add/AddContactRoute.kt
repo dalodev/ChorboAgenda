@@ -8,6 +8,6 @@ import es.littledavity.commons.ui.base.events.Route
 internal sealed class AddContactRoute : Route {
     object Back : AddContactRoute()
     object List : AddContactRoute()
-    object Edit : AddContactRoute()
+    data class Edit(val contactId: Int) : AddContactRoute()
     object SettingsApp : AddContactRoute()
 }

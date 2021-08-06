@@ -5,6 +5,7 @@ package es.littledavity.features.add
 
 import android.Manifest
 import android.net.Uri
+import android.telephony.PhoneNumberUtils
 import androidx.activity.result.ActivityResultLauncher
 import androidx.lifecycle.viewModelScope
 import com.karumi.dexter.PermissionToken
@@ -63,13 +64,15 @@ class AddContactViewModel @Inject constructor(
     }
 
     fun onToolbarRightButtonClicked(name: String, phone: String) {
-        val canDone = name.isNotBlank()
+        val nameError = name.isBlank()
+        val phoneError = PhoneNumberUtils.formatNumber(phone, "ES") == null
+        val canDone = !nameError && !phoneError
         currentContact.name = name
         currentContact.phone = phone
         if (canDone) {
             saveContact()
         } else {
-            _uiState.value = createErrorAddContactUiState()
+            _uiState.value = createErrorAddContactUiState(nameError, phoneError)
         }
     }
 
@@ -98,7 +101,10 @@ class AddContactViewModel @Inject constructor(
                     emit(uiStateFactory.createWithLoadingState())
                 }.collect {
                     _uiState.value = it
-                    route(AddContactRoute.List)
+                    val contactId = (it as? AddContactUiState.Result)?.model?.id
+                    contactId?.let { route(AddContactRoute.Edit(contactId)) }?.let {
+                        route(AddContactRoute.List)
+                    }
                 }
         }
     }
@@ -109,7 +115,11 @@ class AddContactViewModel @Inject constructor(
         uiStateFactory.createWithResultState(contact)
     }
 
-    private fun createErrorAddContactUiState() = uiStateFactory.createWithErrorState()
+    private fun createErrorAddContactUiState(
+        phoneError: Boolean = true,
+        nameError: Boolean = false
+    ) =
+        uiStateFactory.createWithErrorState(nameError, phoneError)
 
     private fun createResultAddContactUiState() =
         uiStateFactory.createWithResultState(currentContact)
@@ -151,6 +161,7 @@ class AddContactViewModel @Inject constructor(
         age = "",
         rating = "",
         country = "",
-        instagram = ""
+        instagram = "",
+        info = emptyList()
     )
 }

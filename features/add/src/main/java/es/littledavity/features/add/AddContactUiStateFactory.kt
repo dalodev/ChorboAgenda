@@ -11,7 +11,7 @@ import javax.inject.Inject
 interface AddContactUiStateFactory {
     fun createWithNewState(): AddContactUiState
     fun createWithLoadingState(): AddContactUiState
-    fun createWithErrorState(): AddContactUiState
+    fun createWithErrorState(nameError: Boolean, phoneError: Boolean): AddContactUiState
     fun createWithPermissionError(navigation: () -> Unit): AddContactUiState
     fun createWithResultState(contact: Contact): AddContactUiState
 }
@@ -24,7 +24,8 @@ internal class AddContactUiStateFactoryImpl @Inject constructor(
 
     override fun createWithLoadingState() = AddContactUiState.Loading
 
-    override fun createWithErrorState() = AddContactUiState.Error
+    override fun createWithErrorState(nameError: Boolean, phoneError: Boolean) =
+        AddContactUiState.Error(nameError, phoneError)
 
     override fun createWithPermissionError(navigation: () -> Unit) =
         AddContactUiState.ErrorPermission(navigation)

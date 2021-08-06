@@ -14,5 +14,6 @@ data class Contact(
     val age: String,
     val rating: String?,
     val country: String,
-    val instagram: String?
+    val instagram: String?,
+    val info: List<Info>
 )

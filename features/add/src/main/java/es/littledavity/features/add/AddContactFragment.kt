@@ -19,9 +19,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class AddContactFragment : BaseFragment<
-    FragmentAddContactBinding,
-    AddContactViewModel,
-    AddContactNavigator>(
+        FragmentAddContactBinding,
+        AddContactViewModel,
+        AddContactNavigator>(
     R.layout.fragment_add_contact
 ) {
 
@@ -69,7 +69,7 @@ class AddContactFragment : BaseFragment<
 
     override fun onPause() {
         super.onPause()
-        viewBinding.toolbar.hideKeyboard()
+        viewBinding.addContactView.hideKeyboard()
     }
 
     override fun onRoute(route: Route) {
@@ -78,7 +78,7 @@ class AddContactFragment : BaseFragment<
             is AddContactRoute.Back -> navigator.goBack()
             is AddContactRoute.List -> navigator.goList()
             is AddContactRoute.SettingsApp -> navigator.goSettingsApp()
-//            is AddContactRoute.Edit ->
+            is AddContactRoute.Edit -> navigator.goEdit(route.contactId)
         }
     }
 }

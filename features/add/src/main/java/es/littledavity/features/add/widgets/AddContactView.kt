@@ -56,7 +56,10 @@ class AddContactView @JvmOverloads constructor(
         when (newState) {
             is AddContactUiState.New -> onNewStateSelected()
             is AddContactUiState.Loading -> onLoadingStateSelected()
-            is AddContactUiState.Error -> onErrorStateSelected()
+            is AddContactUiState.Error -> onErrorStateSelected(
+                newState.nameError,
+                newState.phoneError
+            )
             is AddContactUiState.ErrorPermission -> onErrorPermissionSelected(newState.navigation)
             is AddContactUiState.Result -> onResultStateSelected(newState)
         }
@@ -72,8 +75,13 @@ class AddContactView @JvmOverloads constructor(
         hideMainView()
     }
 
-    private fun onErrorStateSelected() {
-        binding.nameLayout.editText?.error = getString(R.string.add_contact_name_error)
+    private fun onErrorStateSelected(nameError: Boolean, phoneError: Boolean) {
+        if (nameError) {
+            binding.nameLayout.editText?.error = getString(R.string.add_contact_name_error)
+        }
+        if (phoneError) {
+            binding.phoneLayout.editText?.error = getString(R.string.add_contact_phone_error)
+        }
         hideProgressBar()
     }
 
