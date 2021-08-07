@@ -120,6 +120,7 @@ internal class ContactInfoViewModelTest {
         coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
 
         viewModel.routeFlow.test {
+            viewModel.loadData(0L)
             viewModel.onImageClicked()
             assertThat(awaitItem() is ContactInfoRoute.ImageViewer).isTrue
         }

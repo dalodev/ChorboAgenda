@@ -30,8 +30,8 @@ class ChorboTest {
             creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
             instagram = "test",
             rating = "10",
-            screenshots = emptyList()
-
+            screenshots = emptyList(),
+            infoList = emptyList()
         )
         assertEquals(chorboId, chorboFavorite.id)
         assertEquals(chorboName, chorboFavorite.name)

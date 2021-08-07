@@ -44,7 +44,8 @@ private val fakeChorbos = listOf(
         creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
         instagram = "test",
         rating = "10",
-        screenshots = emptyList()
+        screenshots = emptyList(),
+        infoList = emptyList()
     ),
     Contact(
         id = 1,
@@ -58,7 +59,8 @@ private val fakeChorbos = listOf(
         creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
         instagram = "test",
         rating = "10",
-        screenshots = emptyList()
+        screenshots = emptyList(),
+        infoList = emptyList()
     ),
     Contact(
         id = 1,
@@ -72,7 +74,8 @@ private val fakeChorbos = listOf(
         creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
         instagram = "test",
         rating = "10",
-        screenshots = emptyList()
+        screenshots = emptyList(),
+        infoList = emptyList()
     )
 )
 

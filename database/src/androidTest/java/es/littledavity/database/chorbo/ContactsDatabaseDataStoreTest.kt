@@ -35,12 +35,13 @@ class ContactsDatabaseDataStoreTest {
         "test",
         "+34",
         age = "18",
-        gallery = emptyList(),
+        gallery = mutableListOf(),
         country = "test",
         creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
         instagram = "test",
         rating = "10",
-        screenshots = emptyList()
+        screenshots = mutableListOf(),
+        info = emptyList()
     )
 
     @Before
@@ -132,7 +133,8 @@ class ContactsDatabaseDataStoreTest {
             instagram = "test",
             rating = "10",
             screenshots = emptyList(),
-            createTimestamp = 1L
+            createTimestamp = 1L,
+            infoList = emptyList()
         )
         val chorboCaptor = argumentCaptor<Contact>()
         chorboRepository.deleteChorbo(chorboToDelete)

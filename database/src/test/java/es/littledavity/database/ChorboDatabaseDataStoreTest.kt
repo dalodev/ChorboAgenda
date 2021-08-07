@@ -88,7 +88,8 @@ class ChorboDatabaseDataStoreTest {
             creationDate = CreationDate(1L, 2021, CreationDateCategory.YYYY_MMMM_DD),
             instagram = "test",
             rating = "test",
-            screenshots = emptyList()
+            screenshots = emptyList(),
+            infoList = emptyList()
         )
     }
 }
