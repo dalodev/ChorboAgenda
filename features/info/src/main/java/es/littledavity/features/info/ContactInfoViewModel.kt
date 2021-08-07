@@ -32,7 +32,6 @@ import es.littledavity.domain.contacts.usecases.ObserveContactLikeStateUseCase
 import es.littledavity.domain.contacts.usecases.ToggleContactLikeStateUseCase
 import es.littledavity.features.info.mapping.ContactInfoUiStateFactory
 import es.littledavity.features.info.widgets.ContactInfoUiState
-import es.littledavity.features.info.widgets.main.model.ContactInfoModel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -68,7 +67,7 @@ internal class ContactInfoViewModel @Inject constructor(
 
     private val contactId = checkNotNull(savedStateHandle.get<Int>(PARAM_CONTACT_ID))
 
-    private var currentContact: Contact? = null
+    var currentContact: Contact? = null
 
     private var isContactLiked = false
 
@@ -132,7 +131,9 @@ internal class ContactInfoViewModel @Inject constructor(
         navigateToImageViewer(
             title = stringProvider.getString(R.string.gallery),
             initialPosition = position,
-            contactImageUrlsProvider = contactUrlFactory::createGalleryImageUrls
+            contactImageUrlsProvider = {
+                currentContact?.let(contactUrlFactory::createGalleryImageUrls) ?: contactUrlFactory.createGalleryImageUrls(it)
+            }
         )
     }
 
@@ -157,15 +158,44 @@ internal class ContactInfoViewModel @Inject constructor(
     fun onImageClicked() {
         navigateToImageViewer(
             title = stringProvider.getString(R.string.cover),
-            contactImageUrlsProvider = { game ->
-                contactUrlFactory.createCoverImageUrl(game)
-                    ?.let(::listOf)
-                    ?: emptyList()
+            contactImageUrlsProvider = {
+                currentContact?.let(contactUrlFactory::createCoverImageUrl)
+                    ?.let(::listOf) ?: emptyList()
             }
         )
     }
 
-    fun onImageLongClicked(resultLauncher: ActivityResultLauncher<String>) {
+    fun onLikeButtonClicked() {
+        viewModelScope.launch {
+            useCases.toggleContactLikeStateUseCase
+                .execute(ToggleContactLikeStateUseCase.Params(contactId))
+        }
+    }
+
+    fun updatePhoto(uri: Uri?) {
+        if (uri == null) return
+        currentContact?.image = Image(uri.toString())
+        currentContact?.let {
+            _uiState.value = uiStateFactory.createWithResultState(
+                it,
+                isContactLiked
+            )
+        }
+    }
+
+    fun addGalleryImage(uri: Uri?) {
+        if (uri == null) return
+        currentContact?.gallery?.add(Image(uri.toString()))
+        currentContact?.let {
+            _uiState.value = uiStateFactory.createWithResultState(
+                it,
+                isContactLiked
+            )
+        }
+
+    }
+
+    fun requestStoragePermission(resultLauncher: ActivityResultLauncher<String>) {
         permissionService.requestPermission(
             Manifest.permission.WRITE_EXTERNAL_STORAGE,
             object : PermissionListener {
@@ -191,21 +221,8 @@ internal class ContactInfoViewModel @Inject constructor(
         )
     }
 
-    fun onLikeButtonClicked() {
-        viewModelScope.launch {
-            useCases.toggleContactLikeStateUseCase
-                .execute(ToggleContactLikeStateUseCase.Params(contactId))
-        }
-    }
-
-    fun updatePhoto(uri: Uri?) {
-        if (uri == null) return
-        currentContact?.image = Image(uri.toString())
-        currentContact?.let {
-            _uiState.value = uiStateFactory.createWithResultState(
-                it,
-                isContactLiked
-            )
-        }
+    fun updateCurrentContact(contact: Contact?) {
+        currentContact = contact
+        currentContact?.let { uiStateFactory.createWithResultState(it, isContactLiked) }
     }
 }

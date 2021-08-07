@@ -26,6 +26,7 @@ import es.littledavity.commons.ui.extensions.resetAnimation
 import es.littledavity.commons.ui.extensions.showSnackBar
 import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
 import es.littledavity.core.providers.StringProvider
+import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
 import es.littledavity.features.info.widgets.main.header.ContactHeaderController
@@ -52,13 +53,15 @@ internal class ContactInfoView @JvmOverloads constructor(
         handleUiStateChange(newState)
     }
 
+    var currentContact: Contact? = null
+
     @Inject
     lateinit var stringProvider: StringProvider
 
     var onGalleryClicked: ((Int) -> Unit)? = null
     var onBackButtonClicked: (() -> Unit)? = null
     var onImageClicked: (() -> Unit)? = null
-    var onImageLongClicked: (() -> Unit)? = null
+    var onChangeImageClicked: (() -> Unit)? = null
     var onLikeButtonClicked: (() -> Unit)? = null
     var onAddGalleryImagesClicked: (() -> Unit)? = null
 
@@ -69,7 +72,7 @@ internal class ContactInfoView @JvmOverloads constructor(
     }
 
     private fun initContactHeaderController(context: Context) {
-        ContactHeaderController(context, binding, stringProvider).apply {
+        ContactHeaderController(context, currentContact, binding, stringProvider).apply {
             onGalleryClicked = {
                 this@ContactInfoView.onGalleryClicked?.invoke(it)
             }
@@ -82,8 +85,11 @@ internal class ContactInfoView @JvmOverloads constructor(
             onLikeButtonClicked = {
                 this@ContactInfoView.onLikeButtonClicked?.invoke()
             }
-            onCoverLongClicked = {
-                this@ContactInfoView.onImageLongClicked?.invoke()
+            onChangeImageClicked = {
+                this@ContactInfoView.onChangeImageClicked?.invoke()
+            }
+            onAddGalleryClicked = {
+                this@ContactInfoView.onAddGalleryImagesClicked?.invoke()
             }
         }.also { headerController = it }
     }

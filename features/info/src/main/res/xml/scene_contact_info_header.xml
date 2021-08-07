@@ -94,6 +94,15 @@
                 android:translationY="@dimen/contact_info_header_cover_transition_delta_y" />
 
         </Constraint>
+        <Constraint android:id="@id/changeImageBtn">
+
+            <PropertySet android:visibility="invisible" />
+
+            <Transform
+                android:translationX="@dimen/contact_info_header_cover_transition_delta_x"
+                android:translationY="@dimen/contact_info_header_cover_transition_delta_y" />
+
+        </Constraint>
 
         <Constraint android:id="@id/likeBtn">
 
@@ -240,6 +249,13 @@
                 android:translationY="@dimen/contact_info_header_cover_transition_delta_y"
                 app:framePosition="60"
                 app:motionTarget="@id/coverView" />
+
+            <KeyAttribute
+                android:alpha="0"
+                android:translationX="@dimen/contact_info_header_cover_transition_delta_x"
+                android:translationY="@dimen/contact_info_header_cover_transition_delta_y"
+                app:framePosition="60"
+                app:motionTarget="@id/changeImageBtn" />
 
             <KeyAttribute
                 android:alpha="0"

@@ -22,6 +22,7 @@ import es.littledavity.commons.ui.extensions.getFont
 import es.littledavity.commons.ui.extensions.getString
 import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.onClick
+import es.littledavity.commons.ui.extensions.onTextChanged
 import es.littledavity.commons.ui.extensions.setColor
 import es.littledavity.commons.ui.extensions.setLayoutParamsSize
 import es.littledavity.commons.ui.extensions.setSingleLineTextEnabled
@@ -30,6 +31,7 @@ import es.littledavity.commons.ui.extensions.showKeyboard
 import es.littledavity.commons.ui.extensions.topMargin
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewInfoBinding
+import es.littledavity.domain.contacts.entities.Contact
 
 class InfoView @JvmOverloads constructor(
     context: Context,
@@ -122,12 +124,16 @@ class InfoView @JvmOverloads constructor(
         }
         get() = binding.descriptionTv.typeface
 
-    var titleText: CharSequence
+    var titleText: CharSequence = ""
         set(value) {
-            binding.titleTv.text = value
-            binding.titleTvEdit.setText(value)
+            field = value
+            if (editMode) binding.titleTvEdit.setText(value)
+            else binding.titleTv.text = value
         }
-        get() = binding.titleTv.text
+        get() {
+            return if (editMode) binding.titleTvEdit.text
+            else binding.titleTv.text
+        }
 
     private var descriptionText: CharSequence
         set(value) {

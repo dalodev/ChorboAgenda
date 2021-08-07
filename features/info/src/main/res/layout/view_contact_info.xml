@@ -130,15 +130,31 @@
             app:tint="@color/contact_info_header_like_btn_icon_color"
             tools:ignore="ContentDescription" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/changeImageBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/contact_info_header_like_btn_color"
+            android:elevation="@dimen/contact_info_header_like_btn_elevation"
+            app:borderWidth="0dp"
+            app:fabSize="mini"
+            app:layout_constraintBottom_toTopOf="@id/coverView"
+            app:layout_constraintEnd_toEndOf="@id/coverView"
+            app:layout_constraintStart_toEndOf="@id/coverView"
+            app:layout_constraintTop_toTopOf="@id/coverView"
+            app:srcCompat="@drawable/add_images"
+            app:tint="@color/contact_info_header_like_btn_icon_color"
+            tools:ignore="ContentDescription" />
+
         <EditText
             android:id="@+id/nameTv"
             style="@style/Chorboagenda.ContactInfo.Header.Title"
             android:layout_marginTop="@dimen/contact_info_header_title_margin_start"
             android:layout_marginEnd="@dimen/contact_info_header_first_title_margin_end_expanded"
             android:background="@null"
+            android:hint="@string/contact_info_header_name_hint"
             android:maxLines="1"
             android:textColorHint="@color/colorHintTextSecondary"
-            android:hint="@string/contact_info_header_name_hint"
             app:layout_constraintEnd_toStartOf="@id/likeBtn"
             app:layout_constraintStart_toEndOf="@id/coverView"
             app:layout_constraintTop_toBottomOf="@id/galleryView"

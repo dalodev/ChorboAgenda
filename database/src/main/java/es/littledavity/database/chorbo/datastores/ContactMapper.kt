@@ -84,7 +84,7 @@ internal class ContactMapper @Inject constructor(
         height = height
     )
 
-    private fun List<DatabaseImage>.toDataImages() = map { it.toDataImage() }
+    private fun List<DatabaseImage>.toDataImages(): MutableList<DataImage> = map { it.toDataImage() }.toMutableList()
 
     private fun DatabaseCreationDate.toDataCreationDate() = DataCreationDate(
         date = this.date,

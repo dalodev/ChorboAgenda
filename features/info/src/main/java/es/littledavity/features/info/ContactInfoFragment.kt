@@ -33,10 +33,16 @@ internal class ContactInfoFragment : BaseFragment<
     @Inject
     lateinit var urlOpener: UrlOpener
 
-    private var resultLauncher =
+    private var imageResultLauncher =
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             viewModel.updatePhoto(uri)
         }
+
+    private var galleryResultLauncher =
+        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
+            viewModel.addGalleryImage(uri)
+        }
+
 
     override fun onInit() {
         super.onInit()
@@ -48,8 +54,9 @@ internal class ContactInfoFragment : BaseFragment<
         onGalleryClicked = viewModel::onGalleryClicked
         onBackButtonClicked = viewModel::onBackButtonClicked
         onImageClicked = viewModel::onImageClicked
-        onImageLongClicked = { viewModel.onImageLongClicked(resultLauncher) }
+        onChangeImageClicked = { viewModel.requestStoragePermission(imageResultLauncher) }
         onLikeButtonClicked = viewModel::onLikeButtonClicked
+        onAddGalleryImagesClicked = { viewModel.requestStoragePermission(galleryResultLauncher) }
     }
 
     override fun onBindViewModel() {
@@ -59,7 +66,10 @@ internal class ContactInfoFragment : BaseFragment<
 
     private fun observeUiState() {
         viewModel.uiState
-            .onEach { viewBinding.contactInfoView.uiState = it }
+            .onEach {
+                viewBinding.contactInfoView.currentContact = viewModel.currentContact
+                viewBinding.contactInfoView.uiState = it
+            }
             .observeIn(this)
     }
 

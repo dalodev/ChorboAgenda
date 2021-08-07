@@ -8,7 +8,7 @@ import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
-import es.littledavity.commons.ui.bindings.onLongClick
+import androidx.lifecycle.SavedStateHandle
 import es.littledavity.commons.ui.extensions.DimensionSnapshotType
 import es.littledavity.commons.ui.extensions.addTransitionListener
 import es.littledavity.commons.ui.extensions.doOnApplyWindowInsets
@@ -18,17 +18,26 @@ import es.littledavity.commons.ui.extensions.isChecked
 import es.littledavity.commons.ui.extensions.makeGone
 import es.littledavity.commons.ui.extensions.observeChanges
 import es.littledavity.commons.ui.extensions.onClick
-import es.littledavity.commons.ui.extensions.onTextChanged
 import es.littledavity.commons.ui.extensions.postAction
 import es.littledavity.commons.ui.extensions.updateConstraintSets
 import es.littledavity.core.providers.StringProvider
+import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
 import es.littledavity.features.info.widgets.main.model.ContactInfoHeaderModel
 import es.littledavity.features.info.widgets.mapToContactGalleryModels
+import javax.inject.Inject
+
+private const val KEY_PHONE_QUERY = "phone"
+private const val KEY_INSTAGRAM_QUERY = "instagram"
+private const val KEY_RATING_QUERY = "rating"
+private const val KEY_COUNTRY_QUERY = "country"
+private const val KEY_AGE_QUERY = "age"
+
 
 internal class ContactHeaderController(
     context: Context,
+    private val currentContact: Contact?,
     private val binding: ViewContactInfoBinding,
     private val stringProvider: StringProvider
 ) {
@@ -100,23 +109,27 @@ internal class ContactHeaderController(
         set(value) {
             binding.instagramTv.setText(value)
             isInstagramVisible = value != null
+
         }
         get() = binding.instagramTv.text
 
-    private var rating: CharSequence
+    private var rating: CharSequence = ""
         set(value) {
+            field = value
             binding.ratingIv.titleText = value
         }
         get() = binding.ratingIv.titleText
 
-    private var age: CharSequence
+    private var age: CharSequence = ""
         set(value) {
+            field = value
             binding.ageTv.titleText = value
         }
         get() = binding.ageTv.titleText
 
-    private var country: CharSequence
+    private var country: CharSequence = ""
         set(value) {
+            field = value
             binding.countryNameIv.titleText = value
         }
         get() = binding.countryNameIv.titleText
@@ -130,8 +143,9 @@ internal class ContactHeaderController(
     var onGalleryClicked: ((Int) -> Unit)? = null
     var onBackButtonClicked: (() -> Unit)? = null
     var onCoverClicked: (() -> Unit)? = null
-    var onCoverLongClicked: (() -> Unit)? = null
+    var onChangeImageClicked: (() -> Unit)? = null
     var onLikeButtonClicked: (() -> Unit)? = null
+    var onAddGalleryClicked: (() -> Unit)? = null
 
     init {
         initMotionLayout()
@@ -139,6 +153,8 @@ internal class ContactHeaderController(
         initBackButton()
         initCoverView()
         initLikeButton()
+        initAddGalleryButton()
+        initChangeImageButton()
     }
 
     fun bindModel(model: ContactInfoHeaderModel) {
@@ -294,11 +310,18 @@ internal class ContactHeaderController(
         cardElevation = getDimension(R.dimen.contact_info_header_backdrop_elevation)
         isTitleVisible = false
         onClick { onCoverClicked?.invoke() }
-        onLongClick { onCoverLongClicked?.invoke() }
     }
 
     private fun initLikeButton() {
         binding.likeBtn.onClick { onLikeButtonClicked?.invoke() }
+    }
+
+    private fun initAddGalleryButton() {
+        binding.addGalleryImagesBtn.onClick { onAddGalleryClicked?.invoke() }
+    }
+
+    private fun initChangeImageButton() {
+        binding.changeImageBtn.onClick { onChangeImageClicked?.invoke() }
     }
 
     private fun disableScrimConstraintIfNeeded() {

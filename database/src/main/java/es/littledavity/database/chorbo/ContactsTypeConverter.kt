@@ -41,13 +41,13 @@ internal class ContactsTypeConverter @Inject constructor(
     }
 
     @TypeConverter
-    fun fromImages(images: List<Image>): String {
+    fun fromImages(images: MutableList<Image>): String {
         return jsonConverter.toJson(images)
     }
 
     @TypeConverter
-    fun toImages(json: String): List<Image> {
-        return (jsonConverter.fromJson(json) ?: emptyList())
+    fun toImages(json: String): MutableList<Image> {
+        return (jsonConverter.fromJson(json) ?: mutableListOf())
     }
 
     @TypeConverter
