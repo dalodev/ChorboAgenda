@@ -48,7 +48,7 @@ val DOMAIN_CONTACT = DomainContact(
     country = "Espana",
     rating = "10/10",
     instagram = "@Littledavity",
-    info = emptyList()
+    info = mutableListOf()
 )
 
 val DOMAIN_CONTACTS = listOf(

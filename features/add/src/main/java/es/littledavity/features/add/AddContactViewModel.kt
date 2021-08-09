@@ -166,6 +166,6 @@ class AddContactViewModel @Inject constructor(
         rating = "",
         country = "",
         instagram = "",
-        info = emptyList()
+        info = mutableListOf()
     )
 }

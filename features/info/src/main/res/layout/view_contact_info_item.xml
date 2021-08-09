@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/contact_info_item_card_background_color"
+    tools:parentTag="com.google.android.material.card.MaterialCardView">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/contact_info_item_container_margin">
+
+        <EditText
+            android:id="@+id/titleTv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/contact_info_item_title_margin_bottom"
+            android:background="@null"
+            android:fontFamily="@string/font_family_medium"
+            android:hint="@string/contact_info_item_title"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            android:textColor="@color/contact_info_detail_item_title_text_color"
+            android:textColorHint="@color/colorHintTextSecondary"
+            android:textSize="@dimen/contact_info_item_title_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/descriptionTv"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="It's okay, Bender. I like cooking too." />
+
+        <EditText
+            android:id="@+id/descriptionTv"
+            style="@style/Chorboagenda.ContactInfo.InfoView.Title"
+            android:hint="@string/contact_info_item_genres_description"
+            android:imeOptions="actionDone"
+            android:importantForAutofill="no"
+            android:inputType="textMultiLine"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTv"
+            tools:text="And so we say goodbye to our beloved pet, Nibbler, who's gone to a place where I, too, hope one day to go. The toilet. One hundred dollars. You mean while I'm sleeping in it? And from now on you're all named Bender Jr.
+
+I had more, but you go ahead. No! Don't jump! That's right, baby. I ain't your loverboy Flexo, the guy you love so much. You even love anyone pretending to be him! Whoa a real live robot; or is that some kind of cheesy New Year's costume?" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>

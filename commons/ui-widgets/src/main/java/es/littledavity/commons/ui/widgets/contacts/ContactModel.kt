@@ -8,5 +8,5 @@ data class ContactModel(
     var coverImageUrl: String?,
     val name: String,
     val phone: String?,
-    val creationDate: String
+    val creationDate: String,
 )

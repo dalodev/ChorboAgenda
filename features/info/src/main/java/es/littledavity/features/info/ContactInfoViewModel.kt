@@ -27,8 +27,10 @@ import es.littledavity.core.utils.onError
 import es.littledavity.core.utils.resultOrError
 import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.domain.contacts.entities.Image
+import es.littledavity.domain.contacts.entities.Info
 import es.littledavity.domain.contacts.usecases.GetContactUseCase
 import es.littledavity.domain.contacts.usecases.ObserveContactLikeStateUseCase
+import es.littledavity.domain.contacts.usecases.SaveContactUseCase
 import es.littledavity.domain.contacts.usecases.ToggleContactLikeStateUseCase
 import es.littledavity.features.info.mapping.ContactInfoUiStateFactory
 import es.littledavity.features.info.widgets.ContactInfoUiState
@@ -60,7 +62,8 @@ internal class ContactInfoViewModel @Inject constructor(
     private val stringProvider: StringProvider,
     private val errorMapper: ErrorMapper,
     private val logger: Logger,
-    private val permissionService: PermissionService
+    private val permissionService: PermissionService,
+    private val saveContactUseCase: SaveContactUseCase
 ) : BaseViewModel() {
 
     private var isObservingContactData = false
@@ -75,6 +78,8 @@ internal class ContactInfoViewModel @Inject constructor(
 
     val uiState: StateFlow<ContactInfoUiState>
         get() = _uiState
+
+    private var useCaseParams = currentContact?.let { SaveContactUseCase.Params(it) }
 
     fun loadData(resultEmissionDelay: Long) {
         observeContactData(resultEmissionDelay)
@@ -125,7 +130,14 @@ internal class ContactInfoViewModel @Inject constructor(
     private suspend fun observeContactLikeState(contact: Contact) = useCases.observeContactLikeStateUseCase
         .execute(ObserveContactLikeStateUseCase.Params(contact.id))
 
-    fun onBackButtonClicked() = route(ContactInfoRoute.Back)
+    fun onBackButtonClicked() = route(ContactInfoRoute.Back).also {
+        viewModelScope.launch {
+            currentContact?.let {
+                saveContactUseCase.execute(SaveContactUseCase.Params(it))
+                    .flowOn(dispatcherProvider.computation)
+            }
+        }
+    }
 
     fun onGalleryClicked(position: Int) {
         navigateToImageViewer(
@@ -221,8 +233,27 @@ internal class ContactInfoViewModel @Inject constructor(
         )
     }
 
-    fun updateCurrentContact(contact: Contact?) {
-        currentContact = contact
-        currentContact?.let { uiStateFactory.createWithResultState(it, isContactLiked) }
+    fun updateContactData(
+        name: CharSequence,
+        phone: CharSequence?,
+        instagram: CharSequence?,
+        score: CharSequence?,
+        location: CharSequence?,
+        age: CharSequence?,
+        infoList: MutableList<Info>?,
+        new: Boolean = false
+    ) {
+        currentContact?.name = name.toString()
+        currentContact?.phone = phone.toString()
+        currentContact?.instagram = instagram.toString()
+        currentContact?.rating = score.toString()
+        currentContact?.country = location.toString()
+        currentContact?.age = age.toString()
+        currentContact?.info = infoList?.apply {
+            if (new) {
+                add(Info("", ""))
+            }
+        } ?: if (new) mutableListOf(Info("", "")) else mutableListOf()
+        currentContact?.let { _uiState.value = uiStateFactory.createWithResultState(it, isContactLiked) }
     }
 }

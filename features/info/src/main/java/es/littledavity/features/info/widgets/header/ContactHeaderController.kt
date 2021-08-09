@@ -1,14 +1,13 @@
 /*
  * Copyright 2021 dev.id
  */
-package es.littledavity.features.info.widgets.main.header
+package es.littledavity.features.info.widgets.header
 
 import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.text.TextUtils
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
-import androidx.lifecycle.SavedStateHandle
 import es.littledavity.commons.ui.extensions.DimensionSnapshotType
 import es.littledavity.commons.ui.extensions.addTransitionListener
 import es.littledavity.commons.ui.extensions.doOnApplyWindowInsets
@@ -24,9 +23,8 @@ import es.littledavity.core.providers.StringProvider
 import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
-import es.littledavity.features.info.widgets.main.model.ContactInfoHeaderModel
+import es.littledavity.features.info.widgets.model.ContactInfoHeaderModel
 import es.littledavity.features.info.widgets.mapToContactGalleryModels
-import javax.inject.Inject
 
 private const val KEY_PHONE_QUERY = "phone"
 private const val KEY_INSTAGRAM_QUERY = "instagram"
@@ -78,11 +76,11 @@ internal class ContactHeaderController(
             binding.coverView.imageUrl = value
         }
 
-    private var name by observeChanges("") { oldName, newName ->
+    var name by observeChanges("") { oldName, newName ->
         onNameChanged(oldName, newName)
     }
 
-    private var phone: CharSequence?
+    var phone: CharSequence?
         set(value) {
             with(binding.phoneTv) {
                 setText(PhoneNumberUtils.formatNumber(value.toString(), "ES"))
@@ -105,7 +103,7 @@ internal class ContactHeaderController(
         }
         get() = binding.creationDateTv.text
 
-    private var instagram: CharSequence?
+    var instagram: CharSequence?
         set(value) {
             binding.instagramTv.setText(value)
             isInstagramVisible = value != null
@@ -113,21 +111,21 @@ internal class ContactHeaderController(
         }
         get() = binding.instagramTv.text
 
-    private var rating: CharSequence = ""
+    var rating: CharSequence = ""
         set(value) {
             field = value
             binding.ratingIv.titleText = value
         }
         get() = binding.ratingIv.titleText
 
-    private var age: CharSequence = ""
+    var age: CharSequence = ""
         set(value) {
             field = value
             binding.ageTv.titleText = value
         }
         get() = binding.ageTv.titleText
 
-    private var country: CharSequence = ""
+    var country: CharSequence = ""
         set(value) {
             field = value
             binding.countryNameIv.titleText = value

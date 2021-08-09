@@ -4,16 +4,16 @@
 package es.littledavity.domain.contacts.entities
 
 data class Contact(
-    val id: Int,
+    var id: Int,
     var image: Image?,
     var name: String,
     var phone: String?,
-    val gallery: MutableList<Image>,
-    val screenshots: MutableList<Image>,
+    var gallery: MutableList<Image>,
+    var screenshots: MutableList<Image>,
     var creationDate: CreationDate?,
-    val age: String,
-    val rating: String?,
-    val country: String,
-    val instagram: String?,
-    val info: List<Info>
+    var age: String,
+    var rating: String?,
+    var country: String,
+    var instagram: String?,
+    var info: MutableList<Info>
 )

@@ -29,7 +29,7 @@ internal class ContactMapper @Inject constructor() {
         creationDate = contact.creationDate.toDomainCreationDates(),
         rating = contact.rating,
         instagram = contact.instagram,
-        info = contact.info.toDomainInfo()
+        info = contact.info.toDomainInfo().toMutableList()
     )
 
     private fun List<DataInfo>.toDomainInfo() = map {

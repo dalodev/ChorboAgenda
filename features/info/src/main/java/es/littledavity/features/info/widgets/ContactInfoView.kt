@@ -17,20 +17,24 @@ import es.littledavity.commons.ui.extensions.disableChangeAnimations
 import es.littledavity.commons.ui.extensions.fadeIn
 import es.littledavity.commons.ui.extensions.getDimensionPixelSize
 import es.littledavity.commons.ui.extensions.getString
+import es.littledavity.commons.ui.extensions.hideKeyboard
 import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.makeGone
 import es.littledavity.commons.ui.extensions.makeInvisible
 import es.littledavity.commons.ui.extensions.makeVisible
 import es.littledavity.commons.ui.extensions.observeChanges
+import es.littledavity.commons.ui.extensions.onClick
 import es.littledavity.commons.ui.extensions.resetAnimation
 import es.littledavity.commons.ui.extensions.showSnackBar
 import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
 import es.littledavity.core.providers.StringProvider
 import es.littledavity.domain.contacts.entities.Contact
+import es.littledavity.domain.contacts.entities.Info
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
-import es.littledavity.features.info.widgets.main.header.ContactHeaderController
-import es.littledavity.features.info.widgets.main.model.ContactInfoModel
+import es.littledavity.features.info.widgets.details.ContactInfoDetailsItem
+import es.littledavity.features.info.widgets.header.ContactHeaderController
+import es.littledavity.features.info.widgets.model.ContactInfoModel
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,8 +46,8 @@ internal class ContactInfoView @JvmOverloads constructor(
 
     private val binding = ViewContactInfoBinding.inflate(context.layoutInflater, this)
 
-    private lateinit var headerController: ContactHeaderController
-    private lateinit var infoAdapter: ContactInfoAdapter
+    lateinit var headerController: ContactHeaderController
+    lateinit var infoAdapter: ContactInfoAdapter
 
     private var adapterItems by observeChanges<List<Item<*, NoDependencies>>>(emptyList()) { _, newItems ->
         infoAdapter.submitList(newItems)
@@ -64,11 +68,13 @@ internal class ContactInfoView @JvmOverloads constructor(
     var onChangeImageClicked: (() -> Unit)? = null
     var onLikeButtonClicked: (() -> Unit)? = null
     var onAddGalleryImagesClicked: (() -> Unit)? = null
+    var onAddEmptyDetailItem: (() -> Unit)? = null
 
     init {
         initContactHeaderController(context)
         initRecyclerView(context)
         initDefaults()
+        initAddDetailButton()
     }
 
     private fun initContactHeaderController(context: Context) {
@@ -107,6 +113,10 @@ internal class ContactInfoView @JvmOverloads constructor(
 
     private fun initDefaults() {
         uiState = uiState
+    }
+
+    private fun initAddDetailButton() = with(binding.addDetailBtn) {
+        onClick { onAddEmptyDetailItem?.invoke() }
     }
 
     private fun initItemDecorator() = SpacingItemDecorator(
@@ -188,7 +198,8 @@ internal class ContactInfoView @JvmOverloads constructor(
 
     private fun ContactInfoModel.toAdapterItems(): List<Item<*, NoDependencies>> {
         return buildList {
-            // TODO add items to info list
+            // add items to info list
+            if (hasDetails) add(ContactInfoDetailsItem(info))
         }
     }
 
@@ -199,7 +210,12 @@ internal class ContactInfoView @JvmOverloads constructor(
 
     private fun bindListener(item: Item<*, NoDependencies>, viewHolder: RecyclerView.ViewHolder) {
         when (viewHolder) {
-            // TODO create viewholder for earch item with listener invoke
+            // create viewHolder for each item with listener invoke
+            is ContactInfoDetailsItem.ViewHolder -> with(viewHolder) {
+                setOnDetailClickListener {
+                    //add some click functionality to items
+                }
+            }
         }
     }
 

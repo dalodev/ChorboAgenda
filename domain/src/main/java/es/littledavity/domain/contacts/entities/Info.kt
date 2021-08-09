@@ -1,6 +1,6 @@
 package es.littledavity.domain.contacts.entities
 
 data class Info(
-    val title: String?,
-    val description: String?
+    var title: String?,
+    var description: String?
 )

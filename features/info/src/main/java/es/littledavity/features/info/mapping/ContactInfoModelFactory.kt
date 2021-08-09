@@ -5,7 +5,7 @@ package es.littledavity.features.info.mapping
 
 import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.domain.contacts.entities.Contact
-import es.littledavity.features.info.widgets.main.model.ContactInfoModel
+import es.littledavity.features.info.widgets.model.ContactInfoModel
 import javax.inject.Inject
 
 internal interface ContactInfoModelFactory {

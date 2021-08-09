@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         app:layoutDescription="@xml/scene_contact_info_header">
 
-        <es.littledavity.features.info.widgets.main.header.gallery.ContactGalleryView
+        <es.littledavity.features.info.widgets.header.gallery.ContactGalleryView
             android:id="@+id/galleryView"
             android:layout_width="0dp"
             android:layout_height="@dimen/contact_info_header_gallery_height_expanded"
@@ -270,6 +270,22 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ratingIv" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addDetailBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/contact_info_header_like_btn_margin_end"
+            android:layout_marginBottom="@dimen/contact_info_header_like_btn_margin_end"
+            android:backgroundTint="@color/contact_info_header_like_btn_color"
+            android:elevation="@dimen/contact_info_header_like_btn_elevation"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/add_detail"
+            app:tint="@color/contact_info_header_like_btn_icon_color"
+            tools:ignore="ContentDescription" />
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
     <ProgressBar

@@ -1,9 +1,9 @@
 /*
  * Copyright 2021 dev.id
  */
-package es.littledavity.features.info.widgets.main.model
+package es.littledavity.features.info.widgets.model
 
-import es.littledavity.features.info.widgets.main.header.ContactHeaderImageModel
+import es.littledavity.features.info.widgets.header.ContactHeaderImageModel
 
 internal data class ContactInfoHeaderModel(
     val backgroundImageModels: List<ContactHeaderImageModel>,

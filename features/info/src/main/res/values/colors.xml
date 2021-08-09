@@ -15,4 +15,10 @@
     <color name="contact_info_header_developer_name_text_color">@color/colorSecondaryText</color>
     <color name="contact_info_header_info_view_icon_color">#8e9fad</color>
     <color name="contact_info_header_info_view_title_color">#8e9fad</color>
+
+    <!-- ContactInfoItemView -->
+    <color name="contact_info_item_card_background_color">@color/colorPrimaryDark</color>
+    <color name="contact_info_item_title_text_color">@color/colorPrimaryText</color>
+    <color name="contact_info_detail_item_title_text_color">@color/colorAccent</color>
+
 </resources>

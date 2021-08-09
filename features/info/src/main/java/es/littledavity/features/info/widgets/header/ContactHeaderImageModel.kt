@@ -1,7 +1,7 @@
 /*
  * Copyright 2021 dev.id
  */
-package es.littledavity.features.info.widgets.main.header
+package es.littledavity.features.info.widgets.header
 
 internal sealed class ContactHeaderImageModel {
     object DefaultImage : ContactHeaderImageModel()

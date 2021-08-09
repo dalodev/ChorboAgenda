@@ -1,7 +1,7 @@
 /*
  * Copyright 2021 dev.id
  */
-package es.littledavity.features.info.widgets.main.header.gallery
+package es.littledavity.features.info.widgets.header.gallery
 
 import android.content.Context
 import es.littledavity.commons.ui.base.rv.AbstractRecyclerViewAdapter

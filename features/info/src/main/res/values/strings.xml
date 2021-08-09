@@ -11,4 +11,10 @@
     <string name="contact_info_rating_hint">Score</string>
     <string name="contact_info_country_hint">Location</string>
     <string name="contact_info_age_hint">Age</string>
+
+    <!-- ContactInfoItemView -->
+    <string name="contact_info_item_list_title">Details</string>
+    <string name="contact_info_item_genres_description">Type description here</string>
+    <string name="contact_info_item_title">Type title here</string>
+
 </resources>

@@ -6,6 +6,7 @@ package es.littledavity.features.info
 import android.net.Uri
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Transformations.map
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.base.events.Command
@@ -16,7 +17,10 @@ import es.littledavity.commons.ui.extensions.defaultWindowAnimationDuration
 import es.littledavity.commons.ui.extensions.observeIn
 import es.littledavity.commons.ui.extensions.showShortToast
 import es.littledavity.core.urlopener.UrlOpener
+import es.littledavity.domain.contacts.entities.Info
 import es.littledavity.features.info.databinding.FragmentContactInfoBinding
+import es.littledavity.features.info.widgets.details.ContactInfoDetailItem
+import es.littledavity.features.info.widgets.details.ContactInfoDetailsItem
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -51,12 +55,13 @@ internal class ContactInfoFragment : BaseFragment<
 
     private fun initContactInfoView() = with(viewBinding.contactInfoView) {
         applyWindowBottomInsetAsMargin()
-        onGalleryClicked = viewModel::onGalleryClicked
-        onBackButtonClicked = viewModel::onBackButtonClicked
-        onImageClicked = viewModel::onImageClicked
-        onChangeImageClicked = { viewModel.requestStoragePermission(imageResultLauncher) }
+        onGalleryClicked = { viewModel::onGalleryClicked.also { updateContactData() } }
+        onBackButtonClicked = { updateContactData().also { viewModel.onBackButtonClicked() } }
+        onImageClicked = { viewModel::onImageClicked.also { updateContactData() } }
+        onChangeImageClicked = { viewModel.requestStoragePermission(imageResultLauncher).also { updateContactData() } }
         onLikeButtonClicked = viewModel::onLikeButtonClicked
-        onAddGalleryImagesClicked = { viewModel.requestStoragePermission(galleryResultLauncher) }
+        onAddGalleryImagesClicked = { viewModel.requestStoragePermission(galleryResultLauncher).also { updateContactData() } }
+        onAddEmptyDetailItem = { updateContactData(true) }
     }
 
     override fun onBindViewModel() {
@@ -106,6 +111,19 @@ internal class ContactInfoFragment : BaseFragment<
             route.title,
             route.initialPosition,
             route.imageUrls
+        )
+    }
+
+    private fun updateContactData(new: Boolean = false) = with(viewBinding.contactInfoView) {
+        viewModel.updateContactData(
+            headerController.name,
+            headerController.phone,
+            headerController.instagram,
+            headerController.rating,
+            headerController.country,
+            headerController.age,
+            infoAdapter.getData(),
+            new
         )
     }
 }

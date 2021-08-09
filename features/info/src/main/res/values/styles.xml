@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Chorboagenda.ContactInfo"/>
 
-    <style name="Chorboagenda.ContactInfo.Header"/>
+    <style name="Chorboagenda.ContactInfo" />
+
+    <style name="Chorboagenda.ContactInfo.Header" />
 
     <style name="Chorboagenda.ContactInfo.Header.Title">
         <item name="android:layout_width">0dp</item>
@@ -27,5 +28,19 @@
         <item name="infoView_iconColor">@color/contact_info_header_info_view_icon_color</item>
         <item name="infoView_titleTextSize">@dimen/contact_info_header_info_view_title_text_size</item>
         <item name="infoView_titleTextColor">@color/contact_info_header_info_view_title_color</item>
+    </style>
+
+    <style name="Chorboagenda.ContactInfo.InfoView" />
+
+    <style name="Chorboagenda.ContactInfo.InfoView.Title">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_marginTop">@dimen/contact_info_item_title_margin_top</item>
+        <item name="android:textColor">@color/contact_info_item_title_text_color</item>
+        <item name="android:textSize">@dimen/contact_info_item_title_text_size</item>
+        <item name="android:fontFamily">@string/font_family_medium</item>
+        <item name="android:textColorHint">@color/colorHintTextSecondary</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
     </style>
 </resources>

@@ -3,8 +3,8 @@
  */
 package es.littledavity.features.info.widgets
 
-import es.littledavity.features.info.widgets.main.header.ContactHeaderImageModel
-import es.littledavity.features.info.widgets.main.header.gallery.ContactGalleryModel
+import es.littledavity.features.info.widgets.header.ContactHeaderImageModel
+import es.littledavity.features.info.widgets.header.gallery.ContactGalleryModel
 
 internal fun List<ContactHeaderImageModel>.mapToContactGalleryModels(): List<ContactGalleryModel> {
     return map { imageModel ->

@@ -3,7 +3,7 @@
  */
 package es.littledavity.features.info.widgets
 
-import es.littledavity.features.info.widgets.main.model.ContactInfoModel
+import es.littledavity.features.info.widgets.model.ContactInfoModel
 
 internal sealed class ContactInfoUiState {
     object Empty : ContactInfoUiState()

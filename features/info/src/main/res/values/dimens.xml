@@ -47,4 +47,16 @@
     <dimen name="contact_info_decorator_spacing">15dp</dimen>
     <dimen name="contact_info_company_logo_view_width">268dp</dimen>
     <dimen name="contact_info_company_logo_view_height">150dp</dimen>
+
+    <!-- ContactInfoDetailsView -->
+    <dimen name="contact_info_item_container_margin">15dp</dimen>
+    <dimen name="contact_info_item_title_margin">15dp</dimen>
+    <dimen name="contact_info_item_title_margin_bottom">5dp</dimen>
+    <dimen name="contact_info_item_title_text_size">18sp</dimen>
+    <dimen name="contact_info_item_title_margin_top">10dp</dimen>
+    <dimen name="contact_info_item_card_elevation">4dp</dimen>
+    <dimen name="contact_info_details_view_horizontal_padding">12dp</dimen>
+    <dimen name="contact_info_details_view_bottom_padding">15dp</dimen>
+    <dimen name="contact_info_item_corner_radius">4dp</dimen>
+
 </resources>

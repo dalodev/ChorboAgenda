@@ -9,8 +9,8 @@ import es.littledavity.core.factories.IgdbImageUrlFactory
 import es.littledavity.core.factories.createUrls
 import es.littledavity.core.formatters.ContactCreationDateFormatter
 import es.littledavity.domain.contacts.entities.Contact
-import es.littledavity.features.info.widgets.main.header.ContactHeaderImageModel
-import es.littledavity.features.info.widgets.main.model.ContactInfoHeaderModel
+import es.littledavity.features.info.widgets.header.ContactHeaderImageModel
+import es.littledavity.features.info.widgets.model.ContactInfoHeaderModel
 import javax.inject.Inject
 
 internal interface ContactInfoHeaderModelFactory {

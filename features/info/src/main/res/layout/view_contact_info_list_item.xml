@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="@color/contact_info_item_card_background_color"
+    tools:parentTag="com.google.android.material.card.MaterialCardView">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/contact_info_item_container_margin">
+
+        <TextView
+            android:id="@+id/titleTv"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/contact_info_item_title_margin"
+            android:layout_marginTop="@dimen/contact_info_item_title_margin"
+            android:layout_marginEnd="@dimen/contact_info_item_title_margin"
+            android:layout_marginBottom="@dimen/contact_info_item_title_margin_bottom"
+            android:fontFamily="@string/font_family_medium"
+            android:gravity="start"
+            android:text="@string/contact_info_item_list_title"
+            android:textColor="@color/contact_info_item_title_text_color"
+            android:textSize="@dimen/contact_info_item_title_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:clipToPadding="false"
+            android:overScrollMode="never"
+            android:paddingStart="@dimen/contact_info_details_view_horizontal_padding"
+            android:paddingEnd="@dimen/contact_info_details_view_horizontal_padding"
+            android:paddingBottom="@dimen/contact_info_details_view_bottom_padding"
+            android:scrollbars="none"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/titleTv" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</merge>
