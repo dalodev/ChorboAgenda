@@ -79,8 +79,6 @@ internal class ContactInfoViewModel @Inject constructor(
     val uiState: StateFlow<ContactInfoUiState>
         get() = _uiState
 
-    private var useCaseParams = currentContact?.let { SaveContactUseCase.Params(it) }
-
     fun loadData(resultEmissionDelay: Long) {
         observeContactData(resultEmissionDelay)
     }
@@ -197,7 +195,6 @@ internal class ContactInfoViewModel @Inject constructor(
                 isContactLiked
             )
         }
-
     }
 
     fun requestStoragePermission(resultLauncher: ActivityResultLauncher<String>) {
@@ -250,12 +247,22 @@ internal class ContactInfoViewModel @Inject constructor(
         currentContact?.let { _uiState.value = uiStateFactory.createWithResultState(it, isContactLiked) }
     }
 
-    fun onBackPressed() = route(ContactInfoRoute.Back).also {
+    fun onBackPressed() {
         viewModelScope.launch {
             currentContact?.let {
                 saveContactUseCase.execute(SaveContactUseCase.Params(it))
+                    .map(::mapToUiState)
                     .flowOn(dispatcherProvider.computation)
+                    .onStart {
+                        emit(uiStateFactory.createWithLoadingState())
+                    }.collect { state ->
+                        _uiState.value = state
+                        route(ContactInfoRoute.Back)
+                    }
             }
         }
     }
+
+
+    private fun mapToUiState(contact: Contact?) = uiStateFactory.createWithLoadingState()
 }

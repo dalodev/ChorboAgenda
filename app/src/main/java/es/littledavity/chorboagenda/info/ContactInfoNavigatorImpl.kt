@@ -35,7 +35,7 @@ internal class ContactInfoNavigatorImpl @Inject constructor(
     }
 
     override fun goBack() {
-        navController.navigate(ContactInfoFragmentDirections.actionToDashboard())
+        navController.navigateUp()
     }
 
     override fun goSettingsApp() {

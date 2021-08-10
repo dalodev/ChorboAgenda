@@ -157,28 +157,6 @@ internal class ContactsDatabaseDataStore @Inject constructor(
      * @param id Chorbo identifier.
      * @param name Chorbo name.
      */
-/*suspend fun insertChorbo(
-    id: Int,
-    name: String,
-    image: String,
-    countryCode: String,
-    countryName: String,
-    flag: String,
-    whatsapp: String,
-    instagram: String
-) {
-    val chorbo = Chorbo(
-        id = id,
-        name = name,
-        image = image,
-        countryCode = countryCode,
-        countryName = countryName,
-        flag = flag,
-        whatsapp = whatsapp,
-        instagram = instagram
-    )
-    chorboDao.insertChorbo(chorbo)
-}*/
 
     /**
      * Add to database a chrobo.

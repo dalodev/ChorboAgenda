@@ -21,10 +21,10 @@ internal class ContactMapper @Inject constructor(
     fun mapToDatabaseContact(dataContact: DataContact) = DatabaseContact(
         id = dataContact.id,
         name = dataContact.name,
-        image = dataContact.image?.toDatabaseImage(dataContact),
+        image = dataContact.image?.toDatabaseImage(dataContact.image?.id, dataContact.name),
         phone = dataContact.phone,
-        artworks = dataContact.gallery.toDatabaseImages(dataContact),
-        screenshots = dataContact.screenshots.toDatabaseImages(dataContact),
+        artworks = dataContact.gallery.toDatabaseImages(dataContact.name),
+        screenshots = dataContact.screenshots.toDatabaseImages(dataContact.name),
         createTimestamp = timestampProvider.getUnixTimestamp(),
         age = dataContact.age,
         rating = dataContact.rating,
@@ -41,14 +41,14 @@ internal class ContactMapper @Inject constructor(
         )
     }
 
-    private fun DataImage.toDatabaseImage(dataContact: DataContact) = DatabaseImage(
-        id = imageGalleryService.createMediaFile(dataContact),
+    private fun DataImage.toDatabaseImage(imageId: String?, name: String) = DatabaseImage(
+        id = imageGalleryService.createMediaFile(imageId, name),
         width = width,
         height = height
     )
 
-    private fun List<DataImage>.toDatabaseImages(dataContact: DataContact) =
-        map { it.toDatabaseImage(dataContact) }
+    private fun List<DataImage>.toDatabaseImages(name: String) =
+        map { it.toDatabaseImage(it.id, name) }
 
     private fun DataCreationDate.toDatabaseCreationDate() = DatabaseCreationDate(
         date = this.date,

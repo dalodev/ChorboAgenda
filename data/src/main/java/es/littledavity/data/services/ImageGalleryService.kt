@@ -19,13 +19,14 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import es.littledavity.data.contacts.DataContact
 import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileNotFoundException
 import java.io.FileOutputStream
 import java.io.IOException
 import java.util.UUID
 import javax.inject.Inject
 
 interface ImageGalleryService {
-    fun createMediaFile(contact: DataContact): String?
+    fun createMediaFile(imageId: String?, name: String): String?
 }
 
 @BindType
@@ -37,13 +38,17 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         private const val QUALITY = 100
     }
 
-    override fun createMediaFile(contact: DataContact): String? {
-        val bitmapImage = contact.image?.id?.toUri()?.let(::getBitmap)
-        bitmapImage?.let { return saveMediaImage(it, contact) }
+    override fun createMediaFile(imageId: String?, name: String): String? {
+        try {
+            val bitmapImage = imageId?.toUri()?.let(::getBitmap)
+            bitmapImage?.let { return saveMediaImage(it, name, imageId) }
+        } catch (e: FileNotFoundException) {
+            return null
+        }
         return null
     }
 
-    fun getBitmap(uri: Uri): Bitmap {
+    private fun getBitmap(uri: Uri): Bitmap {
         val imageStream = context.contentResolver?.openInputStream(uri)
         val bitmap = BitmapFactory.decodeStream(imageStream)
         val baos = ByteArrayOutputStream()
@@ -57,9 +62,10 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
     }
 
-    fun saveMediaFileLegacy(
+    private fun saveMediaFileLegacy(
         imageToSave: Bitmap,
-        fileName: String
+        fileName: String,
+        name: String
     ): String {
         val externalStorageVolumes = ContextCompat.getExternalFilesDirs(context, null)
         val primaryExternalStorage =
@@ -67,7 +73,7 @@ internal class ImageGalleryServiceImpl @Inject constructor(
                 ?: externalStorageVolumes[1].path
                 ?: error("Storage volumes not found ")
 
-        val dirName = "$primaryExternalStorage/chorboagenda"
+        val dirName = "$primaryExternalStorage${File.separator}$name"
 
         val direct = File(
             dirName
@@ -93,10 +99,10 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         return file.path
     }
 
-    fun saveMediaImage(imageToSave: Bitmap, chorbo: DataContact): String {
-        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${chorbo.name}"
+    private fun saveMediaImage(imageToSave: Bitmap, name: String, imageId: String): String? {
+        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${name}"
         val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, chorbo.id)
+            put(MediaStore.MediaColumns.DISPLAY_NAME, imageId)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 put(MediaStore.MediaColumns.RELATIVE_PATH, relativeLocation)
@@ -118,10 +124,10 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         return uri.toString()
     }
 
-    fun saveMediaImage(imageToSave: Bitmap, chorbo: DataContact, fileName: String): String {
-        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${chorbo.name}"
+    private fun saveMediaImageQ(imageToSave: Bitmap, name: String, imageId: String): String {
+        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${name}"
         val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
+            put(MediaStore.MediaColumns.DISPLAY_NAME, imageId)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
             put(MediaStore.MediaColumns.RELATIVE_PATH, relativeLocation)
         }

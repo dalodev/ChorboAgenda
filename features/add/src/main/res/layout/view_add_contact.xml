@@ -36,7 +36,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/nameLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/NewContactTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/add_content_input_start"
@@ -44,7 +44,6 @@
             android:layout_marginEnd="@dimen/add_content_input_start"
             android:hint="@string/add_contact_name_hint"
             android:textColorHint="@color/colorAccent"
-            app:boxStrokeColor="@color/colorAccent"
             app:hintTextColor="@color/colorAccent"
             app:layout_constraintBottom_toTopOf="@id/phoneLayout"
             app:layout_constraintTop_toBottomOf="@id/photoView">
@@ -66,7 +65,7 @@
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/phoneLayout"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            style="@style/NewContactTextInputLayoutStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/add_content_input_start"
@@ -75,7 +74,6 @@
             android:gravity="center"
             android:hint="@string/add_contact_phone_hint"
             android:textColorHint="@color/colorAccent"
-            app:boxStrokeColor="@color/colorAccent"
             app:hintTextColor="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@id/nameLayout">
