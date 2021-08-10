@@ -130,14 +130,7 @@ internal class ContactInfoViewModel @Inject constructor(
     private suspend fun observeContactLikeState(contact: Contact) = useCases.observeContactLikeStateUseCase
         .execute(ObserveContactLikeStateUseCase.Params(contact.id))
 
-    fun onBackButtonClicked() = route(ContactInfoRoute.Back).also {
-        viewModelScope.launch {
-            currentContact?.let {
-                saveContactUseCase.execute(SaveContactUseCase.Params(it))
-                    .flowOn(dispatcherProvider.computation)
-            }
-        }
-    }
+    fun onBackButtonClicked() = onBackPressed()
 
     fun onGalleryClicked(position: Int) {
         navigateToImageViewer(
@@ -255,5 +248,14 @@ internal class ContactInfoViewModel @Inject constructor(
             }
         } ?: if (new) mutableListOf(Info("", "")) else mutableListOf()
         currentContact?.let { _uiState.value = uiStateFactory.createWithResultState(it, isContactLiked) }
+    }
+
+    fun onBackPressed() = route(ContactInfoRoute.Back).also {
+        viewModelScope.launch {
+            currentContact?.let {
+                saveContactUseCase.execute(SaveContactUseCase.Params(it))
+                    .flowOn(dispatcherProvider.computation)
+            }
+        }
     }
 }

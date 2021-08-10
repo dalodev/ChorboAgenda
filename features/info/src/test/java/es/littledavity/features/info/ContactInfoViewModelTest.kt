@@ -39,7 +39,7 @@ import org.junit.Test
 internal class ContactInfoViewModelTest {
 
     @get:Rule
-    val mmainCoroutineRule = MainCoroutineRule()
+    val mainCoroutineRule = MainCoroutineRule()
 
     @MockK
     private lateinit var saveContactUseCase: SaveContactUseCase
@@ -80,7 +80,7 @@ internal class ContactInfoViewModelTest {
     }
 
     @Test
-    fun whenLoadingData_shouldEmitsCorrectUiStates() = mmainCoroutineRule.runBlockingTest {
+    fun whenLoadingData_shouldEmitsCorrectUiStates() = mainCoroutineRule.runBlockingTest {
         coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
         coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
         viewModel.uiState.test {
@@ -92,7 +92,7 @@ internal class ContactInfoViewModelTest {
     }
 
     @Test
-    fun whenGameFetchingUseCase_throwsError_shouldLogsError() = mmainCoroutineRule.runBlockingTest {
+    fun whenGameFetchingUseCase_throwsError_shouldLogsError() = mainCoroutineRule.runBlockingTest {
         coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Err(DOMAIN_ERROR_API))
         coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
         viewModel.loadData(resultEmissionDelay = 0L)
@@ -100,7 +100,7 @@ internal class ContactInfoViewModelTest {
     }
 
     @Test
-    fun whenGameFetchingUseCase_throwsError_shouldDispatchesToastCommand() = mmainCoroutineRule.runBlockingTest {
+    fun whenGameFetchingUseCase_throwsError_shouldDispatchesToastCommand() = mainCoroutineRule.runBlockingTest {
         coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Err(DOMAIN_ERROR_NOT_FOUND))
         coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
         viewModel.commandFlow.test {
@@ -110,7 +110,7 @@ internal class ContactInfoViewModelTest {
     }
 
     @Test
-    fun whenGalleryIsClicked_shouldRoutesToImageViewer() = mmainCoroutineRule.runBlockingTest {
+    fun whenGalleryIsClicked_shouldRoutesToImageViewer() = mainCoroutineRule.runBlockingTest {
         viewModel.routeFlow.test {
             coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
             coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
@@ -120,7 +120,7 @@ internal class ContactInfoViewModelTest {
     }
 
     @Test
-    fun whenBackButtonIsClicked_shouldRouteToPrevious() = mmainCoroutineRule.runBlockingTest {
+    fun whenBackButtonIsClicked_shouldRouteToPrevious() = mainCoroutineRule.runBlockingTest {
         coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
         viewModel.routeFlow.test {
             viewModel.onBackButtonClicked()
@@ -129,7 +129,7 @@ internal class ContactInfoViewModelTest {
     }
 
     @Test
-    fun whenImageIsClicked_shouldRoutesToImageViewer() = mmainCoroutineRule.runBlockingTest {
+    fun whenImageIsClicked_shouldRoutesToImageViewer() = mainCoroutineRule.runBlockingTest {
         coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
         coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
 
@@ -139,6 +139,17 @@ internal class ContactInfoViewModelTest {
             assertThat(awaitItem() is ContactInfoRoute.ImageViewer).isTrue
         }
     }
+
+    @Test
+    fun whenOnBackPressed_shouldSaveContactAndBack() = mainCoroutineRule.runBlockingTest {
+        coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Err(DOMAIN_ERROR_NOT_FOUND))
+        coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
+        viewModel.routeFlow.test {
+            viewModel.onBackPressed()
+            assertThat(awaitItem() is ContactInfoRoute.Back).isTrue
+        }
+    }
+
 
     private class FakeContactInfoUiStateFactory : ContactInfoUiStateFactory {
 

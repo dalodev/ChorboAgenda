@@ -26,10 +26,10 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 abstract class BaseFragment<
-    VB : ViewBinding,
-    VM : BaseViewModel,
-    NA : Navigator
-    >(
+        VB : ViewBinding,
+        VM : BaseViewModel,
+        NA : Navigator
+        >(
     @LayoutRes private val layoutId: Int
 ) : Fragment(layoutId) {
 

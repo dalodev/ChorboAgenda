@@ -6,21 +6,18 @@ package es.littledavity.features.info
 import android.net.Uri
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Transformations.map
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.base.BaseFragment
 import es.littledavity.commons.ui.base.events.Command
 import es.littledavity.commons.ui.base.events.Route
 import es.littledavity.commons.ui.bindings.viewBinding
+import es.littledavity.commons.ui.extensions.addOnBackPressCallback
 import es.littledavity.commons.ui.extensions.applyWindowBottomInsetAsMargin
 import es.littledavity.commons.ui.extensions.defaultWindowAnimationDuration
 import es.littledavity.commons.ui.extensions.observeIn
 import es.littledavity.commons.ui.extensions.showShortToast
 import es.littledavity.core.urlopener.UrlOpener
-import es.littledavity.domain.contacts.entities.Info
 import es.littledavity.features.info.databinding.FragmentContactInfoBinding
-import es.littledavity.features.info.widgets.details.ContactInfoDetailItem
-import es.littledavity.features.info.widgets.details.ContactInfoDetailsItem
 import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
@@ -51,6 +48,11 @@ internal class ContactInfoFragment : BaseFragment<
     override fun onInit() {
         super.onInit()
         initContactInfoView()
+        initOnBackPress()
+    }
+
+    private fun initOnBackPress() {
+        addOnBackPressCallback { onBackPressed() }
     }
 
     private fun initContactInfoView() = with(viewBinding.contactInfoView) {
@@ -125,5 +127,10 @@ internal class ContactInfoFragment : BaseFragment<
             infoAdapter.getData(),
             new
         )
+    }
+
+    private fun onBackPressed() {
+        updateContactData()
+        viewModel.onBackPressed()
     }
 }
