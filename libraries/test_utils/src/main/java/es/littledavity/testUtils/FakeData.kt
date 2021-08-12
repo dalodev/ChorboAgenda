@@ -18,7 +18,22 @@ val DATA_CONTACT = DataContact(
     id = 1,
     name = "name",
     phone = "12345123",
-    image = DataImage("test", 1, 1),
+    image = DataImage("test", 1, 1, false),
+    gallery = mutableListOf(),
+    screenshots = mutableListOf(),
+    creationDate = CreationDate(1L, 1, CreationDateCategory.YYYY_MMMM_DD),
+    age = "18",
+    country = "Espana",
+    rating = "10/10",
+    instagram = "@Littledavity",
+    info = emptyList()
+)
+
+val DATA_CONTACT_IMAGE_CREATED = DataContact(
+    id = 1,
+    name = "name",
+    phone = "12345123",
+    image = DataImage("test", 1, 1, true),
     gallery = mutableListOf(),
     screenshots = mutableListOf(),
     creationDate = CreationDate(1L, 1, CreationDateCategory.YYYY_MMMM_DD),
@@ -34,13 +49,19 @@ val DATA_CONTACTS = listOf(
     DATA_CONTACT.copy(id = 3)
 )
 
+val DATA_CONTACTS_IMAGE_CREATED = listOf(
+    DATA_CONTACT_IMAGE_CREATED.copy(id = 1),
+    DATA_CONTACT_IMAGE_CREATED.copy(id = 2),
+    DATA_CONTACT_IMAGE_CREATED.copy(id = 3)
+)
+
 val DATA_PAGINATION = DataPagination(offset = 0, limit = 20)
 
 val DOMAIN_CONTACT = DomainContact(
     id = 1,
     name = "name",
     phone = "1234515",
-    image = DomainImage("test", 1, 1),
+    image = DomainImage("test", 1, 1, false),
     gallery = mutableListOf(),
     screenshots = mutableListOf(),
     creationDate = DomainCreationDate(1L, 1, DomainCreationDateCategory.YYYY_MMMM_DD),

@@ -43,7 +43,8 @@ internal class ContactMapper @Inject constructor() {
         return DomainImage(
             id = id,
             width = width,
-            height = height
+            height = height,
+            created = created
         )
     }
 
@@ -83,7 +84,8 @@ internal class ContactMapper @Inject constructor() {
         return DataImage(
             id = id,
             width = width,
-            height = height
+            height = height,
+            created = created
         )
     }
 

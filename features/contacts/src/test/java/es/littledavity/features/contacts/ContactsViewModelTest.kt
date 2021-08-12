@@ -68,14 +68,14 @@ class ContactsViewModelTest {
     }
 
     @Test
-    fun LogsErrorWhenContactsLoadingFails() = mainCoroutineRule.runBlockingTest {
+    fun logsErrorWhenContactsLoadingFails() = mainCoroutineRule.runBlockingTest {
         coEvery { observeContactsUseCase.execute(any()) } returns flow { throw Exception("error") }
         viewModel.loadData()
         assertThat(logger.errorMessage).isNotEmpty
     }
 
     @Test
-    fun DispatchesToastShowingCommandWhenContactsLoadingFails() =
+    fun dispatchesToastShowingCommandWhenContactsLoadingFails() =
         mainCoroutineRule.runBlockingTest {
             coEvery { observeContactsUseCase.execute(any()) } returns flow { throw Exception("Error") }
             viewModel.commandFlow.test {
@@ -85,7 +85,7 @@ class ContactsViewModelTest {
         }
 
     @Test
-    fun RouteToInoScreenWhenContactIsClicked() = mainCoroutineRule.runBlockingTest {
+    fun routeToInoScreenWhenContactIsClicked() = mainCoroutineRule.runBlockingTest {
         val contactModel = ContactModel(
             id = 1,
             name = "name",

@@ -63,7 +63,6 @@ internal class ContactInfoViewModel @Inject constructor(
     private val errorMapper: ErrorMapper,
     private val logger: Logger,
     private val permissionService: PermissionService,
-    private val saveContactUseCase: SaveContactUseCase
 ) : BaseViewModel() {
 
     private var isObservingContactData = false
@@ -177,7 +176,7 @@ internal class ContactInfoViewModel @Inject constructor(
 
     fun updatePhoto(uri: Uri?) {
         if (uri == null) return
-        currentContact?.image = Image(uri.toString())
+        currentContact?.image = Image(id = uri.toString(), created = false)
         currentContact?.let {
             _uiState.value = uiStateFactory.createWithResultState(
                 it,
@@ -188,7 +187,7 @@ internal class ContactInfoViewModel @Inject constructor(
 
     fun addGalleryImage(uri: Uri?) {
         if (uri == null) return
-        currentContact?.gallery?.add(Image(uri.toString()))
+        currentContact?.gallery?.add(Image(id = uri.toString(), created = false))
         currentContact?.let {
             _uiState.value = uiStateFactory.createWithResultState(
                 it,
@@ -250,19 +249,25 @@ internal class ContactInfoViewModel @Inject constructor(
     fun onBackPressed() {
         viewModelScope.launch {
             currentContact?.let {
-                saveContactUseCase.execute(SaveContactUseCase.Params(it))
+                useCases.saveContactUseCase.execute(SaveContactUseCase.Params(it))
                     .map(::mapToUiState)
                     .flowOn(dispatcherProvider.computation)
                     .onStart {
                         emit(uiStateFactory.createWithLoadingState())
                     }.collect { state ->
                         _uiState.value = state
-                        route(ContactInfoRoute.Back)
+                        if (state is ContactInfoUiState.Result) {
+                            route(ContactInfoRoute.Back)
+                        }
                     }
             }
         }
     }
 
 
-    private fun mapToUiState(contact: Contact?) = uiStateFactory.createWithLoadingState()
+    private fun mapToUiState(contact: Contact?) = if (contact == null) {
+        uiStateFactory.createWithEmptyState()
+    } else {
+        uiStateFactory.createWithResultState(contact, isContactLiked)
+    }
 }

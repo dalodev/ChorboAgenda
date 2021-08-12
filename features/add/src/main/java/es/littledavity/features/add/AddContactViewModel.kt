@@ -79,7 +79,7 @@ class AddContactViewModel @Inject constructor(
     }
 
     fun updatePhoto(uri: Uri?) {
-        contactImage = Image(id = uri.toString())
+        contactImage = Image(id = uri.toString(), created = false)
         currentContact.image = contactImage
         _uiState.value = createResultAddContactUiState()
     }

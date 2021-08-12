@@ -42,9 +42,14 @@ internal class ContactMapper @Inject constructor(
     }
 
     private fun DataImage.toDatabaseImage(imageId: String?, name: String) = DatabaseImage(
-        id = imageGalleryService.createMediaFile(imageId, name),
+        id = if (!created) (imageGalleryService.createMediaFile(imageId, name)) else id,
         width = width,
-        height = height
+        height = height,
+        created = when (created) {
+            created -> true
+            !created -> !created
+            else -> false
+        }
     )
 
     private fun List<DataImage>.toDatabaseImages(name: String) =
@@ -81,7 +86,8 @@ internal class ContactMapper @Inject constructor(
     private fun DatabaseImage.toDataImage() = DataImage(
         id = id,
         width = width,
-        height = height
+        height = height,
+        created = created
     )
 
     private fun List<DatabaseImage>.toDataImages(): MutableList<DataImage> = map { it.toDataImage() }.toMutableList()

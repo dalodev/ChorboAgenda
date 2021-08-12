@@ -9,5 +9,6 @@ import kotlinx.serialization.Serializable
 internal data class Image(
     val id: String?,
     val width: Int?,
-    val height: Int?
+    val height: Int?,
+    var created: Boolean = false
 )
