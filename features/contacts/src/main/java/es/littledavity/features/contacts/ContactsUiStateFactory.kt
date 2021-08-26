@@ -32,6 +32,8 @@ internal class ContactsUiStateFactoryImpl @Inject constructor(
     override fun createWithResultState(contacts: List<Contact>): ContactsUiState {
         if (contacts.isEmpty()) return createWithEmptyState()
 
-        return ContactsUiState.Result(contacts.map(contactsModelMapper::mapToContactModel))
+        return ContactsUiState.Result(
+            contacts.map(contactsModelMapper::mapToContactModel).sortedBy { it.name }
+        )
     }
 }

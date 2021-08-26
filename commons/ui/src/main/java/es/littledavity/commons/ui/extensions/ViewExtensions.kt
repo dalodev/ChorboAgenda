@@ -3,9 +3,12 @@
  */
 package es.littledavity.commons.ui.extensions
 
+import android.content.Context
+import android.content.res.Resources
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.graphics.drawable.GradientDrawable
+import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.DecelerateInterpolator
@@ -408,4 +411,13 @@ fun <T> View.relayoutOnChange(initialValue: T): ReadWriteProperty<Any, T> {
 
 fun View.detachFromParent() {
     (this.parent as? ViewGroup)?.removeView(this)
+}
+
+fun getPixels(dipValue: Int, context: Context): Int {
+    val r: Resources = context.resources
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dipValue.toFloat(),
+        r.displayMetrics
+    ).toInt()
 }

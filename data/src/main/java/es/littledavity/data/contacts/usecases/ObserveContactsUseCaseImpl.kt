@@ -17,13 +17,13 @@ import javax.inject.Singleton
 @Singleton
 @BindType
 internal class ObserveContactsUseCaseImpl @Inject constructor(
-    private val likedcontactsLocalDataStore: ContactsLocalDataStore,
+    private val likedContactsLocalDataStore: ContactsLocalDataStore,
     private val dispatcherProvider: DispatcherProvider,
     private val gameMapper: ContactMapper
 ) : ObserveContactsUseCase {
 
     override suspend fun execute(params: ObserveContactsUseCaseParams) =
-        likedcontactsLocalDataStore.observeContacts(params.pagination.toDataPagination())
+        likedContactsLocalDataStore.observeContacts(params.pagination.toDataPagination())
             .map(gameMapper::mapToDomainContacts)
             .flowOn(dispatcherProvider.computation)
 }

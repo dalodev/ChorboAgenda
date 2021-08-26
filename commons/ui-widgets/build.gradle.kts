@@ -11,6 +11,7 @@ plugins {
 android {
     buildFeatures {
         viewBinding = true
+        dataBinding = true
     }
 
     // https://dagger.dev/hilt/gradle-setup#classpath-aggregation
