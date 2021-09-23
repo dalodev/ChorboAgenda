@@ -94,11 +94,6 @@ class ContactsView @JvmOverloads constructor(
         itemExclusionPolicy = LastItemExclusionPolicy()
     )
 
-    private fun initStickyItemDecorator() = ContactsStickyHeaderDecoration(
-        adapter = adapter,
-        binding.root
-    )
-
     private fun initDefaults() {
         uiState = uiState
     }

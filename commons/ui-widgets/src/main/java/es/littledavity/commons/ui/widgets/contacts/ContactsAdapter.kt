@@ -9,12 +9,4 @@ import es.littledavity.commons.ui.base.rv.NoDependencies
 
 internal class ContactsAdapter(
     context: Context
-) : AbstractRecyclerViewAdapter<ContactItem, NoDependencies>(context) {
-
-    private val headers: List<String>  by lazy { currentList.map { it.model.name.first().toString() } }
-    fun getHeaderForCurrentPosition(position: Int) = if (position in headers.indices) {
-        headers[position]
-    } else {
-        ""
-    }
-}
+) : AbstractRecyclerViewAdapter<ContactItem, NoDependencies>(context)
