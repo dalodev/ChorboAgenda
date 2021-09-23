@@ -34,9 +34,9 @@ internal class LikedContactsDatabaseDataStore @Inject constructor(
         likedContactDao.deleteLikedContact(contactId)
     }
 
-    override suspend fun isContactLiked(contactId: Int) = likedContactDao.isGameLiked(contactId)
+    override suspend fun isContactLiked(contactId: Int) = likedContactDao.isContactLiked(contactId)
 
-    override suspend fun observeContactLikeState(contactId: Int) = likedContactDao.observeGameLikeState(contactId)
+    override suspend fun observeContactLikeState(contactId: Int) = likedContactDao.observeContactLikeState(contactId)
 
     override suspend fun observeLikedContacts(pagination: Pagination) = likedContactDao.observeLikedContacts(
         offset = pagination.offset,

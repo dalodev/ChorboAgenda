@@ -3,6 +3,7 @@
  */
 package es.littledavity.commons.ui.extensions
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Typeface
@@ -31,6 +32,7 @@ import androidx.core.view.marginEnd
 import androidx.core.view.marginStart
 import androidx.core.view.marginTop
 import androidx.core.view.updateLayoutParams
+import com.google.android.material.snackbar.Snackbar
 import kotlin.properties.ReadWriteProperty
 
 private const val DATA_SET_ANIMATION_DURATION = 500L
@@ -39,31 +41,43 @@ val View.hasLayoutParams: Boolean
     get() = (layoutParams != null)
 
 var View.layoutParamsWidth: Int
-    set(value) { setLayoutParamsSize(width = value) }
+    set(value) {
+        setLayoutParamsSize(width = value)
+    }
     get() = (layoutParams?.width ?: 0)
 
 var View.layoutParamsHeight: Int
-    set(value) { setLayoutParamsSize(height = value) }
+    set(value) {
+        setLayoutParamsSize(height = value)
+    }
     get() = (layoutParams?.height ?: 0)
 
 @get:Px
 var View.startMargin: Int
-    set(@Px value) { setMargins(startMargin = value) }
+    set(@Px value) {
+        setMargins(startMargin = value)
+    }
     get() = marginStart
 
 @get:Px
 var View.topMargin: Int
-    set(@Px value) { setMargins(topMargin = value) }
+    set(@Px value) {
+        setMargins(topMargin = value)
+    }
     get() = marginTop
 
 @get:Px
 var View.endMargin: Int
-    set(@Px value) { setMargins(endMargin = value) }
+    set(@Px value) {
+        setMargins(endMargin = value)
+    }
     get() = marginEnd
 
 @get:Px
 var View.bottomMargin: Int
-    set(@Px value) { setMargins(bottomMargin = value) }
+    set(@Px value) {
+        setMargins(bottomMargin = value)
+    }
     get() = marginBottom
 
 @get:Px
@@ -76,22 +90,30 @@ val View.verticalMargin: Int
 
 @get:Px
 var View.startPadding: Int
-    set(@Px value) { updatePadding(startPadding = value) }
+    set(@Px value) {
+        updatePadding(startPadding = value)
+    }
     get() = paddingStart
 
 @get:Px
 var View.topPadding: Int
-    set(@Px value) { updatePadding(topPadding = value) }
+    set(@Px value) {
+        updatePadding(topPadding = value)
+    }
     get() = paddingTop
 
 @get:Px
 var View.endPadding: Int
-    set(@Px value) { updatePadding(endPadding = value) }
+    set(@Px value) {
+        updatePadding(endPadding = value)
+    }
     get() = paddingEnd
 
 @get:Px
 var View.bottomPadding: Int
-    set(@Px value) { updatePadding(bottomPadding = value) }
+    set(@Px value) {
+        updatePadding(bottomPadding = value)
+    }
     get() = paddingBottom
 
 @get:Px
@@ -299,6 +321,16 @@ fun View.showShortToast(message: CharSequence): Toast {
 
 fun View.showLongToast(message: CharSequence): Toast {
     return context.showLongToast(message)
+}
+
+@SuppressLint("ShowToast")
+fun View.showSnackWithButton(
+    message: CharSequence,
+    actionMessage: CharSequence,
+    onClick: (() -> Unit)
+) {
+    Snackbar.make(this, message, Snackbar.LENGTH_INDEFINITE)
+        .setAction(actionMessage) { onClick.invoke() }.show()
 }
 
 fun View.makeVisible() {

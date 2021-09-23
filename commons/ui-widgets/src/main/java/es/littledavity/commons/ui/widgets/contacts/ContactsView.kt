@@ -9,26 +9,16 @@ import android.view.ViewGroup.LayoutParams.MATCH_PARENT
 import android.view.ViewGroup.LayoutParams.WRAP_CONTENT
 import android.widget.FrameLayout
 import androidx.core.view.isVisible
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import es.littledavity.commons.ui.extensions.addOnScrollListener
-import es.littledavity.commons.ui.extensions.disableAfterAnimationEnds
-import es.littledavity.commons.ui.extensions.disableChangeAnimations
-import es.littledavity.commons.ui.extensions.fadeIn
-import es.littledavity.commons.ui.extensions.getColor
-import es.littledavity.commons.ui.extensions.getDimensionPixelSize
-import es.littledavity.commons.ui.extensions.getDrawable
-import es.littledavity.commons.ui.extensions.getString
-import es.littledavity.commons.ui.extensions.layoutInflater
-import es.littledavity.commons.ui.extensions.makeGone
-import es.littledavity.commons.ui.extensions.makeInvisible
-import es.littledavity.commons.ui.extensions.makeVisible
-import es.littledavity.commons.ui.extensions.observeChanges
-import es.littledavity.commons.ui.extensions.resetAnimation
+import es.littledavity.commons.ui.extensions.*
 import es.littledavity.commons.ui.recyclerview.LastItemExclusionPolicy
 import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewContactsBinding
+import es.littledavity.commons.ui.widgets.SwipeToDeleteCallback
+
 
 class ContactsView @JvmOverloads constructor(
     context: Context,
@@ -40,8 +30,15 @@ class ContactsView @JvmOverloads constructor(
 
     private lateinit var adapter: ContactsAdapter
 
+    private val swipeToDelete by lazy { SwipeToDeleteCallback(context, ::onSwipe) }
+
+    private var itemToDelete: ContactItem? = null
+
+    private var currentAdapterItems = mutableListOf<ContactItem>()
+
     private var adapterItems by observeChanges<List<ContactItem>>(emptyList()) { _, newItems ->
         adapter.submitList(newItems) {
+            currentAdapterItems = newItems.toMutableList()
             binding.recyclerView.invalidateItemDecorations()
         }
     }
@@ -52,6 +49,7 @@ class ContactsView @JvmOverloads constructor(
 
     var onContactClicked: ((ContactModel) -> Unit)? = null
     var onBottomReached: (() -> Unit)? = null
+    var onRemoveContact: ((Int?) -> Unit)? = null
 
     init {
         initSwipeRefreshLayout()
@@ -78,13 +76,29 @@ class ContactsView @JvmOverloads constructor(
         }
     }
 
-    private fun initAdapter(context: Context) = ContactsAdapter(context)
-        .apply { listenerBinder = ::bindListener }
-        .also { adapter = it }
+    private fun initAdapter(context: Context) = ContactsAdapter(context).apply {
+        listenerBinder = ::bindListener
+        val itemTouchHelper = ItemTouchHelper(swipeToDelete)
+        itemTouchHelper.attachToRecyclerView(binding.recyclerView)
+    }.also { adapter = it }
+
+    private fun onSwipe(position: Int) {
+        swipeToDelete.canSwipe = false
+        itemToDelete = adapterItems[position]
+        adapterItems = currentAdapterItems.apply { removeAt(position) }
+        showSnackBar(getString(R.string.contacts_delete_snackbar_message),
+            getString(R.string.contacts_delete_snackbar_action_message), {
+                itemToDelete?.let { adapterItems = currentAdapterItems.apply { add(position, it) } }
+                swipeToDelete.canSwipe = true
+            }, {
+                onRemoveContact?.invoke(itemToDelete?.model?.id)
+                swipeToDelete.canSwipe = true
+            })
+    }
 
     private fun bindListener(item: ContactItem, viewHolder: RecyclerView.ViewHolder) {
         if (viewHolder is ContactItem.ViewHolder) {
-            viewHolder.setOnGameClickListener { onContactClicked?.invoke(item.model) }
+            viewHolder.setOnContactClickListener { onContactClicked?.invoke(item.model) }
         }
     }
 

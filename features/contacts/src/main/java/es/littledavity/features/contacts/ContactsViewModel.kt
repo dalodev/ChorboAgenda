@@ -17,6 +17,7 @@ import es.littledavity.domain.commons.entities.hasDefaultLimit
 import es.littledavity.domain.commons.entities.nextLimitPage
 import es.littledavity.domain.contacts.commons.ObserveContactsUseCaseParams
 import es.littledavity.domain.contacts.usecases.ObserveContactsUseCase
+import es.littledavity.domain.contacts.usecases.RemoveContactUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
@@ -35,6 +36,7 @@ private const val SUBSEQUENT_EMISSION_DELAY = 500L
 @HiltViewModel
 class ContactsViewModel @Inject constructor(
     private val observeContactsUseCase: ObserveContactsUseCase,
+    private val removeContactUseCase: RemoveContactUseCase,
     private val uiStateFactory: ContactsUiStateFactory,
     private val dispatcherProvider: DispatcherProvider,
     private val logger: Logger,
@@ -84,6 +86,12 @@ class ContactsViewModel @Inject constructor(
 
     fun onBottomReached() {
         observeNewContactsBatch()
+    }
+
+    fun onRemoveContact(id: Int?) {
+        viewModelScope.launch {
+            removeContactUseCase.execute(RemoveContactUseCase.Params(id))
+        }
     }
 
     private fun isSubsequentEmission() = !observeContactsUseCaseParams.pagination.hasDefaultLimit()

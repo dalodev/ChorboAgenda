@@ -147,7 +147,7 @@ internal class ContactInfoViewModel @Inject constructor(
         viewModelScope.launch {
             val contact = getContact()
                 .onError {
-                    logger.error(logTag, "Failed to get the game.", it)
+                    logger.error(logTag, "Failed to get the contact.", it)
                     dispatchCommand(GeneralCommand.ShowLongToast(errorMapper.mapToMessage(it)))
                 }.firstOrNull() ?: return@launch
 

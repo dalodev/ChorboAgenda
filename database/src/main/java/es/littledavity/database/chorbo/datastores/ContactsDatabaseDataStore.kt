@@ -46,6 +46,12 @@ internal class ContactsDatabaseDataStore @Inject constructor(
         return flowOf(chorbo)
     }
 
+    override suspend fun removeContact(id: Int) {
+        withContext(dispatcherProvider.computation) {
+            contactDao.deleteChorboById(id)
+        }
+    }
+
     /**
      * Add to database a list of chorbos.
      *

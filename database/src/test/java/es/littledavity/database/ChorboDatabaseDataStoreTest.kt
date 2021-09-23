@@ -3,6 +3,7 @@
  */
 package es.littledavity.database
 
+import app.cash.turbine.test
 import es.littledavity.core.providers.TimestampProvider
 import es.littledavity.data.contacts.DataContact
 import es.littledavity.data.services.ImageGalleryService
@@ -21,6 +22,7 @@ import es.littledavity.testUtils.FakeDispatcherProvider
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -62,18 +64,6 @@ class ChorboDatabaseDataStoreTest {
         coEvery { contactDao.searchContacts(any(), any(), any()) } returns dbContacts
         assertThat(dataStore.searchContacts("", DATA_PAGINATION)).isEqualTo(DATA_CONTACTS_IMAGE_CREATED)
     }
-
-    /*@Test
-    fun observesContactsSuccessfully() = runBlockingTest {
-        coEvery { imageGalleryService.createMediaFile(any()) } returns "test"
-        coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
-        val dbContacts = contactMapper.mapToDatabaseContacts(DATA_CONTACTS)
-        coEvery { contactDao.observeContacts(any(), any()) } returns flowOf(dbContacts)
-        dataStore.observeContacts(DATA_PAGINATION).test {
-            assertThat(awaitItem()).isEqualTo(DATA_CONTACTS)
-            expectComplete()
-        }
-    }*/
 
     private class FakeSaveContactFactory : SaveContactFactory {
 

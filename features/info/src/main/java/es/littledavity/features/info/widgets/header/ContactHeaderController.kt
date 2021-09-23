@@ -182,8 +182,8 @@ internal class ContactHeaderController(
     }
 
     fun onAttachedToWindow() {
-        // This is a crutch solution to fix a very strange bug, where a user likes a game,
-        // goes to a another screen (e.g., a related game) and comes back, then the like
+        // This is a crutch solution to fix a very strange bug, where a user likes a contact,
+        // goes to a another screen (e.g., a related contact) and comes back, then the like
         // button resets its icon from a filled heart to an empty heart. To fix it, when
         // the user comes back and this view gets reattached to the window, we are asking
         // the button to reset its state and then go to the liked state again.

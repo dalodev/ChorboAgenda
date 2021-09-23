@@ -168,7 +168,8 @@ fun Context.inflateView(
 fun View.showSnackBar(
     message: CharSequence,
     actionMessage: CharSequence,
-    action: (() -> Unit)? = null
+    action: (() -> Unit)? = null,
+    onDismiss: (() -> Unit)? = null,
 ): Snackbar {
     return Snackbar.make(
         this,
@@ -176,6 +177,13 @@ fun View.showSnackBar(
         Snackbar.LENGTH_LONG
     ).apply {
         setAction(actionMessage) { action?.invoke() }
+            .addCallback(object : Snackbar.Callback() {
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    if (event == DISMISS_EVENT_TIMEOUT) {
+                        onDismiss?.invoke()
+                    }
+                }
+            })
         show()
     }
 }
@@ -195,11 +203,11 @@ fun Context.showToast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT)
 
 fun Context.isPermissionGranted(permission: String): Boolean {
     return (
-        ContextCompat.checkSelfPermission(
-            this,
-            permission
-        ) == PackageManager.PERMISSION_GRANTED
-        )
+            ContextCompat.checkSelfPermission(
+                this,
+                permission
+            ) == PackageManager.PERMISSION_GRANTED
+            )
 }
 
 fun Context.isPermissionDenied(permission: String): Boolean {

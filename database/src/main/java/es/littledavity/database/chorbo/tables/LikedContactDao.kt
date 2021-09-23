@@ -20,26 +20,26 @@ internal interface LikedContactDao {
     @Query(
         """
         DELETE FROM ${LikedContact.Schema.TABLE_NAME}
-        WHERE ${LikedContact.Schema.CONTACT_ID} = :gameId
+        WHERE ${LikedContact.Schema.CONTACT_ID} = :contactId
         """
     )
-    suspend fun deleteLikedContact(gameId: Int)
+    suspend fun deleteLikedContact(contactId: Int)
 
     @Query(
         """
         SELECT COUNT(*) FROM ${LikedContact.Schema.TABLE_NAME}
-        WHERE ${LikedContact.Schema.CONTACT_ID} = :gameId
+        WHERE ${LikedContact.Schema.CONTACT_ID} = :contactId
         """
     )
-    suspend fun isGameLiked(gameId: Int): Boolean
+    suspend fun isContactLiked(contactId: Int): Boolean
 
     @Query(
         """
         SELECT COUNT(*) FROM ${LikedContact.Schema.TABLE_NAME}
-        WHERE ${LikedContact.Schema.CONTACT_ID} = :gameId
+        WHERE ${LikedContact.Schema.CONTACT_ID} = :contactId
         """
     )
-    fun observeGameLikeState(gameId: Int): Flow<Boolean>
+    fun observeContactLikeState(contactId: Int): Flow<Boolean>
 
     @Query(
         """

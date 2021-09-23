@@ -41,7 +41,7 @@ internal class ContactItem(model: ContactModel) :
             phone = model.phone
         }
 
-        fun setOnGameClickListener(onClick: () -> Unit) {
+        fun setOnContactClickListener(onClick: () -> Unit) {
             view.onContactClicked = onClick
         }
     }

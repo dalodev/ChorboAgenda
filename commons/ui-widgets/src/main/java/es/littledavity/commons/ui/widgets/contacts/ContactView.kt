@@ -7,6 +7,7 @@ import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.util.AttributeSet
 import com.google.android.material.card.MaterialCardView
+import es.littledavity.commons.ui.bindings.onLongClick
 import es.littledavity.commons.ui.extensions.getColor
 import es.littledavity.commons.ui.extensions.getDimension
 import es.littledavity.commons.ui.extensions.layoutInflater
@@ -44,6 +45,7 @@ class ContactView @JvmOverloads constructor(
         get() = binding.phone.text
 
     var onContactClicked: (() -> Unit)? = null
+    var onLongContactClicked: (() -> Unit)? = null
 
     init {
         initCard()
@@ -54,6 +56,7 @@ class ContactView @JvmOverloads constructor(
         setCardBackgroundColor(getColor(R.color.contact_card_background_color))
         cardElevation = getDimension(R.dimen.contact_card_elevation)
         onClick { onContactClicked?.invoke() }
+        onLongClick { onLongContactClicked?.invoke() }
     }
 
     private fun initImageView() {

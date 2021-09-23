@@ -9,6 +9,7 @@ import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.domain.DomainContact
 import es.littledavity.domain.contacts.usecases.ObserveContactsUseCase
+import es.littledavity.domain.contacts.usecases.RemoveContactUseCase
 import es.littledavity.testUtils.DOMAIN_CONTACTS
 import es.littledavity.testUtils.FakeDispatcherProvider
 import es.littledavity.testUtils.FakeErrorMapper
@@ -33,6 +34,9 @@ class ContactsViewModelTest {
     @MockK
     private lateinit var observeContactsUseCase: ObserveContactsUseCase
 
+    @MockK
+    private lateinit var removeContactUseCase: RemoveContactUseCase
+
     private lateinit var logger: FakeLogger
     private lateinit var viewModel: ContactsViewModel
 
@@ -43,6 +47,7 @@ class ContactsViewModelTest {
         logger = FakeLogger()
         viewModel = ContactsViewModel(
             observeContactsUseCase = observeContactsUseCase,
+            removeContactUseCase = removeContactUseCase,
             uiStateFactory = FakeUiStateFactory(),
             dispatcherProvider = FakeDispatcherProvider(),
             errorMapper = FakeErrorMapper(),

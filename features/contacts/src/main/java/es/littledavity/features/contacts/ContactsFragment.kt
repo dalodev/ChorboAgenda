@@ -48,6 +48,7 @@ class ContactsFragment : BaseFragment<
     private fun initContactsView() = with(viewBinding.contactsView) {
         onContactClicked = viewModel::onContactClicked
         onBottomReached = viewModel::onBottomReached
+        onRemoveContact = viewModel::onRemoveContact
     }
 
     private fun observeUiState() {

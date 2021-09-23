@@ -19,11 +19,11 @@ import javax.inject.Singleton
 internal class ObserveContactsUseCaseImpl @Inject constructor(
     private val likedContactsLocalDataStore: ContactsLocalDataStore,
     private val dispatcherProvider: DispatcherProvider,
-    private val gameMapper: ContactMapper
+    private val contactMapper: ContactMapper
 ) : ObserveContactsUseCase {
 
     override suspend fun execute(params: ObserveContactsUseCaseParams) =
         likedContactsLocalDataStore.observeContacts(params.pagination.toDataPagination())
-            .map(gameMapper::mapToDomainContacts)
+            .map(contactMapper::mapToDomainContacts)
             .flowOn(dispatcherProvider.computation)
 }

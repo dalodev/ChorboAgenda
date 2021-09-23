@@ -15,6 +15,8 @@ interface ContactsLocalDataStore {
 
     suspend fun insertContact(chorbo: DataContact): Flow<DataContact>
 
+    suspend fun removeContact(id: Int)
+
     suspend fun searchContacts(
         searchQuery: String,
         pagination: Pagination
