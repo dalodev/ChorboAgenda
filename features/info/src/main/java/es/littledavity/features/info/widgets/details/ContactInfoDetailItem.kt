@@ -45,5 +45,9 @@ internal class ContactInfoDetailItem(model: Info) : AbstractItem<
         fun setOnDescTextChangedListener(onDescTextChanged: (String) -> Unit) {
             view.onDescriptionTextChanged = onDescTextChanged
         }
+
+        fun setOnDeleteItemListener(onDeleteItem: () -> Unit){
+            view.onDeleteClicked = onDeleteItem
+        }
     }
 }

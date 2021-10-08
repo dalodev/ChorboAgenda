@@ -8,8 +8,8 @@ import es.littledavity.commons.ui.base.rv.HasListeners
 import es.littledavity.commons.ui.base.rv.NoDependencies
 import es.littledavity.domain.contacts.entities.Info
 
-internal class ContactInfoDetailsItem(model: List<Info>) : AbstractItem<
-        List<Info>,
+internal class ContactInfoDetailsItem(model: MutableList<Info>) : AbstractItem<
+        MutableList<Info>,
         ContactInfoDetailsItem.ViewHolder,
         NoDependencies
         >(model) {
@@ -22,6 +22,9 @@ internal class ContactInfoDetailsItem(model: List<Info>) : AbstractItem<
 
     override fun performBinding(viewHolder: ViewHolder, dependencies: NoDependencies) {
         viewHolder.bind(model)
+        viewHolder.setOnDetailDeleteListener {
+            model.removeAt(it)
+        }
     }
 
     internal class ViewHolder(
@@ -34,6 +37,14 @@ internal class ContactInfoDetailsItem(model: List<Info>) : AbstractItem<
 
         fun setOnDetailClickListener(onClick: (Info) -> Unit) {
             view.onInfoClicked = { onClick(it) }
+        }
+
+        fun setOnDetailDeleteListener(onDelete: ((Int) -> Unit)? = null) {
+            view.onItemDeleted = { onDelete?.invoke(bindingAdapterPosition) }
+        }
+
+        fun setOnEmptyListListener(emptyList: ((Boolean) -> Unit)? = null) {
+            view.onEmptyList = { emptyList?.invoke(view.items.isEmpty()) }
         }
     }
 }

@@ -148,12 +148,12 @@ class InfoView @JvmOverloads constructor(
         }
         get() = binding.iconIv.drawable
 
-    private var editMode: Boolean
+    private var editMode: Boolean = false
         set(value) {
-            binding.titleTvEdit.isVisible = value
+            field = value
             binding.titleTv.isVisible = !value
+            binding.titleTvEdit.isVisible = value
         }
-        get() = binding.titleTvEdit.isVisible
 
     private var maxLength: Int = 10
         set(value) {
@@ -202,7 +202,6 @@ class InfoView @JvmOverloads constructor(
             maxLength = getInteger(R.styleable.InfoView_infoView_maxLength, 10)
             hintText = getString(R.styleable.InfoView_infoView_hintText, context.getString(R.string.dash))
             if (editMode) {
-                binding.titleTvEdit.enableEditText()
                 enableEditText()
             }
         }
@@ -211,6 +210,6 @@ class InfoView @JvmOverloads constructor(
     private fun View.enableEditText() = this.onClick {
         binding.titleTvEdit.isEnabled = true
         binding.titleTvEdit.requestFocus()
-        showKeyboard(true)
+        binding.titleTvEdit.showKeyboard(false)
     }
 }

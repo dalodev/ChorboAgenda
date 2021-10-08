@@ -64,7 +64,7 @@ class AddContactViewModel @Inject constructor(
         route(AddContactRoute.Back)
     }
 
-    fun onToolbarRightButtonClicked(name: String, phone: String) {
+    fun onAddContactClicked(name: String, phone: String) {
         val nameError = name.isBlank()
         val phoneError = if (phone.isBlank()) false
         else !isValidNumber(phone)
@@ -74,6 +74,7 @@ class AddContactViewModel @Inject constructor(
         if (canDone) {
             saveContact()
         } else {
+            _uiState.value = uiStateFactory.createWithNewState()
             _uiState.value = createErrorAddContactUiState(nameError, phoneError)
         }
     }
@@ -91,7 +92,7 @@ class AddContactViewModel @Inject constructor(
                 Calendar.getInstance().get(Calendar.YEAR),
                 CreationDateCategory.YYYY_MMMM_DD
             )
-            saveContactUseCase.execute(useCaseParams)
+            saveContactUseCase.execute(useCaseParams.copy(currentContact))
                 .map(::mapToUiState)
                 .flowOn(dispatcherProvider.computation)
                 .onError {
@@ -152,7 +153,7 @@ class AddContactViewModel @Inject constructor(
     }
 
     private fun isValidNumber(phone: String) =
-        phone.isNotBlank() && Patterns.PHONE.matcher(phone).matches() && phone.length > 6 && phone.length < 13
+        phone.isNotBlank() && Patterns.PHONE.matcher(phone).matches()
 
     private fun createContact() = Contact(
         id = 0,

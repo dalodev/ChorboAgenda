@@ -93,6 +93,22 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/addDoneBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/add_contact_btn_margin_end"
+            android:layout_marginBottom="@dimen/add_contact_btn_margin_end"
+            android:backgroundTint="@color/add_contact_btn_color"
+            android:elevation="@dimen/add_contact_btn_elevation"
+            app:borderWidth="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/done"
+            app:tint="@color/add_contact_btn_icon_color"
+            tools:ignore="ContentDescription" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ProgressBar

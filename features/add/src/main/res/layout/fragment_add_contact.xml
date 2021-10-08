@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:toolbar_leftButtonIcon="@drawable/arrow_left"
-        app:toolbar_rightButtonIcon="@drawable/done"
         app:toolbar_titleText="@string/add_contact_toolbar_title" />
 
     <es.littledavity.features.add.widgets.AddContactView

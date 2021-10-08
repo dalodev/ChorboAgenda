@@ -16,5 +16,7 @@
     <string name="contact_info_item_list_title">Details</string>
     <string name="contact_info_item_genres_description">Type description here</string>
     <string name="contact_info_item_title">Type title here</string>
+    <string name="contact_info_item_options_dots">&#8942;</string>
+    <string name="contact_info_item_options_delete">Delete</string>
 
 </resources>

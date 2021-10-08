@@ -53,18 +53,18 @@ class AddContactFragment : BaseFragment<
     private fun initToolbar() = with(viewBinding.toolbar) {
         enableBack = false
         applyWindowTopInsetAsPadding()
-        onRightButtonClickListener = {
-            viewModel.onToolbarRightButtonClicked(
-                viewBinding.addContactView.name,
-                viewBinding.addContactView.phone
-            )
-        }
         onLeftButtonClickListener = { viewModel.onToolbarBackButtonClicked() }
     }
 
     private fun initAddContactView() = with(viewBinding.addContactView) {
         applyWindowBottomInsetAsMargin()
         onPhotoClicked = { viewModel.onPhotoClicked(resultLauncher) }
+        onDoneClicked = {
+            viewModel.onAddContactClicked(
+                viewBinding.addContactView.name,
+                viewBinding.addContactView.phone
+            )
+        }
     }
 
     override fun onPause() {

@@ -17,7 +17,6 @@ import es.littledavity.commons.ui.extensions.disableChangeAnimations
 import es.littledavity.commons.ui.extensions.fadeIn
 import es.littledavity.commons.ui.extensions.getDimensionPixelSize
 import es.littledavity.commons.ui.extensions.getString
-import es.littledavity.commons.ui.extensions.hideKeyboard
 import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.makeGone
 import es.littledavity.commons.ui.extensions.makeInvisible
@@ -29,9 +28,9 @@ import es.littledavity.commons.ui.extensions.showSnackBar
 import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
 import es.littledavity.core.providers.StringProvider
 import es.littledavity.domain.contacts.entities.Contact
-import es.littledavity.domain.contacts.entities.Info
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
+import es.littledavity.features.info.widgets.details.ContactInfoDetailItem
 import es.littledavity.features.info.widgets.details.ContactInfoDetailsItem
 import es.littledavity.features.info.widgets.header.ContactHeaderController
 import es.littledavity.features.info.widgets.model.ContactInfoModel
@@ -126,7 +125,10 @@ internal class ContactInfoView @JvmOverloads constructor(
 
     private fun initLayoutManager(context: Context) = object : LinearLayoutManager(context) {
         override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
-            return RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            return RecyclerView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
     }
 
@@ -199,7 +201,7 @@ internal class ContactInfoView @JvmOverloads constructor(
     private fun ContactInfoModel.toAdapterItems(): List<Item<*, NoDependencies>> {
         return buildList {
             // add items to info list
-            if (hasDetails) add(ContactInfoDetailsItem(info))
+            if (hasDetails) add(ContactInfoDetailsItem(info.toMutableList()))
         }
     }
 
@@ -214,6 +216,11 @@ internal class ContactInfoView @JvmOverloads constructor(
             is ContactInfoDetailsItem.ViewHolder -> with(viewHolder) {
                 setOnDetailClickListener {
                     //add some click functionality to items
+                }
+                setOnEmptyListListener { isEmpty ->
+                    if(isEmpty) {
+                        adapterItems = emptyList()
+                    }
                 }
             }
         }

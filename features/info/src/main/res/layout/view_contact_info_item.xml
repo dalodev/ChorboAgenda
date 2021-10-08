@@ -14,37 +14,58 @@
 
         <EditText
             android:id="@+id/titleTv"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/contact_info_item_title_margin_bottom"
             android:background="@null"
             android:fontFamily="@string/font_family_medium"
             android:hint="@string/contact_info_item_title"
-            android:imeOptions="actionDone"
             android:importantForAutofill="no"
-            android:inputType="textMultiLine"
+            android:maxLines="1"
             android:textColor="@color/contact_info_detail_item_title_text_color"
             android:textColorHint="@color/colorHintTextSecondary"
             android:textSize="@dimen/contact_info_item_title_text_size"
+            android:nextFocusRight="@id/descriptionTv"
             app:layout_constraintBottom_toTopOf="@+id/descriptionTv"
+            app:layout_constraintEnd_toStartOf="@id/itemOptions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:text="It's okay, Bender. I like cooking too." />
+            tools:text="It's okay, Bender. I like cooking too.">
+
+            <requestFocus />
+        </EditText>
 
         <EditText
             android:id="@+id/descriptionTv"
             style="@style/Chorboagenda.ContactInfo.InfoView.Title"
+            android:layout_width="0dp"
             android:hint="@string/contact_info_item_genres_description"
             android:imeOptions="actionDone"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
+            android:nextFocusLeft="@id/titleTv"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/itemOptions"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/titleTv"
             tools:text="And so we say goodbye to our beloved pet, Nibbler, who's gone to a place where I, too, hope one day to go. The toilet. One hundred dollars. You mean while I'm sleeping in it? And from now on you're all named Bender Jr.
 
 I had more, but you go ahead. No! Don't jump! That's right, baby. I ain't your loverboy Flexo, the guy you love so much. You even love anyone pretending to be him! Whoa a real live robot; or is that some kind of cheesy New Year's costume?" />
+
+
+        <TextView
+            android:id="@+id/itemOptions"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:paddingStart="@dimen/contacto_info_item_options_padding"
+            android:paddingEnd="@dimen/contacto_info_item_options_padding"
+            android:text="@string/contact_info_item_options_dots"
+            android:textAppearance="?android:textAppearanceLarge"
+            android:textColor="@color/colorPrimaryText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

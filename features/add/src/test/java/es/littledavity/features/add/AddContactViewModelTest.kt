@@ -63,7 +63,7 @@ class AddContactViewModelTest {
     fun onToolbarRightButtonClickedWithCantDoneShouldError() =
         mainCoroutineRule.runBlockingTest {
             viewModel.uiState.test {
-                viewModel.onToolbarRightButtonClicked("", "")
+                viewModel.onAddContactClicked("", "")
                 assertThat(awaitItem() is AddContactUiState.New).isTrue
                 assertThat(awaitItem() is AddContactUiState.Error).isTrue
             }
@@ -84,7 +84,7 @@ class AddContactViewModelTest {
         mainCoroutineRule.runBlockingTest {
             coEvery { saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
             viewModel.uiState.test {
-                viewModel.onToolbarRightButtonClicked("test", "")
+                viewModel.onAddContactClicked("test", "")
                 assertThat(awaitItem() is AddContactUiState.New).isTrue
                 assertThat(awaitItem() is AddContactUiState.Loading).isTrue
                 assertThat((awaitItem() as AddContactUiState.Result).model.name).isEqualTo("test")

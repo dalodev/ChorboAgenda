@@ -36,6 +36,7 @@ class AddContactView @JvmOverloads constructor(
     }
 
     var onPhotoClicked: (() -> Unit)? = null
+    var onDoneClicked: (() -> Unit)? = null
 
     val name: String
         get() = binding.nameLayout.editText?.text.toString()
@@ -46,6 +47,7 @@ class AddContactView @JvmOverloads constructor(
     init {
         initDefaults()
         binding.photoView.onClick { onPhotoClicked?.invoke() }
+        binding.addDoneBtn.onClick { onDoneClicked?.invoke() }
     }
 
     private fun initDefaults() {

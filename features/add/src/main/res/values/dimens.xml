@@ -4,4 +4,6 @@
     <dimen name="add_contact_photo_height_expanded">240dp</dimen>
     <dimen name="add_contact_add_photo_image_size">64dp</dimen>
     <dimen name="add_contact_name_padding">12dp</dimen>
+    <dimen name="add_contact_btn_margin_end">10dp</dimen>
+    <dimen name="add_contact_btn_elevation">8dp</dimen>
 </resources>

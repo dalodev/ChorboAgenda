@@ -6,14 +6,13 @@ package es.littledavity.commons.ui.widgets.contacts
 import android.content.Context
 import android.telephony.PhoneNumberUtils
 import android.util.AttributeSet
+import androidx.core.view.isVisible
 import com.google.android.material.card.MaterialCardView
 import es.littledavity.commons.ui.bindings.onLongClick
-import es.littledavity.commons.ui.extensions.getColor
-import es.littledavity.commons.ui.extensions.getDimension
-import es.littledavity.commons.ui.extensions.layoutInflater
-import es.littledavity.commons.ui.extensions.onClick
+import es.littledavity.commons.ui.extensions.*
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewContactBinding
+import java.util.*
 
 class ContactView @JvmOverloads constructor(
     context: Context,
@@ -39,8 +38,10 @@ class ContactView @JvmOverloads constructor(
         set(value) {
             binding.phone.text = PhoneNumberUtils.formatNumber(
                 value.toString(),
-                "ES"
+                Locale.getDefault().country
             )
+            binding.phone.isVisible = value?.isNotEmpty().orFalse()
+
         }
         get() = binding.phone.text
 

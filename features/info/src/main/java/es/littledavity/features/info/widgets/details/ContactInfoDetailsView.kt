@@ -3,16 +3,13 @@ package es.littledavity.features.info.widgets.details
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import es.littledavity.commons.ui.extensions.disableAnimations
-import es.littledavity.commons.ui.extensions.getColor
-import es.littledavity.commons.ui.extensions.getDimension
-import es.littledavity.commons.ui.extensions.getDimensionPixelSize
-import es.littledavity.commons.ui.extensions.layoutInflater
-import es.littledavity.commons.ui.extensions.observeChanges
+import es.littledavity.commons.ui.extensions.*
 import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
+import es.littledavity.commons.ui.widgets.SwipeToDeleteCallback
 import es.littledavity.domain.contacts.entities.Info
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoListItemBinding
@@ -27,8 +24,12 @@ internal class ContactInfoDetailsView @JvmOverloads constructor(
 
     lateinit var adapter: ContactInfoDetailsAdapter
 
+    private var currentAdapterItems = mutableListOf<ContactInfoDetailItem>()
+
     private var adapterItems by observeChanges<List<ContactInfoDetailItem>>(emptyList()) { _, newItems ->
-        adapter.submitList(newItems)
+        adapter.submitList(newItems) {
+            currentAdapterItems = newItems.toMutableList()
+        }
     }
 
     var items by observeChanges<List<Info>>(emptyList()) { _, newItems ->
@@ -36,6 +37,8 @@ internal class ContactInfoDetailsView @JvmOverloads constructor(
     }
 
     var onInfoClicked: ((Info) -> Unit)? = null
+    var onItemDeleted: ((Int) -> Unit)? = null
+    var onEmptyList: ((Boolean) -> Unit)? = null
 
     var currentDetails: MutableList<Info> = mutableListOf()
 
@@ -59,7 +62,10 @@ internal class ContactInfoDetailsView @JvmOverloads constructor(
 
     private fun initLayoutManager(context: Context) = object : LinearLayoutManager(context) {
         override fun generateDefaultLayoutParams(): RecyclerView.LayoutParams {
-            return RecyclerView.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT)
+            return RecyclerView.LayoutParams(
+                ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
         }
     }
 
@@ -74,6 +80,7 @@ internal class ContactInfoDetailsView @JvmOverloads constructor(
             viewHolder.setOnVideoClickListener { onInfoClicked?.invoke(item.model) }
             viewHolder.setOnTitleTextChangedListener { item.model.title = it }
             viewHolder.setOnDescTextChangedListener { item.model.description = it }
+            viewHolder.setOnDeleteItemListener { deleteItem(item) }
         }
     }
 
@@ -85,4 +92,10 @@ internal class ContactInfoDetailsView @JvmOverloads constructor(
         spacing = getDimensionPixelSize(R.dimen.contact_info_item_container_margin),
         sideFlags = SpacingItemDecorator.SIDE_BOTTOM,
     )
+
+    private fun deleteItem(item: ContactInfoDetailItem) {
+        onItemDeleted?.invoke(currentAdapterItems.indexOf(item))
+        adapterItems = currentAdapterItems.apply { removeAt(currentAdapterItems.indexOf(item)) }
+        onEmptyList?.invoke(currentAdapterItems.isEmpty())
+    }
 }

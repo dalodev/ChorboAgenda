@@ -58,5 +58,6 @@
     <dimen name="contact_info_details_view_horizontal_padding">12dp</dimen>
     <dimen name="contact_info_details_view_bottom_padding">15dp</dimen>
     <dimen name="contact_info_item_corner_radius">4dp</dimen>
+    <dimen name="contacto_info_item_options_padding">10dp</dimen>
 
 </resources>

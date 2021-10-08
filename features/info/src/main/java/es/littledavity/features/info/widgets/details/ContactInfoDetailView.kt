@@ -2,6 +2,8 @@ package es.littledavity.features.info.widgets.details
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.inputmethod.EditorInfo
+import android.widget.PopupMenu
 import androidx.core.view.isVisible
 import androidx.core.view.marginTop
 import com.google.android.material.card.MaterialCardView
@@ -40,6 +42,7 @@ internal class ContactInfoDetailView @JvmOverloads constructor(
         get() = binding.descriptionTv.text.toString()
 
     var onInfoClicked: (() -> Unit)? = null
+    var onDeleteClicked: (() -> Unit)? = null
 
     var onTitleTextChange: ((String) -> Unit)? = null
     var onDescriptionTextChanged: ((String) -> Unit)? = null
@@ -62,5 +65,24 @@ internal class ContactInfoDetailView @JvmOverloads constructor(
         binding.descriptionTv.onTextChanged {
             onDescriptionTextChanged?.invoke(it)
         }
+        binding.itemOptions.onClick {
+            createOptionsMenu {
+                onDeleteClicked?.invoke()
+            }
+        }
+    }
+
+    private fun createOptionsMenu(itemClicked: () -> Unit) {
+        val popup = PopupMenu(context, binding.itemOptions)
+        popup.inflate(R.menu.options_menu)
+
+        popup.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.contact_info_item_options_delete -> itemClicked.invoke()
+            }
+            return@setOnMenuItemClickListener false
+        }
+
+        popup.show()
     }
 }
