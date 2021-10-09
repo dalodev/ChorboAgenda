@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:300526789088:android:453d200c718d6ea1624b85",
+        "android_client_info": {
+          "package_name": "es.devid.chorboagenda"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "300526789088-et3ti9qiafdmrretko34ik5k8f115ef0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC2lOVk4qY_jQu9iDiTKFLFXjLM86veqc0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "300526789088-et3ti9qiafdmrretko34ik5k8f115ef0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:300526789088:android:6724aaaa7fce58fd624b85",
         "android_client_info": {
           "package_name": "es.littledavity.chorboagenda"
