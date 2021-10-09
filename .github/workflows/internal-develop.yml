@@ -53,9 +53,9 @@ jobs:
           name: reports
           path: app/build/test-results
 
-  #Build debug and upload apk to Firebase app distribution
+  #Build debug and generate apk
   build_and_distribution:
-    name: Upload apk to App Tester
+    name: Build app and generate APK
     needs: test
     runs-on: ubuntu-latest
 
@@ -82,6 +82,19 @@ jobs:
       - name: Build the app (Debug)
         run: ./gradlew assembleDebug
 
+      - name: Upload apk
+        uses: actions/upload-artifact@v2
+        with:
+          name: debug apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+
+  # Upload apk to Firebase app distribution
+  distribution_apk_to_testers:
+    name: Upload apk to App Tester
+    needs: build_and_distribution
+    runs-on: ubuntu-latest
+
+    steps:
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.2.2
         with:
@@ -89,9 +102,3 @@ jobs:
           token: 1//03fyZZND1kDbsCgYIARAAGAMSNwF-L9Irm1bbdpQN6cHomxHu_0_AWPzRHKDomQ2S5vs_ARJF2us9Il6yfl9suCeVU8QsnjXuUOo
           groups: testers
           file: app/build/outputs/apk/debug/app-debug.apk
-
-      - name: Upload apk
-        uses: actions/upload-artifact@v2
-        with:
-          name: debug apk
-          path: app/build/outputs/apk/debug/app-debug.apk
