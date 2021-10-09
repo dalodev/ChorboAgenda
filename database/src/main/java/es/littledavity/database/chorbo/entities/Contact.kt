@@ -16,9 +16,9 @@ import androidx.room.PrimaryKey
 )
 internal data class Contact(
     @ColumnInfo(name = Schema.ID) @PrimaryKey(autoGenerate = true) val id: Int = 0,
-    @ColumnInfo(name = "name") val name: String,
-    @ColumnInfo(name = "image") val image: Image?,
-    @ColumnInfo(name = "phone") var phone: String?,
+    @ColumnInfo(name = Schema.NAME) val name: String,
+    @ColumnInfo(name = Schema.IMAGE) val image: Image?,
+    @ColumnInfo(name = Schema.PHONE) var phone: String?,
     @ColumnInfo(name = Schema.ARTWORKS) val artworks: List<Image>,
     @ColumnInfo(name = Schema.SCREENSHOTS) val screenshots: List<Image>,
     @ColumnInfo(name = Schema.CREATE_TIMESTAMP) val createTimestamp: Long,
@@ -29,11 +29,14 @@ internal data class Contact(
     @ColumnInfo(name = Schema.INSTAGRAM) val instagram: String?,
     @ColumnInfo(name = Schema.INFO_LIST) val infoList: List<Info>,
 
-) {
+    ) {
 
     object Schema {
         const val TABLE_NAME = "chorbo"
         const val ID = "id"
+        const val NAME = "name"
+        const val IMAGE = "image"
+        const val PHONE = "phone"
         const val ARTWORKS = "artworks"
         const val SCREENSHOTS = "screenshots"
         const val CREATE_TIMESTAMP = "create_timestamp"
