@@ -53,6 +53,29 @@ jobs:
           name: reports
           path: app/build/test-results
 
+  # Second step run android test
+  android_test:
+    name: Run Android Test
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        api-level: [ 21, 23, 30 ]
+        target: [ default ]
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - uses: actions/cache@v2
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+          key: ${{ runner.os }}-${{ hashFiles('**/*.gradle*') }}-${{ hashFiles('**/gradle/wrapper/gradle-wrapper.properties') }}-${{ hashFiles('**/buildSrc/**/*.kt') }}
+
+      - name: Copy  gradle properties file
+        run: mkdir -p ~/.gradle ; cp .github/ci-gradle.properties ~/.gradle/gradle.properties
+
       - name: Run Android Test
         uses: reactivecircus/android-emulator-runner@v2
         with:
@@ -62,7 +85,7 @@ jobs:
   #Build debug and generate apk
   build_and_distribution:
     name: Build app and generate APK
-    needs: test
+    needs: [test, android_test]
     runs-on: ubuntu-latest
 
     steps:
@@ -97,7 +120,7 @@ jobs:
   # Upload apk to Firebase app distribution
   distribution_apk_to_testers:
     name: Upload apk to App Tester
-    needs: build_and_distribution
+    needs: [test, android_test]
     runs-on: ubuntu-latest
 
     steps:
