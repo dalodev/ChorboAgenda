@@ -3,22 +3,23 @@
     <!--Primary colors-->
     <color name="colorPrimary">#2B303C</color>
     <color name="colorPrimaryDark">#222630</color>
-    <color name="colorPrimaryLight">#1f1f1f</color>
     <color name="colorAccent">#F55663</color>
+    <color name="colorContentContainer">#1c2028</color>
     <color name="colorPrimaryText">#FFFFFF</color>
     <color name="colorSecondaryText">#809aaf</color>
     <color name="colorNavigationBar">#282d38</color>
-    <color name="colorProgressBar">@color/colorAccent</color>
     <color name="colorHintTextSecondary">#40809aaf</color>
 
+    <color name="colorProgressBar">@color/colorAccent</color>
+    <color name="colorInfoView">@color/colorSecondaryText</color>
     <!--Text colors-->
     <color name="textHeadline">#1f1f1f</color>
     <color name="textBody">#4f4f4f</color>
-    <color name="toolbar_background_color">@android:color/white</color>
-    <color name="colorContentContainer">#1c2028</color>
+
     <!-- Bottom Navigation -->
     <color name="bottom_navigation_item_color_state_unselected">@color/colorSecondaryText</color>
     <color name="bottom_navigation_item_color_state_selected">@color/colorAccent</color>
+
     <string-array name="placeholders">
         <item>#eeeeee</item>
         <item>#e0e0e0</item>

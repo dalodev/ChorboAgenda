@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:gravity="center_vertical"
-        android:fontFamily="@string/font_family_medium"
+        android:fontFamily="@string/text_font_family_medium"
         android:textSize="@dimen/toolbar_title_text_size"
         android:textColor="@color/toolbar_title_text_color"
         android:ellipsize="end"

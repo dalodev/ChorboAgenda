@@ -5,7 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:statusBarColor">@color/toolbar_background_color</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
         <item name="colorControlActivated">@color/colorAccent</item>
         <item name="colorControlNormal">@color/colorAccent</item>
         <item name="android:windowBackground">@color/colorPrimary</item>
@@ -23,7 +23,7 @@
     <style name="Chorboagenda"/>
 
     <style name="ChorboagendaTheme.BackgroundStyle">
-        <item name="android:background">@color/colorPrimaryLight</item>
+        <item name="android:background">@color/colorPrimaryText</item>
     </style>
 
     <style name="ChorboagendaTheme.SurfaceStyle">
@@ -67,14 +67,6 @@
         <item name="android:background">@color/colorAccent</item>
     </style>
 
-    <style name="ChorboagendaTheme.Toolbar">
-        <item name="android:background">@color/toolbar_background_color</item>
-        <item name="toolbar_titleTextColor">@color/toolbar_title_text_color</item>
-        <item name="toolbar_buttonIconColor">@color/toolbar_button_icon_color</item>
-        <item name="toolbar_titleTextSize">@dimen/toolbar_title_text_size</item>
-        <item name="toolbar_titleTextGravity">left</item>
-    </style>
-
     <style name="ChorboagendaTheme.BottomNavigationView" parent="Widget.MaterialComponents.BottomNavigationView">
         <item name="labelVisibilityMode">labeled</item>
         <item name="itemTextAppearanceInactive">@style/ChorboagendaTheme.BottomNavigationView.TextAppearance</item>
@@ -83,6 +75,6 @@
 
     <style name="ChorboagendaTheme.BottomNavigationView.TextAppearance" parent="@style/TextAppearance.AppCompat.Caption">
         <item name="android:textSize">@dimen/bottom_navigation_item_text_size</item>
-        <item name="android:fontFamily">@string/font_family_medium</item>
+        <item name="android:fontFamily">@string/text_font_family_medium</item>
     </style>
 </resources>

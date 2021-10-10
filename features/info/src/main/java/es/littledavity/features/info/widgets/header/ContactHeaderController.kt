@@ -84,7 +84,7 @@ internal class ContactHeaderController(
         set(value) {
             with(binding.phoneTv) {
                 setText(PhoneNumberUtils.formatNumber(value.toString(), "ES"))
-                setOnFocusChangeListener { v, hasFocus ->
+                setOnFocusChangeListener { _, hasFocus ->
                     if (!hasFocus) setText(
                         PhoneNumberUtils.formatNumber(
                             binding.phoneTv.text.toString(),

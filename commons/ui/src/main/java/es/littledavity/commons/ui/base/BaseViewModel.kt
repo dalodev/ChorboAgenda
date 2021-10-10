@@ -22,10 +22,10 @@ abstract class BaseViewModel : ViewModel(), Loggable {
     val routeFlow: Flow<Route> = _routeChannel.receiveAsFlow()
 
     protected fun dispatchCommand(command: Command) {
-        _commandChannel.offer(command)
+        _commandChannel.trySend(command)
     }
 
     protected fun route(route: Route) {
-        _routeChannel.offer(route)
+        _routeChannel.trySend(route)
     }
 }

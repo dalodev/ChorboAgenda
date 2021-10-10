@@ -60,7 +60,7 @@ subprojects {
                 "-Xuse-experimental=kotlin.time.ExperimentalTime",
                 "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
                 "-Xuse-experimental=kotlinx.coroutines.FlowPreview",
-                "-Xuse-experimental=kotlinx.serialization.ExperimentalSerializationApi"
+//                "-Xuse-experimental=kotlinx.serialization.ExperimentalSerializationApi"
             )
 
             jvmTarget = AppConfig.kotlinCompatibilityVersion.toString()

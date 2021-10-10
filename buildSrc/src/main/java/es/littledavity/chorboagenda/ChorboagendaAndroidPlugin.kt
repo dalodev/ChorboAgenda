@@ -36,7 +36,7 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
                 versionCode = AppConfig.versionCode
                 versionName = AppConfig.versionName
 
-                testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+                testInstrumentationRunner = "es.littledavity.testUtils.ChorboagendaTestRunner"
             }
 
             buildTypes {

@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <color name="colorAccent">#F55663</color>
-    <color name="colorSecondaryText">#809aaf</color>
-
-    <color name="colorProgressBar">@color/colorAccent</color>
-    <color name="colorInfoView">@color/colorSecondaryText</color>
-</resources>

@@ -13,7 +13,7 @@
         <item name="android:gravity">start|center_vertical</item>
         <item name="android:textColor">@color/contact_info_header_title_text_color</item>
         <item name="android:textSize">@dimen/contact_info_header_title_text_size</item>
-        <item name="android:fontFamily">@string/font_family_medium</item>
+        <item name="android:fontFamily">@string/text_font_family_medium</item>
     </style>
 
     <style name="Chorboagenda.ContactInfo.Header.InfoView">
@@ -39,7 +39,7 @@
         <item name="android:layout_marginTop">@dimen/contact_info_item_title_margin_top</item>
         <item name="android:textColor">@color/contact_info_item_title_text_color</item>
         <item name="android:textSize">@dimen/contact_info_item_title_text_size</item>
-        <item name="android:fontFamily">@string/font_family_medium</item>
+        <item name="android:fontFamily">@string/text_font_family_medium</item>
         <item name="android:textColorHint">@color/colorHintTextSecondary</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
     </style>

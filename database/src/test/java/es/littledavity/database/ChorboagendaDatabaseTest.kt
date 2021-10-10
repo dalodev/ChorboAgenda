@@ -6,7 +6,6 @@ package es.littledavity.database
 import com.nhaarman.mockitokotlin2.doReturn
 import com.nhaarman.mockitokotlin2.whenever
 import es.littledavity.database.chorbo.tables.ContactDao
-import es.littledavity.testUtils.roboelectric.TestRobolectric
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
 import org.junit.Before
@@ -14,7 +13,7 @@ import org.junit.Test
 import org.mockito.Mock
 import org.mockito.MockitoAnnotations
 
-class ChorboagendaDatabaseTest : TestRobolectric() {
+internal class ChorboagendaDatabaseTest {
 
     @Mock
     internal lateinit var chorboagendaDatabase: ChorboagendaDatabase

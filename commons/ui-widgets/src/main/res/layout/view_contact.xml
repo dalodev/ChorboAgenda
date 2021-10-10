@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/contact_name_margin_left"
             android:ellipsize="end"
-            android:fontFamily="@string/font_family_medium"
+            android:fontFamily="@string/text_font_family_medium"
             android:maxLines="3"
             android:textColor="@color/contact_name_text_color"
             android:textSize="@dimen/contact_name_text_size"

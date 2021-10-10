@@ -20,7 +20,7 @@
             android:layout_marginTop="@dimen/contact_info_item_title_margin"
             android:layout_marginEnd="@dimen/contact_info_item_title_margin"
             android:layout_marginBottom="@dimen/contact_info_item_title_margin_bottom"
-            android:fontFamily="@string/font_family_medium"
+            android:fontFamily="@string/text_font_family_medium"
             android:gravity="start"
             android:text="@string/contact_info_item_list_title"
             android:textColor="@color/contact_info_item_title_text_color"

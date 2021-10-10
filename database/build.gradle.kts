@@ -25,7 +25,7 @@ android {
     }
 
     // https://dagger.dev/hilt/gradle-setup#classpath-aggregation
-    lintOptions {
+    lint {
         isCheckReleaseBuilds = false
     }
 }

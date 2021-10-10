@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/contact_info_item_title_margin_bottom"
             android:background="@null"
-            android:fontFamily="@string/font_family_medium"
+            android:fontFamily="@string/text_font_family_medium"
             android:hint="@string/contact_info_item_title"
             android:importantForAutofill="no"
             android:maxLines="1"
