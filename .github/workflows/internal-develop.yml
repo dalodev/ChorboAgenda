@@ -90,12 +90,18 @@ jobs:
           profile: Nexus 6
           script: ./gradlew connectedCheck --stacktrace
 
-      - name: Unit test Reports
-        uses: asadmansr/android-test-report-action@v1.2.0
-        if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
+      #- name: Unit test Reports
+      #  uses: asadmansr/android-test-report-action@v1.2.0
+      #  if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
+      #  with:
+      #    name: reports
+      #    path: app/build/test-results
+      - name: Upload Reports
+        uses: actions/upload-artifact@v2
         with:
-          name: reports
-          path: app/build/test-results
+        if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
+          name: Test-Reports
+          path: app/build/reports
 
   # Upload apk to Firebase app distribution
   distribution_apk_to_testers:
