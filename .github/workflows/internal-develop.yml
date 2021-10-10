@@ -50,7 +50,7 @@ jobs:
   test:
     name: Run Tests
     needs: [ build_and_distribution ]
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
     strategy:
       matrix:
         api-level: [ 21, 23, 30 ]
@@ -81,21 +81,12 @@ jobs:
       - name: Run unit tests
         run: ./gradlew test --stacktrace
 
-      - name: Run Android Tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ matrix.api-level }}
-          target: ${{ matrix.target }}
-          arch: x86
-          profile: Nexus 6
-          script: ./gradlew connectedCheck --stacktrace
-
-      - name: Upload Reports
-        uses: actions/upload-artifact@v2
+      - name: Test Reports
+        uses: asadmansr/android-test-report-action@v1.2.0
         if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
         with:
-          name: Test-Reports
-          path: app/build/reports
+          name: reports
+          path: app/build/test-results
 
   # Upload apk to Firebase app distribution
   distribution_apk_to_testers:
