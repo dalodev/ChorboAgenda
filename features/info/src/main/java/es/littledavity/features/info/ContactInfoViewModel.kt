@@ -124,8 +124,9 @@ internal class ContactInfoViewModel @Inject constructor(
         GetContactUseCase.Params(contactId)
     ).resultOrError()
 
-    private suspend fun observeContactLikeState(contact: Contact) = useCases.observeContactLikeStateUseCase
-        .execute(ObserveContactLikeStateUseCase.Params(contact.id))
+    private suspend fun observeContactLikeState(contact: Contact) =
+        useCases.observeContactLikeStateUseCase
+            .execute(ObserveContactLikeStateUseCase.Params(contact.id))
 
     fun onBackButtonClicked() = onBackPressed()
 
@@ -134,7 +135,8 @@ internal class ContactInfoViewModel @Inject constructor(
             title = stringProvider.getString(R.string.gallery),
             initialPosition = position,
             contactImageUrlsProvider = {
-                currentContact?.let(contactUrlFactory::createGalleryImageUrls) ?: contactUrlFactory.createGalleryImageUrls(it)
+                currentContact?.let(contactUrlFactory::createGalleryImageUrls)
+                    ?: contactUrlFactory.createGalleryImageUrls(it)
             }
         )
     }
@@ -183,6 +185,9 @@ internal class ContactInfoViewModel @Inject constructor(
                 isContactLiked
             )
         }
+        viewModelScope.launch {
+            saveCurrentContact(false)
+        }
     }
 
     fun addGalleryImage(uri: Uri?) {
@@ -193,6 +198,9 @@ internal class ContactInfoViewModel @Inject constructor(
                 it,
                 isContactLiked
             )
+        }
+        viewModelScope.launch {
+            saveCurrentContact(false)
         }
     }
 
@@ -243,27 +251,37 @@ internal class ContactInfoViewModel @Inject constructor(
                 add(Info("", ""))
             }
         } ?: if (new) mutableListOf(Info("", "")) else mutableListOf()
-        currentContact?.let { _uiState.value = uiStateFactory.createWithResultState(it, isContactLiked) }
+        currentContact?.let {
+            _uiState.value = uiStateFactory.createWithResultState(it, isContactLiked)
+        }
     }
 
     fun onBackPressed() {
         viewModelScope.launch {
-            currentContact?.let {
-                useCases.saveContactUseCase.execute(SaveContactUseCase.Params(it))
-                    .map(::mapToUiState)
-                    .flowOn(dispatcherProvider.computation)
-                    .onStart {
-                        emit(uiStateFactory.createWithLoadingState())
-                    }.collect { state ->
-                        _uiState.value = state
-                        if (state is ContactInfoUiState.Result) {
-                            route(ContactInfoRoute.Back)
-                        }
-                    }
+            saveCurrentContact { state ->
+                if (state is ContactInfoUiState.Result) {
+                    route(ContactInfoRoute.Back)
+                }
             }
         }
     }
 
+    private suspend fun saveCurrentContact(
+        loading: Boolean = true,
+        onCompletion: ((ContactInfoUiState) -> Unit)? = null
+    ) {
+        currentContact?.let {
+            useCases.saveContactUseCase.execute(SaveContactUseCase.Params(it))
+                .map(::mapToUiState)
+                .flowOn(dispatcherProvider.computation)
+                .onStart {
+                    if (loading) emit(uiStateFactory.createWithLoadingState())
+                }.collect { state ->
+                    _uiState.value = state
+                    onCompletion?.invoke(state)
+                }
+        }
+    }
 
     private fun mapToUiState(contact: Contact?) = if (contact == null) {
         uiStateFactory.createWithEmptyState()

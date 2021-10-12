@@ -12,7 +12,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.toList
 import javax.inject.Inject
 
 internal const val PARAM_TITLE = "title"
@@ -55,7 +54,8 @@ internal class ImageViewerViewModel @Inject constructor(
     }
 
     private fun getSelectedPosition(): Int {
-        return savedStateHandle.get(KEY_SELECTED_POSITION) ?: checkNotNull(savedStateHandle.get<Int>(PARAM_INITIAL_POSITION))
+        return savedStateHandle.get(KEY_SELECTED_POSITION)
+            ?: checkNotNull(savedStateHandle.get<Int>(PARAM_INITIAL_POSITION))
     }
 
     private fun observeSelectedPositionChanges() {

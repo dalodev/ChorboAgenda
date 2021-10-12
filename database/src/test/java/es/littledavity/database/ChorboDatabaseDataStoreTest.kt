@@ -3,7 +3,6 @@
  */
 package es.littledavity.database
 
-import app.cash.turbine.test
 import es.littledavity.core.providers.TimestampProvider
 import es.littledavity.data.contacts.DataContact
 import es.littledavity.data.services.ImageGalleryService
@@ -15,14 +14,10 @@ import es.littledavity.database.chorbo.entities.Contact
 import es.littledavity.database.chorbo.entities.CreationDate
 import es.littledavity.database.chorbo.entities.CreationDateCategory
 import es.littledavity.database.chorbo.tables.ContactDao
-import es.littledavity.testUtils.DATA_CONTACTS
-import es.littledavity.testUtils.DATA_CONTACTS_IMAGE_CREATED
-import es.littledavity.testUtils.DATA_PAGINATION
-import es.littledavity.testUtils.FakeDispatcherProvider
+import es.littledavity.testUtils.*
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -62,7 +57,27 @@ class ChorboDatabaseDataStoreTest {
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
         val dbContacts = contactMapper.mapToDatabaseContacts(DATA_CONTACTS)
         coEvery { contactDao.searchContacts(any(), any(), any()) } returns dbContacts
-        assertThat(dataStore.searchContacts("", DATA_PAGINATION)).isEqualTo(DATA_CONTACTS_IMAGE_CREATED)
+        assertThat(dataStore.searchContacts("", DATA_PAGINATION)).isEqualTo(
+            DATA_CONTACTS_IMAGE_CREATED
+        )
+    }
+
+    @Test
+    fun getChorbosSuccessfully() = runBlockingTest {
+        coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
+        coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
+        val dbContacts = contactMapper.mapToDatabaseContacts(DATA_CONTACTS)
+        coEvery { contactDao.getChorbos() } returns dbContacts
+        assertThat(dataStore.getContacts()).isEqualTo(DATA_CONTACTS_IMAGE_CREATED)
+    }
+
+    @Test
+    fun getChorboByIdSuccessfully() = runBlockingTest {
+        coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
+        coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
+        val dbContact = contactMapper.mapToDatabaseContact(DATA_CONTACT)
+        coEvery { contactDao.getChorbo(any()) } returns dbContact
+        assertThat(dataStore.getContact(DATA_CONTACT.id)).isEqualTo(DATA_CONTACT_IMAGE_CREATED)
     }
 
     private class FakeSaveContactFactory : SaveContactFactory {

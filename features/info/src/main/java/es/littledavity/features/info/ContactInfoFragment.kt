@@ -60,9 +60,12 @@ internal class ContactInfoFragment : BaseFragment<
         onGalleryClicked = { viewModel.onGalleryClicked(it).also { updateContactData() } }
         onBackButtonClicked = { updateContactData().also { viewModel.onBackButtonClicked() } }
         onImageClicked = { viewModel.onImageClicked().also { updateContactData() } }
-        onChangeImageClicked = { viewModel.requestStoragePermission(imageResultLauncher).also { updateContactData() } }
+        onChangeImageClicked =
+            { viewModel.requestStoragePermission(imageResultLauncher).also { updateContactData() } }
         onLikeButtonClicked = viewModel::onLikeButtonClicked
-        onAddGalleryImagesClicked = { viewModel.requestStoragePermission(galleryResultLauncher).also { updateContactData() } }
+        onAddGalleryImagesClicked = {
+            viewModel.requestStoragePermission(galleryResultLauncher).also { updateContactData() }
+        }
         onAddEmptyDetailItem = { updateContactData(true) }
     }
 

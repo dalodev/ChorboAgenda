@@ -2,21 +2,14 @@ package es.littledavity.features.info.widgets.details
 
 import android.content.Context
 import android.util.AttributeSet
-import android.view.inputmethod.EditorInfo
 import android.widget.PopupMenu
-import androidx.core.view.isVisible
-import androidx.core.view.marginTop
 import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
 import es.littledavity.commons.ui.extensions.getColor
 import es.littledavity.commons.ui.extensions.getDimension
-import es.littledavity.commons.ui.extensions.getDimensionPixelSize
 import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.onClick
 import es.littledavity.commons.ui.extensions.onTextChanged
-import es.littledavity.commons.ui.extensions.setMargins
-import es.littledavity.commons.ui.extensions.setVerticalMargin
-import es.littledavity.commons.ui.extensions.topMargin
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoItemBinding
 
@@ -40,6 +33,8 @@ internal class ContactInfoDetailView @JvmOverloads constructor(
             binding.descriptionTv.setText(value)
         }
         get() = binding.descriptionTv.text.toString()
+
+    private var popupMenu: PopupMenu? = null
 
     var onInfoClicked: (() -> Unit)? = null
     var onDeleteClicked: (() -> Unit)? = null
@@ -65,24 +60,23 @@ internal class ContactInfoDetailView @JvmOverloads constructor(
         binding.descriptionTv.onTextChanged {
             onDescriptionTextChanged?.invoke(it)
         }
-        binding.itemOptions.onClick {
-            createOptionsMenu {
-                onDeleteClicked?.invoke()
-            }
-        }
+        popupMenu = createOptionsMenu().apply(::optionsMenuClickListener)
+
+        binding.itemOptions.onClick { popupMenu?.show() }
     }
 
-    private fun createOptionsMenu(itemClicked: () -> Unit) {
+    private fun createOptionsMenu(): PopupMenu {
         val popup = PopupMenu(context, binding.itemOptions)
         popup.inflate(R.menu.options_menu)
+        return popup
+    }
 
+    private fun optionsMenuClickListener(popup: PopupMenu) {
         popup.setOnMenuItemClickListener {
             when (it.itemId) {
-                R.id.contact_info_item_options_delete -> itemClicked.invoke()
+                R.id.contact_info_item_options_delete -> onDeleteClicked?.invoke()
             }
             return@setOnMenuItemClickListener false
         }
-
-        popup.show()
     }
 }

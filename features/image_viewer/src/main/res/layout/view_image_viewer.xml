@@ -29,7 +29,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:toolbar_leftButtonIcon="@drawable/arrow_left"
-        app:toolbar_rightButtonIcon="@drawable/share_variant"
         tools:toolbar_titleText="Image" />
 
 </merge>

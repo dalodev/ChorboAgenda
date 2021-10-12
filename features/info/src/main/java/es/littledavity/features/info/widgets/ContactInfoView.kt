@@ -30,7 +30,6 @@ import es.littledavity.core.providers.StringProvider
 import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
-import es.littledavity.features.info.widgets.details.ContactInfoDetailItem
 import es.littledavity.features.info.widgets.details.ContactInfoDetailsItem
 import es.littledavity.features.info.widgets.header.ContactHeaderController
 import es.littledavity.features.info.widgets.model.ContactInfoModel

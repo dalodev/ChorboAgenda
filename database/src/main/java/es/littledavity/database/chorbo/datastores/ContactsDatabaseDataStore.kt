@@ -34,6 +34,12 @@ internal class ContactsDatabaseDataStore @Inject constructor(
         }
     }
 
+    override suspend fun getContacts() = contactDao.getChorbos().let {
+        withContext(dispatcherProvider.computation) {
+            it.map(contactMapper::mapToDataContact)
+        }
+    }
+
     override suspend fun insertContact(chorbo: DataContact): Flow<DataContact> {
         val id = contactDao.insertChorbo(
             withContext(dispatcherProvider.computation) {

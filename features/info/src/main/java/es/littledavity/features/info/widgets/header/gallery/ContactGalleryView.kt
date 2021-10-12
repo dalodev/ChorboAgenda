@@ -31,12 +31,21 @@ internal class ContactGalleryView @JvmOverloads constructor(
     var isGalleryClickEnabled = true
 
     private var adapterItems by observeChanges<List<ContactGalleryItem>>(emptyList()) { _, newItems ->
-        adapter.submitList(newItems)
+        adapter.submitList(newItems) {
+            viewPager.recyclerView?.invalidateItemDecorations()
+            if (!initOpen) {
+                viewPager.currentItem = newItems.size
+            }else {
+                initOpen = false
+            }
+        }
     }
 
     var galleryModels by observeChanges<List<ContactGalleryModel>>(emptyList()) { _, newItems ->
         adapterItems = newItems.map(::ContactGalleryItem)
     }
+
+    var initOpen: Boolean = true
 
     var onGalleryChanged: ((Int) -> Unit)? = null
     var onGalleryClicked: ((Int) -> Unit)? = null

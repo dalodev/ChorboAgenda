@@ -11,6 +11,8 @@ interface ContactsLocalDataStore {
 
     suspend fun getContact(id: Int): DataContact?
 
+    suspend fun getContacts(): List<DataContact>
+
     suspend fun insertContacts(chorbos: List<DataContact>)
 
     suspend fun insertContact(chorbo: DataContact): Flow<DataContact>
