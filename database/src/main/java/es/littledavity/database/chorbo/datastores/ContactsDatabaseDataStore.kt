@@ -34,6 +34,8 @@ internal class ContactsDatabaseDataStore @Inject constructor(
         }
     }
 
+    override suspend fun getContactFlow(id: Int) = contactDao.getChorboFlow(id).toDataContactFlow()
+
     override suspend fun getContacts() = contactDao.getChorbos().let {
         withContext(dispatcherProvider.computation) {
             it.map(contactMapper::mapToDataContact)
@@ -85,7 +87,7 @@ internal class ContactsDatabaseDataStore @Inject constructor(
         .map(contactMapper::mapToDataContact)
         .flowOn(dispatcherProvider.computation)
 
-    private fun Flow<DatabaseContact>.toDataContactFlow() = distinctUntilChanged()
+    private fun Flow<DatabaseContact>.toDataContactFlow() = this
         .map(contactMapper::mapToDataContact)
         .flowOn(dispatcherProvider.computation)
 

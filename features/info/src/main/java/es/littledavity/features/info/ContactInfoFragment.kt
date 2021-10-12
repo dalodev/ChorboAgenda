@@ -83,8 +83,8 @@ internal class ContactInfoFragment : BaseFragment<
             .observeIn(this)
     }
 
-    override fun onLoadData() {
-        super.onLoadData()
+    override fun onResume() {
+        super.onResume()
         viewModel.loadData(requireContext().defaultWindowAnimationDuration())
     }
 
@@ -115,7 +115,9 @@ internal class ContactInfoFragment : BaseFragment<
         navigator.goToImageViewer(
             route.title,
             route.initialPosition,
-            route.imageUrls
+            route.imageUrls,
+            route.contactId,
+            route.profileView
         )
     }
 

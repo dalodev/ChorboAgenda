@@ -16,7 +16,9 @@ internal sealed class ContactInfoRoute : Route {
     data class ImageViewer(
         val title: String?,
         val initialPosition: Int,
-        val imageUrls: List<String>
+        val imageUrls: List<String>,
+        val contactId: Int,
+        val profileView: Boolean
     ) : ContactInfoRoute()
 
     object Back : ContactInfoRoute()

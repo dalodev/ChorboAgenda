@@ -5,7 +5,7 @@ package es.littledavity.database
 
 import es.littledavity.core.providers.TimestampProvider
 import es.littledavity.data.contacts.DataContact
-import es.littledavity.data.services.ImageGalleryService
+import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.database.chorbo.datastores.ContactMapper
 import es.littledavity.database.chorbo.datastores.ContactsDatabaseDataStore
 import es.littledavity.database.chorbo.datastores.SaveContactFactory

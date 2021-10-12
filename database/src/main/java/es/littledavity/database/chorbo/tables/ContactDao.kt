@@ -40,6 +40,9 @@ internal interface ContactDao {
     @Query("SELECT * FROM ${Contact.Schema.TABLE_NAME} WHERE ${Contact.Schema.ID} = :chorboId")
     suspend fun getChorbo(chorboId: Int): Contact?
 
+    @Query("SELECT * FROM ${Contact.Schema.TABLE_NAME} WHERE ${Contact.Schema.ID} = :chorboId")
+    fun getChorboFlow(chorboId: Int): Flow<Contact>
+
     @Query("SELECT * FROM ${Contact.Schema.TABLE_NAME} ORDER BY ${Contact.Schema.NAME}")
     suspend fun getChorbos(): List<Contact>
 

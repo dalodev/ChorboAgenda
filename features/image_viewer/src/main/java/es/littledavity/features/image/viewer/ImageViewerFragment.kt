@@ -60,6 +60,7 @@ internal class ImageViewerFragment : BaseFragment<
 
     private fun initImageViewerView() = with(viewBinding.imageViewerView) {
         onToolbarLeftBtnClicked = ::onBackPressed
+        onToolbarRightBtnClicked = viewModel::deleteImageUrl
         onPageChanged = viewModel::onPageChanged
     }
 

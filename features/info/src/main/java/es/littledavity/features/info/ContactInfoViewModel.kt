@@ -34,6 +34,8 @@ import es.littledavity.domain.contacts.usecases.SaveContactUseCase
 import es.littledavity.domain.contacts.usecases.ToggleContactLikeStateUseCase
 import es.littledavity.features.info.mapping.ContactInfoUiStateFactory
 import es.littledavity.features.info.widgets.ContactInfoUiState
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancelAndJoin
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -66,6 +68,7 @@ internal class ContactInfoViewModel @Inject constructor(
 ) : BaseViewModel() {
 
     private var isObservingContactData = false
+    private var contactObservingJob: Job? = null
 
     private val contactId = checkNotNull(savedStateHandle.get<Int>(PARAM_CONTACT_ID))
 
@@ -84,7 +87,7 @@ internal class ContactInfoViewModel @Inject constructor(
 
     private fun observeContactData(resultEmissionDelay: Long) {
         if (isObservingContactData) return
-        viewModelScope.launch {
+        contactObservingJob = viewModelScope.launch {
             observeContactDataInternal(resultEmissionDelay)
         }
     }
@@ -137,14 +140,16 @@ internal class ContactInfoViewModel @Inject constructor(
             contactImageUrlsProvider = {
                 currentContact?.let(contactUrlFactory::createGalleryImageUrls)
                     ?: contactUrlFactory.createGalleryImageUrls(it)
-            }
+            },
+            false
         )
     }
 
     private fun navigateToImageViewer(
         title: String,
         initialPosition: Int = 0,
-        contactImageUrlsProvider: (Contact) -> List<String>
+        contactImageUrlsProvider: (Contact) -> List<String>,
+        profileView: Boolean
     ) {
         viewModelScope.launch {
             val contact = getContact()
@@ -155,7 +160,16 @@ internal class ContactInfoViewModel @Inject constructor(
 
             val images = contactImageUrlsProvider(contact)
                 .takeIf(List<String>::isNotEmpty) ?: return@launch
-            route(ContactInfoRoute.ImageViewer(title, initialPosition, images))
+            route(
+                ContactInfoRoute.ImageViewer(
+                    title,
+                    initialPosition,
+                    images,
+                    contactId,
+                    profileView
+                )
+            )
+            contactObservingJob?.cancelAndJoin()
         }
     }
 
@@ -165,7 +179,8 @@ internal class ContactInfoViewModel @Inject constructor(
             contactImageUrlsProvider = {
                 currentContact?.let(contactUrlFactory::createCoverImageUrl)
                     ?.let(::listOf) ?: emptyList()
-            }
+            },
+            profileView = true
         )
     }
 

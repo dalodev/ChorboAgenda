@@ -85,6 +85,16 @@
             android:name="image_urls"
             app:argType="string[]" />
 
+        <argument
+            android:name="contact_id"
+            app:argType="integer" />
+
+        <argument
+            android:name="profile_view"
+            android:defaultValue="false"
+            app:argType="boolean"
+            app:nullable="false" />
+
     </action>
 
     <action

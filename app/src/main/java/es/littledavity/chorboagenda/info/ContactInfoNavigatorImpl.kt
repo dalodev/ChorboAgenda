@@ -20,12 +20,20 @@ internal class ContactInfoNavigatorImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : ContactInfoNavigator {
 
-    override fun goToImageViewer(title: String?, initialPosition: Int, imageUrls: List<String>) {
+    override fun goToImageViewer(
+        title: String?,
+        initialPosition: Int,
+        imageUrls: List<String>,
+        contactId: Int,
+        profileView: Boolean,
+    ) {
         navController.navigate(
             ContactInfoFragmentDirections.actionImageViewerFragment(
                 title,
                 initialPosition,
-                imageUrls.toTypedArray()
+                imageUrls.toTypedArray(),
+                contactId,
+                profileView
             )
         )
     }

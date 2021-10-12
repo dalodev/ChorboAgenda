@@ -1,7 +1,7 @@
 /*
  * Copyright 2021 dev.id
  */
-package es.littledavity.data.services
+package es.littledavity.core.service
 
 import android.content.ContentValues
 import android.content.Context
@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.paulrybitskyi.hiltbinder.BindType
 import dagger.hilt.android.qualifiers.ApplicationContext
-import es.littledavity.data.contacts.DataContact
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileNotFoundException
@@ -27,6 +26,7 @@ import javax.inject.Inject
 
 interface ImageGalleryService {
     fun createMediaFile(imageId: String?, name: String): String?
+    fun removeMediaFile(uri: Uri): Int
 }
 
 @BindType
@@ -99,7 +99,7 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         return file.path
     }
 
-    private fun saveMediaImage(imageToSave: Bitmap, name: String, imageId: String): String? {
+    private fun saveMediaImage(imageToSave: Bitmap, name: String, imageId: String): String {
         val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${name}"
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, imageId)
@@ -145,5 +145,10 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         }
         stream.close()
         return uri.path.orEmpty()
+    }
+
+    override fun removeMediaFile(uri: Uri): Int {
+        val resolver = context.contentResolver
+        return resolver.delete(uri, null, null)
     }
 }

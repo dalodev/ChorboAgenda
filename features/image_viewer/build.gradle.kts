@@ -26,6 +26,7 @@ dependencies {
     implementation(Deps.AndroidX.fragmentKtx)
     implementation(Deps.AndroidX.viewPager2)
     implementation(Deps.Misc.photoView)
+    implementation(Deps.Misc.kotlinResult)
 
     implementation(Deps.Google.daggerHilt)
     kapt(Deps.Google.daggerHiltCompiler)
