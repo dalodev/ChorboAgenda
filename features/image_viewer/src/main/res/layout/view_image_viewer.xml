@@ -21,7 +21,7 @@
 
     <es.littledavity.commons.ui.widgets.toolbar.Toolbar
         android:id="@+id/toolbar"
-        style="@style/ChorboagendaTheme.Toolbar"
+        style="@style/ChorboagendaTheme.Toolbar.White"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/image_viewer_bar_background_color"

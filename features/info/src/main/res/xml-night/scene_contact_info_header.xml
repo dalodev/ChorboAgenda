@@ -45,7 +45,7 @@
 
             <CustomAttribute
                 app:attributeName="ColorFilter"
-                app:customColorValue="@color/contact_info_header_like_btn_icon_color"/>
+                app:customColorValue="@color/contact_info_header_title_text_color"/>
 
         </Constraint>
 
@@ -154,7 +154,7 @@
 
             <CustomAttribute
                 app:attributeName="textColor"
-                app:customColorValue="@color/colorPrimaryDark"/>
+                app:customColorValue="@color/colorPrimaryText"/>
 
         </Constraint>
 
@@ -162,7 +162,7 @@
 
             <CustomAttribute
                 app:attributeName="ColorFilter"
-                app:customColorValue="@color/colorPrimaryDark"/>
+                app:customColorValue="@color/colorPrimaryText"/>
 
         </Constraint>
 

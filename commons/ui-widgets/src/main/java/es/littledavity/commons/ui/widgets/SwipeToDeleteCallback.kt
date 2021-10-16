@@ -6,18 +6,19 @@ import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import es.littledavity.commons.ui.extensions.getCompatColor
 import es.littledavity.commons.ui.extensions.orZero
 
 class SwipeToDeleteCallback(
-    context: Context,
+    val context: Context,
     val onSwiped: ((Int) -> Unit)
-) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+) : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
 
     private val deleteIcon = ContextCompat.getDrawable(context, R.drawable.ic_delete_swap)
     private val intrinsicWidth = deleteIcon?.intrinsicWidth.orZero()
     private val intrinsicHeight = deleteIcon?.intrinsicHeight.orZero()
     private val background = ColorDrawable()
-    private val backgroundColor = Color.parseColor("#f44336")
+    private val backgroundColor = context.getCompatColor(R.color.colorPrimaryLight)
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
     var canSwipe = true
 

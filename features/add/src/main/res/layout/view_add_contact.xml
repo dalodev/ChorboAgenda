@@ -28,7 +28,7 @@
             android:layout_width="@dimen/add_contact_add_photo_image_size"
             android:layout_height="@dimen/add_contact_add_photo_image_size"
             android:background="@drawable/add_photo"
-            android:backgroundTint="@color/colorInfoView"
+            android:backgroundTint="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="@+id/photoView"
             app:layout_constraintEnd_toEndOf="@id/photoView"
             app:layout_constraintStart_toStartOf="@id/photoView"
@@ -106,7 +106,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:srcCompat="@drawable/done"
-            app:tint="@color/add_contact_btn_icon_color"
+            app:tint="@color/colorPrimaryTextInverse"
             tools:ignore="ContentDescription" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

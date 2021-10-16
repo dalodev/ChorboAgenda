@@ -29,4 +29,12 @@
         <item name="toolbar_titleTextGravity">left</item>
     </style>
 
+    <style name="ChorboagendaTheme.Toolbar.White" parent="ChorboagendaTheme.Toolbar">
+        <item name="android:background">@color/toolbar_background_color</item>
+        <item name="toolbar_titleTextColor">@color/colorPrimaryTextInverse</item>
+        <item name="toolbar_buttonIconColor">@color/colorPrimaryTextInverse</item>
+        <item name="toolbar_titleTextSize">@dimen/toolbar_title_text_size</item>
+        <item name="toolbar_titleTextGravity">left</item>
+    </style>
+
 </resources>

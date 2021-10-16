@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Primary colors-->
-    <color name="colorPrimary">#4CBFDE</color>
-    <color name="colorPrimaryDark">#FFFFFF</color>
+    <color name="colorPrimary">#2B303C</color>
+    <color name="colorPrimaryDark">#1c2028</color>
     <color name="colorPrimaryLight">#545966</color>
-    <color name="colorAccent">#FF579C</color>
-    <color name="colorPrimaryText">#212121</color>
+    <color name="colorAccent">#BB86FC</color>
+    <color name="colorPrimaryText">#FFFFFF</color>
     <color name="colorPrimaryTextInverse">#FFFFFF</color>
-    <color name="colorSecondaryText">#757575</color>
+    <color name="colorSecondaryText">#809aaf</color>
 
     <color name="colorContentContainer">@color/colorPrimaryDark</color>
     <color name="colorNavigationBar">@color/colorPrimary</color>
@@ -21,13 +21,13 @@
     <color name="textBody">#4f4f4f</color>
 
     <!-- Bottom Navigation -->
-    <color name="bottom_navigation_item_color_state_unselected">@color/colorPrimaryDark</color>
-    <color name="bottom_navigation_item_color_state_selected">@color/colorPrimaryText</color>
+    <color name="bottom_navigation_item_color_state_unselected">@color/colorSecondaryText</color>
+    <color name="bottom_navigation_item_color_state_selected">@color/colorAccent</color>
 
     <string-array name="placeholders">
         <item>#eeeeee</item>
         <item>#e0e0e0</item>
-        <item>#AEAEAE</item>
+        <item>#aeaeae</item>
         <item>#bdbdbd</item>
         <item>#cfcfcf</item>
         <item>#8d8d8d</item>

@@ -6,10 +6,10 @@
     <color name="contact_info_header_back_button_icon_color">@color/colorPrimaryText</color>
     <color name="contact_info_header_back_button_drawable_middleground_color">#35000000</color>
     <color name="contact_info_header_page_indicator_background_color">#35000000</color>
-    <color name="contact_info_header_page_indicator_text_color">@color/colorPrimaryText</color>
+    <color name="contact_info_header_page_indicator_text_color">@color/colorPrimaryDark</color>
     <color name="contact_info_header_backdrop_background_color">@color/colorPrimaryDark</color>
     <color name="contact_info_header_like_btn_color">@color/colorAccent</color>
-    <color name="contact_info_header_like_btn_icon_color">#611d12</color>
+    <color name="contact_info_header_like_btn_icon_color">@color/colorPrimaryDark</color>
     <color name="contact_info_header_title_text_color">@color/colorPrimaryText</color>
     <color name="contact_info_header_release_date_text_color">@color/colorSecondaryText</color>
     <color name="contact_info_header_developer_name_text_color">@color/colorSecondaryText</color>

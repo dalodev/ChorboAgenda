@@ -58,7 +58,7 @@
             android:background="?attr/selectableItemBackgroundBorderless"
             android:padding="@dimen/toolbar_button_icon_padding"
             app:srcCompat="@drawable/close"
-            app:tint="@color/toolbar_button_icon_color"/>
+            app:tint="@color/colorPrimaryDark"/>
 
     </FrameLayout>
 
