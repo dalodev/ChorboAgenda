@@ -4,7 +4,6 @@
 package es.littledavity.features.add
 
 import android.net.Uri
-import android.util.Patterns
 import app.cash.turbine.test
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.domain.contacts.entities.Contact

@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.info.widgets.details
 
 import android.view.LayoutInflater
@@ -9,17 +12,16 @@ import es.littledavity.commons.ui.base.rv.NoDependencies
 import es.littledavity.domain.contacts.entities.Info
 
 internal class ContactInfoDetailItem(model: Info) : AbstractItem<
-        Info,
-        ContactInfoDetailItem.ViewHolder,
-        NoDependencies
-        >(model) {
+    Info,
+    ContactInfoDetailItem.ViewHolder,
+    NoDependencies
+    >(model) {
 
     override fun createViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup,
         dependencies: NoDependencies
     ) = ViewHolder(ContactInfoDetailView(parent.context))
-
 
     override fun performBinding(viewHolder: ViewHolder, dependencies: NoDependencies) {
         viewHolder.bind(model)
@@ -46,7 +48,7 @@ internal class ContactInfoDetailItem(model: Info) : AbstractItem<
             view.onDescriptionTextChanged = onDescTextChanged
         }
 
-        fun setOnDeleteItemListener(onDeleteItem: () -> Unit){
+        fun setOnDeleteItemListener(onDeleteItem: () -> Unit) {
             view.onDeleteClicked = onDeleteItem
         }
     }

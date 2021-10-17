@@ -93,5 +93,4 @@ internal class ContactsDatabaseDataStore @Inject constructor(
 
     suspend fun deleteChorbosById(idList: List<Int>) =
         contactDao.deleteChorbosById(idList)
-
 }

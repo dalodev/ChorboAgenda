@@ -29,7 +29,7 @@ internal data class Contact(
     @ColumnInfo(name = Schema.INSTAGRAM) val instagram: String?,
     @ColumnInfo(name = Schema.INFO_LIST) val infoList: List<Info>,
 
-    ) {
+) {
 
     object Schema {
         const val TABLE_NAME = "chorbo"

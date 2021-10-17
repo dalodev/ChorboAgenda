@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.likes
 
 import app.cash.turbine.test
@@ -6,7 +9,11 @@ import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.domain.DomainContact
 import es.littledavity.domain.contacts.usecases.likes.ObserveLikedContactsUseCase
-import es.littledavity.testUtils.*
+import es.littledavity.testUtils.DOMAIN_CONTACTS
+import es.littledavity.testUtils.FakeDispatcherProvider
+import es.littledavity.testUtils.FakeErrorMapper
+import es.littledavity.testUtils.FakeLogger
+import es.littledavity.testUtils.MainCoroutineRule
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK

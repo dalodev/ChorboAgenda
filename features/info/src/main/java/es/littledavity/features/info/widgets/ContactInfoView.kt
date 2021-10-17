@@ -76,7 +76,7 @@ internal class ContactInfoView @JvmOverloads constructor(
     }
 
     private fun initContactHeaderController(context: Context) {
-        ContactHeaderController(context, currentContact, binding, stringProvider).apply {
+        ContactHeaderController(context, binding, stringProvider).apply {
             onGalleryClicked = {
                 this@ContactInfoView.onGalleryClicked?.invoke(it)
             }
@@ -214,10 +214,10 @@ internal class ContactInfoView @JvmOverloads constructor(
             // create viewHolder for each item with listener invoke
             is ContactInfoDetailsItem.ViewHolder -> with(viewHolder) {
                 setOnDetailClickListener {
-                    //add some click functionality to items
+                    // add some click functionality to items
                 }
                 setOnEmptyListListener { isEmpty ->
-                    if(isEmpty) {
+                    if (isEmpty) {
                         adapterItems = emptyList()
                     }
                 }

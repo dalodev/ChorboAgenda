@@ -4,8 +4,8 @@
 package es.littledavity.database
 
 import es.littledavity.core.providers.TimestampProvider
-import es.littledavity.data.contacts.DataContact
 import es.littledavity.core.service.ImageGalleryService
+import es.littledavity.data.contacts.DataContact
 import es.littledavity.database.chorbo.datastores.ContactMapper
 import es.littledavity.database.chorbo.datastores.ContactsDatabaseDataStore
 import es.littledavity.database.chorbo.datastores.SaveContactFactory
@@ -14,7 +14,12 @@ import es.littledavity.database.chorbo.entities.Contact
 import es.littledavity.database.chorbo.entities.CreationDate
 import es.littledavity.database.chorbo.entities.CreationDateCategory
 import es.littledavity.database.chorbo.tables.ContactDao
-import es.littledavity.testUtils.*
+import es.littledavity.testUtils.DATA_CONTACT
+import es.littledavity.testUtils.DATA_CONTACTS
+import es.littledavity.testUtils.DATA_CONTACTS_IMAGE_CREATED
+import es.littledavity.testUtils.DATA_CONTACT_IMAGE_CREATED
+import es.littledavity.testUtils.DATA_PAGINATION
+import es.littledavity.testUtils.FakeDispatcherProvider
 import io.mockk.MockKAnnotations
 import io.mockk.coEvery
 import io.mockk.impl.annotations.MockK

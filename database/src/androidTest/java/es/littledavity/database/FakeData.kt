@@ -3,9 +3,11 @@
  */
 package es.littledavity.database
 
-import es.littledavity.database.chorbo.entities.*
 import es.littledavity.database.chorbo.DatabaseContact
 import es.littledavity.database.chorbo.DatabaseImage
+import es.littledavity.database.chorbo.entities.CreationDate
+import es.littledavity.database.chorbo.entities.CreationDateCategory
+import es.littledavity.database.chorbo.entities.LikedContact
 
 internal val DATABASE_CONTACT = DatabaseContact(
     id = 1,

@@ -19,9 +19,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class AddContactFragment : BaseFragment<
-        FragmentAddContactBinding,
-        AddContactViewModel,
-        AddContactNavigator>(
+    FragmentAddContactBinding,
+    AddContactViewModel,
+    AddContactNavigator>(
     R.layout.fragment_add_contact
 ) {
 

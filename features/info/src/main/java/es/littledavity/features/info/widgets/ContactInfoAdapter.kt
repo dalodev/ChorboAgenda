@@ -18,9 +18,11 @@ internal class ContactInfoAdapter(
         setHasStableIds(true)
     }
 
-    fun getData(): MutableList<Info>? = (currentList.find {
-        it is ContactInfoDetailsItem
-    } as? ContactInfoDetailsItem)?.model?.filter {
+    fun getData(): MutableList<Info>? = (
+        currentList.find {
+            it is ContactInfoDetailsItem
+        } as? ContactInfoDetailsItem
+        )?.model?.filter {
         it.title?.isNotBlank() ?: false || it.description?.isNotBlank() ?: false
     }?.toMutableList()
 }

@@ -23,9 +23,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 internal class ContactInfoFragment : BaseFragment<
-        FragmentContactInfoBinding,
-        ContactInfoViewModel,
-        ContactInfoNavigator>(
+    FragmentContactInfoBinding,
+    ContactInfoViewModel,
+    ContactInfoNavigator>(
     R.layout.fragment_contact_info
 ) {
     override val viewBinding by viewBinding(FragmentContactInfoBinding::bind)
@@ -43,7 +43,6 @@ internal class ContactInfoFragment : BaseFragment<
         registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
             viewModel.addGalleryImage(uri)
         }
-
 
     override fun onInit() {
         super.onInit()

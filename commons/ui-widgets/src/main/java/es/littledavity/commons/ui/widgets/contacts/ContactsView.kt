@@ -12,13 +12,26 @@ import androidx.core.view.isVisible
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import es.littledavity.commons.ui.extensions.*
+import es.littledavity.commons.ui.extensions.addOnScrollListener
+import es.littledavity.commons.ui.extensions.disableAfterAnimationEnds
+import es.littledavity.commons.ui.extensions.disableChangeAnimations
+import es.littledavity.commons.ui.extensions.fadeIn
+import es.littledavity.commons.ui.extensions.getColor
+import es.littledavity.commons.ui.extensions.getDimensionPixelSize
+import es.littledavity.commons.ui.extensions.getDrawable
+import es.littledavity.commons.ui.extensions.getString
+import es.littledavity.commons.ui.extensions.layoutInflater
+import es.littledavity.commons.ui.extensions.makeGone
+import es.littledavity.commons.ui.extensions.makeInvisible
+import es.littledavity.commons.ui.extensions.makeVisible
+import es.littledavity.commons.ui.extensions.observeChanges
+import es.littledavity.commons.ui.extensions.resetAnimation
+import es.littledavity.commons.ui.extensions.showSnackBar
 import es.littledavity.commons.ui.recyclerview.LastItemExclusionPolicy
 import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
 import es.littledavity.commons.ui.widgets.R
-import es.littledavity.commons.ui.widgets.databinding.ViewContactsBinding
 import es.littledavity.commons.ui.widgets.SwipeToDeleteCallback
-
+import es.littledavity.commons.ui.widgets.databinding.ViewContactsBinding
 
 class ContactsView @JvmOverloads constructor(
     context: Context,
@@ -86,14 +99,18 @@ class ContactsView @JvmOverloads constructor(
         swipeToDelete.canSwipe = false
         itemToDelete = adapterItems[position]
         adapterItems = currentAdapterItems.apply { removeAt(position) }
-        showSnackBar(getString(R.string.contacts_delete_snackbar_message),
-            getString(R.string.contacts_delete_snackbar_action_message), {
+        showSnackBar(
+            getString(R.string.contacts_delete_snackbar_message),
+            getString(R.string.contacts_delete_snackbar_action_message),
+            {
                 itemToDelete?.let { adapterItems = currentAdapterItems.apply { add(position, it) } }
                 swipeToDelete.canSwipe = true
-            }, {
+            },
+            {
                 onRemoveContact?.invoke(itemToDelete?.model?.id)
                 swipeToDelete.canSwipe = true
-            })
+            }
+        )
     }
 
     private fun bindListener(item: ContactItem, viewHolder: RecyclerView.ViewHolder) {

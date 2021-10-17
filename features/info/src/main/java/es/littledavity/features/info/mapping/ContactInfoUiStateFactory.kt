@@ -16,7 +16,6 @@ internal interface ContactInfoUiStateFactory {
         isLiked: Boolean
     ): ContactInfoUiState
     fun createWithPermissionError(navigation: () -> Unit): ContactInfoUiState
-
 }
 
 @BindType(installIn = BindType.Component.VIEW_MODEL)

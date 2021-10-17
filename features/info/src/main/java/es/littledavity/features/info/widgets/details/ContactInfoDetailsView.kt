@@ -1,15 +1,21 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.info.widgets.details
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import es.littledavity.commons.ui.extensions.*
+import es.littledavity.commons.ui.extensions.disableAnimations
+import es.littledavity.commons.ui.extensions.getColor
+import es.littledavity.commons.ui.extensions.getDimension
+import es.littledavity.commons.ui.extensions.getDimensionPixelSize
+import es.littledavity.commons.ui.extensions.layoutInflater
+import es.littledavity.commons.ui.extensions.observeChanges
 import es.littledavity.commons.ui.recyclerview.SpacingItemDecorator
-import es.littledavity.commons.ui.widgets.SwipeToDeleteCallback
 import es.littledavity.domain.contacts.entities.Info
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoListItemBinding

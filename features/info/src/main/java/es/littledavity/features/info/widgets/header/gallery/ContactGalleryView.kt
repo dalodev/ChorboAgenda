@@ -35,7 +35,7 @@ internal class ContactGalleryView @JvmOverloads constructor(
             viewPager.recyclerView?.invalidateItemDecorations()
             if (!initOpen) {
                 viewPager.currentItem = newItems.size
-            }else {
+            } else {
                 initOpen = false
             }
         }

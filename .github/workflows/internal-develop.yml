@@ -46,6 +46,22 @@ jobs:
           name: debug apk
           path: app/build/outputs/apk/debug/app-debug.apk
 
+  # Run quality code
+  ktlint:
+    name: Check Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Run ktlint
+        uses: ScaCap/action-ktlint@master
+        with:
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review # Change reporter
+          android: true
+
   # First step run unit test
   test:
     name: Run Tests

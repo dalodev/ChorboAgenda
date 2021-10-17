@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.image.viewer
 
 import com.paulrybitskyi.hiltbinder.BindType
@@ -10,8 +13,7 @@ interface ImageViewerUiStateFactory {
 }
 
 @BindType(installIn = BindType.Component.VIEW_MODEL)
-internal class ImageViewerUiStateFactoryImpl @Inject constructor(
-) : ImageViewerUiStateFactory {
+internal class ImageViewerUiStateFactoryImpl @Inject constructor() : ImageViewerUiStateFactory {
 
     override fun createWithLoadingState() = ImageViewerUiState.Loading
 

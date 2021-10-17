@@ -7,7 +7,6 @@ import android.Manifest
 import android.net.Uri
 import android.util.Patterns
 import androidx.activity.result.ActivityResultLauncher
-import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.viewModelScope
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse

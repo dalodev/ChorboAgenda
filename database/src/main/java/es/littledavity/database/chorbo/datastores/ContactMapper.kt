@@ -4,13 +4,17 @@
 package es.littledavity.database.chorbo.datastores
 
 import es.littledavity.core.providers.TimestampProvider
-import es.littledavity.data.contacts.*
 import es.littledavity.core.service.ImageGalleryService
-import es.littledavity.database.chorbo.*
+import es.littledavity.data.contacts.DataContact
+import es.littledavity.data.contacts.DataCreationDate
+import es.littledavity.data.contacts.DataCreationDateCategory
+import es.littledavity.data.contacts.DataImage
+import es.littledavity.data.contacts.DataInfo
 import es.littledavity.database.chorbo.DatabaseContact
 import es.littledavity.database.chorbo.DatabaseCreationDate
 import es.littledavity.database.chorbo.DatabaseCreationDateCategory
 import es.littledavity.database.chorbo.DatabaseImage
+import es.littledavity.database.chorbo.DatabaseInfo
 import javax.inject.Inject
 
 internal class ContactMapper @Inject constructor(
@@ -90,7 +94,8 @@ internal class ContactMapper @Inject constructor(
         created = created
     )
 
-    private fun List<DatabaseImage>.toDataImages(): MutableList<DataImage> = map { it.toDataImage() }.toMutableList()
+    private fun List<DatabaseImage>.toDataImages(): MutableList<DataImage> =
+        map { it.toDataImage() }.toMutableList()
 
     private fun DatabaseCreationDate.toDataCreationDate() = DataCreationDate(
         date = this.date,

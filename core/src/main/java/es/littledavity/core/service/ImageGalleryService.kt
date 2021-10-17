@@ -100,7 +100,7 @@ internal class ImageGalleryServiceImpl @Inject constructor(
     }
 
     private fun saveMediaImage(imageToSave: Bitmap, name: String, imageId: String): String {
-        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${name}"
+        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/$name"
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, imageId)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
@@ -125,7 +125,7 @@ internal class ImageGalleryServiceImpl @Inject constructor(
     }
 
     private fun saveMediaImageQ(imageToSave: Bitmap, name: String, imageId: String): String {
-        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/${name}"
+        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/$name"
         val contentValues = ContentValues().apply {
             put(MediaStore.MediaColumns.DISPLAY_NAME, imageId)
             put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")

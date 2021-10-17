@@ -1,7 +1,13 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.commons.ui.widgets
 
 import android.content.Context
-import android.graphics.*
+import android.graphics.Canvas
+import android.graphics.Paint
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffXfermode
 import android.graphics.drawable.ColorDrawable
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -89,7 +95,6 @@ class SwipeToDeleteCallback(
         )
         background.draw(canvas)
 
-
         // Calculate position of delete icon
         val deleteIconTop = itemView.top + (itemHeight - intrinsicHeight) / 2
         val deleteIconMargin = (itemHeight - intrinsicHeight) / 2
@@ -106,6 +111,4 @@ class SwipeToDeleteCallback(
     private fun clearCanvas(c: Canvas?, left: Float, top: Float, right: Float, bottom: Float) {
         c?.drawRect(left, top, right, bottom, clearPaint)
     }
-
-
 }

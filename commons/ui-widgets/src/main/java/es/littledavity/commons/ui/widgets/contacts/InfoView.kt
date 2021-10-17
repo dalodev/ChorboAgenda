@@ -6,7 +6,6 @@ package es.littledavity.commons.ui.widgets.contacts
 import android.content.Context
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
-import android.text.InputType
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.view.Gravity
@@ -22,7 +21,6 @@ import es.littledavity.commons.ui.extensions.getFont
 import es.littledavity.commons.ui.extensions.getString
 import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.onClick
-import es.littledavity.commons.ui.extensions.onTextChanged
 import es.littledavity.commons.ui.extensions.setColor
 import es.littledavity.commons.ui.extensions.setLayoutParamsSize
 import es.littledavity.commons.ui.extensions.setSingleLineTextEnabled
@@ -31,7 +29,6 @@ import es.littledavity.commons.ui.extensions.showKeyboard
 import es.littledavity.commons.ui.extensions.topMargin
 import es.littledavity.commons.ui.widgets.R
 import es.littledavity.commons.ui.widgets.databinding.ViewInfoBinding
-import es.littledavity.domain.contacts.entities.Contact
 
 class InfoView @JvmOverloads constructor(
     context: Context,

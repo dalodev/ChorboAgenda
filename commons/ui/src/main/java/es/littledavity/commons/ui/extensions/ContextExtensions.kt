@@ -203,11 +203,11 @@ fun Context.showToast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT)
 
 fun Context.isPermissionGranted(permission: String): Boolean {
     return (
-            ContextCompat.checkSelfPermission(
-                this,
-                permission
-            ) == PackageManager.PERMISSION_GRANTED
-            )
+        ContextCompat.checkSelfPermission(
+            this,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+        )
 }
 
 fun Context.isPermissionDenied(permission: String): Boolean {

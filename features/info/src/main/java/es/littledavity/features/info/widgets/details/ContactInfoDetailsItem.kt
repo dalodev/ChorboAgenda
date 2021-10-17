@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.features.info.widgets.details
 
 import android.view.LayoutInflater
@@ -9,10 +12,10 @@ import es.littledavity.commons.ui.base.rv.NoDependencies
 import es.littledavity.domain.contacts.entities.Info
 
 internal class ContactInfoDetailsItem(model: MutableList<Info>) : AbstractItem<
-        MutableList<Info>,
-        ContactInfoDetailsItem.ViewHolder,
-        NoDependencies
-        >(model) {
+    MutableList<Info>,
+    ContactInfoDetailsItem.ViewHolder,
+    NoDependencies
+    >(model) {
 
     override fun createViewHolder(
         inflater: LayoutInflater,

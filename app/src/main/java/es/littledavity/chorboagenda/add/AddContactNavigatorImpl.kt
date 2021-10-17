@@ -10,7 +10,6 @@ import android.provider.Settings
 import androidx.navigation.NavController
 import com.paulrybitskyi.hiltbinder.BindType
 import dagger.hilt.android.qualifiers.ApplicationContext
-import es.littledavity.features.add.AddContactFragmentDirections
 import es.littledavity.features.add.AddContactNavigator
 import es.littledavity.features.edit.EditContactFragmentDirections
 import javax.inject.Inject

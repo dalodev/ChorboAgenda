@@ -7,9 +7,6 @@ on:
       - develop
       - master
 
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   build:
@@ -37,11 +34,21 @@ jobs:
       - name: Build the app
         run: ./gradlew assembleDebug
 
-      - name: Upload apk
-        uses: actions/upload-artifact@v2
+  # Run quality code
+  ktlint:
+    name: Check Code Quality
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Run ktlint
+        uses: ScaCap/action-ktlint@master
         with:
-          name: debug apk
-          path: app/build/outputs/apk/debug/app-debug.apk
+          github_token: ${{ secrets.github_token }}
+          reporter: github-pr-review # Change reporter
+          android: true
 
   test:
     runs-on: macos-latest
@@ -84,3 +91,28 @@ jobs:
           path: app/build/reports
         if: always()
 
+  labeler:
+    name: Label the PR size
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+      - name: Run labeler
+        uses: codelytv/pr-size-labeler@v1
+        with:
+          github_token: ${{ secrets.github_token }}
+          xs_label: 'size/xs'
+          xs_max_size: '10'
+          s_label: 'size/s'
+          s_max_size: '100'
+          m_label: 'size/m'
+          m_max_size: '500'
+          l_label: 'size/l'
+          l_max_size: '1000'
+          xl_label: 'size/xl'
+          fail_if_xl: 'false'
+          message_if_xl: >
+            'This PR exceeds the recommended size of 1000 lines.
+            Please make sure you are NOT addressing multiple issues with one PR.
+            Note this PR might be rejected due to its size.’
+          github_api_url: 'api.github.com'

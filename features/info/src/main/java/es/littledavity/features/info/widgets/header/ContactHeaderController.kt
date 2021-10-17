@@ -7,33 +7,33 @@ import android.content.Context
 import android.os.Build
 import android.telephony.PhoneNumberUtils
 import android.text.Html
+import android.text.Spannable
+import android.text.SpannableString
 import android.text.TextUtils
 import android.text.method.LinkMovementMethod
 import android.text.util.Linkify
 import androidx.constraintlayout.widget.ConstraintSet
+import androidx.core.text.HtmlCompat
 import androidx.core.view.isVisible
-import es.littledavity.commons.ui.bindings.onTextChange
-import es.littledavity.commons.ui.extensions.*
+import es.littledavity.commons.ui.extensions.DimensionSnapshotType
+import es.littledavity.commons.ui.extensions.addTransitionListener
+import es.littledavity.commons.ui.extensions.doOnApplyWindowInsets
+import es.littledavity.commons.ui.extensions.getDimension
+import es.littledavity.commons.ui.extensions.getDimensionPixelSize
+import es.littledavity.commons.ui.extensions.isChecked
+import es.littledavity.commons.ui.extensions.makeGone
+import es.littledavity.commons.ui.extensions.observeChanges
+import es.littledavity.commons.ui.extensions.onClick
+import es.littledavity.commons.ui.extensions.postAction
+import es.littledavity.commons.ui.extensions.updateConstraintSets
 import es.littledavity.core.providers.StringProvider
-import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
-import es.littledavity.features.info.widgets.model.ContactInfoHeaderModel
 import es.littledavity.features.info.widgets.mapToContactGalleryModels
-import android.text.SpannableString
-
-import android.text.Spannable
-import androidx.core.text.HtmlCompat
-
-private const val KEY_PHONE_QUERY = "phone"
-private const val KEY_INSTAGRAM_QUERY = "instagram"
-private const val KEY_RATING_QUERY = "rating"
-private const val KEY_COUNTRY_QUERY = "country"
-private const val KEY_AGE_QUERY = "age"
+import es.littledavity.features.info.widgets.model.ContactInfoHeaderModel
 
 internal class ContactHeaderController(
     context: Context,
-    private val currentContact: Contact?,
     private val binding: ViewContactInfoBinding,
     private val stringProvider: StringProvider
 ) {
@@ -45,9 +45,9 @@ internal class ContactHeaderController(
 
     private val hasDefaultBackgroundImage: Boolean
         get() = (
-                (backgroundImageModels.isEmpty()) &&
-                        (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage)
-                )
+            (backgroundImageModels.isEmpty()) &&
+                (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage)
+            )
 
     private val isPageIndicatorEnabled: Boolean
         get() = binding.galleryView.galleryModels.isNotEmpty()
@@ -109,7 +109,6 @@ internal class ContactHeaderController(
                 setInstagramLink(value)
             }
             isInstagramVisible = value != null
-
         }
         get() = binding.instagramTv.text.trim()
 

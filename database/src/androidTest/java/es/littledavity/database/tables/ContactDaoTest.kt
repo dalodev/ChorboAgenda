@@ -1,8 +1,9 @@
+/*
+ * Copyright 2021 dev.id
+ */
 package es.littledavity.database.tables
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.room.Room
-import androidx.test.platform.app.InstrumentationRegistry
 import app.cash.turbine.test
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -10,18 +11,11 @@ import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import dagger.hilt.components.SingletonComponent
-import es.littledavity.database.ChorboagendaDatabase
 import es.littledavity.database.DATABASE_CONTACTS
 import es.littledavity.database.chorbo.DatabaseContact
 import es.littledavity.database.chorbo.tables.ContactDao
 import es.littledavity.database.di.DatabaseModule
 import es.littledavity.testUtils.MainCoroutineRule
-import kotlinx.coroutines.asExecutor
-import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.toList
-import kotlinx.coroutines.runBlocking
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.TestCoroutineScope
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -76,7 +70,6 @@ internal class ContactDaoTest {
         val expectedContacts = DATABASE_CONTACTS
 
         assertThat(dao.getChorbos()).isEqualTo(expectedContacts)
-
     }
 
     @Test
