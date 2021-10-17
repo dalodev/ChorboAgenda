@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.text.TextWatcher
 import android.widget.EditText
 import android.widget.TextView
+import androidx.core.widget.doAfterTextChanged
 import androidx.core.widget.doOnTextChanged
 import es.littledavity.core.commons.SdkInfo
 
@@ -17,7 +18,9 @@ val EditText.content: String
     get() = text.toString()
 
 var EditText.isEditingEnabled: Boolean
-    set(value) { isFocusable = value }
+    set(value) {
+        isFocusable = value
+    }
     get() = isFocusable
 
 /**
@@ -37,7 +40,8 @@ fun EditText.setCursorDrawable(drawable: Drawable) {
     }
 
     try {
-        val cursorDrawableResourceField = TextView::class.java.getDeclaredField("mCursorDrawableRes")
+        val cursorDrawableResourceField =
+            TextView::class.java.getDeclaredField("mCursorDrawableRes")
         cursorDrawableResourceField.isAccessible = true
 
         val editorField = TextView::class.java.getDeclaredField("mEditor")
@@ -59,6 +63,12 @@ fun EditText.setCursorDrawable(drawable: Drawable) {
 
 inline fun EditText.onTextChanged(crossinline callback: (String) -> Unit): TextWatcher {
     return doOnTextChanged { text, _, _, _ ->
+        callback(text.toString())
+    }
+}
+
+inline fun EditText.onAfterTextChanged(crossinline callback: (String) -> Unit): TextWatcher {
+    return doAfterTextChanged { text ->
         callback(text.toString())
     }
 }

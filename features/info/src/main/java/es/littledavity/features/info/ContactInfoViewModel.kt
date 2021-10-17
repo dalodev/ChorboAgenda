@@ -281,6 +281,12 @@ internal class ContactInfoViewModel @Inject constructor(
         }
     }
 
+    fun saveData() {
+        viewModelScope.launch {
+            saveCurrentContact()
+        }
+    }
+
     private suspend fun saveCurrentContact(
         loading: Boolean = true,
         onCompletion: ((ContactInfoUiState) -> Unit)? = null

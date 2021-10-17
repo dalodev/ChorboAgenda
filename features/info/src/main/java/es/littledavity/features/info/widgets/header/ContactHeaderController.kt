@@ -4,34 +4,32 @@
 package es.littledavity.features.info.widgets.header
 
 import android.content.Context
+import android.os.Build
 import android.telephony.PhoneNumberUtils
+import android.text.Html
 import android.text.TextUtils
+import android.text.method.LinkMovementMethod
+import android.text.util.Linkify
 import androidx.constraintlayout.widget.ConstraintSet
 import androidx.core.view.isVisible
-import es.littledavity.commons.ui.extensions.DimensionSnapshotType
-import es.littledavity.commons.ui.extensions.addTransitionListener
-import es.littledavity.commons.ui.extensions.doOnApplyWindowInsets
-import es.littledavity.commons.ui.extensions.getDimension
-import es.littledavity.commons.ui.extensions.getDimensionPixelSize
-import es.littledavity.commons.ui.extensions.isChecked
-import es.littledavity.commons.ui.extensions.makeGone
-import es.littledavity.commons.ui.extensions.observeChanges
-import es.littledavity.commons.ui.extensions.onClick
-import es.littledavity.commons.ui.extensions.postAction
-import es.littledavity.commons.ui.extensions.updateConstraintSets
+import es.littledavity.commons.ui.bindings.onTextChange
+import es.littledavity.commons.ui.extensions.*
 import es.littledavity.core.providers.StringProvider
 import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.features.info.R
 import es.littledavity.features.info.databinding.ViewContactInfoBinding
 import es.littledavity.features.info.widgets.model.ContactInfoHeaderModel
 import es.littledavity.features.info.widgets.mapToContactGalleryModels
+import android.text.SpannableString
+
+import android.text.Spannable
+import androidx.core.text.HtmlCompat
 
 private const val KEY_PHONE_QUERY = "phone"
 private const val KEY_INSTAGRAM_QUERY = "instagram"
 private const val KEY_RATING_QUERY = "rating"
 private const val KEY_COUNTRY_QUERY = "country"
 private const val KEY_AGE_QUERY = "age"
-
 
 internal class ContactHeaderController(
     context: Context,
@@ -77,7 +75,7 @@ internal class ContactHeaderController(
         }
 
     var name by observeChanges("") { oldName, newName ->
-        onNameChanged(oldName, newName)
+        onNameChanged(oldName.trim(), newName.trim())
     }
 
     var phone: CharSequence?
@@ -95,42 +93,46 @@ internal class ContactHeaderController(
             }
             isPhoneVisible = value != null
         }
-        get() = binding.phoneTv.text
+        get() = binding.phoneTv.text.trim()
 
     private var creationDate: CharSequence
         set(value) {
             binding.creationDateTv.text = value
         }
-        get() = binding.creationDateTv.text
+        get() = binding.creationDateTv.text.trim()
 
     var instagram: CharSequence?
         set(value) {
-            binding.instagramTv.setText(value)
+            if (value?.trim().isNullOrBlank()) {
+                binding.instagramTv.setText(value)
+            } else {
+                setInstagramLink(value)
+            }
             isInstagramVisible = value != null
 
         }
-        get() = binding.instagramTv.text
+        get() = binding.instagramTv.text.trim()
 
     var rating: CharSequence = ""
         set(value) {
             field = value
             binding.ratingIv.titleText = value
         }
-        get() = binding.ratingIv.titleText
+        get() = binding.ratingIv.titleText.trim()
 
     var age: CharSequence = ""
         set(value) {
             field = value
             binding.ageTv.titleText = value
         }
-        get() = binding.ageTv.titleText
+        get() = binding.ageTv.titleText.trim()
 
     var country: CharSequence = ""
         set(value) {
             field = value
             binding.countryNameIv.titleText = value
         }
-        get() = binding.countryNameIv.titleText
+        get() = binding.countryNameIv.titleText.trim()
 
     private var backgroundImageModels by observeChanges<List<ContactHeaderImageModel>>(emptyList()) { _, newItems ->
         disableScrimConstraintIfNeeded()
@@ -330,5 +332,25 @@ internal class ContactHeaderController(
         }
 
         binding.galleryScrimView.makeGone()
+    }
+
+    private fun setInstagramLink(value: CharSequence?) {
+        binding.instagramTv.movementMethod = LinkMovementMethod.getInstance()
+        val profile = value?.trim().toString().replace("@", "")
+        val htmlText = "<a href=\"http://instagram.com/_u/$profile/\">$value</a> "
+        val spannable: Spannable = SpannableString(htmlText)
+        Linkify.addLinks(spannable, Linkify.WEB_URLS)
+        // The fix: Append a zero-width space to the Spannable
+        val text = TextUtils.concat(spannable, "\u200B")
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            binding.instagramTv.setText(
+                Html.fromHtml(
+                    text.toString(),
+                    HtmlCompat.FROM_HTML_MODE_LEGACY
+                )
+            )
+        } else {
+            binding.instagramTv.setText(Html.fromHtml(text.toString()))
+        }
     }
 }

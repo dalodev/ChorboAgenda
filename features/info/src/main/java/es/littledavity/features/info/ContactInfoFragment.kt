@@ -57,9 +57,19 @@ internal class ContactInfoFragment : BaseFragment<
 
     private fun initContactInfoView() = with(viewBinding.contactInfoView) {
         applyWindowBottomInsetAsMargin()
-        onGalleryClicked = { viewModel.onGalleryClicked(it).also { updateContactData() } }
+        onGalleryClicked = {
+            viewModel.onGalleryClicked(it).also {
+                updateContactData()
+                viewModel.saveData()
+            }
+        }
         onBackButtonClicked = { updateContactData().also { viewModel.onBackButtonClicked() } }
-        onImageClicked = { viewModel.onImageClicked().also { updateContactData() } }
+        onImageClicked = {
+            viewModel.onImageClicked().also {
+                updateContactData()
+                viewModel.saveData()
+            }
+        }
         onChangeImageClicked =
             { viewModel.requestStoragePermission(imageResultLauncher).also { updateContactData() } }
         onLikeButtonClicked = viewModel::onLikeButtonClicked

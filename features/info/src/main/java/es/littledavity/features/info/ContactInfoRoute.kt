@@ -23,4 +23,5 @@ internal sealed class ContactInfoRoute : Route {
 
     object Back : ContactInfoRoute()
     object SettingsApp : ContactInfoRoute()
+    data class InstagramProfile(val profileName: String) : ContactInfoRoute()
 }
