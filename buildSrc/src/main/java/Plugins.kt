@@ -16,6 +16,7 @@ const val PLUGIN_GIT_HOKS = "plugins.git-hooks"
 const val PLUGIN_KOTLIN = "kotlin"
 const val PLUGIN_KOTLINX_SERIALIZATION = "org.jetbrains.kotlin.plugin.serialization"
 const val PLUGIN_PROTOBUF = "com.google.protobuf"
+const val PLUGIN_JACOCO = "com.dicedmelon.gradle.jacoco-android"
 
 fun PluginDependenciesSpec.chorboagendaAndroid(): PluginDependencySpec {
     return id(PLUGIN_CHORBOAGENDA_ANDROID)
@@ -67,4 +68,8 @@ fun PluginDependenciesSpec.kotlinxSerialization(): PluginDependencySpec {
 
 fun PluginDependenciesSpec.protobuf(): PluginDependencySpec {
     return (id(PLUGIN_PROTOBUF) version Versions.protobufPlugin)
+}
+
+fun PluginDependenciesSpec.jacoco(): PluginDependencySpec {
+    return id(PLUGIN_JACOCO)
 }

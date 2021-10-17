@@ -45,6 +45,7 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
                 // production to avoid security issues
                 getByName("debug") {
                     manifestPlaceholders["usesCleartextTraffic"] = true
+                    isTestCoverageEnabled = true
                 }
 
                 getByName("release") {

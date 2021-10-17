@@ -6,4 +6,5 @@ object BuildPlugins {
     const val DETEKT = "plugins.detekt"
     const val SPOTLESS = "plugins.spotless"
     const val UPDATE_DEPENDENCIES = "plugins.update-dependencies"
+    const val JACOCO = "com.dicedmelon.gradle.jacoco-android"
 }

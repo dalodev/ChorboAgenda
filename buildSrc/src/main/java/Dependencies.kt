@@ -27,6 +27,8 @@ object Versions {
     const val spotless = "4.0.0"
     const val detekt = "1.17.1"
     const val ktlint = "0.41.0"
+    const val jacocoPlugin = "0.1.5"
+    const val jacocoToolss = "0.8.4"
 
 }
 
@@ -47,6 +49,7 @@ object Deps {
         const val spotless = "com.diffplug.spotless:spotless-plugin-gradle:${Versions.spotless}"
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
         const val ktlint = "com.pinterest:ktlint:${Versions.ktlint}"
+        const val jacoco = "com.dicedmelon.gradle:jacoco-android:${Versions.jacocoPlugin}"
     }
 
     object Local {
@@ -234,7 +237,7 @@ object Deps {
 
     object Misc {
 
-        private const val desugaredLibsVersion = "1.0.10"
+        private const val desugaredLibsVersion = "1.1.5"
         private const val kotlinResultVersion = "1.1.11"
         private const val expandableTextViewVersion = "1.0.5"
         private const val hiltBinderVersion = "1.0.0-alpha02"
