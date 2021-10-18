@@ -39,7 +39,7 @@ internal class ContactInfoNavigatorImpl @Inject constructor(
     }
 
     override fun goToInfo(contactId: Int) {
-        navController.navigate((ContactInfoFragmentDirections.actionInfoFragment(contactId)))
+        navController.navigate(ContactInfoFragmentDirections.actionInfoFragment(contactId))
     }
 
     override fun goBack() {

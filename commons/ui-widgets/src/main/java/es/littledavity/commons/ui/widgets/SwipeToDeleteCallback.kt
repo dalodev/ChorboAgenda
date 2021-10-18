@@ -28,9 +28,7 @@ class SwipeToDeleteCallback(
     private val clearPaint = Paint().apply { xfermode = PorterDuffXfermode(PorterDuff.Mode.CLEAR) }
     var canSwipe = true
 
-    override fun isItemViewSwipeEnabled(): Boolean {
-        return canSwipe
-    }
+    override fun isItemViewSwipeEnabled(): Boolean = canSwipe
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,
@@ -44,9 +42,7 @@ class SwipeToDeleteCallback(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
         target: RecyclerView.ViewHolder
-    ): Boolean {
-        return false
-    }
+    ): Boolean = false
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         onSwiped(viewHolder.bindingAdapterPosition)

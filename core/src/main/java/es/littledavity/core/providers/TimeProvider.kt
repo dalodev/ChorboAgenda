@@ -14,7 +14,5 @@ interface TimeProvider {
 @BindType
 internal class TimeProviderImpl @Inject constructor() : TimeProvider {
 
-    override fun getCurrentDateTime(): LocalDateTime {
-        return LocalDateTime.now()
-    }
+    override fun getCurrentDateTime(): LocalDateTime = LocalDateTime.now()
 }

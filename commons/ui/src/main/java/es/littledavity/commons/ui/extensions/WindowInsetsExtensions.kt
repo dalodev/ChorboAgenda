@@ -74,10 +74,10 @@ fun View.applyWindowInsets(
     applyBottomInset: Boolean = false
 ) {
     doOnApplyWindowInsets(type) { targetView, insets, dimensions ->
-        val start = (dimensions.start + (if (applyStartInset) insets.getCompatSystemWindowInsetLeft() else 0))
-        val top = (dimensions.top + (if (applyTopInset) insets.getCompatSystemWindowInsetTop() else 0))
-        val end = (dimensions.end + (if (applyEndInset) insets.getCompatSystemWindowInsetRight() else 0))
-        val bottom = (dimensions.bottom + (if (applyBottomInset) insets.getCompatSystemWindowInsetBottom() else 0))
+        val start = dimensions.start + if (applyStartInset) insets.getCompatSystemWindowInsetLeft() else 0
+        val top = dimensions.top + if (applyTopInset) insets.getCompatSystemWindowInsetTop() else 0
+        val end = dimensions.end + if (applyEndInset) insets.getCompatSystemWindowInsetRight() else 0
+        val bottom = dimensions.bottom + if (applyBottomInset) insets.getCompatSystemWindowInsetBottom() else 0
 
         when (type) {
             DimensionSnapshotType.MARGINS -> targetView.setMargins(start, top, end, bottom)

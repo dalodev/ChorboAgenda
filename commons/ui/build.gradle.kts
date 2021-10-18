@@ -10,6 +10,10 @@ android {
     buildFeatures {
         dataBinding = true
     }
+    lint {
+        isCheckReleaseBuilds = false
+        isAbortOnError = false
+    }
 }
 dependencies {
     implementation(project(Deps.Local.core))

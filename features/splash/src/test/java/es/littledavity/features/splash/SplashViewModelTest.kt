@@ -6,6 +6,7 @@ package es.littledavity.features.splash
 import app.cash.turbine.test
 import es.littledavity.testUtils.MainCoroutineRule
 import io.mockk.MockKAnnotations
+import io.mockk.impl.annotations.InjectMockKs
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -17,12 +18,12 @@ internal class SplashViewModelTest {
     @get:Rule
     val mainCoroutineRule = MainCoroutineRule()
 
+    @InjectMockKs
     private lateinit var viewModel: SplashViewModel
 
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-        viewModel = SplashViewModel()
     }
 
     @Test

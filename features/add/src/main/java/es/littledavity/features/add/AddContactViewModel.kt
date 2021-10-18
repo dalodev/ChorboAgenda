@@ -65,8 +65,11 @@ class AddContactViewModel @Inject constructor(
 
     fun onAddContactClicked(name: String, phone: String) {
         val nameError = name.isBlank()
-        val phoneError = if (phone.isBlank()) false
-        else !isValidNumber(phone)
+        val phoneError = if (phone.isBlank()) {
+            false
+        } else {
+            !isValidNumber(phone)
+        }
         val canDone = !nameError && !phoneError
         currentContact.name = name
         currentContact.phone = phone

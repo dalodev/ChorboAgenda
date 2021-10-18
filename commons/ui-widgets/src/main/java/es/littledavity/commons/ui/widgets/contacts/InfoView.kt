@@ -124,12 +124,18 @@ class InfoView @JvmOverloads constructor(
     var titleText: CharSequence = ""
         set(value) {
             field = value
-            if (editMode) binding.titleTvEdit.setText(value)
-            else binding.titleTv.text = value
+            if (editMode) {
+                binding.titleTvEdit.setText(value)
+            } else {
+                binding.titleTv.text = value
+            }
         }
         get() {
-            return if (editMode) binding.titleTvEdit.text
-            else binding.titleTv.text
+            return if (editMode) {
+                binding.titleTvEdit.text
+            } else {
+                binding.titleTv.text
+            }
         }
 
     private var descriptionText: CharSequence
@@ -183,21 +189,36 @@ class InfoView @JvmOverloads constructor(
         ) {
             iconSize = getDimensionPixelSize(R.styleable.InfoView_infoView_iconSize, iconSize)
             titleTextSize = getDimension(R.styleable.InfoView_infoView_titleTextSize, titleTextSize)
-            descriptionTextSize = getDimension(R.styleable.InfoView_infoView_descriptionTextSize, descriptionTextSize)
-            titleTextTopMargin = getDimensionPixelSize(R.styleable.InfoView_infoView_titleTextTopMargin, titleTextTopMargin)
+            descriptionTextSize =
+                getDimension(R.styleable.InfoView_infoView_descriptionTextSize, descriptionTextSize)
+            titleTextTopMargin = getDimensionPixelSize(
+                R.styleable.InfoView_infoView_titleTextTopMargin,
+                titleTextTopMargin
+            )
             descriptionTextTopMargin =
-                getDimensionPixelSize(R.styleable.InfoView_infoView_descriptionTextTopMargin, descriptionTextTopMargin)
+                getDimensionPixelSize(
+                    R.styleable.InfoView_infoView_descriptionTextTopMargin,
+                    descriptionTextTopMargin
+                )
             iconColor = getColor(R.styleable.InfoView_infoView_iconColor, iconColor)
             titleTextColor = getColor(R.styleable.InfoView_infoView_titleTextColor, titleTextColor)
-            descriptionTextColor = getColor(R.styleable.InfoView_infoView_descriptionTextColor, descriptionTextColor)
-            titleTextTypeface = getFont(context, R.styleable.InfoView_infoView_titleTextFont, titleTextTypeface)
-            descriptionTextTypeface = getFont(context, R.styleable.InfoView_infoView_descriptionTextFont, descriptionTextTypeface)
+            descriptionTextColor =
+                getColor(R.styleable.InfoView_infoView_descriptionTextColor, descriptionTextColor)
+            titleTextTypeface =
+                getFont(context, R.styleable.InfoView_infoView_titleTextFont, titleTextTypeface)
+            descriptionTextTypeface = getFont(
+                context,
+                R.styleable.InfoView_infoView_descriptionTextFont,
+                descriptionTextTypeface
+            )
             icon = getDrawable(R.styleable.InfoView_infoView_icon)
             titleText = getString(R.styleable.InfoView_infoView_titleText, titleText)
-            descriptionText = getString(R.styleable.InfoView_infoView_descriptionText, descriptionText)
+            descriptionText =
+                getString(R.styleable.InfoView_infoView_descriptionText, descriptionText)
             editMode = getBoolean(R.styleable.InfoView_infoView_editMode, false)
             maxLength = getInteger(R.styleable.InfoView_infoView_maxLength, 10)
-            hintText = getString(R.styleable.InfoView_infoView_hintText, context.getString(R.string.dash))
+            hintText =
+                getString(R.styleable.InfoView_infoView_hintText, context.getString(R.string.dash))
             if (editMode) {
                 enableEditText()
             }

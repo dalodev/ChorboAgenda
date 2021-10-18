@@ -1,7 +1,7 @@
 /*
  * Copyright 2021 dev.id
  */
-package es.littledavity.commons.ui.extensions
+package es.littledavity.core.utils
 
 import android.annotation.SuppressLint
 import android.content.Intent
@@ -46,6 +46,5 @@ fun PackageManager.getNativeAppPackageForUrl(url: String): String? {
  *
  * @return true if the url can be opened by a native app; false otherwise
  */
-fun PackageManager.canUrlBeOpenedByNativeApp(url: String): Boolean {
-    return (getNativeAppPackageForUrl(url) != null)
-}
+fun PackageManager.canUrlBeOpenedByNativeApp(url: String): Boolean =
+    getNativeAppPackageForUrl(url) != null

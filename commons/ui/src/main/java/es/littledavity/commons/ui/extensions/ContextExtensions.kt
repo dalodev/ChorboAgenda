@@ -201,26 +201,19 @@ fun Context.showToast(message: CharSequence, duration: Int = Toast.LENGTH_SHORT)
         .apply { show() }
 }
 
-fun Context.isPermissionGranted(permission: String): Boolean {
-    return (
-        ContextCompat.checkSelfPermission(
-            this,
-            permission
-        ) == PackageManager.PERMISSION_GRANTED
-        )
-}
+fun Context.isPermissionGranted(permission: String): Boolean = ContextCompat.checkSelfPermission(
+    this,
+    permission
+) == PackageManager.PERMISSION_GRANTED
 
-fun Context.isPermissionDenied(permission: String): Boolean {
-    return (ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED)
-}
+fun Context.isPermissionDenied(permission: String): Boolean =
+    ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_DENIED
 
-fun Context.arePermissionsGranted(permissions: Set<String>): Boolean {
-    return permissions.all { isPermissionGranted(it) }
-}
+fun Context.arePermissionsGranted(permissions: Set<String>): Boolean =
+    permissions.all { isPermissionGranted(it) }
 
-fun Context.arePermissionsDenied(permissions: Set<String>): Boolean {
-    return permissions.all { isPermissionDenied(it) }
-}
+fun Context.arePermissionsDenied(permissions: Set<String>): Boolean =
+    permissions.all { isPermissionDenied(it) }
 
 /**
  * Checks whether the intent can be handled by some activity
@@ -234,9 +227,8 @@ fun Context.arePermissionsDenied(permissions: Set<String>): Boolean {
  * @return true if can be handled; false otherwise
  */
 @SuppressLint("QueryPermissionsNeeded")
-fun Context.canIntentBeHandled(intent: Intent): Boolean {
-    return packageManager.queryIntentActivities(intent, 0).isNotEmpty()
-}
+fun Context.canIntentBeHandled(intent: Intent): Boolean =
+    packageManager.queryIntentActivities(intent, 0).isNotEmpty()
 
 /**
  * Creates an intent for a type the class of which is passed
@@ -244,12 +236,9 @@ fun Context.canIntentBeHandled(intent: Intent): Boolean {
  *
  * @return The intent for the particular class
  */
-inline fun <reified T> Context.intentFor(): Intent {
-    return Intent(this, T::class.java)
-}
+inline fun <reified T> Context.intentFor(): Intent = Intent(this, T::class.java)
 
-inline fun <reified T : Any> Context.getSystemService(): T {
-    return checkNotNull(ContextCompat.getSystemService(this, T::class.java)) {
+inline fun <reified T : Any> Context.getSystemService(): T =
+    checkNotNull(ContextCompat.getSystemService(this, T::class.java)) {
         "The service ${T::class.java.simpleName} could not be retrieved."
     }
-}

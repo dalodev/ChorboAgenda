@@ -5,6 +5,7 @@ package es.littledavity.commons.ui.recyclerview
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import es.littledavity.commons.ui.extensions.orZero
 
 class RecyclerViewScrollListener constructor(
     stateListener: StateListener,
@@ -37,12 +38,12 @@ class RecyclerViewScrollListener constructor(
         this.shouldNotifyOnReachingEndsRepeatedly = shouldNotifyOnReachingEndsRepeatedly
     }
 
-    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {}
+    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) = Unit
 
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         when {
-            (dy > 0) -> onScrolledDownwards(recyclerView, dy)
-            (dy < 0) -> onScrolledUpwards(recyclerView, dy)
+            dy > 0 -> onScrolledDownwards(recyclerView, dy)
+            dy < 0 -> onScrolledUpwards(recyclerView, dy)
         }
     }
 
@@ -52,7 +53,7 @@ class RecyclerViewScrollListener constructor(
         visibleChildrenCount = recyclerView.childCount
         previousFirstVisiblePosition = getFirstVisiblePosition(recyclerView)
         lastVisiblePosition = getLastVisiblePosition(recyclerView)
-        totalItemCount = recyclerView.adapter!!.itemCount
+        totalItemCount = recyclerView.adapter?.itemCount.orZero()
 
         when {
             isBottomReached() -> onBottomReached(recyclerView)
@@ -61,10 +62,9 @@ class RecyclerViewScrollListener constructor(
     }
 
     private fun isBottomReached(): Boolean {
-        return (
-            (lastVisiblePosition == (totalItemCount - 1)) &&
-                ((lastVisiblePosition != previousLastVisiblePosition) || shouldNotifyOnReachingEnds())
-            )
+        return lastVisiblePosition == totalItemCount - 1 &&
+            lastVisiblePosition != previousLastVisiblePosition ||
+            shouldNotifyOnReachingEnds()
     }
 
     private fun onBottomReached(recyclerView: RecyclerView) {
@@ -74,12 +74,12 @@ class RecyclerViewScrollListener constructor(
 
         stateListener?.onBottomReached(
             recyclerView,
-            ((child!!.top + child!!.measuredHeight) == recyclerView.measuredHeight)
+            child?.top.orZero() + child?.measuredHeight.orZero() == recyclerView.measuredHeight
         )
     }
 
     private fun isMiddleReachedFromTop(): Boolean {
-        return (lastVisiblePosition == (totalItemCount / 2))
+        return lastVisiblePosition == totalItemCount / 2
     }
 
     private fun onMiddleReachedFromTop(recyclerView: RecyclerView) {
@@ -92,7 +92,7 @@ class RecyclerViewScrollListener constructor(
         visibleChildrenCount = recyclerView.childCount
         previousFirstVisiblePosition = getFirstVisiblePosition(recyclerView)
         lastVisiblePosition = getLastVisiblePosition(recyclerView)
-        totalItemCount = recyclerView.adapter!!.itemCount
+        totalItemCount = recyclerView.adapter?.itemCount.orZero()
 
         when {
             isTopReached() -> onTopReached(recyclerView)
@@ -101,10 +101,11 @@ class RecyclerViewScrollListener constructor(
     }
 
     private fun isTopReached(): Boolean {
-        return (
-            (firstVisiblePosition == 0) &&
-                ((firstVisiblePosition != previousFirstVisiblePosition) || shouldNotifyOnReachingEnds())
-            )
+        return firstVisiblePosition == 0 &&
+            (
+                firstVisiblePosition != previousFirstVisiblePosition ||
+                    shouldNotifyOnReachingEnds()
+                )
     }
 
     private fun onTopReached(recyclerView: RecyclerView) {
@@ -112,11 +113,11 @@ class RecyclerViewScrollListener constructor(
         previousFirstVisiblePosition = firstVisiblePosition
         previousTotalItemCount = totalItemCount
 
-        stateListener?.onTopReached(recyclerView, (child!!.top == 0))
+        stateListener?.onTopReached(recyclerView, child?.top == 0)
     }
 
     private fun isMiddleReachedFromBottom(): Boolean {
-        return (firstVisiblePosition == (totalItemCount / 2))
+        return firstVisiblePosition == totalItemCount / 2
     }
 
     private fun onMiddleReachedFromBottom(recyclerView: RecyclerView) {
@@ -144,7 +145,7 @@ class RecyclerViewScrollListener constructor(
             return true
         }
 
-        return (previousTotalItemCount != totalItemCount)
+        return previousTotalItemCount != totalItemCount
     }
 
     interface StateListener {

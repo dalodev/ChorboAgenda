@@ -46,7 +46,11 @@ internal class ContactMapper @Inject constructor(
     }
 
     private fun DataImage.toDatabaseImage(imageId: String?, name: String) = DatabaseImage(
-        id = if (!created) (imageGalleryService.createMediaFile(imageId, name)) else id,
+        id = if (!created) {
+            imageGalleryService.createMediaFile(imageId, name)
+        } else {
+            id
+        },
         width = width,
         height = height,
         created = when (created) {

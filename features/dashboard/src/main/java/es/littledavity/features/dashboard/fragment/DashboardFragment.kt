@@ -85,8 +85,8 @@ internal class DashboardFragment : BaseFragment<
     private fun initViewPagerAdapter() = viewPagerAdapterFactory.createAdapter(this)
         .also { viewPagerAdapter = it }
 
-    private fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
-        return if (menuItem.toPagePosition() == DashboardPage.ADD_CONTACT.position) {
+    private fun onNavigationItemSelected(menuItem: MenuItem): Boolean =
+        if (menuItem.toPagePosition() == DashboardPage.ADD_CONTACT.position) {
             viewModel.onAddContactButtonClicked()
             false
         } else {
@@ -96,7 +96,6 @@ internal class DashboardFragment : BaseFragment<
             )
             true
         }
-    }
 
     private fun MenuItem.toPagePosition() = itemId.toDashboardPageFromMenuItemId().position
 

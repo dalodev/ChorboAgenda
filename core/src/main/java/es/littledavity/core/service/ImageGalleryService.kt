@@ -38,14 +38,11 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         private const val QUALITY = 100
     }
 
-    override fun createMediaFile(imageId: String?, name: String): String? {
-        try {
-            val bitmapImage = imageId?.toUri()?.let(::getBitmap)
-            bitmapImage?.let { return saveMediaImage(it, name, imageId) }
-        } catch (e: FileNotFoundException) {
-            return null
-        }
-        return null
+    override fun createMediaFile(imageId: String?, name: String): String? = try {
+        val bitmapImage = imageId?.toUri()?.let(::getBitmap)
+        bitmapImage?.let { saveMediaImage(it, name, imageId) }
+    } catch (e: FileNotFoundException) {
+        null
     }
 
     private fun getBitmap(uri: Uri): Bitmap {

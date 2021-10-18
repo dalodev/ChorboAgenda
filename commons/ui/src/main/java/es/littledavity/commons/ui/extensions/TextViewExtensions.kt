@@ -22,9 +22,9 @@ private const val COMPOUND_DRAWABLE_INDEX_BOTTOM = 3
 var TextView.isTextStruckThrough: Boolean
     set(value) {
         paintFlags = if (value) {
-            (paintFlags or Paint.STRIKE_THRU_TEXT_FLAG)
+            paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
         } else {
-            (paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv())
+            paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
     }
     get() = paintFlags.containsBits(Paint.STRIKE_THRU_TEXT_FLAG)
@@ -134,7 +134,7 @@ fun TextView.isTextEllipsized(): Boolean {
     val textLayout = checkNotNull(layout)
     val lineCount = textLayout.lineCount
 
-    return ((lineCount > 0) && (textLayout.getEllipsisCount(lineCount - 1) > 0))
+    return lineCount > 0 && textLayout.getEllipsisCount(lineCount - 1) > 0
 }
 
 fun TextView.containsRawText() {
@@ -142,17 +142,17 @@ fun TextView.containsRawText() {
 }
 
 fun TextView.containsEmailAddress() {
-    inputType = (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS)
+    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS
 }
 
 fun TextView.containsPersonName() {
-    inputType = (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PERSON_NAME)
+    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PERSON_NAME
 }
 
 fun TextView.containsPassword() {
-    inputType = (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD)
+    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
 }
 
 fun TextView.containsVisiblePassword() {
-    inputType = (InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD)
+    inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
 }

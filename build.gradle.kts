@@ -45,6 +45,7 @@ allprojects {
     // See: https://githgiub.com/mockito/mockito/issues/2007#issuecomment-689365556
     configurations.all {
         resolutionStrategy.force("org.objenesis:objenesis:2.6")
+        resolutionStrategy.force("org.jacoco:org.jacoco.core:0.8.7")
     }
 }
 
@@ -75,7 +76,7 @@ subprojects {
 }
 
 tasks {
-   /* val clean by registering(Delete::class) {
-        delete(buildDir)
-    }*/
+    /* val clean by registering(Delete::class) {
+         delete(buildDir)
+     }*/
 }

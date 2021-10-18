@@ -7,10 +7,10 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import com.paulrybitskyi.hiltbinder.BindType
-import es.littledavity.commons.ui.extensions.canUrlBeOpenedByNativeApp
-import es.littledavity.commons.ui.extensions.getNativeAppPackageForUrl
 import es.littledavity.core.commons.SdkInfo
 import es.littledavity.core.utils.attachNewTaskFlagIfNeeded
+import es.littledavity.core.utils.canUrlBeOpenedByNativeApp
+import es.littledavity.core.utils.getNativeAppPackageForUrl
 import javax.inject.Inject
 
 @BindType(withQualifier = true)
@@ -48,10 +48,9 @@ internal class NativeAppUrlOpener @Inject constructor() : UrlOpener {
         return true
     }
 
-    private fun createIntent(url: String, context: Context): Intent {
-        return Intent(Intent.ACTION_VIEW).apply {
+    private fun createIntent(url: String, context: Context): Intent =
+        Intent(Intent.ACTION_VIEW).apply {
             data = Uri.parse(url)
             attachNewTaskFlagIfNeeded(context)
         }
-    }
 }

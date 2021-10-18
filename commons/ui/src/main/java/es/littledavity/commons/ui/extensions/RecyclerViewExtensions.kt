@@ -31,16 +31,30 @@ inline fun RecyclerView.addOnScrollListener(
     crossinline onScrolledUpwards: (recyclerView: RecyclerView, deltaY: Int) -> Unit = { _, _ -> },
     crossinline onScrolledDownwards: (recyclerView: RecyclerView, deltaY: Int) -> Unit = { _, _ -> },
     crossinline onTopReached: (recyclerView: RecyclerView, reachedCompletely: Boolean) -> Unit = { _, _ -> },
-    crossinline onMiddleReached: (recyclerView: RecyclerView, direction: RecyclerViewScrollListener.Direction) -> Unit = { _, _ -> },
+    crossinline onMiddleReached: (
+        recyclerView: RecyclerView,
+        direction: RecyclerViewScrollListener.Direction
+    ) -> Unit = { _, _ -> },
     crossinline onBottomReached: (recyclerView: RecyclerView, reachedCompletely: Boolean) -> Unit = { _, _ -> }
 ): RecyclerView.OnScrollListener {
     val stateListener = object : RecyclerViewScrollListener.StateListener {
 
-        override fun onScrolledUpwards(recyclerView: RecyclerView, deltaY: Int) = onScrolledUpwards(recyclerView, deltaY)
-        override fun onScrolledDownwards(recyclerView: RecyclerView, deltaY: Int) = onScrolledDownwards(recyclerView, deltaY)
-        override fun onTopReached(recyclerView: RecyclerView, reachedCompletely: Boolean) = onTopReached(recyclerView, reachedCompletely)
-        override fun onMiddleReached(recyclerView: RecyclerView, direction: RecyclerViewScrollListener.Direction) = onMiddleReached(recyclerView, direction)
-        override fun onBottomReached(recyclerView: RecyclerView, reachedCompletely: Boolean) = onBottomReached(recyclerView, reachedCompletely)
+        override fun onScrolledUpwards(recyclerView: RecyclerView, deltaY: Int) =
+            onScrolledUpwards(recyclerView, deltaY)
+
+        override fun onScrolledDownwards(recyclerView: RecyclerView, deltaY: Int) =
+            onScrolledDownwards(recyclerView, deltaY)
+
+        override fun onTopReached(recyclerView: RecyclerView, reachedCompletely: Boolean) =
+            onTopReached(recyclerView, reachedCompletely)
+
+        override fun onMiddleReached(
+            recyclerView: RecyclerView,
+            direction: RecyclerViewScrollListener.Direction
+        ) = onMiddleReached(recyclerView, direction)
+
+        override fun onBottomReached(recyclerView: RecyclerView, reachedCompletely: Boolean) =
+            onBottomReached(recyclerView, reachedCompletely)
     }
 
     return RecyclerViewScrollListener(

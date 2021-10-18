@@ -44,10 +44,8 @@ internal class ContactHeaderController(
     private var areWindowInsetsApplied = false
 
     private val hasDefaultBackgroundImage: Boolean
-        get() = (
-            (backgroundImageModels.isEmpty()) &&
-                (backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage)
-            )
+        get() = backgroundImageModels.isEmpty() &&
+            backgroundImageModels.single() is ContactHeaderImageModel.DefaultImage
 
     private val isPageIndicatorEnabled: Boolean
         get() = binding.galleryView.galleryModels.isNotEmpty()
@@ -83,12 +81,14 @@ internal class ContactHeaderController(
             with(binding.phoneTv) {
                 setText(PhoneNumberUtils.formatNumber(value.toString(), "ES"))
                 setOnFocusChangeListener { _, hasFocus ->
-                    if (!hasFocus) setText(
-                        PhoneNumberUtils.formatNumber(
-                            binding.phoneTv.text.toString(),
-                            "ES"
+                    if (!hasFocus) {
+                        setText(
+                            PhoneNumberUtils.formatNumber(
+                                binding.phoneTv.text.toString(),
+                                "ES"
+                            )
                         )
-                    )
+                    }
                 }
             }
             isPhoneVisible = value != null
@@ -162,17 +162,15 @@ internal class ContactHeaderController(
         if (isLiked != model.isLiked) {
             isLiked = model.isLiked
         } else {
-            // See onAttachedToWindow method's comment. This crutch is exactly like that,
-            // with the only difference is that icon resets its state when pressing home
-            // button and then coming back.
             if (isLiked) {
                 isLiked = false
                 isLiked = true
             }
         }
 
-        if (backgroundImageModels != model.backgroundImageModels) backgroundImageModels =
-            model.backgroundImageModels
+        if (backgroundImageModels != model.backgroundImageModels) {
+            backgroundImageModels = model.backgroundImageModels
+        }
         if (name != model.name) name = model.name
         if (phone != model.phone) phone = model.phone
         if (creationDate != model.creationDate) creationDate = model.creationDate
@@ -225,8 +223,10 @@ internal class ContactHeaderController(
                 binding.galleryView.isGalleryClickEnabled = !positive
             }
 
-            R.id.trimFirstTitle -> {
-                binding.nameTv.ellipsize = (if (positive) TextUtils.TruncateAt.END else null)
+            R.id.trimFirstTitle -> binding.nameTv.ellipsize = if (positive) {
+                TextUtils.TruncateAt.END
+            } else {
+                null
             }
         }
     }
@@ -257,13 +257,13 @@ internal class ContactHeaderController(
                 set.setMargin(
                     R.id.pageIndicatorTv,
                     ConstraintSet.TOP,
-                    (pageIndicatorTopMargin + insets.systemWindowInsetTop)
+                    pageIndicatorTopMargin + insets.systemWindowInsetTop
                 )
 
                 if (id == R.id.collapsed) {
                     val toolbarHeight = getDimensionPixelSize(R.dimen.toolbar_height)
                     val statusBarHeight = insets.systemWindowInsetTop
-                    val totalHeight = (toolbarHeight + statusBarHeight)
+                    val totalHeight = toolbarHeight + statusBarHeight
 
                     set.setMargin(R.id.nameTv, ConstraintSet.TOP, statusBarHeight)
                     set.constrainHeight(R.id.galleryView, totalHeight)
@@ -273,7 +273,7 @@ internal class ContactHeaderController(
     }
 
     private fun onNameChanged(oldTitle: String, newTitle: String) {
-        if ((oldTitle == newTitle) || newTitle.isBlank()) return
+        if (oldTitle == newTitle || newTitle.isBlank()) return
 
         val firstNameTv = binding.nameTv
         firstNameTv.setText(newTitle)
@@ -287,7 +287,7 @@ internal class ContactHeaderController(
     private fun updateGalleryPageIndicator(newPosition: Int) {
         if (!isPageIndicatorEnabled) return
 
-        val oneIndexedPosition = (newPosition + 1)
+        val oneIndexedPosition = newPosition + 1
         val totalCount = binding.galleryView.galleryModels.size
         val text = stringProvider.getString(
             R.string.contact_info_header_page_indicator_template,

@@ -9,6 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 class LastItemExclusionPolicy : SpacingItemDecorator.ItemExclusionPolicy {
 
     override fun shouldExclude(view: View, parent: RecyclerView): Boolean {
-        return (parent.getChildAdapterPosition(view) == ((parent.adapter?.itemCount ?: 0) - 1))
+        return parent.getChildAdapterPosition(view) == (parent.adapter?.itemCount ?: 0) - 1
     }
 }

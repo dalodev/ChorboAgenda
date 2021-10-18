@@ -32,9 +32,10 @@ internal class ContactCreationDateFormatterImpl @Inject constructor(
     override fun formatReleaseDate(contact: Contact): String {
         val date = contact.creationDate ?: return stringProvider.getString(R.string.unknown)
 
-        return when (val category = date.category) {
-            CreationDateCategory.YYYY_MMMM_DD -> date.formatCompleteDate()
-            else -> throw IllegalStateException("Unknown category: $category.")
+        return if (date.category == CreationDateCategory.YYYY_MMMM_DD) {
+            date.formatCompleteDate()
+        } else {
+            error("Unknown category: ${date.category}.")
         }
     }
 
@@ -52,10 +53,8 @@ internal class ContactCreationDateFormatterImpl @Inject constructor(
         }
     }
 
-    private fun CreationDate.toLocalDateTime(): LocalDateTime {
-        return LocalDateTime.ofInstant(
-            Instant.ofEpochMilli(checkNotNull(date)),
-            ZoneId.systemDefault()
-        )
-    }
+    private fun CreationDate.toLocalDateTime(): LocalDateTime = LocalDateTime.ofInstant(
+        Instant.ofEpochMilli(checkNotNull(date)),
+        ZoneId.systemDefault()
+    )
 }

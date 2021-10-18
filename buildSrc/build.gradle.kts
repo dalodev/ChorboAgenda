@@ -12,20 +12,13 @@ repositories {
     maven("https://plugins.gradle.org/m2/")
 }
 
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
-}
-
 object PluginsVersions {
     const val GRADLE_VERSIONS = "7.0.0"
     const val KOTLIN = "1.5.21"
     const val SPOTLESS = "4.0.0"
-    const val DETEKT = "1.17.1"
+    const val DETEKT = "1.18.1"
     const val KTLINT = "0.41.0"
-}
-
-kotlinDslPluginOptions {
-    experimentalWarning.set(false)
+    const val JACOCO = "0.8.7"
 }
 
 dependencies {
@@ -34,5 +27,6 @@ dependencies {
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginsVersions.DETEKT}")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${PluginsVersions.SPOTLESS}")
     implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
+    implementation("org.jacoco:org.jacoco.core:${PluginsVersions.JACOCO}")
     implementation(gradleApi()) // for custom plugins
 }

@@ -21,52 +21,34 @@ internal class ContactsTypeConverter @Inject constructor(
 ) : RoomTypeConverter {
 
     @TypeConverter
-    fun fromInfoList(infoList: List<Info>?): String {
-        return jsonConverter.toJson(infoList)
-    }
+    fun fromInfoList(infoList: List<Info>?): String = jsonConverter.toJson(infoList)
 
     @TypeConverter
-    fun toInfoList(json: String): List<Info> {
-        return (jsonConverter.fromJson(json) ?: emptyList())
-    }
+    fun toInfoList(json: String): List<Info> = jsonConverter.fromJson(json) ?: emptyList()
 
     @TypeConverter
-    fun fromImage(image: Image?): String {
-        return jsonConverter.toJson(image)
-    }
+    fun fromImage(image: Image?): String = jsonConverter.toJson(image)
 
     @TypeConverter
-    fun toImage(json: String): Image? {
-        return jsonConverter.fromJson(json)
-    }
+    fun toImage(json: String): Image? = jsonConverter.fromJson(json)
 
     @TypeConverter
-    fun fromImages(images: MutableList<Image>): String {
-        return jsonConverter.toJson(images)
-    }
+    fun fromImages(images: MutableList<Image>): String = jsonConverter.toJson(images)
 
     @TypeConverter
-    fun toImages(json: String): MutableList<Image> {
-        return (jsonConverter.fromJson(json) ?: mutableListOf())
-    }
+    fun toImages(json: String): MutableList<Image> = jsonConverter.fromJson(json) ?: mutableListOf()
 
     @TypeConverter
-    fun fromCreationeDate(creationDate: CreationDate): String {
-        return jsonConverter.toJson(creationDate)
-    }
+    fun fromCreationeDate(creationDate: CreationDate): String = jsonConverter.toJson(creationDate)
 
     @TypeConverter
-    fun toReleaseDates(json: String): CreationDate? {
-        return jsonConverter.fromJson(json)
-    }
+    fun toReleaseDates(json: String): CreationDate? = jsonConverter.fromJson(json)
 
     @TypeConverter
-    fun fromCreationDateCategory(category: CreationDateCategory): String {
-        return jsonConverter.toJson(category)
-    }
+    fun fromCreationDateCategory(category: CreationDateCategory): String =
+        jsonConverter.toJson(category)
 
     @TypeConverter
-    fun toCreationDateCategory(json: String): CreationDateCategory {
-        return (jsonConverter.fromJson(json) ?: CreationDateCategory.UNKNOWN)
-    }
+    fun toCreationDateCategory(json: String): CreationDateCategory =
+        jsonConverter.fromJson(json) ?: CreationDateCategory.UNKNOWN
 }

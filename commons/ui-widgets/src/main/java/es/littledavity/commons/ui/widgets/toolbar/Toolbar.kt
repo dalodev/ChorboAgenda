@@ -78,7 +78,7 @@ class Toolbar @JvmOverloads constructor(
         get() = binding.extraRightBtnContainer.isVisible
 
     private val areBothRightButtonsVisible: Boolean
-        get() = (isRightButtonVisible && isExtraRightButtonVisible)
+        get() = isRightButtonVisible && isExtraRightButtonVisible
 
     @get:ColorInt
     var buttonIconColor: Int = getColor(R.color.toolbar_button_icon_color)
@@ -106,7 +106,9 @@ class Toolbar @JvmOverloads constructor(
         }
 
     var titleTextSize: Float
-        set(value) { binding.titleTv.setTextSizeInPx(value) }
+        set(value) {
+            binding.titleTv.setTextSizeInPx(value)
+        }
         get() = binding.titleTv.textSize
 
     /**
@@ -119,36 +121,40 @@ class Toolbar @JvmOverloads constructor(
      */
     var titleTextGravity by observeChanges(TitleGravity.CENTER) { _, newValue ->
         checkNewTitleGravity(newValue)
-        binding.titleTv.gravity = (newValue.gravity or Gravity.CENTER_VERTICAL)
+        binding.titleTv.gravity = newValue.gravity or Gravity.CENTER_VERTICAL
         updateTitleHorizontalPadding()
     }
 
     var titleTextTypeface: Typeface
-        set(value) { binding.titleTv.typeface = value }
+        set(value) {
+            binding.titleTv.typeface = value
+        }
         get() = binding.titleTv.typeface
 
     var titleText: CharSequence
-        set(value) { binding.titleTv.text = value }
+        set(value) {
+            binding.titleTv.text = value
+        }
         get() = binding.titleTv.text
 
     var leftButtonIcon: Drawable?
         set(value) {
             binding.leftBtnIv.setImageDrawable(value?.setColor(buttonIconColor))
-            isLeftButtonVisible = (value != null)
+            isLeftButtonVisible = value != null
         }
         get() = binding.leftBtnIv.drawable
 
     var rightButtonIcon: Drawable?
         set(value) {
             binding.rightBtnIv.setImageDrawable(value?.setColor(buttonIconColor))
-            isRightButtonVisible = (value != null)
+            isRightButtonVisible = value != null
         }
         get() = binding.rightBtnIv.drawable
 
     var extraRightButtonIcon: Drawable?
         set(value) {
             binding.extraRightBtnIv.setImageDrawable(value?.setColor(buttonIconColor))
-            isExtraRightButtonVisible = (value != null)
+            isExtraRightButtonVisible = value != null
         }
         get() = binding.extraRightBtnIv.drawable
 
@@ -241,17 +247,31 @@ class Toolbar @JvmOverloads constructor(
             attrs = R.styleable.CustomToolbar,
             defStyleAttr = defStyleAttr
         ) {
-            setBackgroundColor(getColor(R.styleable.CustomToolbar_android_background, defaultBackgroundColor))
-            buttonIconColor = getColor(R.styleable.CustomToolbar_toolbar_buttonIconColor, buttonIconColor)
-            buttonRippleColor = getColor(R.styleable.CustomToolbar_toolbar_buttonRippleColor, buttonRippleColor)
+            setBackgroundColor(
+                getColor(
+                    R.styleable.CustomToolbar_android_background,
+                    defaultBackgroundColor
+                )
+            )
+            buttonIconColor =
+                getColor(R.styleable.CustomToolbar_toolbar_buttonIconColor, buttonIconColor)
+            buttonRippleColor =
+                getColor(R.styleable.CustomToolbar_toolbar_buttonRippleColor, buttonRippleColor)
             leftButtonIcon = getDrawable(R.styleable.CustomToolbar_toolbar_leftButtonIcon)
             rightButtonIcon = getDrawable(R.styleable.CustomToolbar_toolbar_rightButtonIcon)
-            extraRightButtonIcon = getDrawable(R.styleable.CustomToolbar_toolbar_extraRightButtonIcon)
+            extraRightButtonIcon =
+                getDrawable(R.styleable.CustomToolbar_toolbar_extraRightButtonIcon)
             titleText = getString(R.styleable.CustomToolbar_toolbar_titleText, titleText)
-            titleTextColor = getColor(R.styleable.CustomToolbar_toolbar_titleTextColor, titleTextColor)
-            titleTextSize = getDimension(R.styleable.CustomToolbar_toolbar_titleTextSize, titleTextSize)
-            titleTextTypeface = getFont(context, R.styleable.CustomToolbar_toolbar_titleTextFont, titleTextTypeface)
-            titleTextGravity = getInt(R.styleable.CustomToolbar_toolbar_titleTextGravity, titleTextGravity.id).asTitleGravity()
+            titleTextColor =
+                getColor(R.styleable.CustomToolbar_toolbar_titleTextColor, titleTextColor)
+            titleTextSize =
+                getDimension(R.styleable.CustomToolbar_toolbar_titleTextSize, titleTextSize)
+            titleTextTypeface =
+                getFont(context, R.styleable.CustomToolbar_toolbar_titleTextFont, titleTextTypeface)
+            titleTextGravity = getInt(
+                R.styleable.CustomToolbar_toolbar_titleTextGravity,
+                titleTextGravity.id
+            ).asTitleGravity()
         }
     }
 
@@ -291,7 +311,7 @@ class Toolbar @JvmOverloads constructor(
 
     private fun calculateTitleLeftPadding(): Int {
         return if (isLeftButtonVisible) {
-            (buttonConfig.buttonContainerSize + titleConfig.horizontalPaddingWithIcon)
+            buttonConfig.buttonContainerSize + titleConfig.horizontalPaddingWithIcon
         } else {
             titleConfig.horizontalPaddingWithoutIcon
         }
@@ -327,13 +347,11 @@ class Toolbar @JvmOverloads constructor(
     }
 
     private fun checkNewTitleGravity(newTitleGravity: TitleGravity) {
-        val canNotAssignNewTitleGravity = (
-            areBothRightButtonsVisible &&
-                (newTitleGravity != TitleGravity.LEFT)
-            )
+        val canNotAssignNewTitleGravity =
+            areBothRightButtonsVisible && newTitleGravity != TitleGravity.LEFT
 
         if (canNotAssignNewTitleGravity) {
-            throw IllegalStateException(
+            error(
                 """
                 Toolbar does not support setting any other title gravity
                 except LEFT when both right buttons are visible.
@@ -368,6 +386,6 @@ class Toolbar @JvmOverloads constructor(
     }
 
     private fun calculateHeight(): Int {
-        return (defaultToolbarHeight + verticalPadding)
+        return defaultToolbarHeight + verticalPadding
     }
 }

@@ -44,19 +44,15 @@ open class SpacingItemDecorator @JvmOverloads constructor(
                 return
             }
         }
-
         if (sideFlags.containsBits(SIDE_LEFT) && shouldAssignSpacing(view, parent)) {
             outRect.left = spacing
         }
-
         if (sideFlags.containsBits(SIDE_TOP) && shouldAssignSpacing(view, parent)) {
             outRect.top = spacing
         }
-
         if (sideFlags.containsBits(SIDE_RIGHT) && shouldAssignSpacing(view, parent)) {
             outRect.right = spacing
         }
-
         if (sideFlags.containsBits(SIDE_BOTTOM) && shouldAssignSpacing(view, parent)) {
             outRect.bottom = spacing
         }

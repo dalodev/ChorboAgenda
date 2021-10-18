@@ -104,7 +104,7 @@ internal class ImageViewerViewModel @Inject constructor(
         return stringProvider.getString(
             R.string.image_viewer_toolbar_title_template,
             title,
-            (selectedPosition.value + 1),
+            selectedPosition.value + 1,
             imageUrls.value.size
         )
     }
@@ -155,9 +155,8 @@ internal class ImageViewerViewModel @Inject constructor(
     ).resultOrError()
 
     private fun handleUiState(uiState: ImageViewerUiState) {
-        when (uiState) {
-            is ImageViewerUiState.Result -> handleResultState(uiState)
-            else -> Unit
+        if (uiState is ImageViewerUiState.Result) {
+            handleResultState(uiState)
         }
     }
 

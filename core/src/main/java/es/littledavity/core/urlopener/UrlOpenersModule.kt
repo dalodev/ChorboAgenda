@@ -15,7 +15,5 @@ internal object UrlOpenersModule {
     @Provides
     fun provideUrlOpeners(
         @UrlOpenerKey(UrlOpenerKey.Type.NATIVE_APP) nativeAppUrlOpener: UrlOpener,
-    ): List<UrlOpener> {
-        return listOf(nativeAppUrlOpener)
-    }
+    ): List<UrlOpener> = listOf(nativeAppUrlOpener)
 }

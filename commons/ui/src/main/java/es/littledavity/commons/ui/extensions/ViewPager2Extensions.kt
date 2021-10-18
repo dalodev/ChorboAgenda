@@ -8,12 +8,16 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.ViewPager2
 
 val ViewPager2.recyclerView: RecyclerView?
-    get() = (children.firstOrNull() as? RecyclerView)
+    get() = children.firstOrNull() as? RecyclerView
 
 inline fun ViewPager2.registerOnPageChangeCallback(
     crossinline onPageSelected: (position: Int) -> Unit = {},
     crossinline onPageScrollStateChanged: (state: Int) -> Unit = {},
-    crossinline onPageScrolled: (position: Int, positionOffset: Float, positionOffsetPixels: Int) -> Unit = { _, _, _ -> }
+    crossinline onPageScrolled: (
+        position: Int,
+        positionOffset: Float,
+        positionOffsetPixels: Int
+    ) -> Unit = { _, _, _ -> }
 ): ViewPager2.OnPageChangeCallback {
     return object : ViewPager2.OnPageChangeCallback() {
 

@@ -27,9 +27,7 @@ enum class TitleGravity(
 
         @JvmName("forId")
         @JvmStatic
-        internal fun Int.asTitleGravity(): TitleGravity {
-            return values().find { it.id == this }
-                ?: throw IllegalArgumentException("Could not find the title gravity for the specified ID: $this.")
-        }
+        internal fun Int.asTitleGravity(): TitleGravity = values().find { it.id == this }
+            ?: throw IllegalArgumentException("Could not find the title gravity for the specified ID: $this.")
     }
 }

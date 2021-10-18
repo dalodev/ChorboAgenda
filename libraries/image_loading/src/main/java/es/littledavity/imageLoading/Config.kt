@@ -23,13 +23,13 @@ class Config private constructor(
 ) {
 
     internal val hasTargetSize: Boolean
-        get() = ((targetWidth > 0) && (targetHeight > 0))
+        get() = targetWidth > 0 && targetHeight > 0
 
     internal val hasTransformations: Boolean
         get() = transformations.isNotEmpty()
 
     internal val hasAtLeastOneResultListener: Boolean
-        get() = ((onSuccess != null) || (onFailure != null))
+        get() = onSuccess != null || onFailure != null
 
     class Builder {
 

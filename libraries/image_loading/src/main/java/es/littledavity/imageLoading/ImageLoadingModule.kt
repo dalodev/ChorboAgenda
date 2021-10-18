@@ -25,7 +25,7 @@ internal object ImageLoadingModule {
     fun providePicasso(@ApplicationContext context: Context): Picasso {
         val activityManager = context.getSystemService<ActivityManager>()
         // ~50% of the available heap
-        val cacheSizeInBytes = (1024 * 1024 * activityManager.memoryClass / 2)
+        val cacheSizeInBytes = 1024 * 1024 * activityManager.memoryClass / 2
 
         return Picasso.Builder(context)
             .defaultBitmapConfig(Bitmap.Config.ARGB_8888)

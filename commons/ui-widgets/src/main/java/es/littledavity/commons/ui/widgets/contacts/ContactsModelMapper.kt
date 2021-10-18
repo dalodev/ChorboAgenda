@@ -27,13 +27,11 @@ internal class ContactsModelMapperImpl @Inject constructor(
         creationDate = contact.formatCreationDate(),
     )
 
-    private fun Contact.createImageUrl(): String? {
-        return image?.let { cover ->
-            igdbImageUrlFactory.createUrl(
-                cover,
-                IgdbImageUrlFactory.Config(IgdbImageSize.BIG_COVER)
-            )
-        }
+    private fun Contact.createImageUrl(): String? = image?.let { cover ->
+        igdbImageUrlFactory.createUrl(
+            cover,
+            IgdbImageUrlFactory.Config(IgdbImageSize.BIG_COVER)
+        )
     }
 
     private fun Contact.formatCreationDate() = creationDateFormatter.formatReleaseDate(this)

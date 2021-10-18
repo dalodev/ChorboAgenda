@@ -36,16 +36,17 @@ internal class LikedContactsDatabaseDataStore @Inject constructor(
 
     override suspend fun isContactLiked(contactId: Int) = likedContactDao.isContactLiked(contactId)
 
-    override suspend fun observeContactLikeState(contactId: Int) = likedContactDao.observeContactLikeState(contactId)
+    override suspend fun observeContactLikeState(contactId: Int) =
+        likedContactDao.observeContactLikeState(contactId)
 
-    override suspend fun observeLikedContacts(pagination: Pagination) = likedContactDao.observeLikedContacts(
-        offset = pagination.offset,
-        limit = pagination.limit
-    ).toDataContactsFlow()
+    override suspend fun observeLikedContacts(pagination: Pagination) =
+        likedContactDao.observeLikedContacts(
+            offset = pagination.offset,
+            limit = pagination.limit
+        ).toDataContactsFlow()
 
-    private fun Flow<List<DatabaseContact>>.toDataContactsFlow(): Flow<List<DataContact>> {
-        return distinctUntilChanged()
+    private fun Flow<List<DatabaseContact>>.toDataContactsFlow(): Flow<List<DataContact>> =
+        distinctUntilChanged()
             .map(contactMapper::mapToDataContact)
             .flowOn(dispatcherProvider.computation)
-    }
 }

@@ -59,17 +59,9 @@ internal class IgdbImageUrlFactoryImpl @Inject constructor() : IgdbImageUrlFacto
     override fun createUrl(image: Image, config: IgdbImageUrlFactory.Config): String? {
         if (image.id?.isBlank() == true) return null
         return image.id
-        /*return String.format(
-            IMAGE_URL_TEMPLATE,
-            constructType(config),
-            image.id,
-            config.extension.rawExtension
-        )*/
     }
 
-    private fun constructType(config: IgdbImageUrlFactory.Config): String {
-        return buildString {
-            append(config.size.rawSize)
-        }
+    private fun constructType(config: IgdbImageUrlFactory.Config) = buildString {
+        append(config.size.rawSize)
     }
 }

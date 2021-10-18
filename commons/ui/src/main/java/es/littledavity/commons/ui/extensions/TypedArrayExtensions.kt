@@ -14,11 +14,11 @@ import androidx.core.content.res.ResourcesCompat
 import es.littledavity.core.commons.SdkInfo
 
 fun TypedArray.getString(@StyleableRes index: Int, default: CharSequence = ""): CharSequence {
-    return (getString(index) ?: default)
+    return getString(index) ?: default
 }
 
 fun TypedArray.getDrawable(@StyleableRes index: Int, default: Drawable? = null): Drawable? {
-    return (getDrawable(index) ?: default)
+    return getDrawable(index) ?: default
 }
 
 @SuppressLint("NewApi")
@@ -28,7 +28,7 @@ fun TypedArray.getFont(
     default: Typeface
 ): Typeface {
     return if (SdkInfo.IS_AT_LEAST_OREO) {
-        (getFont(index) ?: default)
+        getFont(index) ?: default
     } else {
         getResourceId(index, -1)
             .takeIf { it != -1 }
@@ -38,5 +38,5 @@ fun TypedArray.getFont(
 }
 
 fun TypedArray.getColorStateList(@StyleableRes index: Int, default: ColorStateList): ColorStateList {
-    return (getColorStateList(index) ?: default)
+    return getColorStateList(index) ?: default
 }

@@ -81,9 +81,8 @@ class LikedContactsViewModel @Inject constructor(
         }
     }
 
-    private fun isSubsequentEmission(): Boolean {
-        return !observeContactsUseCaseParams.pagination.hasDefaultLimit()
-    }
+    private fun isSubsequentEmission(): Boolean =
+        !observeContactsUseCaseParams.pagination.hasDefaultLimit()
 
     private fun configureNextLoad(uiState: ContactsUiState) {
         if (uiState !is ContactsUiState.Result) return
@@ -91,7 +90,7 @@ class LikedContactsViewModel @Inject constructor(
         val paginationLimit = observeContactsUseCaseParams.pagination.limit
         val itemCount = uiState.items.size
 
-        hasMoreContactsToLoad = (paginationLimit == itemCount)
+        hasMoreContactsToLoad = paginationLimit == itemCount
     }
 
     fun onContactClicked(contact: ContactModel) {

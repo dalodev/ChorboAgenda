@@ -25,10 +25,8 @@ object Versions {
     const val coroutines = "1.5.2"
     const val room = "2.3.0-rc01"
     const val spotless = "4.0.0"
-    const val detekt = "1.17.1"
+    const val detekt = "1.18.1"
     const val ktlint = "0.41.0"
-    const val jacocoPlugin = "0.1.5"
-    const val jacocoToolss = "0.8.4"
 
 }
 
@@ -49,7 +47,6 @@ object Deps {
         const val spotless = "com.diffplug.spotless:spotless-plugin-gradle:${Versions.spotless}"
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
         const val ktlint = "com.pinterest:ktlint:${Versions.ktlint}"
-        const val jacoco = "com.dicedmelon.gradle:jacoco-android:${Versions.jacocoPlugin}"
     }
 
     object Local {

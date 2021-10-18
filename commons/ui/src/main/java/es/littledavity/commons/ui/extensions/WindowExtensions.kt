@@ -14,7 +14,8 @@ var Window.isBackgroundDimmingEnabled: Boolean
             clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND)
         }
     }
-    get() = ((attributes.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND) == WindowManager.LayoutParams.FLAG_DIM_BEHIND)
+    get() = attributes.flags and WindowManager.LayoutParams.FLAG_DIM_BEHIND ==
+        WindowManager.LayoutParams.FLAG_DIM_BEHIND
 
 fun Window.makeScreenAlwaysAwake() {
     addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)

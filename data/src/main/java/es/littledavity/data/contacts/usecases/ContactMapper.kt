@@ -39,18 +39,15 @@ internal class ContactMapper @Inject constructor() {
         )
     }
 
-    private fun DataImage.toDomainImage(): DomainImage {
-        return DomainImage(
-            id = id,
-            width = width,
-            height = height,
-            created = created
-        )
-    }
+    private fun DataImage.toDomainImage(): DomainImage = DomainImage(
+        id = id,
+        width = width,
+        height = height,
+        created = created
+    )
 
-    private fun MutableList<DataImage>.toDomainImages(): MutableList<DomainImage> {
-        return map { it.toDomainImage() }.toMutableList()
-    }
+    private fun MutableList<DataImage>.toDomainImages(): MutableList<DomainImage> =
+        map { it.toDomainImage() }.toMutableList()
 
     private fun DataCreationDate.toDomainCreationDates() = DomainCreationDate(
         date = this.date,
@@ -80,18 +77,15 @@ internal class ContactMapper @Inject constructor() {
         )
     }
 
-    private fun DomainImage.toDataImage(): DataImage {
-        return DataImage(
-            id = id,
-            width = width,
-            height = height,
-            created = created
-        )
-    }
+    private fun DomainImage.toDataImage(): DataImage = DataImage(
+        id = id,
+        width = width,
+        height = height,
+        created = created
+    )
 
-    private fun MutableList<DomainImage>.toDataImages(): MutableList<DataImage> {
-        return map { it.toDataImage() }.toMutableList()
-    }
+    private fun MutableList<DomainImage>.toDataImages(): MutableList<DataImage> =
+        map { it.toDataImage() }.toMutableList()
 
     private fun DomainCreationDate?.toDataCreationDate() = DataCreationDate(
         date = this?.date,

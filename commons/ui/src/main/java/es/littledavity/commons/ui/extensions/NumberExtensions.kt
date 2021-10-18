@@ -11,32 +11,32 @@ import androidx.annotation.FloatRange
 import kotlin.math.roundToInt
 
 val Int.isEven: Boolean
-    get() = ((this and 1) == 0)
+    get() = this and 1 == 0
 
 val Int.isOdd: Boolean
     get() = !isEven
 
 val Long.isEven: Boolean
-    get() = ((this and 1L) == 0L)
+    get() = this and 1L == 0L
 
 val Long.isOdd: Boolean
     get() = !isEven
 
 val Int.isOpaque: Boolean
-    get() = (Color.alpha(this) == 255)
+    get() = Color.alpha(this) == 255
 
 val Int.isTransparent: Boolean
-    get() = (Color.alpha(this) == 0)
+    get() = Color.alpha(this) == 0
 
 val Int.isTranslucent: Boolean
-    get() = (Color.alpha(this) in 2..254)
+    get() = Color.alpha(this) in 2..254
 
 fun Int.dpToPx(context: Context): Int {
     return toFloat().dpToPx(context).roundToInt()
 }
 
 fun Float.dpToPx(context: Context): Float {
-    return (this * context.displayMetrics.density)
+    return this * context.displayMetrics.density
 }
 
 fun Int.spToPx(context: Context): Int {
@@ -44,7 +44,7 @@ fun Int.spToPx(context: Context): Int {
 }
 
 fun Float.spToPx(context: Context): Float {
-    return (this * context.displayMetrics.scaledDensity)
+    return this * context.displayMetrics.scaledDensity
 }
 
 fun Int.pxToDp(context: Context): Int {
@@ -52,7 +52,7 @@ fun Int.pxToDp(context: Context): Int {
 }
 
 fun Float.pxToDp(context: Context): Float {
-    return (this / context.displayMetrics.density)
+    return this / context.displayMetrics.density
 }
 
 fun Int.pxToSp(context: Context): Int {
@@ -60,11 +60,11 @@ fun Int.pxToSp(context: Context): Int {
 }
 
 fun Float.pxToSp(context: Context): Float {
-    return (this / context.displayMetrics.scaledDensity)
+    return this / context.displayMetrics.scaledDensity
 }
 
 fun Int.containsBits(bits: Int): Boolean {
-    return ((this and bits) == bits)
+    return this and bits == bits
 }
 
 /**

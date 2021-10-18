@@ -38,19 +38,19 @@ import kotlin.properties.ReadWriteProperty
 private const val DATA_SET_ANIMATION_DURATION = 500L
 private val DATA_SET_ANIMATION_INTERPOLATOR = DecelerateInterpolator(1.5F)
 val View.hasLayoutParams: Boolean
-    get() = (layoutParams != null)
+    get() = layoutParams != null
 
 var View.layoutParamsWidth: Int
     set(value) {
         setLayoutParamsSize(width = value)
     }
-    get() = (layoutParams?.width ?: 0)
+    get() = layoutParams?.width ?: 0
 
 var View.layoutParamsHeight: Int
     set(value) {
         setLayoutParamsSize(height = value)
     }
-    get() = (layoutParams?.height ?: 0)
+    get() = layoutParams?.height ?: 0
 
 @get:Px
 var View.startMargin: Int
@@ -82,11 +82,11 @@ var View.bottomMargin: Int
 
 @get:Px
 val View.horizontalMargin: Int
-    get() = (startMargin + endMargin)
+    get() = startMargin + endMargin
 
 @get:Px
 val View.verticalMargin: Int
-    get() = (topMargin + bottomMargin)
+    get() = topMargin + bottomMargin
 
 @get:Px
 var View.startPadding: Int
@@ -118,11 +118,11 @@ var View.bottomPadding: Int
 
 @get:Px
 val View.horizontalPadding: Int
-    get() = (startPadding + endPadding)
+    get() = startPadding + endPadding
 
 @get:Px
 val View.verticalPadding: Int
-    get() = (topPadding + bottomPadding)
+    get() = topPadding + bottomPadding
 
 fun View.setLayoutParamsSize(size: Int) {
     setLayoutParamsSize(width = size, height = size)
@@ -249,8 +249,9 @@ fun View.clearBottomPadding() {
     bottomPadding = 0
 }
 
+@SuppressWarnings("unchecked")
 fun <T : ViewGroup.LayoutParams> View.toLayoutParams(): T {
-    return (layoutParams as T)
+    return layoutParams as T
 }
 
 fun View.getColor(@ColorRes colorId: Int): Int {
@@ -376,7 +377,7 @@ fun View.enable(
             setAlpha(alpha)
         }
 
-        if (childrenToo && (this is ViewGroup)) {
+        if (childrenToo && this is ViewGroup) {
             for (child in children) {
                 child.enable(changeAlpha, alpha, childrenToo)
             }
@@ -407,7 +408,7 @@ fun View.disable(
             setAlpha(alpha)
         }
 
-        if (childrenToo && (this is ViewGroup)) {
+        if (childrenToo && this is ViewGroup) {
             for (child in children) {
                 child.disable(changeAlpha, alpha, childrenToo)
             }
