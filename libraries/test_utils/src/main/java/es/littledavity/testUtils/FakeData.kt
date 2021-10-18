@@ -14,6 +14,10 @@ import es.littledavity.domain.DomainCreationDateCategory
 import es.littledavity.domain.DomainImage
 import es.littledavity.domain.commons.entities.Error
 
+private const val SPAIN_STRING = "Espana"
+private const val RATING_STRING = "10/10"
+private const val INSTAGRAM_STRING = "@Littledavity"
+
 val DATA_CONTACT = DataContact(
     id = 1,
     name = "name",
@@ -23,9 +27,9 @@ val DATA_CONTACT = DataContact(
     screenshots = mutableListOf(),
     creationDate = CreationDate(1L, 1, CreationDateCategory.YYYY_MMMM_DD),
     age = "18",
-    country = "Espana",
-    rating = "10/10",
-    instagram = "@Littledavity",
+    country = SPAIN_STRING,
+    rating = RATING_STRING,
+    instagram = INSTAGRAM_STRING,
     info = emptyList()
 )
 
@@ -38,9 +42,9 @@ val DATA_CONTACT_IMAGE_CREATED = DataContact(
     screenshots = mutableListOf(),
     creationDate = CreationDate(1L, 1, CreationDateCategory.YYYY_MMMM_DD),
     age = "18",
-    country = "Espana",
-    rating = "10/10",
-    instagram = "@Littledavity",
+    country = SPAIN_STRING,
+    rating = RATING_STRING,
+    instagram = INSTAGRAM_STRING,
     info = emptyList()
 )
 val DATA_CONTACTS = listOf(
@@ -66,9 +70,9 @@ val DOMAIN_CONTACT = DomainContact(
     screenshots = mutableListOf(),
     creationDate = DomainCreationDate(1L, 1, DomainCreationDateCategory.YYYY_MMMM_DD),
     age = "18",
-    country = "Espana",
-    rating = "10/10",
-    instagram = "@Littledavity",
+    country = SPAIN_STRING,
+    rating = RATING_STRING,
+    instagram = INSTAGRAM_STRING,
     info = mutableListOf()
 )
 
