@@ -13,7 +13,7 @@ on:
 jobs:
 
   #Build debug and generate apk
-  build_and_distribution:
+  build_and_upload_apk:
     name: Build app and generate APK
     runs-on: ubuntu-latest
 
@@ -62,7 +62,6 @@ jobs:
           reporter: github-pr-review # Change reporter
           android: true
 
-  # First step run unit test
   test:
     name: Run Tests
     needs: [ build_and_distribution ]
@@ -125,7 +124,7 @@ jobs:
       - name: upload artifact to Firebase App Distribution
         uses: wzieba/Firebase-Distribution-Github-Action@v1.2.2
         with:
-          appId: 1:300526789088:android:453d200c718d6ea1624b85
-          token: 1//03fyZZND1kDbsCgYIARAAGAMSNwF-L9Irm1bbdpQN6cHomxHu_0_AWPzRHKDomQ2S5vs_ARJF2us9Il6yfl9suCeVU8QsnjXuUOo
+          appId: ${{secrets.FIREBASE_APP_ID}}
+          token: ${{secrets.FIREBASE_TOKEN}}
           groups: testers
           file: app/build/outputs/apk/debug/app-debug.apk
