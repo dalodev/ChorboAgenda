@@ -336,20 +336,19 @@ internal class ContactHeaderController(
     private fun setInstagramLink(value: CharSequence?) {
         binding.instagramTv.movementMethod = LinkMovementMethod.getInstance()
         val profile = value?.trim().toString().replace("@", "")
-        val htmlText = "<a href=\"http://instagram.com/_u/$profile/\">$value</a> "
+        val htmlText = "<a href=\"http://instagram.com/_u/$profile/\">$value</a>"
         val spannable: Spannable = SpannableString(htmlText)
         Linkify.addLinks(spannable, Linkify.WEB_URLS)
         // The fix: Append a zero-width space to the Spannable
-        val text = TextUtils.concat(spannable, "\u200B")
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             binding.instagramTv.setText(
                 Html.fromHtml(
-                    text.toString(),
+                    htmlText,
                     HtmlCompat.FROM_HTML_MODE_LEGACY
                 )
             )
         } else {
-            binding.instagramTv.setText(Html.fromHtml(text.toString()))
+            binding.instagramTv.setText(Html.fromHtml(htmlText))
         }
     }
 }
