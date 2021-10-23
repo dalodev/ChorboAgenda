@@ -31,8 +31,8 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
             buildToolsVersion(AppConfig.buildToolsVersion)
 
             defaultConfig {
-                minSdkVersion(AppConfig.minSdkVersion)
-                targetSdkVersion(AppConfig.targetSdkVersion)
+                minSdk = AppConfig.minSdkVersion
+                targetSdk = AppConfig.targetSdkVersion
                 versionCode = AppConfig.versionCode
                 versionName = AppConfig.versionName
 
