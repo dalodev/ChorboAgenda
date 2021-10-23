@@ -13,11 +13,6 @@ android {
         viewBinding = true
         dataBinding = true
     }
-
-    // https://dagger.dev/hilt/gradle-setup#classpath-aggregation
-    lint {
-        isCheckReleaseBuilds = false
-    }
 }
 
 hilt {

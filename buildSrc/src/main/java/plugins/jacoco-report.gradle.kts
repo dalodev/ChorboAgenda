@@ -1,12 +1,17 @@
 package plugins
 
+import PLUGIN_JACOCO
+
 object BuildTaskGroups {
     const val VERIFICATION = "verification"
 }
 
+plugins.apply(PLUGIN_JACOCO)
+
 tasks.withType<Test> {
     configure<JacocoTaskExtension> {
         isIncludeNoLocationClasses = true
+        this.excludes?.add("jdk.internal.*")
     }
 }
 
@@ -69,33 +74,31 @@ fun JacocoReport.setDirectories() {
     executionData.setFrom(executionDataTree)
 }
 
-if (tasks.findByName("jacocoAndroidTestReport") == null) {
-
-    tasks.register<JacocoReport>("jacocoAndroidTestReport") {
-        group = BuildTaskGroups.VERIFICATION
-        description = "Code coverage report for both Android and Unit tests."
-        dependsOn("testDebugUnitTest", "createDebugCoverageReport")
-        reports {
-            reports()
-        }
-        setDirectories()
+tasks.register<JacocoReport>("jacocoAndroidTestReport") {
+    group = BuildTaskGroups.VERIFICATION
+    description = "Code coverage report for both and Unit tests."
+    dependsOn("testDebugUnitTest") //createDebugCoverageReport for android test
+    reports {
+        reports()
+    }
+    setDirectories()
+    doLast {
+        println("Jacoco coverage report: file://${reports.html.destination}/index.html")
     }
 }
 
-if (tasks.findByName("jacocoAndroidCoverageVerification") == null) {
-    tasks.register<JacocoCoverageVerification>("jacocoAndroidCoverageVerification") {
-        group = BuildTaskGroups.VERIFICATION
-        description = "Code coverage verification for Android both Android and Unit tests."
-        dependsOn("testDebugUnitTest", "createDebugCoverageReport")
-        violationRules {
-            rule {
-                limit {
-                    counter = "INSTRUCTIONAL"
-                    value = "COVEREDRATIO"
-                    minimum = "0.5".toBigDecimal()
-                }
+tasks.register<JacocoCoverageVerification>("jacocoAndroidCoverageVerification") {
+    group = BuildTaskGroups.VERIFICATION
+    description = "Code coverage verification for Android both Android and Unit tests."
+    dependsOn("testDebugUnitTest")//createDebugCoverageReport for android test
+    violationRules {
+        rule {
+            limit {
+                counter = "INSTRUCTIONAL"
+                value = "COVEREDRATIO"
+                minimum = "0.5".toBigDecimal()
             }
         }
-        setDirectories()
     }
+    setDirectories()
 }

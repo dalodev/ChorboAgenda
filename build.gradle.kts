@@ -4,6 +4,8 @@
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import es.littledavity.chorboagenda.BuildPlugins
+import es.littledavity.chorboagenda.utils.hasTestDirectory
+import es.littledavity.chorboagenda.utils.isAndroidModule
 
 plugins {
     gradleVersions()
@@ -25,6 +27,7 @@ buildscript {
         classpath(Deps.Plugins.gradleVersions)
         classpath(Deps.Plugins.spotless)
         classpath(Deps.Plugins.detekt)
+        classpath(Deps.Plugins.jacoco)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts.kts.kts files
     }
@@ -45,7 +48,6 @@ allprojects {
     // See: https://githgiub.com/mockito/mockito/issues/2007#issuecomment-689365556
     configurations.all {
         resolutionStrategy.force("org.objenesis:objenesis:2.6")
-        resolutionStrategy.force("org.jacoco:org.jacoco.core:0.8.7")
     }
 }
 
@@ -61,7 +63,7 @@ subprojects {
                 "-Xuse-experimental=kotlin.time.ExperimentalTime",
                 "-Xuse-experimental=kotlinx.coroutines.ExperimentalCoroutinesApi",
                 "-Xuse-experimental=kotlinx.coroutines.FlowPreview",
-//                "-Xuse-experimental=kotlinx.serialization.ExperimentalSerializationApi"
+                "-Xuse-experimental=kotlinx.serialization.ExperimentalSerializationApi"
             )
 
             jvmTarget = AppConfig.kotlinCompatibilityVersion.toString()
@@ -73,10 +75,11 @@ subprojects {
             correctErrorTypes = true
         }
     }
-}
 
-tasks {
-    /* val clean by registering(Delete::class) {
-         delete(buildDir)
-     }*/
+    afterEvaluate {
+        if(isAndroidModule() && hasTestDirectory()) {
+            println("Applyng code coverage in module -> ${project.name}")
+            plugins.apply(BuildPlugins.JACOCO)
+        }
+    }
 }

@@ -27,6 +27,7 @@ object Versions {
     const val spotless = "4.0.0"
     const val detekt = "1.18.1"
     const val ktlint = "0.41.0"
+    const val jacoco = "0.8.7"
 
 }
 
@@ -47,6 +48,7 @@ object Deps {
         const val spotless = "com.diffplug.spotless:spotless-plugin-gradle:${Versions.spotless}"
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
         const val ktlint = "com.pinterest:ktlint:${Versions.ktlint}"
+        const val jacoco = "org.jacoco:org.jacoco.core:${Versions.jacoco}"
     }
 
     object Local {

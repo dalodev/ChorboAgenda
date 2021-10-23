@@ -45,7 +45,7 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
                 // production to avoid security issues
                 getByName("debug") {
                     manifestPlaceholders["usesCleartextTraffic"] = true
-//                    isTestCoverageEnabled = true
+                    isTestCoverageEnabled = true
                 }
 
                 getByName("release") {
@@ -71,6 +71,20 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
                 excludes.add("META-INF/licenses/ASM")
                 pickFirsts.add("win32-x86-64/attach_hotspot_windows.dll")
                 pickFirsts.add("win32-x86/attach_hotspot_windows.dll")
+            }
+
+            // https://dagger.dev/hilt/gradle-setup#classpath-aggregation
+            lintOptions {
+                isCheckReleaseBuilds = false
+                isAbortOnError = false
+            }
+            testOptions {
+                unitTests.isIncludeAndroidResources = true
+                unitTests.isReturnDefaultValues = true
+            }
+
+            jacoco {
+                buildToolsVersion("0.8.7")
             }
         }
     }

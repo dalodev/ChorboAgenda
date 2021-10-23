@@ -9,8 +9,6 @@ plugins {
     navSafeArgsKotlin()
     spotless()
     detekt()
-    jacoco()
-    jacocoReport()
 }
 
 android {
@@ -20,19 +18,6 @@ android {
     buildFeatures {
         dataBinding = true
     }
-    // https://dagger.dev/hilt/gradle-setup#classpath-aggregation
-    lint {
-        isCheckReleaseBuilds = false
-        isAbortOnError = false
-    }
-    testOptions {
-        unitTests.isIncludeAndroidResources = true
-        unitTests.isReturnDefaultValues = true
-    }
-}
-
-jacoco {
-    toolVersion = "0.8.7"
 }
 
 hilt {

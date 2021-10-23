@@ -23,11 +23,6 @@ android {
     sourceSets {
         getByName("androidTest").assets.srcDirs("$projectDir/schemas")
     }
-
-    // https://dagger.dev/hilt/gradle-setup#classpath-aggregation
-    lint {
-        isCheckReleaseBuilds = false
-    }
 }
 
 hilt {
