@@ -28,7 +28,7 @@ object Versions {
     const val detekt = "1.18.1"
     const val ktlint = "0.41.0"
     const val jacoco = "0.8.7"
-    const val dokka = "1.5.0"
+    const val dokka = "1.5.31"
 }
 
 object Deps {
@@ -77,7 +77,7 @@ object Deps {
 
     object Kotlin {
 
-        private const val serializationVersion = "1.1.0"
+        private const val serializationVersion = "1.3.0"
 
         const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
         const val coroutines =
@@ -196,15 +196,15 @@ object Deps {
 
         private const val jUnitVersion = "4.13.2"
         private const val jUnitExtVersion = "1.1.2"
-        private const val assertJVersion = "3.19.0"
+        private const val assertJVersion = "3.21.0"
         private const val mockkVersion = "1.11.0"
         private const val turbineVersion = "0.6.0"
         private const val testRunnerVersion = "1.3.0"
         private const val archCoreVersion = "2.1.0"
         private const val mockWebServerVersion = "4.9.1"
-        private const val roboelectricVersion = "4.3.1"
+        private const val roboelectricVersion = "4.6.1"
         private const val mockitoVersion = "2.2.0"
-        private const val mockitoKotlinVersion = "3.1.0"
+        private const val mockitoKotlinVersion = "4.0.0"
         private const val rulesVersion = "1.3.0"
         private const val testCoreVersion = "1.3.0"
         private const val fragmentVersion = "1.3.0-beta01"
