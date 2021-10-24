@@ -11,6 +11,7 @@ plugins {
     gradleVersions()
     detekt()
     spotless()
+    dokka()
 }
 
 buildscript {
@@ -28,6 +29,7 @@ buildscript {
         classpath(Deps.Plugins.spotless)
         classpath(Deps.Plugins.detekt)
         classpath(Deps.Plugins.jacoco)
+        classpath(Deps.Plugins.dokka)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts.kts.kts files
     }
@@ -42,6 +44,7 @@ allprojects {
     plugins.apply(BuildPlugins.SPOTLESS)
     plugins.apply(BuildPlugins.DETEKT)
     plugins.apply(BuildPlugins.KTLINT)
+    plugins.apply(BuildPlugins.DOKKA)
 
     // Without the below block, a build failure was happening when
     // running ./gradlew connectedAndroidTest.

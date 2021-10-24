@@ -18,6 +18,7 @@ const val PLUGIN_KOTLINX_SERIALIZATION = "org.jetbrains.kotlin.plugin.serializat
 const val PLUGIN_PROTOBUF = "com.google.protobuf"
 const val PLUGIN_JACOCO_REPORT = "plugins.jacoco-report"
 const val PLUGIN_JACOCO = "jacoco"
+const val PLUGIN_DOKKA = "org.jetbrains.dokka"
 
 fun PluginDependenciesSpec.chorboagendaAndroid(): PluginDependencySpec {
     return id(PLUGIN_CHORBOAGENDA_ANDROID)
@@ -77,4 +78,8 @@ fun PluginDependenciesSpec.jacoco(): PluginDependencySpec {
 
 fun PluginDependenciesSpec.jacocoReport(): PluginDependencySpec {
     return id(PLUGIN_JACOCO_REPORT)
+}
+
+fun PluginDependenciesSpec.dokka(): PluginDependencySpec {
+    return id(PLUGIN_DOKKA)
 }

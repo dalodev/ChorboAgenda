@@ -19,6 +19,7 @@ object PluginsVersions {
     const val DETEKT = "1.18.1"
     const val KTLINT = "0.41.0"
     const val JACOCO = "0.8.7"
+    const val DOKKA = "1.5.0"
 }
 
 dependencies {
@@ -28,5 +29,6 @@ dependencies {
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${PluginsVersions.SPOTLESS}")
     implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
     implementation("org.jacoco:org.jacoco.core:${PluginsVersions.JACOCO}")
+    implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginsVersions.DOKKA}")
     implementation(gradleApi()) // for custom plugins
 }

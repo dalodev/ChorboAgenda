@@ -28,7 +28,7 @@ object Versions {
     const val detekt = "1.18.1"
     const val ktlint = "0.41.0"
     const val jacoco = "0.8.7"
-
+    const val dokka = "1.5.0"
 }
 
 object Deps {
@@ -49,6 +49,7 @@ object Deps {
         const val detekt = "io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${Versions.detekt}"
         const val ktlint = "com.pinterest:ktlint:${Versions.ktlint}"
         const val jacoco = "org.jacoco:org.jacoco.core:${Versions.jacoco}"
+        const val dokka = "org.jetbrains.dokka:dokka-gradle-plugin:${Versions.dokka}"
     }
 
     object Local {
@@ -68,7 +69,6 @@ object Deps {
         const val featuresSearch = ":features:search"
         const val featuresNew = ":features:new"
         const val featuresInfo = ":features:info"
-        const val featuresImageLoading = ":features:image_loading"
         const val featuresImageViewer = ":features:image_viewer"
         const val featuresLikes = ":features:likes"
         const val featuresAdd = ":features:add"
