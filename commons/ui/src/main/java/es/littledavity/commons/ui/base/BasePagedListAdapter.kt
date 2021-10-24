@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView
  * @param contentsSame Function called to check whether two items have the same data.
  * @see PagedListAdapter
  */
-abstract class BasePagedListAdapter<T>(
+abstract class BasePagedListAdapter<T: Any>(
     itemsSame: (T, T) -> Boolean,
     contentsSame: (T, T) -> Boolean
 ) : PagedListAdapter<T, RecyclerView.ViewHolder>(object : DiffUtil.ItemCallback<T>() {

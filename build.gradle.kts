@@ -7,8 +7,9 @@ import es.littledavity.chorboagenda.BuildPlugins
 import es.littledavity.chorboagenda.utils.hasTestDirectory
 import es.littledavity.chorboagenda.utils.isAndroidModule
 
+plugins.apply(BuildPlugins.UPDATE_DEPENDENCIES)
+
 plugins {
-    gradleVersions()
     detekt()
     spotless()
     dokka()
@@ -18,6 +19,7 @@ buildscript {
     repositories {
         mavenCentral()
         google()
+        gradlePluginPortal()
     }
 
     dependencies {

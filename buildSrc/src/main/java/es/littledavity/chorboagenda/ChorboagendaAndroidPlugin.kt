@@ -82,10 +82,6 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
                 unitTests.isIncludeAndroidResources = true
                 unitTests.isReturnDefaultValues = true
             }
-
-            jacoco {
-                buildToolsVersion("0.8.7")
-            }
         }
     }
 

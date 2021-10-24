@@ -17,7 +17,7 @@ object AppConfig {
 
 object Versions {
 
-    const val kotlin = "1.5.21" // also in buildSrc build.gradle.kts file
+    const val kotlin = "1.5.31" // also in buildSrc build.gradle.kts file
     const val gradleVersionsPlugin = "0.38.0"
     const val protobufPlugin = "0.8.15"
     const val navigation = "2.3.5"
@@ -256,7 +256,6 @@ object Deps {
         const val dexter = "com.karumi:dexter:$dexterVersion"
         const val timber = "com.jakewharton.timber:timber:$timberVersion"
         const val coil = "io.coil-kt:coil:$coilVersion"
-        const val countryPicker = "com.github.debutdeveloper:countrypickerandroid:dcbbda7fda"
         const val lottie = "com.airbnb.android:lottie:$lottieVersion"
     }
 

@@ -10,7 +10,7 @@ apply<DetektPlugin>()
 
 configure<DetektExtension> {
     toolVersion = "1.18.1"
-    input = project.files("src/main/kotlin")
+    source = project.files("src/main/kotlin")
     config = files("$rootDir/.detekt/config.yml")
     buildUponDefaultConfig = true
     reports {
