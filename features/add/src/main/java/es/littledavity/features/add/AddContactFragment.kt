@@ -19,9 +19,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class AddContactFragment : BaseFragment<
-    FragmentAddContactBinding,
-    AddContactViewModel,
-    AddContactNavigator>(
+        FragmentAddContactBinding,
+        AddContactViewModel,
+        AddContactNavigator>(
     R.layout.fragment_add_contact
 ) {
 
@@ -58,7 +58,13 @@ class AddContactFragment : BaseFragment<
 
     private fun initAddContactView() = with(viewBinding.addContactView) {
         applyWindowBottomInsetAsMargin()
-        onPhotoClicked = { viewModel.onPhotoClicked(resultLauncher) }
+        onPhotoClicked = {
+            viewModel.onPhotoClicked(resultLauncher)
+            viewModel.saveFieldsState(
+                viewBinding.addContactView.name,
+                viewBinding.addContactView.phone
+            )
+        }
         onDoneClicked = {
             viewModel.onAddContactClicked(
                 viewBinding.addContactView.name,

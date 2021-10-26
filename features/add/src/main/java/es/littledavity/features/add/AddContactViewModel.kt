@@ -154,6 +154,11 @@ class AddContactViewModel @Inject constructor(
         )
     }
 
+    fun saveFieldsState(name: String, phone: String) = with(currentContact) {
+        this.name = name
+        this.phone = phone
+    }
+
     private fun isValidNumber(phone: String) =
         phone.isNotBlank() && Patterns.PHONE.matcher(phone).matches()
 

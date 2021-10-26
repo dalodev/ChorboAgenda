@@ -18,7 +18,7 @@ object PluginsVersions {
     const val KOTLIN = "1.5.31"
     const val SPOTLESS = "4.0.0"
     const val DETEKT = "1.18.1"
-    const val KTLINT = "0.41.0"
+    const val KTLINT = "0.42.1"
     const val JACOCO = "0.8.7"
     const val DOKKA = "1.5.31"
     const val UPDATE_DEPENDENCIES = "0.39.0"
