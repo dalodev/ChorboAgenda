@@ -215,7 +215,7 @@ internal class ContactInfoViewModel @Inject constructor(
             )
         }
         viewModelScope.launch {
-            saveCurrentContact(false)
+            saveCurrentContact(true)
         }
     }
 

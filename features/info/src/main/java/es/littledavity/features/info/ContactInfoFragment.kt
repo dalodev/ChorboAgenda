@@ -59,14 +59,12 @@ internal class ContactInfoFragment : BaseFragment<
         onGalleryClicked = {
             viewModel.onGalleryClicked(it).also {
                 updateContactData()
-                viewModel.saveData()
             }
         }
         onBackButtonClicked = { updateContactData().also { viewModel.onBackButtonClicked() } }
         onImageClicked = {
             viewModel.onImageClicked().also {
                 updateContactData()
-                viewModel.saveData()
             }
         }
         onChangeImageClicked =

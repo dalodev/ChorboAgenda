@@ -145,7 +145,11 @@ internal class ImageGalleryServiceImpl @Inject constructor(
     }
 
     override fun removeMediaFile(uri: Uri): Int {
-        val resolver = context.contentResolver
-        return resolver.delete(uri, null, null)
+        return try {
+            val resolver = context.contentResolver
+            resolver.delete(uri, null, null)
+        } catch (e: Exception) {
+            -1
+        }
     }
 }
