@@ -55,7 +55,7 @@ internal class ContactMapper @Inject constructor(
         height = height,
         created = when (created) {
             created -> true
-            !created -> !created
+            !created -> true
             else -> false
         }
     )

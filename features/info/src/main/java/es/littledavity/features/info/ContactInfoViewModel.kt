@@ -194,13 +194,8 @@ internal class ContactInfoViewModel @Inject constructor(
     fun updatePhoto(uri: Uri?) {
         if (uri == null) return
         currentContact?.image = Image(id = uri.toString(), created = false)
-        currentContact?.let {
-            _uiState.value = uiStateFactory.createWithResultState(
-                it,
-                isContactLiked
-            )
-        }
         viewModelScope.launch {
+            _uiState.value = uiStateFactory.createWithLoadingState()
             saveCurrentContact(false)
         }
     }
@@ -208,13 +203,8 @@ internal class ContactInfoViewModel @Inject constructor(
     fun addGalleryImage(uri: Uri?) {
         if (uri == null) return
         currentContact?.gallery?.add(Image(id = uri.toString(), created = false))
-        currentContact?.let {
-            _uiState.value = uiStateFactory.createWithResultState(
-                it,
-                isContactLiked
-            )
-        }
         viewModelScope.launch {
+            _uiState.value = uiStateFactory.createWithLoadingState()
             saveCurrentContact(true)
         }
     }
@@ -281,12 +271,6 @@ internal class ContactInfoViewModel @Inject constructor(
         }
     }
 
-    fun saveData() {
-        viewModelScope.launch {
-            saveCurrentContact()
-        }
-    }
-
     private suspend fun saveCurrentContact(
         loading: Boolean = true,
         onCompletion: ((ContactInfoUiState) -> Unit)? = null
@@ -299,14 +283,18 @@ internal class ContactInfoViewModel @Inject constructor(
                     if (loading) emit(uiStateFactory.createWithLoadingState())
                 }.collect { state ->
                     _uiState.value = state
-                    onCompletion?.invoke(state)
+                    onCompletion?.invoke(state) ?: run {
+                        contactObservingJob?.cancelAndJoin()
+                        loadData(0)
+                    }
                 }
         }
     }
 
-    private fun mapToUiState(contact: Contact?) = if (contact == null) {
-        uiStateFactory.createWithEmptyState()
-    } else {
+    private fun mapToUiState(contact: Contact?) = if (contact != null) {
         uiStateFactory.createWithResultState(contact, isContactLiked)
+    } else {
+        uiStateFactory.createWithLoadingState()
     }
+
 }

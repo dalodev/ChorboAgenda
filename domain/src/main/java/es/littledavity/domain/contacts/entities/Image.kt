@@ -7,5 +7,5 @@ data class Image(
     val id: String?,
     val width: Int? = null,
     val height: Int? = null,
-    val created: Boolean = false
+    var created: Boolean = false
 )
