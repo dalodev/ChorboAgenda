@@ -136,7 +136,7 @@ internal class ContactHeaderController(
     private var backgroundImageModels by observeChanges<List<ContactHeaderImageModel>>(emptyList()) { _, newItems ->
         disableScrimConstraintIfNeeded()
         binding.galleryView.galleryModels = newItems.mapToContactGalleryModels()
-        binding.pageIndicatorTv.isVisible = newItems.isNotEmpty()
+        binding.pageIndicatorTv.isVisible = newItems.isNotEmpty() && newItems.first() !is ContactHeaderImageModel.DefaultImage
     }
 
     var onGalleryClicked: ((Int) -> Unit)? = null

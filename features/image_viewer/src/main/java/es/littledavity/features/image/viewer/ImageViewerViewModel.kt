@@ -161,12 +161,17 @@ internal class ImageViewerViewModel @Inject constructor(
     }
 
     private fun handleResultState(state: ImageViewerUiState.Result) {
-        if (state.urls.isEmpty()) {
-            onBackPressed()
-        } else {
-            _imageUrls.value = state.urls
-            _toolbarTitle.value = updateToolbarTitle()
-            savedStateHandle.set(KEY_SELECTED_POSITION, selectedPosition.value)
+        when {
+            profileView -> onBackPressed()
+            else -> {
+                if (state.urls.isEmpty()) {
+                    onBackPressed()
+                } else {
+                    _imageUrls.value = state.urls
+                    _toolbarTitle.value = updateToolbarTitle()
+                    savedStateHandle.set(KEY_SELECTED_POSITION, selectedPosition.value)
+                }
+            }
         }
     }
 
