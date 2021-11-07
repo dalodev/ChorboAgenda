@@ -88,7 +88,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOVTOKEN }} # not required for public repos
           flags: unittests # optional
-          files: app/build/reports/kover/reports.xml # optional
+          files: app/build/reports/kover/report.xml # optional
           name: codecov-umbrella # optional
           fail_ci_if_error: false # optional (default = false)
           verbose: true # optional (default = false)
