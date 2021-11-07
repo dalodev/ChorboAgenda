@@ -88,9 +88,9 @@ jobs:
         with:
           token: ${{ secrets.CODECOVTOKEN }} # not required for public repos
           flags: unittests # optional
-          files: ./report.xml # optional
+          files: ./reports/kover/report.xml # optional
           name: codecov-umbrella # optional
-          fail_ci_if_error: false # optional (default = false)
+          fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
 
   # Upload apk to Firebase app distribution
