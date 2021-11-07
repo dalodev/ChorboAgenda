@@ -48,7 +48,7 @@ jobs:
 
   test:
     name: Run Tests
-    needs: [ build_and_distribution ]
+    needs: [ build_and_upload_apk ]
     runs-on: ubuntu-latest
 
     steps:
@@ -95,7 +95,7 @@ jobs:
   # Upload apk to Firebase app distribution
   distribution_apk_to_testers:
     name: Upload apk to App Tester
-    needs: [ build_and_distribution, test ]
+    needs: [ build_and_upload_apk, test ]
     runs-on: ubuntu-latest
 
     steps:
