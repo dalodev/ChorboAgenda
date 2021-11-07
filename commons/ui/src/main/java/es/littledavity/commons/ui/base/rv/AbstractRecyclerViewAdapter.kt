@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dev.id
+ * Copyright 2021 dalodev
  */
 package es.littledavity.commons.ui.base.rv
 
@@ -11,7 +11,8 @@ import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.commons.ui.extensions.observeChanges
 import kotlin.reflect.KClass
 
-private inline class ViewType(val type: Int)
+@JvmInline
+private value class ViewType(val type: Int)
 
 abstract class AbstractRecyclerViewAdapter<IT : Item<*, in Dependencies>, Dependencies : ItemDependencies>(
     context: Context,

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dev.id
+ * Copyright 2021 dalodev
  */
 plugins {
     `kotlin-dsl`
@@ -19,7 +19,6 @@ object PluginsVersions {
     const val SPOTLESS = "4.0.0"
     const val DETEKT = "1.18.1"
     const val KTLINT = "0.42.1"
-    const val JACOCO = "0.8.7"
     const val DOKKA = "1.5.31"
     const val UPDATE_DEPENDENCIES = "0.39.0"
 }
@@ -30,7 +29,6 @@ dependencies {
     implementation("io.gitlab.arturbosch.detekt:detekt-gradle-plugin:${PluginsVersions.DETEKT}")
     implementation("com.diffplug.spotless:spotless-plugin-gradle:${PluginsVersions.SPOTLESS}")
     implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
-    implementation("org.jacoco:org.jacoco.core:${PluginsVersions.JACOCO}")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginsVersions.DOKKA}")
     implementation("com.github.ben-manes:gradle-versions-plugin:${PluginsVersions.UPDATE_DEPENDENCIES}")
     implementation(gradleApi()) // for custom plugins

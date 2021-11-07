@@ -46,30 +46,10 @@ jobs:
           name: debug apk
           path: app/build/outputs/apk/debug/app-debug.apk
 
-  # Run quality code
-  ktlint:
-    name: Check Code Quality
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout the code
-        uses: actions/checkout@v2
-
-      - name: Run ktlint
-        uses: ScaCap/action-ktlint@master
-        with:
-          github_token: ${{ secrets.github_token }}
-          reporter: github-pr-review # Change reporter
-          android: true
-
   test:
     name: Run Tests
     needs: [ build_and_distribution ]
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        api-level: [ 21, 23, 30 ]
-        target: [ default ]
 
     steps:
       - name: Checkout the code
@@ -102,6 +82,15 @@ jobs:
         with:
           name: reports
           path: app/build/test-results
+
+      - name: Code coverage
+        uses: codecov/codecov-action@v2
+        with:
+          token: ${{ secrets.CODECOVTOKEN }} # not required for public repos
+          flags: unittests # optional
+          name: codecov-umbrella # optional
+          fail_ci_if_error: false # optional (default = false)
+          verbose: true # optional (default = false)
 
   # Upload apk to Firebase app distribution
   distribution_apk_to_testers:

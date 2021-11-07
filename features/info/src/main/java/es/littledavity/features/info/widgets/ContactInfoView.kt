@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dev.id
+ * Copyright 2021 dalodev
  */
 package es.littledavity.features.info.widgets
 
@@ -209,7 +209,7 @@ internal class ContactInfoView @JvmOverloads constructor(
         headerController.onAttachedToWindow()
     }
 
-    private fun bindListener(item: Item<*, NoDependencies>, viewHolder: RecyclerView.ViewHolder) {
+    private fun bindListener(@Suppress("UNUSED_PARAMETER")item: Item<*, NoDependencies>, viewHolder: RecyclerView.ViewHolder) {
         when (viewHolder) {
             // create viewHolder for each item with listener invoke
             is ContactInfoDetailsItem.ViewHolder -> with(viewHolder) {

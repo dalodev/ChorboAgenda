@@ -6,6 +6,5 @@ object BuildPlugins {
     const val DETEKT = "plugins.detekt"
     const val SPOTLESS = "plugins.spotless"
     const val UPDATE_DEPENDENCIES = "plugins.update-dependencies"
-    const val JACOCO = "plugins.jacoco-report"
     const val DOKKA = "plugins.dokka"
 }

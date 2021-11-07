@@ -19,6 +19,8 @@ const val PLUGIN_PROTOBUF = "com.google.protobuf"
 const val PLUGIN_JACOCO_REPORT = "plugins.jacoco-report"
 const val PLUGIN_JACOCO = "jacoco"
 const val PLUGIN_DOKKA = "org.jetbrains.dokka"
+const val PLUGIN_QODANA = "org.jetbrains.qodana"
+const val PLUGIN_KOVER = "org.jetbrains.kotlinx.kover"
 
 fun PluginDependenciesSpec.chorboagendaAndroid(): PluginDependencySpec {
     return id(PLUGIN_CHORBOAGENDA_ANDROID)
@@ -29,7 +31,7 @@ fun PluginDependenciesSpec.androidLibrary(): PluginDependencySpec {
 }
 
 fun PluginDependenciesSpec.gradleVersions(): PluginDependencySpec {
-    return (id(PLUGIN_GRADLE_VERSIONS) version Versions.gradleVersionsPlugin)
+    return id(PLUGIN_GRADLE_VERSIONS)
 }
 
 fun PluginDependenciesSpec.androidApplication(): PluginDependencySpec {
@@ -82,4 +84,12 @@ fun PluginDependenciesSpec.jacocoReport(): PluginDependencySpec {
 
 fun PluginDependenciesSpec.dokka(): PluginDependencySpec {
     return id(PLUGIN_DOKKA)
+}
+
+fun PluginDependenciesSpec.qodana(): PluginDependencySpec {
+    return id(PLUGIN_QODANA) version Versions.qodana
+}
+
+fun PluginDependenciesSpec.kover(): PluginDependencySpec {
+    return id(PLUGIN_KOVER) version Versions.kover
 }

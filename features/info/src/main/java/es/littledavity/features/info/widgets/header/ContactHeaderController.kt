@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dev.id
+ * Copyright 2021 dalodev
  */
 package es.littledavity.features.info.widgets.header
 
@@ -333,6 +333,7 @@ internal class ContactHeaderController(
         binding.galleryScrimView.makeGone()
     }
 
+    @Suppress("DEPRECATION")
     private fun setInstagramLink(value: CharSequence?) {
         binding.instagramTv.movementMethod = LinkMovementMethod.getInstance()
         val profile = value?.trim().toString().replace("@", "")

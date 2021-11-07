@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dev.id
+ * Copyright 2021 dalodev
  */
 package es.littledavity.features.info
 
@@ -296,5 +296,4 @@ internal class ContactInfoViewModel @Inject constructor(
     } else {
         uiStateFactory.createWithLoadingState()
     }
-
 }

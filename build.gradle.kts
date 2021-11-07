@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dev.id
+ * Copyright 2021 dalodev
  */
 import org.jetbrains.kotlin.gradle.plugin.KaptExtension
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
@@ -7,12 +7,12 @@ import es.littledavity.chorboagenda.BuildPlugins
 import es.littledavity.chorboagenda.utils.hasTestDirectory
 import es.littledavity.chorboagenda.utils.isAndroidModule
 
-plugins.apply(BuildPlugins.UPDATE_DEPENDENCIES)
-
 plugins {
     detekt()
     spotless()
     dokka()
+    gradleVersions()
+    kover()
 }
 
 buildscript {
@@ -27,11 +27,6 @@ buildscript {
         classpath(Deps.Plugins.kotlinGradle)
         classpath(Deps.Plugins.navSafeArgs)
         classpath(Deps.Plugins.daggerHiltGradle)
-        classpath(Deps.Plugins.gradleVersions)
-        classpath(Deps.Plugins.spotless)
-        classpath(Deps.Plugins.detekt)
-        classpath(Deps.Plugins.jacoco)
-        classpath(Deps.Plugins.dokka)
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle.kts.kts.kts files
     }
@@ -47,6 +42,7 @@ allprojects {
     plugins.apply(BuildPlugins.DETEKT)
     plugins.apply(BuildPlugins.KTLINT)
     plugins.apply(BuildPlugins.DOKKA)
+    plugins.apply(BuildPlugins.UPDATE_DEPENDENCIES)
 
     // Without the below block, a build failure was happening when
     // running ./gradlew connectedAndroidTest.
@@ -57,7 +53,6 @@ allprojects {
 }
 
 subprojects {
-
     tasks.withType(KotlinCompile::class.java).all {
         sourceCompatibility = AppConfig.javaCompatibilityVersion.toString()
         targetCompatibility = AppConfig.javaCompatibilityVersion.toString()
@@ -81,10 +76,5 @@ subprojects {
         }
     }
 
-    afterEvaluate {
-        if(isAndroidModule() && hasTestDirectory()) {
-            println("Applyng code coverage in module -> ${project.name}")
-            plugins.apply(BuildPlugins.JACOCO)
-        }
-    }
+    afterEvaluate { if(isAndroidModule() && hasTestDirectory()) { } }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dev.id
+ * Copyright 2021 dalodev
  */
 plugins {
     androidApplication()
@@ -7,8 +7,6 @@ plugins {
     kotlinKapt()
     daggerHiltAndroid()
     navSafeArgsKotlin()
-    spotless()
-    detekt()
 }
 
 android {

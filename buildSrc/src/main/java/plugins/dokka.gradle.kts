@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dalodev
+ */
 package plugins
 
 import PLUGIN_DOKKA

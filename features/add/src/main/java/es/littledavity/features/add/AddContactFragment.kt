@@ -1,5 +1,5 @@
 /*
- * Copyright 2021 dev.id
+ * Copyright 2021 dalodev
  */
 package es.littledavity.features.add
 
@@ -19,9 +19,9 @@ import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class AddContactFragment : BaseFragment<
-        FragmentAddContactBinding,
-        AddContactViewModel,
-        AddContactNavigator>(
+    FragmentAddContactBinding,
+    AddContactViewModel,
+    AddContactNavigator>(
     R.layout.fragment_add_contact
 ) {
 
