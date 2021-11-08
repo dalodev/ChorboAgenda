@@ -43,7 +43,9 @@ allprojects {
     plugins.apply(BuildPlugins.KTLINT)
     plugins.apply(BuildPlugins.DOKKA)
     plugins.apply(BuildPlugins.UPDATE_DEPENDENCIES)
-
+    tasks.koverHtmlReport {
+        isEnabled = false                        // false to disable report generation
+    }
     // Without the below block, a build failure was happening when
     // running ./gradlew connectedAndroidTest.
     // See: https://githgiub.com/mockito/mockito/issues/2007#issuecomment-689365556
@@ -75,4 +77,8 @@ subprojects {
             correctErrorTypes = true
         }
     }
+}
+
+tasks.koverHtmlReport {
+    isEnabled = false
 }
