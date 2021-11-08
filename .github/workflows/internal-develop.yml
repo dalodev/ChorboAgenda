@@ -83,13 +83,15 @@ jobs:
           name: reports
           path: app/build/test-results
 
+      - name: Generate coverage report
+        run: ./gradlew koverCollectReports
+
       - name: Code coverage
         uses: codecov/codecov-action@v2
         with:
           token: ${{ secrets.CODECOVTOKEN }} # not required for public repos
+          directory: ./build/reports/kover/all/
           flags: unittests # optional
-          files: ./reports/kover/report.xml # optional
-          name: codecov-umbrella # optional
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
 

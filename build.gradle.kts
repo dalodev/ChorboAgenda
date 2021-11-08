@@ -75,6 +75,4 @@ subprojects {
             correctErrorTypes = true
         }
     }
-
-    afterEvaluate { if(isAndroidModule() && hasTestDirectory()) { } }
 }
