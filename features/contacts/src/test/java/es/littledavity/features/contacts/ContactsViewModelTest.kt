@@ -106,6 +106,18 @@ class ContactsViewModelTest {
         }
     }
 
+    @Test
+    fun onRemoveContact_shouldremoveContactUseCaseExecute() = mainCoroutineRule.runBlockingTest {
+        coEvery { removeContactUseCase.execute(any()) } returns Unit
+        coEvery { observeContactsUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACTS)
+
+        viewModel.uiState.test {
+            viewModel.loadData()
+            viewModel.onRemoveContact(1)
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
     private class FakeUiStateFactory :
         ContactsUiStateFactory {
 

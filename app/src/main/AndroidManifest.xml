@@ -22,7 +22,7 @@
         <activity
             android:name="es.littledavity.features.splash.SplashActivity"
             android:screenOrientation="portrait"
-            android:exported="false"
+            android:exported="true"
             tools:ignore="IntentFilterExportedReceiver,LockedOrientationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

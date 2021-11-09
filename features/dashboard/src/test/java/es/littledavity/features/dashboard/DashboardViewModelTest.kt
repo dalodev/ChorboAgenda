@@ -32,4 +32,12 @@ class DashboardViewModelTest {
             assertThat(awaitItem() is DashboardRoute.Search).isTrue
         }
     }
+
+    @Test
+    fun onAddContactButtonClicked_shouldGoToAddRoute() = mainCoroutineRule.runBlockingTest {
+        viewModel.routeFlow.test {
+            viewModel.onAddContactButtonClicked()
+            assertThat(awaitItem() is DashboardRoute.Add).isTrue
+        }
+    }
 }

@@ -3,6 +3,7 @@
  */
 package es.littledavity.database
 
+import app.cash.turbine.test
 import es.littledavity.core.providers.TimestampProvider
 import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.data.contacts.DataContact
@@ -83,6 +84,33 @@ class ChorboDatabaseDataStoreTest {
         val dbContact = contactMapper.mapToDatabaseContact(DATA_CONTACT)
         coEvery { contactDao.getChorbo(any()) } returns dbContact
         assertThat(dataStore.getContact(DATA_CONTACT.id)).isEqualTo(DATA_CONTACT_IMAGE_CREATED)
+    }
+
+    @Test
+    fun insertContactObserve() = runBlockingTest {
+        coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
+        coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
+        coEvery { contactDao.insertChorbo(any()) } returns 1L
+        dataStore.insertContact(DATA_CONTACT).test {
+            assertThat(awaitItem()).isEqualTo(DATA_CONTACT)
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
+    @Test
+    fun removeContactSuccesfully() = runBlockingTest {
+        coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
+        coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
+        coEvery { contactDao.deleteChorboById(any()) } returns Unit
+        assertThat(dataStore.removeContact(1)).isNotNull
+    }
+
+    @Test
+    fun insertContactsSuccesfully() = runBlockingTest {
+        coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
+        coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
+        coEvery { contactDao.insertChorbos(any()) } returns Unit
+        assertThat(dataStore.insertContacts(DATA_CONTACTS)).isNotNull
     }
 
     private class FakeSaveContactFactory : SaveContactFactory {

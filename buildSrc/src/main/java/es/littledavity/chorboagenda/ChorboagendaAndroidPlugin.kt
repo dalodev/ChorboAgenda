@@ -19,7 +19,6 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
         plugins.apply(PLUGIN_KOTLIN_ANDROID)
     }
 
-
     private fun Project.configureAndroid() {
         configureAndroidCommonInfo()
         configureAndroidApplicationId()

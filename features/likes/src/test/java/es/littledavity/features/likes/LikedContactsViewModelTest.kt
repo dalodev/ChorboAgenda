@@ -9,6 +9,7 @@ import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.domain.DomainContact
 import es.littledavity.domain.contacts.usecases.likes.ObserveLikedContactsUseCase
+import es.littledavity.testUtils.DOMAIN_CONTACT
 import es.littledavity.testUtils.DOMAIN_CONTACTS
 import es.littledavity.testUtils.FakeDispatcherProvider
 import es.littledavity.testUtils.FakeErrorMapper
@@ -93,6 +94,22 @@ class LikedContactsViewModelTest {
             )
             val route = awaitItem()
             assertThat(route is LikedContactsRoute.Info).isTrue
+        }
+    }
+
+    @Test
+    fun onBottomReached_shouldObserveContacts() = mainCoroutineRule.runBlockingTest {
+        val list = mutableListOf<DomainContact>()
+        repeat(20) {
+            list.add(DOMAIN_CONTACT)
+        }
+        coEvery { observeLikedContactsUseCase.execute(any()) } returns flowOf(list)
+        viewModel.loadData()
+        viewModel.uiState.test {
+            viewModel.onBottomReached()
+            assertThat(awaitItem() is ContactsUiState.Empty).isFalse
+            assertThat(awaitItem() is ContactsUiState.Loading).isTrue
+            assertThat(awaitItem() is ContactsUiState.Result).isTrue
         }
     }
 

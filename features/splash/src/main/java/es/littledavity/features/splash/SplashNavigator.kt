@@ -9,6 +9,4 @@ import es.littledavity.commons.ui.base.navigation.Navigator
 interface SplashNavigator : Navigator {
 
     fun goToDashBoard(context: Context)
-
-    fun exitApp()
 }

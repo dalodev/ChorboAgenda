@@ -19,8 +19,4 @@ internal class SplashNavigatorImpl @Inject constructor(
         activity.startActivity(DashboardActivity.newIntent(context))
         activity.finish()
     }
-
-    override fun exitApp() {
-        activity.finish()
-    }
 }

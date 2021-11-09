@@ -7,6 +7,7 @@ import app.cash.turbine.test
 import es.littledavity.testUtils.MainCoroutineRule
 import io.mockk.MockKAnnotations
 import io.mockk.impl.annotations.InjectMockKs
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.test.runBlockingTest
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -31,6 +32,7 @@ internal class SplashViewModelTest {
 
         viewModel.routeFlow.test {
             viewModel.init()
+            delay(1000)
             assertThat(awaitItem() is SplashRoute.Dashboard).isTrue
         }
     }

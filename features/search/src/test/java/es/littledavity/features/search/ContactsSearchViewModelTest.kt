@@ -5,6 +5,7 @@ package es.littledavity.features.search
 
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
+import es.littledavity.commons.ui.widgets.contacts.ContactModel
 import es.littledavity.commons.ui.widgets.contacts.ContactsModelMapper
 import es.littledavity.commons.ui.widgets.contacts.ContactsUiState
 import es.littledavity.domain.contacts.entities.Contact
@@ -43,7 +44,7 @@ internal class ContactsSearchViewModelTest {
         logger = FakeLogger()
         viewModel = ContactsSearchViewModel(
             searchUseCase = searchContactsUseCase,
-            uiStateFactory = FakecontactsSearchUiStateFactory(contactsModelMapper),
+            uiStateFactory = FakeContactsSearchUiStateFactory(contactsModelMapper),
             dispatcherProvider = FakeDispatcherProvider(),
             errorMapper = FakeErrorMapper(),
             logger = logger,
@@ -64,7 +65,24 @@ internal class ContactsSearchViewModelTest {
         }
     }
 
-    private class FakecontactsSearchUiStateFactory(val contactsModelMapper: ContactsModelMapper) :
+    @Test
+    fun onContactClicked_shouldRoute() = mainCoroutineRule.runBlockingTest {
+
+        viewModel.routeFlow.test {
+            viewModel.onContactClicked(
+                ContactModel(
+                    1,
+                    "test",
+                    "test",
+                    "test",
+                    "test"
+                )
+            )
+            assertThat(awaitItem() is ContactsSearchRoute.Info).isTrue
+        }
+    }
+
+    private class FakeContactsSearchUiStateFactory(val contactsModelMapper: ContactsModelMapper) :
         ContactsSearchUiStateFactory {
 
         override fun createWithEmptyState(searchQuery: String) =
