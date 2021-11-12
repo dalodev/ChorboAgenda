@@ -6,6 +6,7 @@ package es.littledavity.features.add
 import android.net.Uri
 import app.cash.turbine.test
 import es.littledavity.commons.ui.widgets.contacts.ContactModel
+import es.littledavity.core.service.PermissionService
 import es.littledavity.domain.contacts.entities.Contact
 import es.littledavity.domain.contacts.usecases.SaveContactUseCase
 import es.littledavity.testUtils.DOMAIN_CONTACT
@@ -35,10 +36,12 @@ class AddContactViewModelTest {
     private lateinit var logger: FakeLogger
     private lateinit var viewModel: AddContactViewModel
 
+    @MockK
+    private lateinit var permissionService: PermissionService
+
     @Before
     fun setup() {
         MockKAnnotations.init(this)
-
         logger = FakeLogger()
         viewModel = AddContactViewModel(
             saveContactUseCase = saveContactUseCase,
@@ -46,7 +49,7 @@ class AddContactViewModelTest {
             dispatcherProvider = FakeDispatcherProvider(),
             errorMapper = FakeErrorMapper(),
             logger = logger,
-            permissionService = mockk()
+            permissionService = permissionService
         )
     }
 
@@ -90,6 +93,23 @@ class AddContactViewModelTest {
             }
         }
 
+    @Test
+    fun onPhotoClicked_whenPermissionGranted_shouldLaunchResult() =
+        mainCoroutineRule.runBlockingTest {
+            coEvery { permissionService.requestPermission(any(), any()) } returns Unit
+            viewModel.onPhotoClicked(mockk())
+            viewModel.uiState.test {
+                assertThat(awaitItem() is AddContactUiState.ErrorPermission).isFalse
+            }
+        }
+
+    @Test
+    fun saveFieldsState_shouldUpdateState() {
+        viewModel.saveFieldsState("test", "phone")
+        assertThat(viewModel.currentContact.name).isEqualTo("test")
+        assertThat(viewModel.currentContact.phone).isEqualTo("phone")
+    }
+
     private class FakeUiStateFactory : AddContactUiStateFactory {
 
         override fun createWithNewState(): AddContactUiState {
@@ -100,8 +120,11 @@ class AddContactViewModelTest {
             return AddContactUiState.Loading
         }
 
-        override fun createWithErrorState(nameError: Boolean, phoneError: Boolean): AddContactUiState {
-            return AddContactUiState.Error(false, false)
+        override fun createWithErrorState(
+            nameError: Boolean,
+            phoneError: Boolean
+        ): AddContactUiState {
+            return AddContactUiState.Error(nameError = false, phoneError = false)
         }
 
         override fun createWithPermissionError(navigation: () -> Unit): AddContactUiState {

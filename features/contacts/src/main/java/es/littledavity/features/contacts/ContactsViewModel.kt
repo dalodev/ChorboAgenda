@@ -3,6 +3,7 @@
  */
 package es.littledavity.features.contacts
 
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import es.littledavity.commons.ui.base.BaseViewModel
@@ -46,7 +47,8 @@ class ContactsViewModel @Inject constructor(
     private var isObservingContacts = false
     private var contactsObservingJob: Job? = null
     private var observeContactsUseCaseParams = ObserveContactsUseCaseParams()
-    private var hasMoreContactsToLoad = false
+    @VisibleForTesting
+    var hasMoreContactsToLoad = false
 
     private val _uiState = MutableStateFlow(uiStateFactory.createWithEmptyState())
     val uiState: StateFlow<ContactsUiState>

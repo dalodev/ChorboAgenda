@@ -7,6 +7,7 @@ import android.Manifest
 import android.net.Uri
 import android.util.Patterns
 import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.VisibleForTesting
 import androidx.lifecycle.viewModelScope
 import com.karumi.dexter.PermissionToken
 import com.karumi.dexter.listener.PermissionDeniedResponse
@@ -50,7 +51,8 @@ class AddContactViewModel @Inject constructor(
 
     private var contactImage: Image? = null
 
-    private val currentContact = createContact()
+    @VisibleForTesting
+    val currentContact = createContact()
 
     private var useCaseParams = SaveContactUseCase.Params(currentContact)
 

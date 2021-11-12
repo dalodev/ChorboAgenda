@@ -84,11 +84,4 @@ internal class ContactsDatabaseDataStore @Inject constructor(
     private fun Flow<List<DatabaseContact>>.toDataContactsFlow() = distinctUntilChanged()
         .map(contactMapper::mapToDataContact)
         .flowOn(dispatcherProvider.computation)
-
-    private fun Flow<DatabaseContact>.toDataContactFlow() = this
-        .map(contactMapper::mapToDataContact)
-        .flowOn(dispatcherProvider.computation)
-
-    suspend fun deleteChorbosById(idList: List<Int>) =
-        contactDao.deleteChorbosById(idList)
 }

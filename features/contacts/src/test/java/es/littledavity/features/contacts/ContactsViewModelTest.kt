@@ -107,13 +107,31 @@ class ContactsViewModelTest {
     }
 
     @Test
-    fun onRemoveContact_shouldremoveContactUseCaseExecute() = mainCoroutineRule.runBlockingTest {
+    fun onRemoveContact_shouldRemoveContactUseCaseExecute() = mainCoroutineRule.runBlockingTest {
         coEvery { removeContactUseCase.execute(any()) } returns Unit
         coEvery { observeContactsUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACTS)
 
         viewModel.uiState.test {
             viewModel.loadData()
             viewModel.onRemoveContact(1)
+            cancelAndConsumeRemainingEvents()
+        }
+    }
+
+    @Test
+    fun onBottomReached_shouldObserveContacts() = mainCoroutineRule.runBlockingTest {
+        coEvery { removeContactUseCase.execute(any()) } returns Unit
+        coEvery { observeContactsUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACTS)
+        viewModel.uiState.test {
+            viewModel.hasMoreContactsToLoad = true
+            viewModel.onBottomReached()
+            val emptyState = awaitItem()
+            val loadingState = awaitItem()
+            val resultState = awaitItem()
+            assertThat(emptyState is ContactsUiState.Empty).isTrue
+            assertThat(loadingState is ContactsUiState.Loading).isTrue
+            assertThat(resultState is ContactsUiState.Result).isTrue
+            assertThat((resultState as ContactsUiState.Result).items).hasSize(DOMAIN_CONTACTS.size)
             cancelAndConsumeRemainingEvents()
         }
     }

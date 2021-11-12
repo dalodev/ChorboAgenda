@@ -111,5 +111,5 @@ internal class ContactMapper @Inject constructor(
 internal fun ContactMapper.mapToDatabaseContacts(dataContacts: List<DataContact>) =
     dataContacts.map(::mapToDatabaseContact)
 
-internal fun ContactMapper.mapToDataContact(databasecontacts: List<DatabaseContact>) =
-    databasecontacts.map(::mapToDataContact)
+internal fun ContactMapper.mapToDataContact(databaseContacts: List<DatabaseContact>) =
+    databaseContacts.map(::mapToDataContact)
