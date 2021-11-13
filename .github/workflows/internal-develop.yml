@@ -91,7 +91,7 @@ jobs:
         with:
           token: ${{ secrets.CODECOVTOKEN }} # not required for public repos
           #directory: ./build/reports/kover/all/
-          flags: unittests, uitests # optional
+          flags: unittests #, uitests # optional
           fail_ci_if_error: true # optional (default = false)
           verbose: true # optional (default = false)
 

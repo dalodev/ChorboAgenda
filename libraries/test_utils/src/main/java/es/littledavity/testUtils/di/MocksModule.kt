@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dalodev
+ */
 package es.littledavity.testUtils.di
 
 import dagger.Module

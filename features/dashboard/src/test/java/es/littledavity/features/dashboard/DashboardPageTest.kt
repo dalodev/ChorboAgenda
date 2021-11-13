@@ -4,6 +4,7 @@
 package es.littledavity.features.dashboard
 
 import es.littledavity.features.dashboard.fragment.DashboardPage
+import es.littledavity.features.dashboard.fragment.DashboardPage.Companion.toDashboardPageFromMenuItemId
 import es.littledavity.features.dashboard.fragment.DashboardPage.Companion.toDashboardPageFromPosition
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.Before
@@ -35,6 +36,23 @@ class DashboardPageTest {
     fun toDashboardPageFromPosition_shouldReturnLikesPage() {
 
         val page = 2.toDashboardPageFromPosition()
+        assertThat(page).isEqualTo(DashboardPage.LIKES)
+    }
+
+    @Test
+    fun totoDashboardPageFromMenuItemId_shouldReturnContactPage() {
+        val page = R.id.dashboard_bottom_navigation_item_contacts.toDashboardPageFromMenuItemId()
+        assertThat(page).isEqualTo(DashboardPage.CONTACTS)
+    }
+    @Test
+    fun totoDashboardPageFromMenuItemId_shouldReturnAddContactPage() {
+        val page = R.id.dashboard_bottom_navigation_item_add.toDashboardPageFromMenuItemId()
+        assertThat(page).isEqualTo(DashboardPage.ADD_CONTACT)
+    }
+
+    @Test
+    fun totoDashboardPageFromMenuItemId_shouldReturnLikesContactPage() {
+        val page = R.id.dashboard_bottom_navigation_item_likes.toDashboardPageFromMenuItemId()
         assertThat(page).isEqualTo(DashboardPage.LIKES)
     }
 }

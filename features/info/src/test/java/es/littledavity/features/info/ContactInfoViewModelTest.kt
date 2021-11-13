@@ -3,6 +3,7 @@
  */
 package es.littledavity.features.info
 
+import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.github.michaelbull.result.Err
@@ -95,14 +96,19 @@ class ContactInfoViewModelTest {
     }
 
     @Test
-    fun whenGameFetchingUseCase_throwsError_shouldDispatchesToastCommand() = mainCoroutineRule.runBlockingTest {
-        coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Err(DOMAIN_ERROR_NOT_FOUND))
-        coEvery { useCases.saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
-        viewModel.commandFlow.test {
-            viewModel.loadData(resultEmissionDelay = 0L)
-            assertThat(awaitItem() is GeneralCommand.ShowLongToast).isTrue
+    fun whenGameFetchingUseCase_throwsError_shouldDispatchesToastCommand() =
+        mainCoroutineRule.runBlockingTest {
+            coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(
+                Err(
+                    DOMAIN_ERROR_NOT_FOUND
+                )
+            )
+            coEvery { useCases.saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
+            viewModel.commandFlow.test {
+                viewModel.loadData(resultEmissionDelay = 0L)
+                assertThat(awaitItem() is GeneralCommand.ShowLongToast).isTrue
+            }
         }
-    }
 
     @Test
     fun whenGalleryIsClicked_shouldRoutesToImageViewer() = mainCoroutineRule.runBlockingTest {
@@ -146,6 +152,73 @@ class ContactInfoViewModelTest {
             assertThat(awaitItem() is ContactInfoRoute.Back).isTrue
         }
     }
+
+    @Test
+    fun onLikeButtonClicked_shouldUpdateUiState() = mainCoroutineRule.runBlockingTest {
+        coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
+        coEvery { useCases.saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
+        coEvery { useCases.toggleContactLikeStateUseCase.execute(any()) } returns Unit
+        coEvery { useCases.observeContactLikeStateUseCase.execute(any()) } returns flowOf(false)
+        viewModel.uiState.test {
+            viewModel.onLikeButtonClicked()
+            assertThat(awaitItem() is ContactInfoUiState.Result).isFalse()
+        }
+    }
+
+    @Test
+    fun updatePhoto_shouldSaveCurrentContactAndUpdateUiState() = mainCoroutineRule.runBlockingTest {
+        coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
+        coEvery { useCases.saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
+        viewModel.uiState.test {
+            viewModel.loadData(0L)
+            assertThat(awaitItem() is ContactInfoUiState.Empty).isTrue
+            assertThat(awaitItem() is ContactInfoUiState.Loading).isTrue
+            assertThat(awaitItem() is ContactInfoUiState.Result).isTrue
+            viewModel.updatePhoto(mockk())
+            assertThat(awaitItem() is ContactInfoUiState.Loading).isTrue
+            assertThat(awaitItem() is ContactInfoUiState.Result).isTrue
+        }
+    }
+
+    @Test
+    fun addGalleryImage_shouldSaveCurrentContactAndUpdateUiState() {
+        mainCoroutineRule.runBlockingTest {
+            coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
+            coEvery { useCases.saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
+            viewModel.uiState.test {
+                viewModel.loadData(0L)
+                assertThat(awaitItem() is ContactInfoUiState.Empty).isTrue
+                assertThat(awaitItem() is ContactInfoUiState.Loading).isTrue
+                assertThat(awaitItem() is ContactInfoUiState.Result).isTrue
+                viewModel.addGalleryImage(mockk())
+                assertThat(awaitItem() is ContactInfoUiState.Loading).isTrue
+                assertThat(awaitItem() is ContactInfoUiState.Result).isTrue
+            }
+        }
+    }
+
+    @Test
+    fun updateContactData_shouldSaveCurrentContact() =
+        mainCoroutineRule.runBlockingTest {
+            coEvery { useCases.getContactUseCase.execute(any()) } returns flowOf(Ok(DOMAIN_CONTACT))
+            coEvery { useCases.saveContactUseCase.execute(any()) } returns flowOf(DOMAIN_CONTACT)
+            viewModel.uiState.test {
+                viewModel.loadData(0L)
+                assertThat(awaitItem() is ContactInfoUiState.Empty).isTrue
+                assertThat(awaitItem() is ContactInfoUiState.Loading).isTrue
+                assertThat(awaitItem() is ContactInfoUiState.Result).isTrue
+                viewModel.updateContactData(
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    "test",
+                    null,
+                    false
+                )
+            }
+        }
 
     private class FakeContactInfoUiStateFactory : ContactInfoUiStateFactory {
 

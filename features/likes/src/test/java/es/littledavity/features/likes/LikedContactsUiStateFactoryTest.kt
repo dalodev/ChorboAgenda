@@ -1,3 +1,6 @@
+/*
+ * Copyright 2021 dalodev
+ */
 package es.littledavity.features.likes
 
 import es.littledavity.commons.ui.widgets.contacts.ContactModel

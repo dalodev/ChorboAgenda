@@ -205,7 +205,7 @@ internal class ContactInfoViewModel @Inject constructor(
         currentContact?.gallery?.add(Image(id = uri.toString(), created = false))
         viewModelScope.launch {
             _uiState.value = uiStateFactory.createWithLoadingState()
-            saveCurrentContact(true)
+            saveCurrentContact(false)
         }
     }
 
