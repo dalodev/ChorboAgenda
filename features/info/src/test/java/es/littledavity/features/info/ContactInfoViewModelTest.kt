@@ -3,7 +3,6 @@
  */
 package es.littledavity.features.info
 
-import android.net.Uri
 import androidx.lifecycle.SavedStateHandle
 import app.cash.turbine.test
 import com.github.michaelbull.result.Err

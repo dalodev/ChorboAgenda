@@ -39,7 +39,7 @@ internal class ContactsTypeConverter @Inject constructor(
     fun toImages(json: String): MutableList<Image> = jsonConverter.fromJson(json) ?: mutableListOf()
 
     @TypeConverter
-    fun fromCreationeDate(creationDate: CreationDate): String = jsonConverter.toJson(creationDate)
+    fun fromCreationDate(creationDate: CreationDate): String = jsonConverter.toJson(creationDate)
 
     @TypeConverter
     fun toReleaseDates(json: String): CreationDate? = jsonConverter.fromJson(json)

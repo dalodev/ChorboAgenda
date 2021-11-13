@@ -68,9 +68,8 @@ class ChorboDatabaseDataStoreTest {
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
         val dbContacts = contactMapper.mapToDatabaseContacts(DATA_CONTACTS)
         coEvery { contactDao.searchContacts(any(), any(), any()) } returns dbContacts
-        assertThat(dataStore.searchContacts("", DATA_PAGINATION)).isEqualTo(
-            DATA_CONTACTS_IMAGE_CREATED
-        )
+        val result = dataStore.searchContacts("", DATA_PAGINATION)
+        assertThat(result).isEqualTo(DATA_CONTACTS_IMAGE_CREATED)
     }
 
     @Test
@@ -79,7 +78,8 @@ class ChorboDatabaseDataStoreTest {
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
         val dbContacts = contactMapper.mapToDatabaseContacts(DATA_CONTACTS)
         coEvery { contactDao.getChorbos() } returns dbContacts
-        assertThat(dataStore.getContacts()).isEqualTo(DATA_CONTACTS_IMAGE_CREATED)
+        val result = dataStore.getContacts()
+        assertThat(result).isEqualTo(DATA_CONTACTS_IMAGE_CREATED)
     }
 
     @Test
@@ -88,7 +88,8 @@ class ChorboDatabaseDataStoreTest {
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
         val dbContact = contactMapper.mapToDatabaseContact(DATA_CONTACT)
         coEvery { contactDao.getChorbo(any()) } returns dbContact
-        assertThat(dataStore.getContact(DATA_CONTACT.id)).isEqualTo(DATA_CONTACT_IMAGE_CREATED)
+        val result = dataStore.getContact(DATA_CONTACT.id)
+        assertThat(result).isEqualTo(DATA_CONTACT_IMAGE_CREATED)
     }
 
     @Test
@@ -107,7 +108,8 @@ class ChorboDatabaseDataStoreTest {
         coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
         coEvery { contactDao.deleteChorboById(any()) } returns Unit
-        assertThat(dataStore.removeContact(1)).isNotNull
+        val result = dataStore.removeContact(1)
+        assertThat(result).isNotNull
     }
 
     @Test
@@ -115,7 +117,8 @@ class ChorboDatabaseDataStoreTest {
         coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
         coEvery { contactDao.insertChorbos(any()) } returns Unit
-        assertThat(dataStore.insertContacts(DATA_CONTACTS)).isNotNull
+        val result = dataStore.insertContacts(DATA_CONTACTS)
+        assertThat(result).isNotNull
     }
 
     @Test
@@ -136,7 +139,8 @@ class ChorboDatabaseDataStoreTest {
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
         coEvery { contactDao.getChorbo(any()) } returns databaseContact
         val dataContact = contactMapper.mapToDataContact(databaseContact)
-        assertThat(dataStore.getContact(databaseContact.id)).isEqualTo(dataContact)
+        val result = dataStore.getContact(databaseContact.id)
+        assertThat(result).isEqualTo(dataContact)
     }
 
     private class FakeSaveContactFactory : SaveContactFactory {

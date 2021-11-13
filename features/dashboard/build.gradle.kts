@@ -14,6 +14,10 @@ android {
     }
 }
 
+hilt {
+    enableTransformForLocalTests = true
+}
+
 dependencies {
 
     implementation(project(Deps.Local.domain))
