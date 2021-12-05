@@ -10,17 +10,16 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Build
 import android.os.Environment
+import android.os.Environment.getExternalStorageDirectory
+import android.os.Environment.getExternalStoragePublicDirectory
 import android.provider.MediaStore
 import android.util.Base64
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.paulrybitskyi.hiltbinder.BindType
 import dagger.hilt.android.qualifiers.ApplicationContext
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileNotFoundException
-import java.io.FileOutputStream
-import java.io.IOException
+import java.io.*
 import java.util.UUID
 import javax.inject.Inject
 
@@ -31,7 +30,7 @@ interface ImageGalleryService {
 
 @BindType
 internal class ImageGalleryServiceImpl @Inject constructor(
-    @ApplicationContext private val context: Context
+        @ApplicationContext private val context: Context
 ) : ImageGalleryService {
 
     companion object {
@@ -54,73 +53,33 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
     }
 
-    fun getBitmap(imageBase64: String): Bitmap {
-        val decodedBytes = Base64.decode(imageBase64, Base64.DEFAULT)
-        return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-    }
-
     private fun saveMediaFileLegacy(
-        imageToSave: Bitmap,
-        fileName: String,
-        name: String
+            imageToSave: Bitmap,
+            fileName: String,
+            name: String
     ): String {
-        val externalStorageVolumes = ContextCompat.getExternalFilesDirs(context, null)
-        val primaryExternalStorage =
-            externalStorageVolumes[0]?.path
-                ?: externalStorageVolumes[1].path
-                ?: error("Storage volumes not found ")
+        val directoryPath = getExternalStorageDirectory().toString()
+        val directory = File("${directoryPath}/$fileName")
 
-        val dirName = "$primaryExternalStorage${File.separator}$name"
-
-        val direct = File(
-            dirName
-        )
-
-        if (!direct.exists()) {
-            val wallpaperDirectory = File(dirName)
-            wallpaperDirectory.mkdirs()
+        if (!directory.exists()) {
+            directory.mkdirs()
         }
-        val uuid = UUID.randomUUID().toString()
-        val file = File(dirName, fileName + uuid)
-        if (file.exists()) {
-            file.delete()
-        }
-        try {
-            val out = FileOutputStream(file)
-            imageToSave.compress(Bitmap.CompressFormat.JPEG, QUALITY, out)
-            out.flush()
-            out.close()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return file.path
+        val file = File(directory, UUID.randomUUID().toString())
+        saveImageToStream(imageToSave, FileOutputStream(file))
+        val values = contentValues(name)
+        values.put(MediaStore.Images.Media.DATA, file.absolutePath)
+        return context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values).toString()
     }
 
     private fun saveMediaImage(imageToSave: Bitmap, name: String, imageId: String): String {
-        val relativeLocation = "${Environment.DIRECTORY_PICTURES}/$name"
-        val contentValues = ContentValues().apply {
-            put(MediaStore.MediaColumns.DISPLAY_NAME, imageId)
-            put(MediaStore.MediaColumns.MIME_TYPE, "image/jpeg")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                put(MediaStore.MediaColumns.RELATIVE_PATH, relativeLocation)
-            }
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            saveMediaImageQ(imageToSave, name, imageId)
+        } else {
+            saveMediaFileLegacy(imageToSave, name, imageId)
         }
-        val resolver = context.contentResolver
-
-        val contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        val uri = resolver.insert(contentUri, contentValues)
-            ?: throw IOException("Failed to create new MediaStore record.")
-
-        val stream = resolver.openOutputStream(uri)
-            ?: throw IOException("Failed to get output stream.")
-
-        if (!imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, stream)) {
-            throw IOException("Failed to save bitmap")
-        }
-        stream.close()
-        return uri.toString()
     }
 
+    @RequiresApi(Build.VERSION_CODES.Q)
     private fun saveMediaImageQ(imageToSave: Bitmap, name: String, imageId: String): String {
         val relativeLocation = "${Environment.DIRECTORY_PICTURES}/$name"
         val contentValues = ContentValues().apply {
@@ -130,18 +89,22 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         }
         val resolver = context.contentResolver
 
-        val contentUri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        val contentUri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            MediaStore.Images.Media.getContentUri(MediaStore.VOLUME_EXTERNAL_PRIMARY)
+        } else {
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        }
         val uri = resolver.insert(contentUri, contentValues)
-            ?: throw IOException("Failed to create new MediaStore record.")
+                ?: throw IOException("Failed to create new MediaStore record.")
 
         val stream = resolver.openOutputStream(uri)
-            ?: throw IOException("Failed to get output stream.")
+                ?: throw IOException("Failed to get output stream.")
 
         if (!imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, stream)) {
             throw IOException("Failed to save bitmap")
         }
         stream.close()
-        return uri.path.orEmpty()
+        return uri.toString()
     }
 
     override fun removeMediaFile(uri: Uri): Int {
@@ -151,5 +114,25 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         } catch (e: Exception) {
             -1
         }
+    }
+
+    private fun saveImageToStream(bitmap: Bitmap, outputStream: OutputStream?) {
+        if (outputStream != null) {
+            try {
+                bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream)
+                outputStream.close()
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun contentValues(id: String) : ContentValues {
+        val values = ContentValues()
+        values.put(MediaStore.MediaColumns.DISPLAY_NAME, id)
+        values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        values.put(MediaStore.Images.Media.DATE_ADDED, System.currentTimeMillis() / 1000)
+        values.put(MediaStore.Images.Media.DATE_TAKEN, System.currentTimeMillis())
+        return values
     }
 }
