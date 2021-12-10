@@ -11,11 +11,8 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.os.Environment.getExternalStorageDirectory
-import android.os.Environment.getExternalStoragePublicDirectory
 import android.provider.MediaStore
-import android.util.Base64
 import androidx.annotation.RequiresApi
-import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import com.paulrybitskyi.hiltbinder.BindType
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -30,7 +27,7 @@ interface ImageGalleryService {
 
 @BindType
 internal class ImageGalleryServiceImpl @Inject constructor(
-        @ApplicationContext private val context: Context
+    @ApplicationContext private val context: Context
 ) : ImageGalleryService {
 
     companion object {
@@ -54,12 +51,12 @@ internal class ImageGalleryServiceImpl @Inject constructor(
     }
 
     private fun saveMediaFileLegacy(
-            imageToSave: Bitmap,
-            fileName: String,
-            name: String
+        imageToSave: Bitmap,
+        fileName: String,
+        name: String
     ): String {
         val directoryPath = getExternalStorageDirectory().toString()
-        val directory = File("${directoryPath}/$fileName")
+        val directory = File("$directoryPath/$fileName")
 
         if (!directory.exists()) {
             directory.mkdirs()
@@ -95,10 +92,10 @@ internal class ImageGalleryServiceImpl @Inject constructor(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI
         }
         val uri = resolver.insert(contentUri, contentValues)
-                ?: throw IOException("Failed to create new MediaStore record.")
+            ?: throw IOException("Failed to create new MediaStore record.")
 
         val stream = resolver.openOutputStream(uri)
-                ?: throw IOException("Failed to get output stream.")
+            ?: throw IOException("Failed to get output stream.")
 
         if (!imageToSave.compress(Bitmap.CompressFormat.JPEG, 100, stream)) {
             throw IOException("Failed to save bitmap")
@@ -127,7 +124,7 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         }
     }
 
-    private fun contentValues(id: String) : ContentValues {
+    private fun contentValues(id: String): ContentValues {
         val values = ContentValues()
         values.put(MediaStore.MediaColumns.DISPLAY_NAME, id)
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")

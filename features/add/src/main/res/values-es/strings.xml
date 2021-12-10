@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- AddContactFragment -->
+    <string name="add_contact_toolbar_title">Nuevo contacto</string>
+    <string name="add_contact_name_hint">Nombre*</string>
+    <string name="add_contact_phone_hint">Teléfono</string>
+    <string name="add_contact_retry">Reintentar</string>
+    <string name="add_contact_save_contact">Guardar contacto</string>
+    <string name="add_contact_name_error">Nombre no válido</string>
+    <string name="add_contact_phone_error">Teléfono no válido</string>
+    <string name="add_contact_photo_permission_error">Debes dar permisos de almacenamiento</string>
+    <string name="add_contact_settings_button">Ajustes</string>
+
+</resources>

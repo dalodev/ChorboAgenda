@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ContactsSearchFragment -->
+    <string name="contacts_search_fragment_search_hint">Buscar</string>
+    <string name="contacts_search_fragment_info_title_default">Busca un contacto</string>
+    <string name="contacts_search_fragment_info_title_empty">No se ha encontrado\n\"%s\"</string>
+</resources>

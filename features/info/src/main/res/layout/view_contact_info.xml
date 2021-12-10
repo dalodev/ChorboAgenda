@@ -232,7 +232,7 @@
             style="@style/Chorboagenda.ContactInfo.Header.InfoView"
             app:infoView_editMode="true"
             app:infoView_hintText="@string/contact_info_rating_hint"
-            app:infoView_icon="@drawable/star_rating"
+            app:infoView_icon="@drawable/score_rating_fire"
             app:infoView_maxLength="2"
             app:layout_constraintBottom_toTopOf="@id/recyclerView"
             app:layout_constraintEnd_toStartOf="@+id/countryNameIv"

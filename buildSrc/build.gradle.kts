@@ -14,7 +14,7 @@ repositories {
 }
 
 object PluginsVersions {
-    const val GRADLE_VERSIONS = "7.0.3"
+    const val GRADLE_VERSIONS = "7.0.4"
     const val KOTLIN = "1.5.31"
     const val SPOTLESS = "4.0.0"
     const val DETEKT = "1.18.1"

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ContactInfoView -->
+    <string name="contact_info_header_page_indicator_template">%1$d/%2$d</string>
+    <string name="contact_info_info_view_title">No hay datos</string>
+    <string name="info_contact_photo_permission_error">Debes dar permisos de almacenamiento</string>
+    <string name="info_contact_settings_button">Ajustes</string>
+    <string name="contact_info_header_phone_hint">teléfono</string>
+    <string name="contact_info_header_name_hint">nombre</string>
+    <string name="contact_info_header_instagram_hint">instagram</string>
+    <string name="contact_info_rating_hint">Score</string>
+    <string name="contact_info_country_hint">Ubicación</string>
+    <string name="contact_info_age_hint">Edad</string>
+
+    <!-- ContactInfoItemView -->
+    <string name="contact_info_item_list_title">Información</string>
+    <string name="contact_info_item_genres_description">descripción</string>
+    <string name="contact_info_item_title">título</string>
+    <string name="contact_info_item_options_dots">&#8942;</string>
+    <string name="contact_info_item_options_delete">Borrar</string>
+
+</resources>

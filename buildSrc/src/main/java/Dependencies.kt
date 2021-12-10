@@ -36,7 +36,7 @@ object Deps {
 
     object Plugins {
 
-        private const val gradlePluginVersion = "7.0.3" // also in buildSrc build.gradle.kts file
+        private const val gradlePluginVersion = "7.0.4" // also in buildSrc build.gradle.kts file
 
         const val androidGradle = "com.android.tools.build:gradle:${gradlePluginVersion}"
         const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"

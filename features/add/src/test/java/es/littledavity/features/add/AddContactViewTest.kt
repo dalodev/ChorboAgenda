@@ -1,32 +1,17 @@
+/*
+ * Copyright 2021 dalodev
+ */
 package es.littledavity.features.add
 
 import android.content.Context
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.view.isVisible
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textfield.TextInputLayout
-import es.littledavity.commons.ui.extensions.layoutInflater
 import es.littledavity.features.add.databinding.ViewAddContactBinding
 import es.littledavity.features.add.widgets.AddContactView
-import io.mockk.MockKAnnotations
-import io.mockk.coEvery
-import io.mockk.every
 import io.mockk.impl.annotations.MockK
-import io.mockk.mockk
-import io.mockk.mockkObject
-import io.mockk.mockkStatic
-import io.mockk.slot
-import io.mockk.spyk
-import io.mockk.verify
-import org.assertj.core.api.Assertions.assertThat
-import org.junit.Before
-import org.junit.Test
-import org.mockito.ArgumentMatchers.any
-import org.mockito.Mock
-
 
 class AddContactViewTest {
 

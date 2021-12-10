@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- ContactsSearchFragment -->
-    <string name="contacts_search_fragment_search_hint">Search contact</string>
+    <string name="contacts_search_fragment_search_hint">Search</string>
     <string name="contacts_search_fragment_info_title_default">Search for specific contact</string>
     <string name="contacts_search_fragment_info_title_empty">No contacts found for\n\"%s\"</string>
 </resources>

@@ -43,14 +43,15 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
                 // instrumented tests using MockWebServer) and disabling it in the
                 // production to avoid security issues
                 getByName("debug") {
+                    versionNameSuffix = "-DEBUG"
+                    isDebuggable = true
                     manifestPlaceholders["usesCleartextTraffic"] = true
                     isTestCoverageEnabled = true
                 }
 
                 getByName("release") {
                     manifestPlaceholders["usesCleartextTraffic"] = false
-
-                    isMinifyEnabled = false
+                    isMinifyEnabled = true
                     proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
                 }
             }

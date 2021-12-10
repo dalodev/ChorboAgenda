@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="image_viewer_default_toolbar_title">Imágen</string>
+    <string name="image_viewer_toolbar_title_template">%1$s %2$d of %3$d</string>
+</resources>
