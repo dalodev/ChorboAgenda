@@ -68,10 +68,8 @@ to be able to organize your contacts, special friends, dates, or any person you 
 
 - [Android Studio](https://developer.android.com/studio)
 - [Kotlin](https://kotlinlang.org) - First class and official programming language for Android development.
-- [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html)
-- [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html#asynchronous-flow) - Official Kotlin's tooling for performing asynchronous work.
+- [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) and [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html#asynchronous-flow) - Official Kotlin's tooling for performing asynchronous work.
 - [MVVM/MVI Architecture](https://developer.android.com/jetpack/guide) - Official recommended architecture for building robust, production-quality apps.
-
 - [Android Jetpack](https://developer.android.com/jetpack)
   - [Room](https://developer.android.com/topic/libraries/architecture/room) - The Room library provides an abstraction layer over SQLite to allow for more robust database access.
   - [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
