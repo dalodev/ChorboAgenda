@@ -16,7 +16,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/dalodev/ChorboAgenda">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/9118197/145686559-fa1ddfb0-4e97-40d1-af73-ee097f11553f.pnghttps://user-images.githubusercontent.com/9118197/145686559-fa1ddfb0-4e97-40d1-af73-ee097f11553f.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center"></h3>
@@ -59,7 +59,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Product Name Screen Shot][product-screenshot]](https://user-images.githubusercontent.com/9118197/145686559-fa1ddfb0-4e97-40d1-af73-ee097f11553f.png)
 
 Chorboagenda is a free app for **[Android](https://example.com)** that has been developed   
 to be able to organize your contacts, special friends, dates, or any person you decide
