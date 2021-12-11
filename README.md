@@ -122,7 +122,7 @@ For more information about used dependencies, see [this](/buildSrc/src/main/java
 ## Roadmap
 
 - [ ] Add Changelog
-- [ ] Multi-language Support
+- [x] Multi-language Support
   - [x] English
   - [x] Spanish
 
