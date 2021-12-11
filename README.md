@@ -124,7 +124,7 @@ For more information about used dependencies, see [this](/buildSrc/src/main/java
 - [ ] Add Changelog
 - [ ] Multi-language Support
   - [x] English
-  - [ ] Spanish
+  - [x] Spanish
 
 See the [open issues](https://github.com/dalodev/Chorboagenda/issues) for a full list of proposed features (and known issues).
 
