@@ -15,8 +15,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://github.com/dalodev/ChorboAgenda">
-    <img src="https://user-images.githubusercontent.com/9118197/145686559-fa1ddfb0-4e97-40d1-af73-ee097f11553f.pnghttps://user-images.githubusercontent.com/9118197/145686559-fa1ddfb0-4e97-40d1-af73-ee097f11553f.png" alt="Logo" width="80" height="80">
+  <a href="https://user-images.githubusercontent.com/9118197/145686559-fa1ddfb0-4e97-40d1-af73-ee097f11553f.png">
+    <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center"></h3>

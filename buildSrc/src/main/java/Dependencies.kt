@@ -7,8 +7,8 @@ object AppConfig {
     const val minSdkVersion = 21
     const val buildToolsVersion = "30.0.2"
     const val applicationId = "es.devid.chorboagenda"
-    const val versionCode = 1
-    const val versionName = "1.0.0"
+    const val versionCode = 2
+    const val versionName = "1.0.1"
 
     val javaCompatibilityVersion = JavaVersion.VERSION_1_8
     val kotlinCompatibilityVersion = JavaVersion.VERSION_1_8
@@ -17,7 +17,7 @@ object AppConfig {
 
 object Versions {
 
-    const val kotlin = "1.5.31" // also in buildSrc build.gradle.kts file
+    const val kotlin = "1.6.10" // also in buildSrc build.gradle.kts file
     const val gradleVersionsPlugin = "0.38.0"
     const val protobufPlugin = "0.8.15"
     const val navigation = "2.3.5"
@@ -26,17 +26,17 @@ object Versions {
     const val room = "2.3.0-rc01"
     const val spotless = "4.0.0"
     const val detekt = "1.18.1"
-    const val ktlint = "0.42.1"
-    const val dokka = "1.5.31"
+    const val ktlint = "0.44.0"
+    const val dokka = "1.6.10"
     const val qodana = "0.1.12"
-    const val kover = "0.4.1"
+    const val kover = "0.5.0"
 }
 
 object Deps {
 
     object Plugins {
 
-        private const val gradlePluginVersion = "7.0.4" // also in buildSrc build.gradle.kts file
+        private const val gradlePluginVersion = "7.1.2" // also in buildSrc build.gradle.kts file
 
         const val androidGradle = "com.android.tools.build:gradle:${gradlePluginVersion}"
         const val kotlinGradle = "org.jetbrains.kotlin:kotlin-gradle-plugin:${Versions.kotlin}"
@@ -77,7 +77,7 @@ object Deps {
 
     object Kotlin {
 
-        private const val serializationVersion = "1.3.0"
+        private const val serializationVersion = "1.3.2"
 
         const val stdLib = "org.jetbrains.kotlin:kotlin-stdlib:${Versions.kotlin}"
         const val coroutines =
@@ -131,7 +131,7 @@ object Deps {
     object Google {
 
         private const val materialComponentsVersion = "1.3.0"
-        private const val protobufVersion = "3.15.8"
+        private const val protobufVersion = "3.19.4"
         private const val daggerVersion = "2.28.3"
         private const val databindingVersion = "3.1.4"
 
@@ -195,17 +195,17 @@ object Deps {
     object Testing {
 
         private const val jUnitVersion = "4.13.2"
-        private const val jUnitExtVersion = "1.1.2"
-        private const val assertJVersion = "3.21.0"
-        private const val mockkVersion = "1.12.0"
-        private const val turbineVersion = "0.6.0"
-        private const val testRunnerVersion = "1.3.0"
+        private const val jUnitExtVersion = "1.1.3"
+        private const val assertJVersion = "3.22.0"
+        private const val mockkVersion = "1.12.3"
+        private const val turbineVersion = "0.7.0"
+        private const val testRunnerVersion = "1.4.0"
         private const val archCoreVersion = "2.1.0"
         private const val mockWebServerVersion = "4.9.2"
-        private const val roboelectricVersion = "4.6.1"
+        private const val roboelectricVersion = "4.7.3"
         private const val mockitoVersion = "2.2.0"
         private const val mockitoKotlinVersion = "4.0.0"
-        private const val rulesVersion = "1.3.0"
+        private const val rulesVersion = "1.4.0"
         private const val testCoreVersion = "1.3.0"
         private const val fragmentVersion = "1.3.0-beta01"
         private const val playCoreVerion = "1.8.3"
@@ -237,9 +237,9 @@ object Deps {
     object Misc {
 
         private const val desugaredLibsVersion = "1.1.5"
-        private const val kotlinResultVersion = "1.1.11"
+        private const val kotlinResultVersion = "1.1.14"
         private const val expandableTextViewVersion = "1.0.5"
-        private const val hiltBinderVersion = "1.0.0-alpha02"
+        private const val hiltBinderVersion = "1.1.2"
         private const val photoViewVersion = "2.3.0"
         private const val dexterVersion = "6.2.3"
         private const val timberVersion = "5.0.1"

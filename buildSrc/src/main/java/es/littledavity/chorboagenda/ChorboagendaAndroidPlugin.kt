@@ -51,7 +51,7 @@ class ChorboagendaAndroidPlugin : Plugin<Project> {
 
                 getByName("release") {
                     manifestPlaceholders["usesCleartextTraffic"] = false
-                    isMinifyEnabled = true
+                    isMinifyEnabled = false
                     proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
                 }
             }

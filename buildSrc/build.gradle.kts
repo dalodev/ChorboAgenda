@@ -14,12 +14,12 @@ repositories {
 }
 
 object PluginsVersions {
-    const val GRADLE_VERSIONS = "7.0.4"
-    const val KOTLIN = "1.5.31"
+    const val GRADLE_VERSIONS = "7.1.2"
+    const val KOTLIN = "1.6.10"
     const val SPOTLESS = "4.0.0"
     const val DETEKT = "1.18.1"
-    const val KTLINT = "0.42.1"
-    const val DOKKA = "1.5.31"
+    const val KTLINT = "0.44.0"
+    const val DOKKA = "1.6.10"
     const val UPDATE_DEPENDENCIES = "0.39.0"
 }
 
