@@ -73,7 +73,7 @@ jobs:
       - name: Run detekt
         run: ./gradlew detekt
 
-      - name: Run detekt
+      - name: Run ktlint
         run: ./gradlew ktlintCheck
 
       - name: Run unit tests

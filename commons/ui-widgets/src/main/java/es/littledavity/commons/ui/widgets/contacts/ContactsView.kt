@@ -100,7 +100,8 @@ class ContactsView @JvmOverloads constructor(
         itemToDelete = adapterItems[position]
         adapterItems = currentAdapterItems.apply { removeAt(position) }
         showSnackBar(
-            getString(R.string.contacts_delete_snackbar_message,
+            getString(
+                R.string.contacts_delete_snackbar_message,
                 itemToDelete?.model?.name
                     ?: getString(R.string.contacts_delete_snackbar_message_one)
             ),
