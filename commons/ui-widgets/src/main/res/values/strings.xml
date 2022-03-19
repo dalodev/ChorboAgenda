@@ -2,6 +2,7 @@
 <resources>
     <!-- ContactsView -->
     <string name="contacts_info_view_title">No Contacts Available</string>
-    <string name="contacts_delete_snackbar_message">1 deleted</string>
+    <string name="contacts_delete_snackbar_message">%s deleted</string>
+    <string name="contacts_delete_snackbar_message_one">1</string>
     <string name="contacts_delete_snackbar_action_message">Undo</string>
 </resources>

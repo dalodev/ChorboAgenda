@@ -2,9 +2,9 @@ import org.gradle.api.JavaVersion
 
 object AppConfig {
 
-    const val compileSdkVersion = 30
-    const val targetSdkVersion = 30
-    const val minSdkVersion = 21
+    const val compileSdkVersion = 31
+    const val targetSdkVersion = 31
+    const val minSdkVersion = 23
     const val buildToolsVersion = "30.0.2"
     const val applicationId = "es.devid.chorboagenda"
     const val versionCode = 2
@@ -29,7 +29,7 @@ object Versions {
     const val ktlint = "0.44.0"
     const val dokka = "1.6.10"
     const val qodana = "0.1.12"
-    const val kover = "0.5.0"
+    const val kover = "0.4.1"
 }
 
 object Deps {

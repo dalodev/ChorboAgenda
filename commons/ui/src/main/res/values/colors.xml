@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--Primary colors-->
-    <color name="colorPrimary">#4CBFDE</color>
+    <color name="colorPrimary">#3DDC84</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="colorPrimaryLight">#545966</color>
-    <color name="colorAccent">#FF579C</color>
+    <color name="colorAccent">#FE3C72</color>
     <color name="colorPrimaryText">#212121</color>
     <color name="colorPrimaryTextInverse">#FFFFFF</color>
     <color name="colorSecondaryText">#757575</color>
@@ -22,7 +22,7 @@
 
     <!-- Bottom Navigation -->
     <color name="bottom_navigation_item_color_state_unselected">@color/colorPrimaryDark</color>
-    <color name="bottom_navigation_item_color_state_selected">@color/colorPrimaryText</color>
+    <color name="bottom_navigation_item_color_state_selected">@color/colorAccent</color>
 
     <string-array name="placeholders">
         <item>#eeeeee</item>

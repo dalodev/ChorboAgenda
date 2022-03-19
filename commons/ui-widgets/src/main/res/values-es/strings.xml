@@ -2,6 +2,7 @@
 <resources>
     <!-- ContactsView -->
     <string name="contacts_info_view_title">No se han contrado contactos</string>
-    <string name="contacts_delete_snackbar_message">1 borrado</string>
+    <string name="contacts_delete_snackbar_message">%s borrado</string>
+    <string name="contacts_delete_snackbar_message_one">1</string>
     <string name="contacts_delete_snackbar_action_message">Deshacer</string>
 </resources>

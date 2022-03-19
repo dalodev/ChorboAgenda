@@ -73,6 +73,9 @@ jobs:
       - name: Run detekt
         run: ./gradlew detekt
 
+      - name: Run detekt
+        run: ./gradlew ktlintCheck
+
       - name: Run unit tests
         run: ./gradlew test --stacktrace
 
@@ -92,7 +95,7 @@ jobs:
           token: ${{ secrets.CODECOVTOKEN }} # not required for public repos
           #directory: ./build/reports/kover/all/
           flags: unittests, uitests # optional
-          fail_ci_if_error: true # optional (default = false)
+          fail_ci_if_error: false # optional (default = false)
           verbose: true # optional (default = false)
 
   # Upload apk to Firebase app distribution

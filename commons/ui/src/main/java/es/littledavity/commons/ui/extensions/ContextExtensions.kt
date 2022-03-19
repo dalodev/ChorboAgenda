@@ -170,6 +170,7 @@ fun View.showSnackBar(
     actionMessage: CharSequence,
     action: (() -> Unit)? = null,
     onDismiss: (() -> Unit)? = null,
+    anchorView: View? = null,
 ): Snackbar {
     return Snackbar.make(
         this,
@@ -184,6 +185,7 @@ fun View.showSnackBar(
                     }
                 }
             })
+        setAnchorView(anchorView)
         show()
     }
 }

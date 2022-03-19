@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:background="@color/colorContentContainer"
@@ -19,7 +19,7 @@
             android:layout_gravity="center"
             android:clipToPadding="false"
             android:overScrollMode="never"
-            android:scrollbars="none"/>
+            android:scrollbars="none" />
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:indeterminateTint="@color/colorProgressBar"/>
+        android:indeterminateTint="@color/colorProgressBar" />
 
     <es.littledavity.commons.ui.widgets.contacts.InfoView
         android:id="@+id/infoView"
@@ -41,6 +41,12 @@
         app:infoView_titleTextColor="@color/colorInfoView"
         app:infoView_titleTextSize="@dimen/contacts_info_view_title_text_size"
         tools:infoView_icon="@drawable/account_heart_outline"
-        tools:infoView_titleText="No chorbos to show"
+        tools:infoView_titleText="No chorbos to show" />
+
+    <View
+        android:id="@+id/bottomView"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_gravity="bottom"
         />
 </merge>

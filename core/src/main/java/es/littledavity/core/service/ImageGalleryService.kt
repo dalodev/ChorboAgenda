@@ -16,7 +16,12 @@ import androidx.annotation.RequiresApi
 import androidx.core.net.toUri
 import com.paulrybitskyi.hiltbinder.BindType
 import dagger.hilt.android.qualifiers.ApplicationContext
-import java.io.*
+import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
+import java.io.IOException
+import java.io.OutputStream
 import java.util.UUID
 import javax.inject.Inject
 
@@ -65,7 +70,8 @@ internal class ImageGalleryServiceImpl @Inject constructor(
         saveImageToStream(imageToSave, FileOutputStream(file))
         val values = contentValues(name)
         values.put(MediaStore.Images.Media.DATA, file.absolutePath)
-        return context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values).toString()
+        return context.contentResolver.insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values)
+            .toString()
     }
 
     private fun saveMediaImage(imageToSave: Bitmap, name: String, imageId: String): String {

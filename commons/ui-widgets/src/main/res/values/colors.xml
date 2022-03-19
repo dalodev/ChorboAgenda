@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Toolbar -->
-    <color name="toolbar_background_color">@color/colorPrimary</color>
+    <color name="toolbar_background_color">@color/colorPrimaryDark</color>
     <color name="toolbar_title_text_color">@color/colorPrimaryText</color>
     <color name="toolbar_button_icon_color">@color/colorPrimaryIcon</color>
     <color name="toolbar_button_ripple_color">#10000000</color>

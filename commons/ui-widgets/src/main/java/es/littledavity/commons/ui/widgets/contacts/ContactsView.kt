@@ -100,7 +100,10 @@ class ContactsView @JvmOverloads constructor(
         itemToDelete = adapterItems[position]
         adapterItems = currentAdapterItems.apply { removeAt(position) }
         showSnackBar(
-            getString(R.string.contacts_delete_snackbar_message),
+            getString(R.string.contacts_delete_snackbar_message,
+                itemToDelete?.model?.name
+                    ?: getString(R.string.contacts_delete_snackbar_message_one)
+            ),
             getString(R.string.contacts_delete_snackbar_action_message),
             {
                 itemToDelete?.let { adapterItems = currentAdapterItems.apply { add(position, it) } }
@@ -109,7 +112,8 @@ class ContactsView @JvmOverloads constructor(
             {
                 onRemoveContact?.invoke(itemToDelete?.model?.id)
                 swipeToDelete.canSwipe = true
-            }
+            },
+            anchorView = binding.bottomView
         )
     }
 

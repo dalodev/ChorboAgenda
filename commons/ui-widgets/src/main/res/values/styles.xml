@@ -26,7 +26,7 @@
         <item name="toolbar_titleTextColor">@color/toolbar_title_text_color</item>
         <item name="toolbar_buttonIconColor">@color/toolbar_button_icon_color</item>
         <item name="toolbar_titleTextSize">@dimen/toolbar_title_text_size</item>
-        <item name="toolbar_titleTextGravity">left</item>
+        <item name="toolbar_titleTextGravity">center</item>
     </style>
 
     <style name="ChorboagendaTheme.Toolbar.White" parent="ChorboagendaTheme.Toolbar">
@@ -34,7 +34,7 @@
         <item name="toolbar_titleTextColor">@color/colorPrimaryTextInverse</item>
         <item name="toolbar_buttonIconColor">@color/colorPrimaryTextInverse</item>
         <item name="toolbar_titleTextSize">@dimen/toolbar_title_text_size</item>
-        <item name="toolbar_titleTextGravity">left</item>
+        <item name="toolbar_titleTextGravity">center</item>
     </style>
 
 </resources>
