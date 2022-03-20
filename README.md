@@ -15,7 +15,7 @@
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
-  <a href="https://user-images.githubusercontent.com/9118197/145686559-fa1ddfb0-4e97-40d1-af73-ee097f11553f.png">
+  <a href="ic_launcher_foreground](https://user-images.githubusercontent.com/9118197/159167282-a31f2c90-664e-495a-9874-0b92831b459f.png">
     <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Logo" width="80" height="80">
   </a>
 
@@ -59,9 +59,9 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-[![Product Name Screen Shot][product-screenshot]](https://user-images.githubusercontent.com/9118197/145686559-fa1ddfb0-4e97-40d1-af73-ee097f11553f.png)
+![](https://user-images.githubusercontent.com/9118197/159167282-a31f2c90-664e-495a-9874-0b92831b459f.png)
 
-Chorboagenda is a free app for **[Android](https://example.com)** that has been developed   
+Chorboagenda is a free app for **[Android](https://github.com/dalodev/ChorboAgenda)** that has been developed
 to be able to organize your contacts, special friends, dates, or any person you decide
 
 ### Built With
@@ -69,7 +69,7 @@ to be able to organize your contacts, special friends, dates, or any person you 
 - [Android Studio](https://developer.android.com/studio)
 - [Kotlin](https://kotlinlang.org) - First class and official programming language for Android development.
 - [Coroutines](https://kotlinlang.org/docs/reference/coroutines-overview.html) and [Flow](https://kotlinlang.org/docs/reference/coroutines/flow.html#asynchronous-flow) - Official Kotlin's tooling for performing asynchronous work.
-- [MVVM/MVI Architecture](https://developer.android.com/jetpack/guide) - Official recommended architecture for building robust, production-quality apps.
+- [MVVM Architecture](https://developer.android.com/jetpack/guide) - Official recommended architecture for building robust, production-quality apps.
 - [Android Jetpack](https://developer.android.com/jetpack)
   - [Room](https://developer.android.com/topic/libraries/architecture/room) - The Room library provides an abstraction layer over SQLite to allow for more robust database access.
   - [Dagger Hilt](https://developer.android.com/training/dependency-injection/hilt-android)
@@ -95,21 +95,21 @@ to be able to organize your contacts, special friends, dates, or any person you 
   - [Dagger Hilt Test](https://developer.android.com/training/dependency-injection/hilt-testing) - A testing library for modifying the Dagger bindings in instrumented tests.
   - [Room Testing](https://developer.android.com/training/data-storage/room/migrating-db-versions#test) - A library for testing Room migrations.
 - [Gradle's Kotlin DSL](https://docs.gradle.org/current/userguide/kotlin_dsl.html) - Gradle’s Kotlin DSL is an alternative syntax to the Groovy DSL with an enhanced editing experience.
-- [buildSrc](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources) - A special module within the project to manage dependencies and whatnot. 
+- [buildSrc](https://docs.gradle.org/current/userguide/organizing_gradle_projects.html#sec:build_sources) - A special module within the project to manage dependencies and what not.
 - [Github Actions](https://github.com/features/actions) -  To automate all software workflow CI/CD
 - [Firebase](https://firebase.google.com/) - For app distribution, analytics and testing
-  
+
 For more information about used dependencies, see [this](/buildSrc/src/main/java/Dependencies.kt) file.
 
 <!-- GETTING STARTED -->
 ## Getting Started
 
 ### Prerequisites
-![Min API](https://img.shields.io/badge/API-21%2B-orange.svg?style=flat)
+![Min API](https://img.shields.io/badge/API-23%2B-orange.svg?style=flat)
 [![Platform](https://img.shields.io/badge/platform-Android-green.svg)](http://developer.android.com/index.html)
 [![Kotlin](https://img.shields.io/badge/Kotlin-1.5-purple?longCache=true&style=popout-square)](https://kotlinlang.org)
 [![Android Studio](https://img.shields.io/badge/Android_Studio-4.2-blue.svg?longCache=true&style=popout-square)](https://developer.android.com/studio)
-[![Android](https://img.shields.io/badge/Android-5-green.svg?longCache=true&style=popout-square)](https://www.android.com)
+[![Android](https://img.shields.io/badge/Android-6-green.svg?longCache=true&style=popout-square)](https://www.android.com)
 
 * Por razones de seguridad debes añadir tu propio fichero de configuración de Firebase `google-services.json`
 

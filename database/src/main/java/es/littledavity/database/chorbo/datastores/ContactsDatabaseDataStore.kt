@@ -3,8 +3,10 @@
  */
 package es.littledavity.database.chorbo.datastores
 
+import android.net.Uri
 import com.paulrybitskyi.hiltbinder.BindType
 import es.littledavity.core.providers.DispatcherProvider
+import es.littledavity.core.service.ImageGalleryService
 import es.littledavity.data.commons.Pagination
 import es.littledavity.data.contacts.DataContact
 import es.littledavity.data.contacts.datastores.ContactsLocalDataStore
@@ -25,7 +27,8 @@ internal class ContactsDatabaseDataStore @Inject constructor(
     private val contactDao: ContactDao,
     private val contactMapper: ContactMapper,
     private val dispatcherProvider: DispatcherProvider,
-    private val saveContactFactory: SaveContactFactory
+    private val saveContactFactory: SaveContactFactory,
+    private val imageGalleryService: ImageGalleryService,
 ) : ContactsLocalDataStore {
 
     override suspend fun getContact(id: Int) = contactDao.getChorbo(id)?.let { databaseContact ->
@@ -52,7 +55,12 @@ internal class ContactsDatabaseDataStore @Inject constructor(
 
     override suspend fun removeContact(id: Int) {
         withContext(dispatcherProvider.computation) {
+            val chorbo = contactDao.getChorbo(id)
             contactDao.deleteChorboById(id)
+            Uri.parse(chorbo?.image?.id)?.let(imageGalleryService::removeMediaFile)
+            chorbo?.artworks?.forEach {
+                Uri.parse(it.id)?.let(imageGalleryService::removeMediaFile)
+            }
         }
     }
 

@@ -50,7 +50,7 @@ class ChorboDatabaseDataStoreTest {
 
     @Before
     fun setup() {
-        MockKAnnotations.init(this, relaxUnitFun = true)
+        MockKAnnotations.init(this)
 
         contactMapper = ContactMapper(timestampProvider, imageGalleryService)
 
@@ -58,7 +58,8 @@ class ChorboDatabaseDataStoreTest {
             contactDao = contactDao,
             contactMapper = contactMapper,
             dispatcherProvider = FakeDispatcherProvider(),
-            saveContactFactory = FakeSaveContactFactory()
+            saveContactFactory = FakeSaveContactFactory(),
+            imageGalleryService = imageGalleryService
         )
     }
 
@@ -104,16 +105,17 @@ class ChorboDatabaseDataStoreTest {
     }
 
     @Test
-    fun removeContactSuccesfully() = runBlockingTest {
+    fun removeContactSuccessfully() = runBlockingTest {
         coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
+        coEvery { contactDao.getChorbo(any()) } returns databaseContact
         coEvery { contactDao.deleteChorboById(any()) } returns Unit
         val result = dataStore.removeContact(1)
         assertThat(result).isNotNull
     }
 
     @Test
-    fun insertContactsSuccesfully() = runBlockingTest {
+    fun insertContactsSuccessfully() = runBlockingTest {
         coEvery { imageGalleryService.createMediaFile(any(), any()) } returns "test"
         coEvery { timestampProvider.getUnixTimestamp(any()) } returns 1L
         coEvery { contactDao.insertChorbos(any()) } returns Unit
