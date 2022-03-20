@@ -16,7 +16,7 @@
 <br />
 <div align="center">
   <a href="ic_launcher_foreground](https://user-images.githubusercontent.com/9118197/159167282-a31f2c90-664e-495a-9874-0b92831b459f.png">
-    <img src="https://user-images.githubusercontent.com/9118197/159167282-a31f2c90-664e-495a-9874-0b92831b459f.png" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/9118197/159167282-a31f2c90-664e-495a-9874-0b92831b459f.png" alt="Logo" width="120" height="120">
   </a>
 
 <h3 align="center"></h3>
@@ -59,7 +59,6 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-![](https://user-images.githubusercontent.com/9118197/159167282-a31f2c90-664e-495a-9874-0b92831b459f.png)
 
 Chorboagenda is a free app for **[Android](https://github.com/dalodev/ChorboAgenda)** that has been developed
 to be able to organize your contacts, special friends, dates, or any person you decide
