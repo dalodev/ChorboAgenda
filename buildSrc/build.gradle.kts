@@ -21,6 +21,7 @@ object PluginsVersions {
     const val KTLINT = "0.44.0"
     const val DOKKA = "1.6.10"
     const val UPDATE_DEPENDENCIES = "0.39.0"
+    const val POET = "1.13.0"
 }
 
 dependencies {
@@ -31,5 +32,6 @@ dependencies {
     implementation("com.pinterest:ktlint:${PluginsVersions.KTLINT}")
     implementation("org.jetbrains.dokka:dokka-gradle-plugin:${PluginsVersions.DOKKA}")
     implementation("com.github.ben-manes:gradle-versions-plugin:${PluginsVersions.UPDATE_DEPENDENCIES}")
+    implementation("com.squareup:javapoet:${PluginsVersions.POET}")
     implementation(gradleApi()) // for custom plugins
 }
