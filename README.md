@@ -16,7 +16,7 @@
 <br />
 <div align="center">
   <a href="ic_launcher_foreground](https://user-images.githubusercontent.com/9118197/159167282-a31f2c90-664e-495a-9874-0b92831b459f.png">
-    <img src="https://www.w3schools.com/images/w3schools_green.jpg" alt="Logo" width="80" height="80">
+    <img src="https://user-images.githubusercontent.com/9118197/159167282-a31f2c90-664e-495a-9874-0b92831b459f.png" alt="Logo" width="80" height="80">
   </a>
 
 <h3 align="center"></h3>
